@@ -1,0 +1,502 @@
+[
+  {
+    "image": "FA24_FE (1).webp",
+    "answer": "A",
+    "answerText": "A. Social engineering",
+    "explanation": "Tricking an employee into revealing credentials by impersonating IT staff, without technical tools, is classic social engineering (pretext-based manipulation of people).",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (2).webp",
+    "answer": "C",
+    "answerText": "C. Defining clear expectations and the impact of policies on the business.",
+    "explanation": "Executives back security policy when they clearly see business impact and expectations, not from being shut out of communication or buried in technical detail.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (3).webp",
+    "answer": "C",
+    "answerText": "C. Risk transference",
+    "explanation": "Risk transference means shifting the risk to a third party (e.g., insurance or an outsourced provider), as opposed to avoiding, accepting, or mitigating it.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (4).webp",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "Operational consistency requires measuring consistency, quality, and results together to know processes are reliably repeatable.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (5).webp",
+    "answer": "C",
+    "answerText": "C. Organizational committees enforcing policies and monitoring workers' actions.",
+    "explanation": "Policy enforcement at the organizational level is carried out by internal committees tasked with enforcing rules and monitoring compliance, not external or unrelated bodies.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (6).webp",
+    "answer": "A",
+    "answerText": "A. True",
+    "explanation": "This is the standard definition of an Internet/web proxy server: it mediates and filters traffic between clients and the Internet.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (8).webp",
+    "answer": "E",
+    "answerText": "E. All of the above",
+    "explanation": "IT frameworks (COBIT, ISO, NIST, etc.) commonly share risk-based management, alignment with business risk appetite, disruption/loss reduction, and a defined path from requirements to controls.",
+    "verifyAnswer": "E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (9).webp",
+    "answer": "C",
+    "answerText": "C. Availability of the data",
+    "explanation": "The updated presentation isn't accessible to John at the location he needs it, which is an availability problem, not an authorization or repudiation issue.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (10).webp",
+    "answer": "C",
+    "answerText": "C. A common control used across a significant population of systems, applications, and operations.",
+    "explanation": "A pervasive (general) control applies broadly across many systems/processes, unlike a narrow, department- or system-specific control.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (11).webp",
+    "answer": "C",
+    "answerText": "C. Both",
+    "explanation": "VoIP can run over both LANs (internal calls) and WANs (calls routed across the Internet/wide-area networks).",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (12).webp",
+    "answer": "C",
+    "answerText": "C. third line",
+    "explanation": "In the Three Lines of Defense model, the third line is independent (internal/external) audit, which objectively evaluates the first (operations) and second (risk/compliance) lines.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (13).webp",
+    "answer": "C",
+    "answerText": "C. Reassessment principle",
+    "explanation": "The reassessment principle states that security controls and policies must be periodically reviewed and updated as risks and environments change.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (14).webp",
+    "answer": "A",
+    "answerText": "A. Incident is declared",
+    "explanation": "The Incident Response Team formally begins logging/recording activity once an incident is officially declared, which triggers the response process.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (15).webp",
+    "answer": "B",
+    "answerText": "B. Classification and handling of information",
+    "explanation": "An Information Classification standard specifically defines how data is categorized (e.g., public, confidential) and how each category must be handled.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (16).webp",
+    "answer": "C",
+    "answerText": "C. Adherence to an organization's policy",
+    "explanation": "Compliance means actually following/adhering to policy, distinct from merely attempting to (A) or failing to (D).",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (17).webp",
+    "answer": "B",
+    "answerText": "B. Chief Financial Officer",
+    "explanation": "Typical IRT members include Info Security, Legal, and Public Relations representatives; the CFO is not a standard core member of the incident response team.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (18).webp",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "Security policies are driven by multiple pressures: protecting shareholder value, regulatory requirements, and technology vulnerabilities/limitations.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (19).webp",
+    "answer": "C",
+    "answerText": "C. Engaging in communication",
+    "explanation": "Apathy toward security policy is best overcome through active communication and engagement, not by simply issuing directives or demanding obedience.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (20).webp",
+    "answer": "A",
+    "answerText": "A. Company officers",
+    "explanation": "Regulators and the public ultimately hold corporate officers (executives) accountable for major breaches, even though ISOs/CIOs handle operational security.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (21).webp",
+    "answer": "D",
+    "answerText": "D. All are correct",
+    "explanation": "Both statements are true: least access privileges are tailored to an individual, while best-fit privileges are tailored to a group based on assessed risk.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (22).webp",
+    "answer": "B",
+    "answerText": "B. Prevents employees from misusing the Internet",
+    "explanation": "An AUP defines proper behavior, outlines discipline, and reduces liability, but it cannot guarantee it fully 'prevents' misuse — that overstates its actual benefit.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (23).webp",
+    "answer": "A",
+    "answerText": "A. Adoption of an information security policy framework or charter",
+    "explanation": "Establishing a governing policy framework/charter is the foundational first step before standards, awareness training, or tool purchases follow.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (24).webp",
+    "answer": "C",
+    "answerText": "C. Connectivity and traffic control",
+    "explanation": "LAN security policies primarily address how devices connect and how traffic flows/is controlled within the local network.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (25).webp",
+    "answer": "C",
+    "answerText": "C. Slow reaction time",
+    "explanation": "Hierarchical organizational models have well-defined accountability and communication lines but suffer from slower reaction/decision times due to layers of approval.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (26).webp",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "Same as the operational-consistency question: consistency, quality, and results all must be measured together.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (27).webp",
+    "answer": "C",
+    "answerText": "C. To better understand the threat and the weakness exploited",
+    "explanation": "Classifying incidents helps the organization understand the nature of the threat and which vulnerability was exploited, guiding an appropriate response.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (28).webp",
+    "answer": "A",
+    "answerText": "A. Vulnerability window",
+    "explanation": "The gap between a vulnerability's discovery and a patch being developed is generally termed the vulnerability (exposure) window; terminology in the source material may differ slightly.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (29).webp",
+    "answer": "A",
+    "answerText": "A. Information security officer (ISO)",
+    "explanation": "The ISO is responsible for coordinating breach response — assessing impact, minimizing damage, and managing remediation across the organization.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (30).webp",
+    "answer": "A",
+    "answerText": "A. Protect information",
+    "explanation": "The primary reason organizations classify data is to know what needs protecting and apply appropriate controls, unlike selling information which is not a classification goal.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (31).webp",
+    "answer": "A",
+    "answerText": "A. Data Leakage Protection Inventory",
+    "explanation": "Discovering where sensitive data currently resides is the 'data discovery/inventory' function of a DLP program, best matching option A among the given choices.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (32).webp",
+    "answer": "A",
+    "answerText": "A. LAN",
+    "explanation": "A Local Area Network (LAN) is designed to efficiently connect computers within a single office or group of nearby buildings.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (33).webp",
+    "answer": "A",
+    "answerText": "A. Pretexting",
+    "explanation": "Using a fabricated scenario (a fake failed task) to trick an employee into revealing an ID and password is the social-engineering technique called pretexting.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (34).webp",
+    "answer": "B",
+    "answerText": "B. Baseline standard",
+    "explanation": "A baseline standard specifies the minimum required security controls/configuration for a particular type of technology device.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (35).webp",
+    "answer": "C",
+    "answerText": "C. World Area Network Domain",
+    "explanation": "The seven domains include LAN, WAN, Remote Access, and System/Application domains, but there is no 'World Area Network' — the real term is Wide Area Network.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (36).webp",
+    "answer": "A",
+    "answerText": "A. Least access privileges customize access to an individual",
+    "explanation": "The correct distinction is that least access is tailored per individual while best-fit is tailored per group by risk; since only single options are offered, A best captures the core individual-based aspect (paired conceptually with B).",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (37).webp",
+    "answer": "C",
+    "answerText": "C. Chief information security officer",
+    "explanation": "The CISO is typically the one who reports the organization's information security posture directly to the board of directors.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (38).webp",
+    "answer": "A",
+    "answerText": "A. Assesses policies and standards and makes recommendations for change",
+    "explanation": "A policy change control board's core functions are to assess/recommend changes and review requested changes to the framework (A and D); A is selected as the primary function among single-answer choices.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (39).webp",
+    "answer": "B",
+    "answerText": "B. To understand an organization's risks and their potential effects on the business",
+    "explanation": "An RCSA is designed to identify and evaluate organizational risks and their business impact, not budgeting or staffing decisions.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (40).webp",
+    "answer": "A",
+    "answerText": "A. Firecall-ID",
+    "explanation": "A Firecall-ID process grants temporary elevated (privileged) access for emergency situations, later revoked and audited.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (41).webp",
+    "answer": "B",
+    "answerText": "B. It may restrict the application of current best practices.",
+    "explanation": "Legacy/outdated technology often cannot support modern security controls, limiting an organization's ability to apply current best practices.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (42).webp",
+    "answer": "C",
+    "answerText": "C. Sell information",
+    "explanation": "Organizations classify data to protect, retain, and recover it — selling information is not a typical classification driver.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (43).webp",
+    "answer": "C",
+    "answerText": "C. Gold master",
+    "explanation": "A secure baseline configuration image used as the template for deployment is commonly called a 'gold master' image.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (44).webp",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "'Tone at the top' encompasses leaders communicating priorities, enforcing policy, and building trust with regulators/the public — all of these together.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (45).webp",
+    "answer": "A",
+    "answerText": "A. Risk avoidance",
+    "explanation": "Relocating away from a hurricane-prone area to eliminate the risk entirely (rather than reduce, share, or accept it) is risk avoidance.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (46).webp",
+    "answer": "B",
+    "answerText": "B. Assisting with analysis and recommending immediate response actions",
+    "explanation": "System Administrators support incident response through technical analysis and recommending immediate remediation steps, not PR or HR tasks.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (47).webp",
+    "answer": "B",
+    "answerText": "B. Guideline",
+    "explanation": "Guidelines are recommended, optional practices, whereas standards, procedures, and baselines are typically mandatory.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (48).webp",
+    "answer": "D",
+    "answerText": "D. Random audits",
+    "explanation": "In a decentralized model, random/spot audits are an effective way for central IT to independently verify each department's compliance with security requirements.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (49).webp",
+    "answer": "D",
+    "answerText": "D. All of the Above",
+    "explanation": "Security awareness is driven by legal/regulatory requirements as well as expectations from customers and shareholders.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (50).webp",
+    "answer": "C",
+    "answerText": "C. ERM",
+    "explanation": "COBIT, ISO, and OCTAVE are recognized IT/security policy frameworks, while ERM (Enterprise Risk Management) is a broader risk-management discipline, not an IT security policy framework.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "FA24_FE (51).webp",
+    "answer": "A",
+    "answerText": "A. LAN-to-WAN Domain",
+    "explanation": "The LAN-to-WAN Domain covers the infrastructure connecting an organization's internal LAN to the WAN/Internet, enabling end-user Internet access.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  }
+]

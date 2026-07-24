@@ -1,0 +1,495 @@
+[
+  {
+    "image": "IAP301_SP26_FE (1).webp",
+    "answer": "B",
+    "answerText": "B. Shared beliefs and purpose",
+    "explanation": "A shared vision for policy success is built on common beliefs and purpose across the organization, not on technical complexity or outsourcing.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (2).webp",
+    "answer": "B",
+    "answerText": "B. Guideline",
+    "explanation": "The description (optional, sets direction, can evolve into policy) is the textbook definition of a guideline as a policy-support document.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (3).webp",
+    "answer": "A, C",
+    "answerText": "A. Because we need to focus limited resources on protecting a smaller amount of the most important data / C. Because it's not practical to keep data classified forever",
+    "explanation": "Declassifying frees limited protection resources for truly critical data (A) and reflects that keeping everything classified indefinitely is impractical (C).",
+    "verifyAnswer": "A, C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "IAP301_SP26_FE (4).webp",
+    "answer": "C",
+    "answerText": "C. Between the private LAN and public WAN",
+    "explanation": "A DMZ is a buffer subnet placed between the trusted internal LAN and the untrusted public WAN/Internet.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (5).webp",
+    "answer": "D",
+    "answerText": "D. Random audits",
+    "explanation": "In a decentralized model, unannounced/random audits are the practical way for central IT to independently verify each department's compliance with baseline security requirements.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (6).webp",
+    "answer": "B",
+    "answerText": "B. Remote browser access",
+    "explanation": "Remote browser isolation executes browsing sessions on a remote server away from the endpoint, preventing browser-based exploits from reaching the local machine.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (7).webp",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "Sarbanes-Oxley, Gramm-Leach-Bliley, and HIPAA each mandate some form of security awareness/training program for covered organizations.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (8).webp",
+    "answer": "D",
+    "answerText": "D. Corrective",
+    "explanation": "Since the problem (undersized system causing lag) already occurred, applying a fix (e.g., scaling capacity) is a corrective control, not a preventative or detective one.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (9).webp",
+    "answer": "A, B, C, D",
+    "answerText": "A. Principles; B. Guidelines; C. Procedures; D. Standards",
+    "explanation": "A standard security policy framework is built from principles, policies, standards, guidelines, and procedures; firewalls are a technical control, not a policy framework component.",
+    "verifyAnswer": "A, B, C, D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "IAP301_SP26_FE (10).webp",
+    "answer": "C",
+    "answerText": "C. Availability of the data",
+    "explanation": "The presentation file exists but is not accessible where/when needed, which is an availability issue rather than integrity or confidentiality.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (11).webp",
+    "answer": "B",
+    "answerText": "B. Risk and Control Self-Assessment",
+    "explanation": "RCSA is a standard risk-management term meaning Risk and Control Self-Assessment.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (12).webp",
+    "answer": "B",
+    "answerText": "B. 6",
+    "explanation": "Mobile device passcode policies commonly require a minimum of 6 digits under typical corporate and PTC mobile security standards.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (13).webp",
+    "answer": "A",
+    "answerText": "A. As soon as an incident is declared",
+    "explanation": "The Incident Response Team begins logging/recording events immediately once an incident is declared, to preserve an accurate timeline for later analysis.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (14).webp",
+    "answer": "C",
+    "answerText": "C. Employees prioritize job preservation",
+    "explanation": "During downturns employees focus on keeping their jobs and existing workload, so new policy compliance work feels like an added burden.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (15).webp",
+    "answer": "B, D, E",
+    "answerText": "B. Users accessing the Internet / D. Managing software licenses / E. Managing intellectual property",
+    "explanation": "Acceptable Use Policies typically govern how employees use company resources such as Internet access, licensed software, and intellectual property, rather than server-to-server communication or transmission encryption specifics.",
+    "verifyAnswer": "B, D, E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "IAP301_SP26_FE (16).webp",
+    "answer": "A",
+    "answerText": "A. Company officers",
+    "explanation": "Regulators and the public hold senior company officers (executives/board) ultimately accountable for a catastrophic breach, even though the CIO/ISO manage day-to-day security.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (17).webp",
+    "answer": "A",
+    "answerText": "A. Protecting information from unauthorized access, use, disclosure, disruption, modification, or destruction",
+    "explanation": "This is the standard formal definition of information systems security (the CIA-based definition used in NIST/FISMA).",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (18).webp",
+    "answer": "B",
+    "answerText": "B. Policies, standards, and procedures",
+    "explanation": "Formal governance documents—policies, standards, and procedures—form the foundation for managing all information security activities consistently.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (19).webp",
+    "answer": "B",
+    "answerText": "B. False",
+    "explanation": "New regulations don't always require brand-new policies; existing policies can often be updated or mapped to cover new regulatory requirements.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (20).webp",
+    "answer": "B",
+    "answerText": "B. Surplus of funding",
+    "explanation": "A surplus of funding is not a challenge; lack of accountability, low priority, and tight schedules are the typical obstacles to policy implementation.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (21).webp",
+    "answer": "A",
+    "answerText": "A. Attackers",
+    "explanation": "In personality-type frameworks applied to organizational leadership, aggressive 'Attacker' types are described as those who push through barriers that previously blocked success.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (22).webp",
+    "answer": "C",
+    "answerText": "C. Detailed line budget",
+    "explanation": "An incident response team charter defines mission, structure, and roles/responsibilities at a high level; a detailed line-item budget belongs in separate financial planning documents.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (23).webp",
+    "answer": "A",
+    "answerText": "A. By using an incident severity rating",
+    "explanation": "Organizations classify incidents as major or minor using a predefined severity rating scale based on impact and scope.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (24).webp",
+    "answer": "C",
+    "answerText": "C. A governance and controls framework for assessing, governing, and managing IT security and risks",
+    "explanation": "COBIT is an IT governance framework covering assessment, governance, and management of IT-related risk and controls, not just financial controls or specific technologies.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (25).webp",
+    "answer": "C",
+    "answerText": "C. Both",
+    "explanation": "VoIP can run over both LANs (internal calls) and WANs (calls across the Internet/wide area links).",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (26).webp",
+    "answer": "A, B",
+    "answerText": "A. Biometric scanners / B. RFID card readers",
+    "explanation": "Biometric scanners and RFID badge readers control physical entry to spaces; RBAC and passwords are logical/technical access controls, not physical ones.",
+    "verifyAnswer": "A, B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "IAP301_SP26_FE (27).webp",
+    "answer": "A",
+    "answerText": "A. When logged in to terminal services I will save an organizational document on to my personal laptop/computer/tablet so I can work on it off line. I then upload it again after I have finished.",
+    "explanation": "Saving organizational documents onto a personal device to work offline violates data protection regulations by exposing data to unmanaged, unauthorized personal hardware. Option B uses encryption, and Option C follows proper verification and official company email channels.",
+    "verifyAnswer": "A, C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false,
+    "corrected": true
+  },
+  {
+    "image": "IAP301_SP26_FE (28).webp",
+    "answer": "B",
+    "answerText": "B. To establish and maintain configuration information throughout a system's lifecycle",
+    "explanation": "Configuration management's purpose is tracking and controlling a system's configuration state over its entire lifecycle, which is broader than just patching or monitoring.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (29).webp",
+    "answer": "A, B",
+    "answerText": "A. Maintain an information security policy; B. Protect cardholder data",
+    "explanation": "PCI DSS defines six core control objectives: 1. Build and Maintain a Secure Network, 2. Protect Cardholder Data, 3. Maintain a Vulnerability Management Program, 4. Implement Strong Access Control Measures, 5. Regularly Monitor and Test Networks, 6. Maintain an Information Security Policy. Therefore, both A and B are explicit PCI DSS control objectives.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true,
+    "corrected": true
+  },
+  {
+    "image": "IAP301_SP26_FE (30).webp",
+    "answer": "C",
+    "answerText": "C. Decryption",
+    "explanation": "Authentication, authorization, and logging (accountability) are the classic access control components; decryption is a cryptographic operation, not an access control.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (31).webp",
+    "answer": "A",
+    "answerText": "A. To provide a structured approach to implementing and managing security policies",
+    "explanation": "A policy framework's main purpose is to give a consistent, organized structure for creating, implementing, and managing security policies across the organization.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (32).webp",
+    "answer": "B",
+    "answerText": "B. Skills individuals are comfortable with to achieve predictable outcomes",
+    "explanation": "A \"safe zone\" refers to the comfortable, familiar skill set a person relies on to get predictable results, not a physical or policy area.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (33).webp",
+    "answer": "C",
+    "answerText": "C. Frequent security breaches",
+    "explanation": "Repeated security incidents despite training indicate the awareness program is failing to change behavior, making it the primary indicator of ineffectiveness.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (34).webp",
+    "answer": "E",
+    "answerText": "E. All of the above",
+    "explanation": "Risk-based management, alignment with business risk appetite, reduced disruption/losses, and an established path from requirements to controls are all common characteristics of IT frameworks.",
+    "verifyAnswer": "E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (35).webp",
+    "answer": "D",
+    "answerText": "D. Background checks & Access rights reviews",
+    "explanation": "Both background checks and access rights reviews are performed manually by people rather than automated systems, making them examples of manual controls.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (36).webp",
+    "answer": "C",
+    "answerText": "C. DMZ Web site",
+    "explanation": "Remote users typically authenticate with two-factor authentication when accessing externally-facing resources hosted in the DMZ.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (37).webp",
+    "answer": "A, B, C",
+    "answerText": "A. Avoiding financial penalties / B. Maintaining public trust / C. Preventing criminal liability",
+    "explanation": "Organizations comply with legal/regulatory standards primarily to avoid fines, retain customer/public trust, and prevent criminal liability—not to gain competitive advantage or cut costs.",
+    "verifyAnswer": "A, B, C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "IAP301_SP26_FE (38).webp",
+    "answer": "C",
+    "answerText": "C. Clear and Concise",
+    "explanation": "Policy and standards documents should be written clearly and concisely so employees can easily understand and follow them.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (39).webp",
+    "answer": "C",
+    "answerText": "C. Procedure",
+    "explanation": "Procedures are the documented, step-by-step instructions employees follow to perform work in line with policy, exactly as described.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (40).webp",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "HIPAA, CIPA, and GLBA all require some form of risk assessment as part of their compliance requirements.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (41).webp",
+    "answer": "C",
+    "answerText": "C. Defense-in-depth principle",
+    "explanation": "Defense-in-depth is the principle of layering multiple, consistent, integrated security measures and practices to protect assets.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (42).webp",
+    "answer": "C",
+    "answerText": "C. The measurable business benefits",
+    "explanation": "Executives respond best to quantifiable business value (risk reduction, cost savings, compliance benefits) rather than technical details or timelines.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (43).webp",
+    "answer": "A, B",
+    "answerText": "A. needs; B. capacity to deploy",
+    "explanation": "The number of policy documents an organization maintains depends on its actual needs and its practical capacity to develop, deploy, and enforce them.",
+    "verifyAnswer": "A, B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "IAP301_SP26_FE (44).webp",
+    "answer": "B",
+    "answerText": "B. False",
+    "explanation": "Interactive service accounts (used for logins) do have passwords, unlike non-interactive service accounts which may use other authentication methods.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (45).webp",
+    "answer": "D",
+    "answerText": "D. All are correct",
+    "explanation": "Legal requirements, customer expectations, and shareholder interests all drive the need for security awareness programs.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (47).webp",
+    "answer": "B",
+    "answerText": "B. False",
+    "explanation": "The first responders to an incident are typically the incident response/IRT team or IT operations staff, not the risk management and metrics team, which handles longer-term analysis and reporting.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (48).webp",
+    "answer": "B",
+    "answerText": "B. The recovery of IT assets after a major outage",
+    "explanation": "A Disaster Recovery Plan focuses specifically on restoring IT systems and assets following a major disruption, distinct from broader business continuity, legal, or communications plans.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "IAP301_SP26_FE (49).webp",
+    "answer": "A, B",
+    "answerText": "A. Risk avoidance; B. Risk acceptance",
+    "explanation": "Risk avoidance and risk acceptance are generally accepted high-level risk management strategies used to handle identified organizational risks.",
+    "verifyAnswer": "A, B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "IAP301_SP26_FE (50).webp",
+    "answer": "A, B",
+    "answerText": "A. Least access privileges customize access to an individual; B. Best fit privileges customize access to a group based on risk",
+    "explanation": "Least-privilege access is tailored to what an individual specifically needs, while best-fit access assigns privileges to a group/role based on that group's risk profile. The original proposed pair (A, D) contradicted itself by describing both least and best-fit as individual-based, leaving no actual contrast; A+B forms the coherent, textbook distinction.",
+    "verifyAnswer": "A, B",
+    "agree": false,
+    "corrected": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  }
+]

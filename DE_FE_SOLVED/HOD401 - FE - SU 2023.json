@@ -1,0 +1,432 @@
+[
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (1).webp",
+    "answer": "C",
+    "answerText": "C. open-source",
+    "explanation": "Linux is a well-known open-source operating system, unlike Windows or Mac OS which are proprietary.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (10).webp",
+    "answer": "C",
+    "answerText": "C. ports",
+    "explanation": "Enumeration extracts user accounts, shares, and services from a target; discovering open ports is the job of port scanning, not enumeration.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (11).webp",
+    "answer": "C",
+    "answerText": "C. Session Hijacking",
+    "explanation": "Session hijacking lets an attacker take over a valid user's session ID on a dynamically generated page, effectively assuming the user's identity.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (12).webp",
+    "answer": "C",
+    "answerText": "C. Depends on the system/compiler",
+    "explanation": "The C standard does not fix the size of int; it is implementation-defined and varies by system/compiler (commonly 2 or 4 bytes).",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (13).webp",
+    "answer": "C",
+    "answerText": "C. Public-key cryptosystems do not require a secure key distribution channel.",
+    "explanation": "A core advantage of PKI/asymmetric cryptography is that the public key can be distributed openly without needing a secure channel, unlike symmetric keys.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (14).webp",
+    "answer": "D",
+    "answerText": "D. END",
+    "explanation": "TCP flags include URG, PSH, RST, SYN, FIN, and ACK; there is no \"END\" flag.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (15).webp",
+    "answer": "A, B",
+    "answerText": "A. Identify traffic to common ports; B. Block traffic to specific ports",
+    "explanation": "Firewalls filter traffic by identifying and blocking/allowing it based on ports/rules; they do not stop all malware nor simply drop every incoming packet.",
+    "verifyAnswer": "A, B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (16).webp",
+    "answer": "B",
+    "answerText": "B. gray hat",
+    "explanation": "Gray hat hackers typically engage in vulnerability research, sometimes disclosing findings without full authorization, unlike white hats (authorized) or black hats (malicious).",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (17).webp",
+    "answer": "A",
+    "answerText": "A. Packet filter",
+    "explanation": "Packet-filtering firewalls only examine header information (IP, port, protocol) and do not inspect the connection state or payload.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (18).webp",
+    "answer": "C",
+    "answerText": "C. Nessus",
+    "explanation": "Nessus is a well-known vulnerability scanner with a signature database that detects vulnerabilities across UNIX, Windows, CGI scripts, DDoS zombies, and Trojans.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (19).webp",
+    "answer": "A",
+    "answerText": "A. unsigned short",
+    "explanation": "unsigned short (range 0-65535) is the smallest, most suitable type that can hold 65000 without overflow, unlike a signed short/int edge cases.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (20).webp",
+    "answer": "A",
+    "answerText": "A. Data Encryption Standard",
+    "explanation": "DES stands for Data Encryption Standard, a symmetric-key block cipher.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (21).webp",
+    "answer": "B",
+    "answerText": "B. 168",
+    "explanation": "3DES applies DES three times with three 56-bit keys, giving an effective key length of 168 bits.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (22).webp",
+    "answer": "C",
+    "answerText": "C. IP Fragmentation or Session Splicing",
+    "explanation": "This IDS-evasion technique splits packets into fragments reassembled only at the destination, hiding the payload from resource-limited IDS reassembly, known as IP fragmentation/session splicing.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (23).webp",
+    "answer": "B",
+    "answerText": "B. 10 5",
+    "explanation": "The XOR swap idiom correctly swaps the values pointed to by a and b, so x becomes 10 and y becomes 5, printed as \"10 5\".",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (25).webp",
+    "answer": "C",
+    "answerText": "C. Format String Attack",
+    "explanation": "Using printf(str) directly with user-controlled input (instead of printf(\"%s\", str)) allows attacker-supplied format specifiers, leading to a format string attack.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (26).webp",
+    "answer": "A, B, D, E",
+    "answerText": "A. SamSpade; B. Maltego; D. Cheops; E. NSLookup",
+    "explanation": "SamSpade, Maltego, Cheops, and NSLookup are classic footprinting/reconnaissance tools; Burp Suite is a web application testing/proxy tool, not primarily a footprinting tool.",
+    "verifyAnswer": "A, B, D, E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (27).webp",
+    "answer": "C",
+    "answerText": "C. synchronize server information",
+    "explanation": "A DNS zone transfer copies zone data between DNS servers to keep secondary/replica servers synchronized with the primary.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (28).webp",
+    "answer": "D",
+    "answerText": "D. 64",
+    "explanation": "Base64 encoding uses an alphabet of 64 printable characters (A-Z, a-z, 0-9, +, /).",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (29).webp",
+    "answer": "A",
+    "answerText": "A. Hping",
+    "explanation": "Hping can craft custom TCP packets to elicit a response from a host even when ICMP is blocked, unlike standard ping which relies on ICMP.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (3).webp",
+    "answer": "D",
+    "answerText": "D. Try to break into system and analyzing security policies and procedures",
+    "explanation": "Security testing involves actively attempting to break into systems and evaluating security policies/procedures, going beyond simply checking CIA properties.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (30).webp",
+    "answer": "A",
+    "answerText": "A. Capture the WPA2 authentication handshake and then crack it.",
+    "explanation": "The standard method to obtain a WPA2 key is to capture the 4-way EAPOL handshake and perform an offline dictionary/brute-force crack; WPA2/802.11i does not prevent this attack vector.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (31).webp",
+    "answer": "B",
+    "answerText": "B. RootKit",
+    "explanation": "A rootkit is designed to hide processes, files, registry entries, and intercept keystrokes to maintain stealthy control of a system.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (32).webp",
+    "answer": "D",
+    "answerText": "D. 4",
+    "explanation": "Firewalls are commonly classified into four types: packet-filtering, stateful inspection, circuit-level gateway, and application-level gateway.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (33).webp",
+    "answer": "A, D",
+    "answerText": "A. Files; D. GET/POST parameters",
+    "explanation": "Insecure direct object reference attacks target directly referenced resources like files and parameters (e.g., IDs in GET/POST) that can be manipulated to access unauthorized data.",
+    "verifyAnswer": "A, D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (34).webp",
+    "answer": "A",
+    "answerText": "A. Linux.",
+    "explanation": "Linux is open-source, whereas Windows, Unix (in many commercial variants), and Mac OS are proprietary operating systems.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (35).webp",
+    "answer": "A, B",
+    "answerText": "A. Identifies the wireless network; B. Acts as a password for network access",
+    "explanation": "The SSID names/identifies the wireless network and is commonly (though weakly) treated as a shared secret needed to connect; hiding it does not defeat discovery tools, and it should not be left at factory default.",
+    "verifyAnswer": "A, B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (36).webp",
+    "answer": "B",
+    "answerText": "B. No",
+    "explanation": "Effective security awareness training should educate and motivate users, not instill fear, which tends to reduce engagement and reporting of incidents.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (37).webp",
+    "answer": "B",
+    "answerText": "B. RSA",
+    "explanation": "RSA is an asymmetric (public-key) encryption algorithm, while SHA1/MD5 are hash functions and 3DES is symmetric.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (38).webp",
+    "answer": "B",
+    "answerText": "B. Certified Ethical Hacker",
+    "explanation": "CEH stands for Certified Ethical Hacker, an EC-Council certification.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (39).webp",
+    "answer": "B",
+    "answerText": "B. A variable that stores address of other variables",
+    "explanation": "A pointer in C is a variable that holds the memory address of another variable.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (4).webp",
+    "answer": "C",
+    "answerText": "C. NetWare and Solaris",
+    "explanation": "NetWare and Solaris are network operating systems, not stand-alone OSs like Windows Vista, Mac OS X, UNIX, or Linux.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (40).webp",
+    "answer": "C",
+    "answerText": "C. 6",
+    "explanation": "A standard TCP header has 6 control flags: URG, ACK, PSH, RST, SYN, and FIN.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (41).webp",
+    "answer": "C",
+    "answerText": "C. from human beings",
+    "explanation": "Social engineering exploits human psychology to trick people into revealing information, rather than attacking computers directly.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (42).webp",
+    "answer": "B",
+    "answerText": "B. Operators",
+    "explanation": "Search operators (e.g., Google dorking operators like site:, filetype:) are used to tweak and refine search results.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (43).webp",
+    "answer": "C",
+    "answerText": "C. monitor network devices",
+    "explanation": "SNMP (Simple Network Management Protocol) is used to monitor and manage network devices such as routers and switches.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (44).webp",
+    "answer": "C",
+    "answerText": "C. 22",
+    "explanation": "SSH uses TCP port 22 by default.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (5).webp",
+    "answer": "A",
+    "answerText": "A. without knowledge",
+    "explanation": "Black-box testing simulates an outside attacker who has no prior knowledge of the internal system/network being tested.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (6).webp",
+    "answer": "B",
+    "answerText": "B. IP Fragment Scanning",
+    "explanation": "IP fragment scanning splits the TCP header across multiple packet fragments so packet filters/firewalls cannot easily inspect the intended flags/purpose.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (7).webp",
+    "answer": "A",
+    "answerText": "A. True",
+    "explanation": "Enabling object access audit events allows the system to log each time a file/object is accessed, letting an admin see who accessed it over time.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (8).webp",
+    "answer": "D",
+    "answerText": "D. The vulnerable application does not display errors with information about the injection results to the attacker.",
+    "explanation": "In blind SQL injection, the application does not return database errors or query results directly, forcing the attacker to infer data through indirect responses (e.g., true/false, timing).",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378 (9).webp",
+    "answer": "A",
+    "answerText": "A. Zone transfer",
+    "explanation": "A zone transfer is the process of copying an entire DNS zone file, often exploited by attackers for reconnaissance if misconfigured.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FE_-_SU_2023_378.webp",
+    "answer": "A",
+    "answerText": "A. job boards",
+    "explanation": "Job postings often list specific technologies, software versions, and infrastructure the organization uses, letting attackers infer the technology and structure in use.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  }
+]

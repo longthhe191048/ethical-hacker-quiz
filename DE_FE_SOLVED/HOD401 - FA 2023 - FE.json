@@ -1,0 +1,462 @@
+[
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (1).webp",
+    "answer": "A",
+    "answerText": "A. Encrypt data and ransom victim's money",
+    "explanation": "Ransomware encrypts the victim's data and then demands a ransom payment for the decryption key; it does not merely encrypt or delete data without extortion.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (10).webp",
+    "answer": "A",
+    "answerText": "A. True",
+    "explanation": "Client-side scripts (e.g., JavaScript) are commonly allowed to run in browsers to enable legitimate interactive functionality, as long as proper input validation/output encoding controls are in place.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (11).webp",
+    "answer": "C",
+    "answerText": "C. Session Hijacking",
+    "explanation": "Session hijacking allows an attacker to take over a user's authenticated session on a dynamically generated site, effectively assuming their identity; SQLi, XSS, and CSRF have different mechanisms/goals.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (12).webp",
+    "answer": "A",
+    "answerText": "A. find some insecurity in a cryptographic scheme",
+    "explanation": "Cryptanalysis is the study of analyzing cryptographic systems to find weaknesses that allow defeating their security without knowing the key.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (13).webp",
+    "answer": "A",
+    "answerText": "A. Network",
+    "explanation": "ICMP (Internet Control Message Protocol) operates at the Network layer of the OSI model, used for diagnostic and error-reporting purposes alongside IP.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (14).webp",
+    "answer": "A",
+    "answerText": "A. block cipher",
+    "explanation": "DES operates on fixed-size 64-bit blocks of data using a 56-bit key, making it a block cipher, not a stream cipher.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (15).webp",
+    "answer": "D",
+    "answerText": "D. The vulnerable application does not display errors with information about the injection results to the attacker.",
+    "explanation": "In blind SQL injection the application does not return database errors or visible query output, forcing the attacker to infer results indirectly (e.g., via true/false or timing responses).",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (16).webp",
+    "answer": "A",
+    "answerText": "A. 32",
+    "explanation": "An IPv4 address is 32 bits long, typically written as four 8-bit octets in dotted-decimal notation.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (17).webp",
+    "answer": "B",
+    "answerText": "B. Kevin Mitnick",
+    "explanation": "\"Ghost in the Wires: My Adventures as the World's Most Wanted Hacker\" is the autobiography of Kevin Mitnick, describing his hacking exploits.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (18).webp",
+    "answer": "D",
+    "answerText": "D. Nmap with the sO (Raw IP packets) switch.",
+    "explanation": "Nmap's IP protocol scan (-sO) probes for supported IP protocols rather than TCP/UDP ports, letting you discover unconventional protocols in use when standard service identification fails.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (19).webp",
+    "answer": "B",
+    "answerText": "B. *",
+    "explanation": "In C, a pointer variable is declared by preceding the variable name with an asterisk (*), e.g., int *p;.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (2).webp",
+    "answer": "D",
+    "answerText": "D. Brain",
+    "explanation": "Brain was the first PC boot-sector virus and requires a host file/action to spread; Nimda, Slammer, and Conficker are self-propagating worms.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (20).webp",
+    "answer": "B",
+    "answerText": "B. Scanning",
+    "explanation": "The standard hacking methodology proceeds from footprinting/reconnaissance to scanning the target network for live hosts, ports, and services.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (21).webp",
+    "answer": "D",
+    "answerText": "D. The web application should not use random tokens.",
+    "explanation": "CSRF exploitation requires the target application to lack unpredictable, per-session anti-CSRF tokens; without this protection an attacker can forge requests that ride on the victim's authenticated session.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (22).webp",
+    "answer": "A",
+    "answerText": "A. Packet filter",
+    "explanation": "Packet-filtering firewalls examine only packet header fields (source/destination IP, port, protocol) without tracking connection state or inspecting application data.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (23).webp",
+    "answer": "A",
+    "answerText": "A. 4",
+    "explanation": "The TCP/IP model has 4 layers: Network Access (Link), Internet, Transport, and Application.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (24).webp",
+    "answer": "D",
+    "answerText": "D. ethics",
+    "explanation": "Ethics refers to standards of behavior and moral judgments of right and wrong, which is the term hackers use when discussing responsible/unethical conduct.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (25).webp",
+    "answer": "C",
+    "answerText": "C. SMNP",
+    "explanation": "SNScan is a tool used to discover devices running SNMP (listed here with the typo \"SMNP\") by scanning for the SNMP service and community strings.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (26).webp",
+    "answer": "D",
+    "answerText": "D. All of the other choices",
+    "explanation": "A virus can attach to executables, replicate via executable programs, and has no completely foolproof prevention method, so all listed statements are true.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (27).webp",
+    "answer": "C",
+    "answerText": "C. Depends on the system/compiler",
+    "explanation": "The C standard does not fix the size of int; it is implementation-defined and depends on the compiler and target platform (commonly 4 bytes on modern systems, but not guaranteed).",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (28).webp",
+    "answer": "C",
+    "answerText": "C. Nessus",
+    "explanation": "Nessus is a vulnerability scanner with a signature database that detects vulnerabilities across UNIX, Windows, and web CGI scripts, and can also identify DDoS zombies and Trojans.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (29).webp",
+    "answer": "B",
+    "answerText": "B. Automated tools like AirSnort are available to discover WEP keys",
+    "explanation": "The availability of cracking tools like AirSnort is a consequence/exploitation method, not an inherent design reason WEP is weak; the true underlying flaws are the lack of mutual authentication, no centralized key management, and the small 24-bit IV.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (3).webp",
+    "answer": "A",
+    "answerText": "A. fine-tune search results",
+    "explanation": "Google hacking uses advanced search operators to fine-tune and narrow search results to expose sensitive information, files, or vulnerable systems indexed by Google.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (30).webp",
+    "answer": "B",
+    "answerText": "B. [1]",
+    "explanation": "Lists are mutable and passed by reference in Python, so k[0]=1 inside passing_argument modifies testList in place, changing it from [0] to [1].",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (31).webp",
+    "answer": "A",
+    "answerText": "A. Capture the WPA2 authentication handshake and then crack it.",
+    "explanation": "The standard method to obtain a WPA2 pre-shared key is to capture the 4-way EAPOL handshake during authentication and then perform an offline dictionary/brute-force attack against it.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (32).webp",
+    "answer": "A",
+    "answerText": "A. job boards",
+    "explanation": "Job postings on job boards often reveal the specific technologies, software, and infrastructure used within an organization, which attackers can mine for reconnaissance.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (33).webp",
+    "answer": "B",
+    "answerText": "B. Plaintext attack",
+    "explanation": "Having obtained both ciphertext and its corresponding decrypted plaintext, the attacker can use a known-plaintext attack to try to derive the encryption key used.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (34).webp",
+    "answer": "C",
+    "answerText": "C. Hacks for political reasons",
+    "explanation": "A hacktivist is motivated by political or social causes, using hacking (including defacement) as a form of activism, distinguishing them from purely criminal or curiosity-driven hackers.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (35).webp",
+    "answer": "A",
+    "answerText": "A. NULL session",
+    "explanation": "A NULL session is an unauthenticated connection to a Windows system's NetBIOS/IPC$ share, historically used to enumerate shares, users, and other information remotely.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (36).webp",
+    "answer": "C",
+    "answerText": "C. It replaces legitimate programs",
+    "explanation": "A rootkit's primary purpose is to hide malicious activity and maintain covert access by replacing or subverting legitimate system programs and utilities.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (37).webp",
+    "answer": "A",
+    "answerText": "A. Windows Vista",
+    "explanation": "Windows Vista is a client/desktop operating system, not a network (server) operating system, unlike Windows Server 2003, NetWare, Solaris, UNIX, and Linux.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (38).webp",
+    "answer": "A,B,D,E",
+    "answerText": "A. SamSpade; B. Maltego; D. Cheops; E. NSLookup",
+    "explanation": "SamSpade, Maltego, Cheops, and NSLookup are all footprinting/reconnaissance tools used to gather information about a target; Burp Suite is a web application testing/proxy tool, not a footprinting tool.",
+    "verifyAnswer": "A,B,D,E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (39).webp",
+    "answer": "A",
+    "answerText": "A. target of evaluation",
+    "explanation": "TOE stands for \"Target of Evaluation,\" a term used in Common Criteria security evaluations to denote the system or product being assessed.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (4).webp",
+    "answer": "C",
+    "answerText": "C. open-source",
+    "explanation": "Linux is an open-source operating system, with its kernel source code freely available for anyone to view, modify, and distribute.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (40).webp",
+    "answer": "A",
+    "answerText": "A. validate an email address",
+    "explanation": "The SMTP VRFY command is used to verify (validate) whether a specific email address or username exists on the mail server.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (41).webp",
+    "answer": "A,C,D",
+    "answerText": "A. Use ARPWALL system and block ARP spoofing attacks; C. Use private VLANS; D. Place static ARP entries on servers, workstation and routers",
+    "explanation": "Defenses against ARP spoofing include dedicated tools like ARPWALL, network segmentation via private VLANs, and static ARP entries to prevent poisoning; tuning IDS to watch for ARP traffic is detection, not prevention.",
+    "verifyAnswer": "A,C,D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (42).webp",
+    "answer": "C",
+    "answerText": "C. dw",
+    "explanation": "In vi, the \"dw\" command deletes from the cursor to the end of the current word; \"dd\" deletes the whole line and \"wq\" saves and quits.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (43).webp",
+    "answer": "C",
+    "answerText": "C. iptables -F",
+    "explanation": "The \"-F\" (flush) option in iptables removes (flushes) all rules from a chain/table, whereas -L lists rules and -A appends a rule.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (44).webp",
+    "answer": "B",
+    "answerText": "B. 10 5",
+    "explanation": "The XOR swap algorithm correctly swaps the values pointed to by a and b using pointers, so x=5,y=10 become 10 and 5 respectively after the swap function runs.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (45).webp",
+    "answer": "B",
+    "answerText": "B. 10 5",
+    "explanation": "Identical code to the previous question: the XOR swap via pointers correctly exchanges the values, printing 10 5.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (5).webp",
+    "answer": "B",
+    "answerText": "B. A software that does malicious activities on a computer",
+    "explanation": "Malware is broadly defined as any software designed to perform malicious/unauthorized actions on a system; this is more general and accurate than limiting it to only data theft/destruction or a specific list (Trojan/Worm/Virus).",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (6).webp",
+    "answer": "B",
+    "answerText": "B. gray hat",
+    "explanation": "A gray hat hacker operates between white hat and black hat, sometimes acting ethically and sometimes maliciously depending on the situation.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (7).webp",
+    "answer": "A",
+    "answerText": "A. Zone transfer",
+    "explanation": "A DNS zone transfer is the process of copying the entire zone file (all DNS records) from a primary to a secondary DNS server, which attackers can abuse if misconfigured.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (8).webp",
+    "answer": "B",
+    "answerText": "B. RootKit",
+    "explanation": "A rootkit is designed to hide processes, files, and registry entries from detection while intercepting keystrokes, giving stealthy persistent access to a compromised system.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025 (9).webp",
+    "answer": "C",
+    "answerText": "C. 128",
+    "explanation": "An IPv6 address is 128 bits long, vastly expanding the address space compared to IPv4's 32 bits.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_FA_2023_-_FE_1025.webp",
+    "answer": "B",
+    "answerText": "B. Plain text",
+    "explanation": "In cryptography, the original, readable message before encryption is called plaintext; after encryption it becomes ciphertext.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  }
+]

@@ -1,0 +1,504 @@
+[
+  {
+    "image": "SP25_FE_HCM (1).webp",
+    "answer": "A",
+    "answerText": "A. Data Leakage Protection Inventory",
+    "explanation": "A DLP data inventory process is used to discover and catalog where sensitive data currently resides; the other options describe unrelated or fabricated DLP concepts.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (2).webp",
+    "answer": "B",
+    "answerText": "B. Providing authority and support for the IRT's efforts",
+    "explanation": "Management's role in incident response is to empower and back the Incident Response Team with authority, resources, and decision-making support, not to perform technical fixes.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (3).webp",
+    "answer": "C",
+    "answerText": "C. Built on domains like Risk Governance, Evaluation, and Response",
+    "explanation": "ISACA's Risk IT framework is structured around the three domains of Risk Governance, Risk Evaluation, and Risk Response.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (4).webp",
+    "answer": "B",
+    "answerText": "B. To maintain accurate configuration information throughout a system's lifecycle",
+    "explanation": "A CMDB's primary purpose is to track and maintain accurate configuration item data across the system lifecycle, supporting change and configuration management.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (5).webp",
+    "answer": "C",
+    "answerText": "C. Reduction in risk",
+    "explanation": "The ultimate goal of a security policy is to reduce organizational risk; awareness counts or approval rank are weaker, indirect measures.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (6).webp",
+    "answer": "D",
+    "answerText": "D. WMI",
+    "explanation": "SCAP consists of standards like XCCDF, OVAL, and CPE (plus CCE/CVE/CVSS); WMI is a Microsoft management technology, not part of SCAP.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (7).webp",
+    "answer": "B",
+    "answerText": "B. Classifying assets and assigning accountability for them",
+    "explanation": "System/Application Domain policies focus on asset classification and ownership/accountability, not dress codes or office layout.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (8).webp",
+    "answer": "D",
+    "answerText": "D. Pleasers",
+    "explanation": "Pleasers are the personality type that over-extends themselves helping others and struggles to ask for what they need, a classic social-engineering target profile.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (9).webp",
+    "answer": "A, C",
+    "answerText": "A. Innovators; C. More likely to take risks",
+    "explanation": "The question explicitly says 'Select two'. Entrepreneurs are typically characterized both as innovators (A) and as more risk-tolerant (C); B and D are not typical entrepreneurial traits.",
+    "verifyAnswer": "A, C",
+    "agree": true,
+    "corrected": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "SP25_FE_HCM (10).webp",
+    "answer": "B",
+    "answerText": "B. Configuration management",
+    "explanation": "Maintaining a database of original settings plus subsequent changes is the definition of configuration management.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (11).webp",
+    "answer": "C",
+    "answerText": "C. A control that does not stop behavior immediately but automates notification of incident",
+    "explanation": "Detective controls identify and alert on an incident after/as it happens (like an IDS) rather than stopping it in real time.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (12).webp",
+    "answer": "A",
+    "answerText": "A. To provide quick response to requests for information and support the IRT",
+    "explanation": "Front-line users are crucial for promptly answering IRT information requests and supporting the response effort.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (13).webp",
+    "answer": "A",
+    "answerText": "A. Inventory management",
+    "explanation": "Knowing what software is installed on workstations is the function of inventory management.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (14).webp",
+    "answer": "A, B, E",
+    "answerText": "A. Promise not to share the credentials entrusted to his or her care; B. Promise to report any indication of a breach or intrusion promptly; E. Acknowledgment of the risk associated with elevated access in the event the credentials are breached or abused",
+    "explanation": "A privileged-level access agreement (PAA) generally contains a promise not to share credentials (A), a promise to promptly report suspected breaches (B), and an acknowledgment of the elevated risk of privileged access (E). Options C (general privacy expectation) and D (email etiquette) belong to a general Acceptable Use Policy, not specifically the PAA.",
+    "verifyAnswer": "A, B, E",
+    "agree": true,
+    "corrected": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "SP25_FE_HCM (15).webp",
+    "answer": "A",
+    "answerText": "A. The final set of security tools and processes needed to meet goals.",
+    "explanation": "'Target state' refers to the desired end-state of security controls/processes an organization aims to achieve, as opposed to the current state.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (16).webp",
+    "answer": "B",
+    "answerText": "B. Systems administrators",
+    "explanation": "System administrators need broad, often unrestricted access to systems and databases to support and maintain applications.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (17).webp",
+    "answer": "B",
+    "answerText": "B. Risk appetite measures impact and likelihood, while risk tolerance measures variance from a target goal",
+    "explanation": "Risk appetite is the broad, strategic level of risk (impact/likelihood) an organization accepts, while risk tolerance defines acceptable deviation/variance from specific targets set within that appetite.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (18).webp",
+    "answer": "C",
+    "answerText": "C. Availability of the data",
+    "explanation": "John cannot access the needed presentation when he needs it, which is an availability problem, not integrity or unauthorized access.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (19).webp",
+    "answer": "A",
+    "answerText": "A. Risk Governance",
+    "explanation": "Risk Governance provides the business context, aligning risk activities with business strategy, goals, and tolerances.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (20).webp",
+    "answer": "D",
+    "answerText": "D. Human behavior",
+    "explanation": "Understanding how people will actually behave and react is a critical factor to weigh before rolling out a new policy, since policies fail if they ignore human behavior.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (21).webp",
+    "answer": "B",
+    "answerText": "B. FOUO",
+    "explanation": "'For Official Use Only' (FOUO) is the classification the DoD historically uses for sensitive but unclassified information.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (22).webp",
+    "answer": "A",
+    "answerText": "A. Concentrators",
+    "explanation": "VPN concentrators are the dedicated devices built specifically to establish and manage large numbers of VPN connections.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (23).webp",
+    "answer": "C",
+    "answerText": "C. To better understand the threat and the weakness exploited",
+    "explanation": "Classifying incidents helps responders understand the nature of the threat and the vulnerability that was exploited, guiding response.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (24).webp",
+    "answer": "B",
+    "answerText": "B. Provide authentication, integrity, and nonrepudiation for files.",
+    "explanation": "Digital signatures cryptographically ensure authentication, integrity, and nonrepudiation, which is why they matter for policy compliance/sign-off records.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (25).webp",
+    "answer": "B",
+    "answerText": "B. Easy to understand language",
+    "explanation": "A well-designed policy should be written in clear, easy-to-understand language so employees can actually follow it, not buried in technical jargon.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (26).webp",
+    "answer": "C",
+    "answerText": "C. ERM",
+    "explanation": "COBIT, ISO, and OCTAVE are IT security/risk frameworks; Enterprise Risk Management (ERM) is a broader organizational risk discipline, not specifically an IT security policy framework.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (27).webp",
+    "answer": "A",
+    "answerText": "A. A control that stops behavior immediately and does not rely on human decisions",
+    "explanation": "An automated control acts immediately without requiring human judgment, e.g., an automatic account lockout or firewall block.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (28).webp",
+    "answer": "B",
+    "answerText": "B. Procedure",
+    "explanation": "Step-by-step documentation of how to perform specific tasks (power up/down, configure backups) is a procedure.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (29).webp",
+    "answer": "B",
+    "answerText": "B. Assisting with analysis and recommending immediate response actions",
+    "explanation": "System administrators support incident response by helping analyze the technical situation and recommending immediate remediation steps.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (30).webp",
+    "answer": "B",
+    "answerText": "B. To understand an organization's risks and their potential effects on the business",
+    "explanation": "RCSA's core purpose is helping an organization identify and understand its risks and how they could affect the business.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (31).webp",
+    "answer": "B",
+    "answerText": "B. It allows the organization to understand its risks and potential effects on the business",
+    "explanation": "The key benefit of RCSA, same as its purpose, is giving the organization insight into its risk landscape and business impact.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (32).webp",
+    "answer": "D",
+    "answerText": "D. Financial statements",
+    "explanation": "An IT policy framework typically consists of policies, standards, baselines, guidelines, and procedures; financial statements are unrelated accounting documents.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (33).webp",
+    "answer": "B",
+    "answerText": "B. Surplus of funding",
+    "explanation": "Common challenges are lack of accountability, low priority, and tight schedules; having a surplus of funding is not a challenge to implementing policies.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (34).webp",
+    "answer": "A",
+    "answerText": "A. Information security officer (ISO)",
+    "explanation": "The ISO is generally responsible for coordinating breach assessment, damage minimization, and remediation across the organization.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (35).webp",
+    "answer": "B",
+    "answerText": "B. A stateless firewall looks at each packet individually and a stateful firewall examines the packet in context the connection and other packets.",
+    "explanation": "Stateless firewalls filter packets in isolation using static rules, while stateful firewalls track connection state and evaluate packets in context.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (36).webp",
+    "answer": "B",
+    "answerText": "B. False",
+    "explanation": "The statement has IDS and IPS reversed: an IDS only detects and alerts without stopping traffic, while an IPS both detects and actively blocks/stops the attack.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (37).webp",
+    "answer": "B",
+    "answerText": "B. False",
+    "explanation": "Encryption protects data confidentiality but does not protect against all breach types, such as insider misuse of authorized decryption access or availability/integrity attacks.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (38).webp",
+    "answer": "C",
+    "answerText": "C. Organizational committees enforcing policies and monitoring workers' actions.",
+    "explanation": "Policy enforcement at the organizational level is carried out by dedicated committees tasked with enforcing policy and monitoring compliance, not wellness or external boards.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (39).webp",
+    "answer": "C",
+    "answerText": "C. third line",
+    "explanation": "In the three-lines-of-defense model, independent/internal audit constitutes the third line of defense.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (40).webp",
+    "answer": "C",
+    "answerText": "C. Systems administrators",
+    "explanation": "Systems administrators require broad, largely unrestricted access to systems and databases to perform their job functions.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (41).webp",
+    "answer": "B",
+    "answerText": "B. Ensuring compliance with policies and regulations",
+    "explanation": "Information security governance is about oversight ensuring adherence to policies, standards, and regulatory requirements, not daily operations or profit.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (42).webp",
+    "answer": "C",
+    "answerText": "C. Customers as the third line",
+    "explanation": "The three lines of defense are business units (1st), risk management/compliance functions (2nd), and internal/independent audit (3rd) — customers are not part of the model.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (43).webp",
+    "answer": "B",
+    "answerText": "B. Reduce risk",
+    "explanation": "Well-defined, properly implemented security policies primarily help the business by reducing risk, which also supports consistent operations.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (44).webp",
+    "answer": "C",
+    "answerText": "C. More controls than if you were in the office",
+    "explanation": "Remote access is inherently higher risk, so remote authentication typically requires additional controls (e.g., MFA, VPN) beyond what's needed on-site.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (45).webp",
+    "answer": "C",
+    "answerText": "C. Sell, Market, and Profit",
+    "explanation": "COBIT's domains include Align/Plan/Organize, Build/Acquire/Implement, Deliver/Service/Support, and Monitor/Evaluate/Assess — 'Sell, Market, and Profit' is not a COBIT phase.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (46).webp",
+    "answer": "B",
+    "answerText": "B. Internal connection committee",
+    "explanation": "Architecture review committee, Vendor governance committee, and Security compliance committee are standard organizational gateway committees that evaluate technical architecture, third-party risk, and regulatory alignment before implementation. 'Internal connection committee' is a distractor and is not a recognized gateway committee.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (47).webp",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "PCI DSS requires monitoring/testing networks, encrypting cardholder data, and implementing strong access controls, among other requirements — all listed items apply.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (48).webp",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "Emphasizing business risk in security awareness makes risk relevant to employees, improves policy adherence, and prepares staff for unexpected risks — all benefits apply.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (49).webp",
+    "answer": "A",
+    "answerText": "A. True",
+    "explanation": "This is an accurate description of an Internet proxy server acting as an intermediary that filters requests/responses between users and the Internet.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_FE_HCM (50).webp",
+    "answer": "D",
+    "answerText": "D. All the above",
+    "explanation": "ISS policies support business operations by controlling infrastructure change, protecting data at rest/in transit, and mitigating insider threats — all are valid aspects.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  }
+]

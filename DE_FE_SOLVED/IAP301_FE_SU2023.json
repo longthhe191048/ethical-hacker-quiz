@@ -1,0 +1,476 @@
+[
+  {
+    "image": "page_001.jpg",
+    "answer": "C",
+    "answerText": "C. Creating some layers of redundancy",
+    "explanation": "Redundancy (backup people/processes so no single point of failure in awareness/response) is a recognized method for overcoming apathy toward security policy; the other options describe rigid enforcement, not motivation.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_002.jpg",
+    "answer": "E",
+    "answerText": "E. All of the mentioned",
+    "explanation": "Shareholder value, regulatory requirements, and technology vulnerabilities/limitations are all cited pressures driving organizations to create security policies.",
+    "verifyAnswer": "E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_003.jpg",
+    "answer": "C",
+    "answerText": "C. Data steward",
+    "explanation": "A data steward is the role responsible for operational tasks like backup, versioning, uploads/downloads, and database administration, as opposed to the data owner who has ultimate accountability.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_004.jpg",
+    "answer": "C",
+    "answerText": "C. InfoSec Program Charter",
+    "explanation": "The InfoSec Program Charter is the capstone document establishing reporting lines and delegated responsibility for information security under the CIO or other executive.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_005.jpg",
+    "answer": "C",
+    "answerText": "C. Adherence to an organization's policy",
+    "explanation": "Policy compliance is defined as adherence (following the rules), not merely effort or failure to follow, which are opposite/different concepts.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_006.jpg",
+    "answer": "A",
+    "answerText": "A. Apathy",
+    "explanation": "Apathy is defined as a state of indifference or suppression of emotions such as concern, excitement, motivation, or passion — the opposite of sympathy or enthusiasm.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_007.jpg",
+    "answer": "C",
+    "answerText": "C. (iii)",
+    "explanation": "The CISO (Chief Information Security Officer) is typically responsible for writing the report to the board of directors on the state of InfoSec within the company.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_008.jpg",
+    "answer": "A",
+    "answerText": "A. I x L",
+    "explanation": "Risk level is standardly calculated as Impact multiplied by Likelihood (Risk = Impact x Likelihood).",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_009.jpg",
+    "answer": "C",
+    "answerText": "C. FTP (File Transfer Protocol)",
+    "explanation": "FTP is the standard protocol used to exchange files over a LAN or WAN.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_010.jpg",
+    "answer": "B",
+    "answerText": "B. False",
+    "explanation": "The Business Impact Analysis (BIA) is performed before and feeds into the Business Continuity Plan (BCP), not after it.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_011.jpg",
+    "answer": "B",
+    "answerText": "B. False",
+    "explanation": "Same as the previous item: the BIA precedes and informs the BCP, so it is not created after the BCP.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_012.jpg",
+    "answer": "B",
+    "answerText": "B. False",
+    "explanation": "A single breached record does not by itself determine pervasiveness; if the underlying root cause is a systemic gap (e.g., no encryption/access control applied broadly), that same weakness affects all similar data, so a single-record breach CAN reveal a pervasive control weakness.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "corrected": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_013.jpg",
+    "answer": "A",
+    "answerText": "A. before, after",
+    "explanation": "Quality assurance (QA) is performed before code goes into production (proactive process checks), while quality control (QC) tests the code after it is in production (reactive verification).",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_014.jpg",
+    "answer": "C",
+    "answerText": "C. NIST (National Institute of Standards and Technology)",
+    "explanation": "NIST publishes security control guidelines (e.g., SP 800-series) for federal information systems.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_015.jpg",
+    "answer": "C",
+    "answerText": "C. Ongoing awareness",
+    "explanation": "Continuous/ongoing security awareness programs are a key method for overcoming apathy, keeping the topic relevant rather than a one-time directive.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_016.jpg",
+    "answer": "C",
+    "answerText": "C. Corrective",
+    "explanation": "Corrective controls are associated with responding to and fixing a security incident after it has occurred, unlike detective (finding) or deterrent (discouraging) controls.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_017.jpg",
+    "answer": "A",
+    "answerText": "A. (i)",
+    "explanation": "Data at rest is the term for data stored on any type of media, as opposed to data in transit (moving across a network) or encrypted data (a state of protection, not storage).",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_018.jpg",
+    "answer": "B",
+    "answerText": "B. False",
+    "explanation": "It is the custodian who must obtain approval from the data owner to use/manage the data, not the other way around.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_019.jpg",
+    "answer": "B",
+    "answerText": "B. WBEM (Web-Based Enterprise Management)",
+    "explanation": "WBEM is a set of management and web-based standards for querying and managing systems and applications across both internet and internal networks.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_020.jpg",
+    "answer": "A",
+    "answerText": "A. Routers and firewalls",
+    "explanation": "Routers and firewalls are the standard network devices used to segment LANs into separate zones or subnets.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_021.jpg",
+    "answer": "A",
+    "answerText": "A. (i)",
+    "explanation": "A segmented network limits how systems can communicate with each other, unlike a flat network where all devices can freely communicate.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_022.jpg",
+    "answer": "A",
+    "answerText": "A. digital assets",
+    "explanation": "Digital assets is the term for any organization-owned digital material such as text, graphics, audio, video, and animations.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_023.jpg",
+    "answer": "E",
+    "answerText": "E. All of the mentioned",
+    "explanation": "Controlling infrastructure change, protecting data at rest/in transit, and protecting against insider threats are all aspects of ISS policies supporting business operations.",
+    "verifyAnswer": "E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_024.jpg",
+    "answer": "B",
+    "answerText": "B. LAN",
+    "explanation": "Employees typically use two-factor authentication (e.g., via VPN) to remotely access the corporate LAN; the WAN is merely the transport path, not the resource being accessed.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "corrected": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_025.jpg",
+    "answer": "E",
+    "answerText": "E. All of the mentioned",
+    "explanation": "Architecture operating model, intent, and the policy change control board are all important considerations before writing a policy.",
+    "verifyAnswer": "E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_026.jpg",
+    "answer": "A",
+    "answerText": "A. SNMP (Simple Network Management Protocol)",
+    "explanation": "SNMP is used to query and manage network devices; SNMPv1 had known weaknesses like transmitting the community string in clear text, improved in v2/v3.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_027.jpg",
+    "answer": "C",
+    "answerText": "C. (iii)",
+    "explanation": "A control environment refers to the overall way in which an organization's controls are governed and executed, not simply an inventory or exception-tracking framework.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_028.jpg",
+    "answer": "D",
+    "answerText": "D. All of the mentioned",
+    "explanation": "Automating distribution of security policy settings requires administrator training, organizational acceptance, and testing for effectiveness — all are relevant considerations.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_029.jpg",
+    "answer": "D",
+    "answerText": "D. Recovery Time Objective",
+    "explanation": "RTO stands for Recovery Time Objective, the targeted duration for restoring a business process after a disruption.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_030.jpg",
+    "answer": "A",
+    "answerText": "A. True",
+    "explanation": "A consequence model applies disciplinary measures for policy violations specifically to encourage and ensure future compliance with information security policies.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_031.jpg",
+    "answer": "C",
+    "answerText": "C. critical infrastructure",
+    "explanation": "Critical infrastructure refers to the key elements of a country's transportation, energy, communications, and banking systems.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_032.jpg",
+    "answer": "B",
+    "answerText": "B. Auditors",
+    "explanation": "Auditors independently evaluate risk and issue independent opinions on controls, distinct from insiders, contractors, or security/systems staff who operate the controls.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_033.jpg",
+    "answer": "C",
+    "answerText": "C. breach",
+    "explanation": "A breach is defined as a confirmed event that compromises the confidentiality, integrity, or availability of information.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_034.jpg",
+    "answer": "D",
+    "answerText": "D. Creating a budget to compare options",
+    "explanation": "Discovering, reporting, containing, and analyzing an incident are standard incident response steps; creating a budget to compare options is not part of incident response.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_035.jpg",
+    "answer": "D",
+    "answerText": "D. Value delivery",
+    "explanation": "Value delivery means focusing resources to deliver the greatest benefits to the organization.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_036.jpg",
+    "answer": "D",
+    "answerText": "D. (i) and (ii)",
+    "explanation": "Least access privileges customize access to an individual, while best-fit privileges customize access to a group based on risk — these are genuine differences, not \"no difference.\"",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_037.jpg",
+    "answer": "C",
+    "answerText": "C. Detailed line budget",
+    "explanation": "An incident response team charter should define mission, organizational structure, and roles/responsibilities, but not a detailed line-item budget.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_038.jpg",
+    "answer": "A",
+    "answerText": "A. procedures",
+    "explanation": "Security procedures are the step-by-step, technical/operational instructions that implement and enforce the policies an organization defines; policies state what/why, while procedures are the concrete technical implementation (how). \"Measures\" and \"counter-measures\" describe safeguards generally, and \"guidelines\" are non-mandatory recommendations, neither of which specifically denotes the technical implementation of policy the way procedures do.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "corrected": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_039.jpg",
+    "answer": "D",
+    "answerText": "D. (i) and (ii) only",
+    "explanation": "Competitive advantage from real-time data access and increased customer responsiveness are business benefits of mobile internet access; preventing unauthorized access is a security requirement, not a business benefit driver.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_040.jpg",
+    "answer": "A",
+    "answerText": "A. True",
+    "explanation": "Confidential is indeed the lowest of the federal government's classified data ratings (Confidential, Secret, Top Secret).",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_041.jpg",
+    "answer": "D",
+    "answerText": "D. All (i), (ii), (iii)",
+    "explanation": "Line management makes policies operational by being a go-to resource for questions, applying policies consistently, and gathering metrics on their effectiveness.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_042.jpg",
+    "answer": "C",
+    "answerText": "C. NIST SP 800-171",
+    "explanation": "NIST SP 800-171, \"Protecting Unclassified Information in Nonfederal Information Systems and Organizations,\" matches the description exactly.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_043.jpg",
+    "answer": "A",
+    "answerText": "A. (i)",
+    "explanation": "Hardening is the process of eliminating security risks by minimizing access rights, requiring unique authentication, and removing nonessential software/configurations.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_044.jpg",
+    "answer": "B",
+    "answerText": "B. Integrity",
+    "explanation": "Integrity is the security principle ensuring that information has not been improperly changed or altered.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_045.jpg",
+    "answer": "D",
+    "answerText": "D. Communications plan",
+    "explanation": "A communications plan is critical to ensuring that security awareness messaging effectively reaches specific types of users.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_046.jpg",
+    "answer": "A",
+    "answerText": "A. (i)",
+    "explanation": "Standard policy-governance practice is to keep security policies written to best practice and manage non-compliant legacy technology through a formal, documented policy waiver/exception. This preserves one consistent high bar for everyone else, unlike (ii) which silently weakens the security standard for the entire organization to accommodate the weakest system, or (iii) which fragments governance into multiple divergent policy sets that are harder to maintain and audit. A waiver is therefore the least objectionable approach.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "corrected": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_047.jpg",
+    "answer": "C",
+    "answerText": "C. Data steward",
+    "explanation": "Confirmed by the marked checkbox in the source image: a data steward implements policies/procedures such as backup, versioning, uploading, downloading, and database administration.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  }
+]

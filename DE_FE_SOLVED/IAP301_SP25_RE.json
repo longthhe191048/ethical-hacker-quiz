@@ -1,0 +1,495 @@
+[
+  {
+    "image": "SP25_RE (1).webp",
+    "answer": "A",
+    "answerText": "A. Auditor",
+    "explanation": "An auditor independently examines risk, controls, and compliance and issues an unbiased opinion, unlike an administrator or data owner/steward who operate the system.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (10).webp",
+    "answer": "C",
+    "answerText": "C. Slow reaction time",
+    "explanation": "Hierarchical models have many layers of approval, so decisions and reactions move slowly; the other options describe advantages, not disadvantages.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (11).webp",
+    "answer": "B",
+    "answerText": "B. Use an early adopter to demonstrate policy value",
+    "explanation": "Showing a respected early adopter successfully using the policy builds credibility and overcomes resistance better than hiding or forcing the policy.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (12).webp",
+    "answer": "C",
+    "answerText": "C. Procedure",
+    "explanation": "The stem's definition (\"written statement describing the steps required to implement a process\", supporting policies/standards, human-followed) is the standard textbook definition of a procedure.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (13).webp",
+    "answer": "D",
+    "answerText": "D. Physical security",
+    "explanation": "Visitor control (sign-in, escorts, badges) is a classic aspect of physical security, not network, personnel, or workstation security.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (14).webp",
+    "answer": "F",
+    "answerText": "F. All of the mentioned",
+    "explanation": "Incident response lifecycle involves key phases including discovery, reporting, containment, and post-incident analysis. In comprehensive exam questions, 'All of the mentioned' encompasses all listed incident management activities.",
+    "note": "multi-select style question",
+    "verifyAnswer": "F",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (15).webp",
+    "answer": "A",
+    "answerText": "A. User Apathy",
+    "explanation": "User apathy is specifically defined as a lack of interest, enthusiasm, or concern toward a system, service, or product.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (16).webp",
+    "answer": "A",
+    "answerText": "A. Change management",
+    "explanation": "Change management is the formal process for controlling and reviewing changes so they don't cause unexpected outages.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (17).webp",
+    "answer": "C",
+    "answerText": "C. Device management",
+    "explanation": "The device management component of a DLP program ensures protection is applied on every endpoint device regardless of OS or type.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (18).webp",
+    "answer": "C",
+    "answerText": "C. Option 3",
+    "explanation": "Writing policy to the lowest common standard to accommodate outdated technology drags down the security posture for the entire organization, making it the least desirable of the four options.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (19).webp",
+    "answer": "C",
+    "answerText": "C. Challenge whether a company's existing processes represent the best approach",
+    "explanation": "A change agent's role is to question and drive improvement of existing processes, not simply confirm they work.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (2).webp",
+    "answer": "C",
+    "answerText": "C. Change management",
+    "explanation": "Launching a redesigned site right before the critical holiday revenue period requires a formal change management process to control risk of outages during that sensitive window.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (20).webp",
+    "answer": "B",
+    "answerText": "B. Firewalls",
+    "explanation": "Firewalls are technical (logical) controls enforced through technology; the other options are administrative or physical controls.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (21).webp",
+    "answer": "D",
+    "answerText": "D. Data being stored for later transmission",
+    "explanation": "Data at rest refers to inactive data stored in any digital repository (such as hard drives or storage arrays) awaiting future access or transmission, distinguishing it from data in motion or data in use.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (22).webp",
+    "answer": "C",
+    "answerText": "C. Procedure",
+    "explanation": "Documented step-by-step instructions that give employees structured guidance to complete tasks in line with policy is the definition of a procedure.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (24).webp",
+    "answer": "C",
+    "answerText": "C. To improve security and prevent future incidents",
+    "explanation": "Incident analysis exists to learn lessons and strengthen defenses so similar incidents don't recur, not merely to identify the attacker or train staff.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (25).webp",
+    "answer": "B",
+    "answerText": "B. Humans may not have information security in mind when performing their jobs",
+    "explanation": "Human error often stems from employees focusing on their primary job tasks and not thinking about security implications while doing them.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (26).webp",
+    "answer": "C",
+    "answerText": "C. To protect information based on its sensitivity",
+    "explanation": "Data classification exists so that appropriate protective controls can be applied according to how sensitive or critical the data is.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (27).webp",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "HIPAA, GLBA, and FERPA all mandate adequate security controls for the specific sensitive data types they cover (health, financial, education records).",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (28).webp",
+    "answer": "B",
+    "answerText": "B. Clean desk policy",
+    "explanation": "A clean desk policy requires employees to secure documents and digital media when leaving their desk or when not in use.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (29).webp",
+    "answer": "B",
+    "answerText": "B. User Authentication Methods",
+    "explanation": "A VPN client standard specifies required user authentication methods (such as multi-factor authentication) before establishing remote access to the network.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (3).webp",
+    "answer": "A",
+    "answerText": "A. Difficult to follow and enforce",
+    "explanation": "An unwritten (informal/tribal-knowledge) policy is not documented, making it hard to communicate, follow consistently, or enforce.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (30).webp",
+    "answer": "B",
+    "answerText": "B. To define the scope and meaning of terms used",
+    "explanation": "A dictionary/glossary section in a policy document clarifies terminology so readers interpret the policy consistently.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (31).webp",
+    "answer": "B",
+    "answerText": "B. Identifying and reviewing policy violations",
+    "explanation": "A Security Compliance Committee's role is oversight — identifying and reviewing violations and compliance issues — rather than day-to-day enforcement or technical support.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (32).webp",
+    "answer": "C",
+    "answerText": "C. ITIL",
+    "explanation": "ITIL (Information Technology Infrastructure Library) is specifically an IT service management framework, unlike COBIT (governance), ISO 27001 (ISMS), or PCI DSS (payment card security).",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (33).webp",
+    "answer": "D",
+    "answerText": "D. Logical access control mechanisms",
+    "explanation": "Logical/technical access controls are technical controls; policies, personnel screening, and change control procedures are all administrative controls.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (34).webp",
+    "answer": "C",
+    "answerText": "C. Detailed line budget",
+    "explanation": "An incident response team charter should define mission, structure, and roles/responsibilities, but detailed line-item budgets belong in separate financial planning documents.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (35).webp",
+    "answer": "A",
+    "answerText": "A. It provides a standardized risk score to determine patch criticality",
+    "explanation": "OWASP's Risk Rating Methodology scores vulnerabilities so organizations can prioritize which patches are most critical to apply first.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (36).webp",
+    "answer": "B",
+    "answerText": "B. Data stored on any physical or virtual storage device",
+    "explanation": "Data at rest broadly means data residing in storage (physical or virtual media), as opposed to data in transit or actively processed.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (37).webp",
+    "answer": "A",
+    "answerText": "A. COBIT specifies how to implement controls, while ISO focuses on broader IT management practices",
+    "explanation": "COBIT is control/governance-oriented and prescriptive, whereas ISO standards (e.g., 27001/27002) address broader information/IT management practices.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (38).webp",
+    "answer": "C",
+    "answerText": "C. Necessitates managing to the intent of regulations as much as to the letter.",
+    "explanation": "Because regulations vary and change frequently, organizations must interpret and manage compliance around the intent of the rules, not just their literal wording.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (39).webp",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "Shareholder value, regulatory requirements, and technology vulnerabilities/limitations are all recognized drivers for establishing security policies.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (4).webp",
+    "answer": "B",
+    "answerText": "B. It defines how long data should be kept based on legal and business needs",
+    "explanation": "Data retention policy importance lies in balancing legal/regulatory requirements and business needs for how long data must be kept, not indefinite storage or blanket deletion.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (40).webp",
+    "answer": "B",
+    "answerText": "B. Users accessing the Internet",
+    "explanation": "An acceptable use policy (AUP) governs how end users may use company resources, including Internet access; server-to-server communication is typically outside AUP scope (covered by other technical standards).",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (41).webp",
+    "answer": "C",
+    "answerText": "C. Between the private LAN and public WAN",
+    "explanation": "A DMZ sits as a buffer zone between the trusted internal LAN and the untrusted public WAN/Internet, hosting public-facing services.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (42).webp",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "Pride, self-interest, and success are all commonly cited fundamental components of motivation.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (43).webp",
+    "answer": "A",
+    "answerText": "A. Routers and firewalls",
+    "explanation": "Routers and firewalls are the standard networking devices used to segment LANs into separate subnets/zones.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (44).webp",
+    "answer": "C",
+    "answerText": "C. Corrective",
+    "explanation": "Corrective controls are those applied after an incident to respond to and resolve/restore from it, as opposed to deterrent or detective controls.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (45).webp",
+    "answer": "B",
+    "answerText": "B. To define system configurations",
+    "explanation": "Common Configuration Enumeration (CCE) in SCAP provides standardized identifiers/names for system configuration issues, distinct from CVE (vulnerabilities) or CVSS (severity scoring).",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (46).webp",
+    "answer": "D",
+    "answerText": "D. System/Application Domain",
+    "explanation": "The System/Application Domain covers the servers and applications used to collect, process, and store organizational information.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (47).webp",
+    "answer": "B",
+    "answerText": "B. Maintains the integrity and security of evidence",
+    "explanation": "Chain of custody documents who handled evidence and when, ensuring it remains untampered and admissible in forensic/legal proceedings.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (48).webp",
+    "answer": "A",
+    "answerText": "A. Data leakage",
+    "explanation": "Monitoring user email and Internet activity specifically aims to prevent data leakage and loss of sensitive corporate information.",
+    "note": "multi-select style question",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (49).webp",
+    "answer": "B",
+    "answerText": "B. By domain",
+    "explanation": "IT infrastructure security policies are commonly organized around the seven domains of IT infrastructure (User, Workstation, LAN, LAN-to-WAN, WAN, Remote Access, System/Application).",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (5).webp",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "Achieving operational consistency requires measuring consistency, quality, and results together.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (50).webp",
+    "answer": "B",
+    "answerText": "B. Standard",
+    "explanation": "In the information security policy hierarchy, standards set mandatory rules and specifications that employees and systems must strictly follow, unlike guidelines which are optional.",
+    "note": "multi-select style question",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (6).webp",
+    "answer": "C",
+    "answerText": "C. ERM",
+    "explanation": "ERM (Enterprise Risk Management) is a general risk management discipline, not an IT security policy framework like COBIT, ISO, or OCTAVE.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (7).webp",
+    "answer": "C",
+    "answerText": "C. Initiation, evaluation, development, approval, publication, implementation, and maintenance",
+    "explanation": "This lifecycle sequence matches the standard document development process for policies/standards/procedures described in the course material.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (8).webp",
+    "answer": "C",
+    "answerText": "C. World Area Network Domain",
+    "explanation": "The seven domains of typical IT infrastructure are User, Workstation, LAN, LAN-to-WAN, WAN, Remote Access, and System/Application Domains — \"World Area Network Domain\" is not one of them (it's a distractor confusing WAN).",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (9).webp",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "Shareholder value, regulations, and technology vulnerabilities/limitations are all cited as pressures driving the creation of security policies.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  }
+]

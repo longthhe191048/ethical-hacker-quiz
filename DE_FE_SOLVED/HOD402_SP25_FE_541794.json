@@ -1,0 +1,502 @@
+[
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (1).webp",
+    "answer": "B",
+    "answerText": "B. RC5",
+    "explanation": "RC5 is a block cipher with a variable block size (32, 64, or 128 bits), variable key size, and variable rounds; the others use fixed block sizes.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (10).webp",
+    "answer": "A",
+    "answerText": "A. systems on a network that are sharing files, folders, and printers",
+    "explanation": "Network share enumeration identifies hosts that expose shared resources (files, folders, printers) over the network.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (11).webp",
+    "answer": "A",
+    "answerText": "A. when user credentials were not provided",
+    "explanation": "An unauthenticated scan is run externally without login credentials, typically because none were provided or the goal is to simulate an outside attacker.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (12).webp",
+    "answer": "A",
+    "answerText": "A. NIDS",
+    "explanation": "A Network Intrusion Detection System passively monitors traffic and alerts an administrator, but does not itself block traffic (that is the role of a NIPS).",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (13).webp",
+    "answer": "B",
+    "answerText": "B. Stateful packet inspection",
+    "explanation": "Stateful inspection tracks the state of active connections/conversations to determine which return traffic should be permitted.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (14).webp",
+    "answer": "B",
+    "answerText": "B. Three-leg perimeter configuration",
+    "explanation": "A three-leg (triple-homed) DMZ uses a single firewall with three interfaces: internal network, DMZ, and external/Internet.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (15).webp",
+    "answer": "B, D",
+    "answerText": "B. Both are deployed as sensors.; D. Both use signatures to detect malicious traffic.",
+    "explanation": "IDS and IPS are both deployed as sensors on the network and both commonly rely on signature databases to identify malicious traffic; they differ mainly in that IPS can act inline to block traffic.",
+    "verifyAnswer": "B, D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (16).webp",
+    "answer": "B",
+    "answerText": "B. 1 - c, 2 - b, 3 - a",
+    "explanation": "Environmental metrics include modified base/CIA requirements (c); Base metrics include exploitability and impact metrics (b); Temporal metrics include exploit code maturity, remediation level, and report confidence (a).",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (17).webp",
+    "answer": "D",
+    "answerText": "D. confidentiality requirements",
+    "explanation": "The CVSS Environmental group includes modified base metrics and the confidentiality/integrity/availability requirements; the other items belong to Base or Temporal groups.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (18).webp",
+    "answer": "C",
+    "answerText": "C. operational",
+    "explanation": "Process-level remediation, patch management, and secrets management are operational controls (day-to-day procedures carried out by people), as opposed to technical (system-enforced), administrative (policy-level), or physical controls.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (19).webp",
+    "answer": "A",
+    "answerText": "A. exploit code maturity",
+    "explanation": "CVSS Temporal metrics consist of exploit code maturity, remediation level, and report confidence, reflecting factors that change over time.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (2).webp",
+    "answer": "B",
+    "answerText": "B. Brute Force",
+    "explanation": "A brute-force attack systematically tries every possible key until the correct one decrypts the message.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (20).webp",
+    "answer": "D",
+    "answerText": "D. Union operator",
+    "explanation": "Union-based SQL injection appends a UNION SELECT statement to force the database to return results from additional SELECT queries combined with the original query.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (21).webp",
+    "answer": "C, E, F",
+    "answerText": "C. Use HTML escape before inserting untrusted data into HTML element content.; E. Use attribute escape before inserting untrusted data into HTML common attributes.; F. Use JavaScript escape before inserting untrusted data into JavaScript data values.",
+    "explanation": "OWASP's XSS Prevention Cheat Sheet rules call for context-appropriate escaping (HTML escape, attribute escape, JavaScript escape) of untrusted data before inserting it into those contexts.",
+    "verifyAnswer": "C, E, F",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (22).webp",
+    "answer": "A, D",
+    "answerText": "A. caching of HTTP messages; D. enabling HTTP transfers across a firewall",
+    "explanation": "Web proxies primarily cache HTTP content to speed up access and act as intermediaries that allow HTTP traffic to traverse firewalls safely.",
+    "verifyAnswer": "A, D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (23).webp",
+    "answer": "B",
+    "answerText": "B. 1 - a, 2 - c, 3 - d, 4 - b",
+    "explanation": "In the URL, xyz-company.com is the host (a), 2457 is the port (c), support/file is the path (d), and name=intro&r=true is the query-string (b).",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (24).webp",
+    "answer": "B",
+    "answerText": "B. These session ID names can be used to fingerprint the application framework employed.",
+    "explanation": "Default session ID names (e.g., JSESSIONID, PHPSESSID) reveal which framework is running, helping attackers fingerprint the application and target known vulnerabilities.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (25).webp",
+    "answer": "B",
+    "answerText": "B. to convince a victim on a phone call to disclose private or financial information",
+    "explanation": "Vishing (voice phishing) uses phone calls to trick victims into revealing sensitive information.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (26).webp",
+    "answer": "B",
+    "answerText": "B. Asterisk",
+    "explanation": "Asterisk is an open-source VoIP/PBX management platform that can be configured to manipulate and spoof caller ID information, unlike SpoofCard/SpoofApp which are simple caller-ID spoofing apps rather than VoIP management tools.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (27).webp",
+    "answer": "B",
+    "answerText": "B. urgency",
+    "explanation": "Creating a false sense of urgency (act now or suffer consequences) is a classic influence technique used to pressure victims into clicking malicious links.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (28).webp",
+    "answer": "D",
+    "answerText": "D. Shoulder surfing can be prevented by using special screen filters for computer displays.",
+    "explanation": "Privacy screen filters restrict the viewing angle of a display, mitigating shoulder surfing. Statement A actually describes piggybacking (with consent) mislabeled as tailgating, and statement B describes tailgating (without consent) mislabeled as piggybacking, so both are reversed and incorrect; C is false since badge cloning can be performed with software-defined radio/RFID tools.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (29).webp",
+    "answer": "B",
+    "answerText": "B. partially known environment test",
+    "explanation": "A partially known (gray-box) environment test provides the tester with limited information, such as domain names and IP addresses, rather than full internal knowledge (known/white-box) or none at all (unknown/black-box).",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (3).webp",
+    "answer": "C",
+    "answerText": "C. 10011001",
+    "explanation": "01010101 XOR 11001100, computed bit by bit (0^1,1^1,0^0,1^0,0^1,1^1,0^0,1^0), gives 10011001.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (30).webp",
+    "answer": "B",
+    "answerText": "B. The tester is provided with a list of domain names and IP addresses in the scope of a particular target.",
+    "explanation": "A partially known environment test is characterized by giving the tester limited scope information (domains/IPs) rather than full details or none at all.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (31).webp",
+    "answer": "A, E",
+    "answerText": "A. Vulnerability Analysis; E. Trust Analysis",
+    "explanation": "Vulnerability Analysis and Trust Analysis are core OSSTMM (Open Source Security Testing Methodology Manual) test channels and analytical processes, whereas network mapping and maintaining access are general pentesting activities.",
+    "verifyAnswer": "A, E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (32).webp",
+    "answer": "A, C, F",
+    "answerText": "A. Threat modeling; C. Reporting; F. Exploitation",
+    "explanation": "PTES defines the phases: Pre-engagement, Intelligence Gathering, Threat Modeling, Vulnerability Analysis, Exploitation, Post-Exploitation, and Reporting; Threat modeling, Exploitation, and Reporting are named PTES phases, unlike Penetration, Enumerating further, or Network mapping.",
+    "verifyAnswer": "A, C, F",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (33).webp",
+    "answer": "A, B",
+    "answerText": "A. use reputable and standard libraries to create the APIs; B. make internal API documentation mandatory",
+    "explanation": "Using reputable, standard libraries to build APIs reduces security flaws, and maintaining thorough internal API documentation ensures developers and security auditors understand API design and boundaries.",
+    "verifyAnswer": "A, B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (34).webp",
+    "answer": "A, B",
+    "answerText": "A. Boolean operators; B. Conditionals",
+    "explanation": "Boolean operators and conditionals are logic constructs that control program flow; arrays, dictionaries, and libraries are data structures/resources, not logic constructs.",
+    "verifyAnswer": "A, B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (35).webp",
+    "answer": "B, D",
+    "answerText": "B. Zenmap; D. Enum4linux",
+    "explanation": "Zenmap (Nmap GUI) and Enum4linux both actively interact with and probe the target system directly, which characterizes active reconnaissance, unlike passive/OSINT tools such as Nslookup queries, Tor, and Maltego.",
+    "verifyAnswer": "B, D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (36).webp",
+    "answer": "A",
+    "answerText": "A. BlackArch Linux",
+    "explanation": "BlackArch Linux is an Arch-based penetration testing distribution whose repository has historically included over 1900 (now 2500+) security tools, more than Kali or Parrot ship by default.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (37).webp",
+    "answer": "A",
+    "answerText": "A. Needle",
+    "explanation": "Needle is an open-source framework specifically built for security testing of iOS applications; Drozer, APK Studio, and ApkX target Android.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (38).webp",
+    "answer": "A, B",
+    "answerText": "A. turbines in a power plant; B. robots in a factory",
+    "explanation": "Industrial control/OT systems like power plant turbines and factory robots control critical physical processes and should never be directly Internet-exposed, unlike typical consumer IoT devices such as thermostats, refrigerators, or CO detectors.",
+    "verifyAnswer": "A, B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (39).webp",
+    "answer": "B",
+    "answerText": "B. credential harvesting",
+    "explanation": "Credential harvesting involves breaching cloud infrastructure to collect valid usernames, passwords, tokens, and PINs for later misuse.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (4).webp",
+    "answer": "A, E",
+    "answerText": "A. pwd; E. cat",
+    "explanation": "Meterpreter supports the standard Unix-style commands pwd (print working directory) and cat (display file contents), which also work natively on Linux/Unix systems; hashdump, clearev, and resource are Meterpreter-specific.",
+    "verifyAnswer": "A, E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (40).webp",
+    "answer": "A",
+    "answerText": "A. account takeover",
+    "explanation": "Account takeover occurs when a threat actor gains access to a user or application account, which can then be leveraged to access further accounts and information.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (41).webp",
+    "answer": "A, B",
+    "answerText": "A. using insecure permission configurations for cloud object storage services; B. using hard-coded credentials to access different services",
+    "explanation": "Misconfigured, overly permissive storage buckets and hard-coded credentials embedded in code/scripts are two leading causes of cloud data breaches.",
+    "verifyAnswer": "A, B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (42).webp",
+    "answer": "A, C, E",
+    "answerText": "A. testing timeline; C. location of testing; E. preferred method of communication",
+    "explanation": "A Rules of Engagement (RoE) document explicitly details the testing timeline, physical or virtual testing locations, and preferred communication methods during a penetration test engagement.",
+    "verifyAnswer": "A, C, E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (43).webp",
+    "answer": "B, E",
+    "answerText": "B. PGP; E. S/MIME",
+    "explanation": "PGP and S/MIME are the standard protocols for encrypting and digitally signing email to ensure secure, authenticated communication.",
+    "verifyAnswer": "B, E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (44).webp",
+    "answer": "A",
+    "answerText": "A. GraphQL documentation",
+    "explanation": "GraphQL is a query language for APIs along with a runtime for executing those queries against your data, matching the description exactly.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (45).webp",
+    "answer": "D",
+    "answerText": "D. healthcare clearinghouse",
+    "explanation": "Under HIPAA, a healthcare clearinghouse converts nonstandard health information received from another entity into a standard format (or vice versa).",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (46).webp",
+    "answer": "A",
+    "answerText": "A. amplification",
+    "explanation": "An amplification attack abuses services that return responses much larger than the request, magnifying the reflected traffic sent to the victim in a DDoS attack.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (47).webp",
+    "answer": "A, E",
+    "answerText": "A. limit anonymous logins to a select group of people; E. require re-authentication of inactive sessions",
+    "explanation": "Restricting anonymous FTP access and forcing re-authentication after inactivity reduce the attack surface and abuse of FTP servers; the other options are unrelated or counterproductive.",
+    "verifyAnswer": "A, E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (48).webp",
+    "answer": "C",
+    "answerText": "C. It is a post-exploitation attempt that is used to extract service account credential hashes from Active Directory for offline cracking.",
+    "explanation": "Kerberoasting requests service tickets (TGS) for service accounts and extracts their encrypted hashes for offline brute-force/cracking to recover the service account password.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (49).webp",
+    "answer": "B",
+    "answerText": "B. WPS",
+    "explanation": "Wi-Fi Protected Setup (WPS) uses an 8-digit PIN with a design flaw that makes it highly vulnerable to brute-force attacks, unlike WPA2-EAP, WPA3, or even WPA2-TKIP.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (5).webp",
+    "answer": "D",
+    "answerText": "D. Netcat",
+    "explanation": "Netcat is a lightweight, portable networking utility widely used to create bind and reverse shells from a compromised host.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (6).webp",
+    "answer": "A, D",
+    "answerText": "A. Twittor; D. Empire",
+    "explanation": "Twittor and Empire are command-and-control (C2) frameworks/utilities used to manage compromised hosts, whereas Netcat, BloodHound, and Socket serve other purposes.",
+    "verifyAnswer": "A, D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (7).webp",
+    "answer": "C",
+    "answerText": "C. reverse shell",
+    "explanation": "In a reverse shell, the attacker sets up a listener and the compromised victim system initiates the outbound connection back to the attacker, often to bypass inbound firewall restrictions.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (8).webp",
+    "answer": "A",
+    "answerText": "A. that the port is open",
+    "explanation": "In a TCP FIN scan, closed ports respond with an RST packet, while open (or open|filtered) ports simply ignore the FIN packet and send no response.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542 (9).webp",
+    "answer": "A",
+    "answerText": "A. Vulnerability of services running inside the target may not be detected.",
+    "explanation": "Without valid credentials, an unauthenticated scan can only assess externally visible attack surface and may miss vulnerabilities in services/software running locally on the target.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_FE_541794_3542.webp",
+    "answer": "E",
+    "answerText": "E. CRL",
+    "explanation": "A Certificate Revocation List (CRL) is the published list of certificates that have been revoked/invalidated before their expiration date.",
+    "verifyAnswer": "E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  }
+]
