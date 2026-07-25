@@ -1,0 +1,502 @@
+[
+  {
+    "image": "HOD402_SP25_RE_396441.webp",
+    "answer": "C",
+    "answerText": "C. DES",
+    "explanation": "DES uses a 56-bit key and is considered cryptographically broken/weakest among the listed algorithms, compared to 3DES, AES, and Blowfish which use longer/stronger keys.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (1).webp",
+    "answer": "D",
+    "answerText": "D. Hierarchical trust",
+    "explanation": "A hierarchical trust model has a root CA at the top that issues certificates and all users/subordinates trust that root, unlike a web of trust which has no central authority.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (10).webp",
+    "answer": "A, B",
+    "answerText": "A. Recon-ng; B. Dig",
+    "explanation": "Recon-ng aggregates passive OSINT/DNS data and Dig performs passive-style DNS lookups without directly touching the target's infrastructure, unlike Wireshark, Nmap, or ExifTool which are used differently.",
+    "verifyAnswer": "A, B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (11).webp",
+    "answer": "A",
+    "answerText": "A. VPN",
+    "explanation": "A VPN can be set up temporarily to create a secure encrypted tunnel connecting two different companies' networks, then torn down when no longer needed.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (12).webp",
+    "answer": "B",
+    "answerText": "B. Packet filtering",
+    "explanation": "A packet-filtering firewall makes allow/deny decisions purely based on rules matching IP addresses, ports, and protocols, without inspecting session state or application content.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (13).webp",
+    "answer": "A",
+    "answerText": "A. To deny all TCP traffic from the 192.168.10.0/24 network to the 172.16.5.0/24 network on port 23 (Telnet).",
+    "explanation": "The first line explicitly denies TCP traffic on port 23 (Telnet) between those two subnets; the second line then permits everything else, but the primary/specific function of the list is the Telnet deny rule.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (14).webp",
+    "answer": "A",
+    "answerText": "A. scores are rated from 0 to 10, with 10 being the most severe",
+    "explanation": "CVSS (Common Vulnerability Scoring System) produces a numeric score from 0.0 to 10.0, where 10.0 represents the most critical/severe vulnerability.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (15).webp",
+    "answer": "C",
+    "answerText": "C. true negatives",
+    "explanation": "A true negative occurs when the IDS correctly identifies benign activity as acceptable, i.e., no alert is raised and none was warranted.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (16).webp",
+    "answer": "A, B",
+    "answerText": "A. multifactor authentication; B. certificate management",
+    "explanation": "MFA and certificate management are technical controls (implemented through technology/systems), whereas mandatory vacations is administrative and access control vestibules are physical controls.",
+    "verifyAnswer": "A, B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (17).webp",
+    "answer": "A",
+    "answerText": "A. Dradis",
+    "explanation": "Dradis is a collaboration/reporting framework that ingests output from many pentest tools and generates consolidated reports in formats like CSV, HTML, and PDF.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (18).webp",
+    "answer": "C",
+    "answerText": "C. Default credential attack",
+    "explanation": "Requiring advanced security configuration before deployment ensures default usernames/passwords on new routers and switches are changed, mitigating default credential attacks.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (19).webp",
+    "answer": "D",
+    "answerText": "D. An attacker launches the attack on a web site and forces the web application to send the query results via an email.",
+    "explanation": "Out-of-band SQLi retrieves data through a different channel than the web response (e.g., DNS or email), unlike in-band injection where results appear directly on screen.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (2).webp",
+    "answer": "A",
+    "answerText": "A. Steganography",
+    "explanation": "Steganography hides the very existence of a message (e.g., inside an image), whereas encryption/ciphers hide content but not the fact a message exists.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (20).webp",
+    "answer": "D",
+    "answerText": "D. in a user input field in a web form",
+    "explanation": "XSS test payloads are injected into fields where user input is reflected/stored and rendered by the browser, such as web form input fields.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (21).webp",
+    "answer": "C",
+    "answerText": "C. directory traversal",
+    "explanation": "The URL uses '../../../../' sequences to move outside the intended web directory and access /etc/httpd/httpd.conf, which is a classic directory (path) traversal exploit.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (22).webp",
+    "answer": "B",
+    "answerText": "B. HTTP 2.0 provides HTTP message multiplexing and requires fewer messages to download web content.",
+    "explanation": "HTTP/2's key performance improvement is multiplexing multiple requests/responses over a single connection, reducing the number of separate messages/connections needed compared to HTTP/1.1.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (23).webp",
+    "answer": "C, E",
+    "answerText": "C. tailgating; E. piggybacking",
+    "explanation": "Access control vestibules (mantraps) only allow one authenticated person through at a time, directly preventing tailgating and piggybacking into secure areas.",
+    "verifyAnswer": "C, E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (24).webp",
+    "answer": "D",
+    "answerText": "D. badge/card access",
+    "explanation": "Badge/card access controls entry so only authorized individuals can open doors, reducing the chance of someone piggybacking or tailgating behind an authorized person unnoticed (especially combined with vestibules).",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (25).webp",
+    "answer": "C",
+    "answerText": "C. an attack that exploits a website that is commonly accessed by members of a targeted organization",
+    "explanation": "A watering hole attack compromises a legitimate site frequently visited by the target group, infecting visitors when they browse it, rather than attacking individuals directly.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (26).webp",
+    "answer": "B",
+    "answerText": "B. elicitation",
+    "explanation": "Elicitation is a social engineering technique for extracting information from a target through seemingly normal, non-threatening conversation rather than direct questioning.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (27).webp",
+    "answer": "B",
+    "answerText": "B. The tester could be provided with network diagrams, IP addresses, configurations, and user credentials.",
+    "explanation": "A known-environment (white-box) test gives the tester detailed internal knowledge such as diagrams, IP ranges, configs, and credentials, unlike unknown (black-box) tests.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (28).webp",
+    "answer": "D",
+    "answerText": "D. BlackArch",
+    "explanation": "BlackArch is an Arch Linux-based penetration testing distribution bundled with thousands of security tools, unlike OWASP (a project/foundation), PTES (a methodology), or SET (a specific tool).",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (29).webp",
+    "answer": "D",
+    "answerText": "D. back-end databases",
+    "explanation": "Web application penetration tests should also assess the back-end databases the application relies on, since injection and data exposure flaws often originate there.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (3).webp",
+    "answer": "D, E",
+    "answerText": "D. Metasploit; E. Sysinternals",
+    "explanation": "Metasploit (via Meterpreter payloads) and Sysinternals tools (e.g., PsExec) can establish remote command/control connections to a compromised system, unlike Nmap, Mimikatz, or BloodHound which are used for scanning/credential dumping/AD mapping.",
+    "verifyAnswer": "D, E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (30).webp",
+    "answer": "A",
+    "answerText": "A. reward security professionals for finding vulnerabilities in the systems of the company",
+    "explanation": "Bug bounty programs pay independent researchers for discovering and responsibly reporting vulnerabilities, not for fixing them or catching active attackers.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (31).webp",
+    "answer": "C, D",
+    "answerText": "C. Arrays; D. Lists",
+    "explanation": "Arrays and lists are data structures that organize collections of values, whereas procedures, functions, and libraries are program organization/code-reuse constructs, not data structures.",
+    "verifyAnswer": "C, D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (32).webp",
+    "answer": "A",
+    "answerText": "A. List",
+    "explanation": "The square-bracket syntax cves = [...] in Python defines a list, Python's built-in ordered, mutable sequence data structure.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (33).webp",
+    "answer": "A",
+    "answerText": "A. Class",
+    "explanation": "A class is a template/blueprint defining initial variables (attributes) and functions (methods) used to instantiate objects.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (34).webp",
+    "answer": "C",
+    "answerText": "C. to check open relay configurations on the target server",
+    "explanation": "The Nmap NSE script smtp-open-relay.nse specifically tests whether an SMTP server is misconfigured to allow open mail relaying, a reconnaissance/check action, not exploitation.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (35).webp",
+    "answer": "D",
+    "answerText": "D. side-channel attack",
+    "explanation": "A side-channel attack exploits shared physical hardware (CPU cache, timing, power) between co-located VMs to leak sensitive data like keys and credentials across the virtualization boundary.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (36).webp",
+    "answer": "B",
+    "answerText": "B. resource pooling",
+    "explanation": "NIST SP 800-145 defines five essential cloud characteristics, one of which is resource pooling, where a provider's resources are pooled to serve multiple consumers using multi-tenancy.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (37).webp",
+    "answer": "C",
+    "answerText": "C. Dagda",
+    "explanation": "Dagda is an open-source tool that uses the ClamAV engine (plus other checks) to analyze Docker images/containers for malware, Trojans, backdoors, and vulnerabilities.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (38).webp",
+    "answer": "A",
+    "answerText": "A. GATTacker",
+    "explanation": "GATTacker is a tool designed to perform man-in-the-middle (on-path) attacks against Bluetooth Low Energy (BLE) GATT-based devices.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (39).webp",
+    "answer": "A",
+    "answerText": "A. Nimbostratus",
+    "explanation": "Nimbostratus is a tool designed to attack cloud infrastructure, including probing the cloud metadata service for vulnerabilities.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (4).webp",
+    "answer": "D",
+    "answerText": "D. vertical privilege escalation",
+    "explanation": "Vertical privilege escalation occurs when a lower-privileged user gains access to functions or data intended for higher-privileged users, moving 'up' the privilege hierarchy.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (40).webp",
+    "answer": "D",
+    "answerText": "D. FedRAMP",
+    "explanation": "FedRAMP (Federal Risk and Authorization Management Program) is the U.S. government regulation/program governing security assessment and authorization of cloud services used by federal agencies like the IRS.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (41).webp",
+    "answer": "D",
+    "answerText": "D. ineffective identification of what technical and nontechnical elements will be required for the penetration test",
+    "explanation": "Scope creep happens when the engagement's boundaries were not clearly defined up front, so unplanned technical/nontechnical elements get added as the test proceeds.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (42).webp",
+    "answer": "C",
+    "answerText": "C. Question the company contact person and review contracts.",
+    "explanation": "Before starting testing, the consultant must first confirm scope validity by talking to the point of contact and reviewing the signed contracts/agreements, ensuring alignment with what was agreed upon.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (43).webp",
+    "answer": "A",
+    "answerText": "A. contract",
+    "explanation": "The contract is the formal legal document specifying the agreement between the consultant and the company for the penetration testing engagement, including terms, liability, and authorization.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (44).webp",
+    "answer": "D",
+    "answerText": "D. On-path",
+    "explanation": "IP spoofing is commonly used to enable on-path (man-in-the-middle) attacks, where the attacker forges source IP addresses to intercept or redirect traffic between two parties.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (45).webp",
+    "answer": "A",
+    "answerText": "A. Airmon-ng",
+    "explanation": "Airmon-ng (part of the Aircrack-ng suite) is used with related tools like aireplay-ng to send deauthentication/disassociation frames against wireless clients.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (46).webp",
+    "answer": "D",
+    "answerText": "D. 1-a, 2-e, 3-c, 4-d, 5-b, 6-f",
+    "explanation": "MAIL denotes the sender's address (a), RSET cancels a transaction (e), EHLO initiates an ESMTP conversation (c), DATA starts message transfer (d), STARTTLS begins a TLS connection (b), and HELO initiates a basic SMTP conversation (f).",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (47).webp",
+    "answer": "D",
+    "answerText": "D. 25",
+    "explanation": "TCP port 25 is the standard default port for unencrypted SMTP mail transfer between servers, while 110/143 are POP3/IMAP and 993 is IMAPS.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (48).webp",
+    "answer": "B, D",
+    "answerText": "B. Both are deployed as sensors.; D. Both use signatures to detect malicious traffic.",
+    "explanation": "IDS and IPS are both deployed as network sensors and both commonly rely on signature databases to detect malicious traffic; they differ in that IDS works on traffic copies (passive) while IPS is inline (active).",
+    "verifyAnswer": "B, D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (5).webp",
+    "answer": "C",
+    "answerText": "C. creating a bind or reverse shell",
+    "explanation": "Setting up a bind or reverse shell gives the attacker a persistent remote access channel back into the compromised system after the initial exploit, maintaining a foothold.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (6).webp",
+    "answer": "C",
+    "answerText": "C. nc -z",
+    "explanation": "The -z flag tells Netcat to scan for listening daemons without sending data, effectively turning it into a simple port scanner.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (7).webp",
+    "answer": "A",
+    "answerText": "A. The extra packets required may trigger an IDS alarm.",
+    "explanation": "A TCP Connect scan completes the full three-way handshake (SYN, SYN-ACK, ACK plus RST/teardown) generating more traffic than a stealthy SYN scan, making it more likely to be logged/alarmed by an IDS.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (8).webp",
+    "answer": "D",
+    "answerText": "D. Scanning policy options should include query throttling.",
+    "explanation": "Throttling the scan rate/query frequency reduces bandwidth and processing load on devices along the path, minimizing adverse impact during a vulnerability scan.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671 (9).webp",
+    "answer": "A",
+    "answerText": "A. It gives an accurate presentation of vulnerabilities.",
+    "explanation": "The most important feature of a final penetration test report is that it accurately and truthfully documents the vulnerabilities found, forming the basis for remediation decisions.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP25_RE_396441_3671.webp",
+    "answer": "B",
+    "answerText": "B. Symmetric encryption does not scale easily and does not provide for nonrepudiation.",
+    "explanation": "Symmetric encryption requires securely sharing/distributing the same key with every party (poor scalability) and, since any holder of the shared key could have created a message, it cannot prove which party sent it (no nonrepudiation) — unlike asymmetric encryption.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  }
+]

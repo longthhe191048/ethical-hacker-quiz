@@ -1,0 +1,454 @@
+[
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (1).webp",
+    "answer": "B",
+    "answerText": "B. Netcraft",
+    "explanation": "Netcraft is a well-known service/tool used to fingerprint a web server's OS and web server software via its 'What's that site running?' lookup.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (10).webp",
+    "answer": "C",
+    "answerText": "C. Public-key cryptosystems do not require a secure key distribution channel.",
+    "explanation": "PKI's key advantage is that public keys can be shared openly without needing a pre-established secure channel, unlike symmetric-key systems.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (11).webp",
+    "answer": "B",
+    "answerText": "B. RSA",
+    "explanation": "RSA is a classic asymmetric (public-key) encryption algorithm; SHA1 and MD5 are hash functions, and 3DES is symmetric.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (12).webp",
+    "answer": "A",
+    "answerText": "A. Windows Vista",
+    "explanation": "Windows Vista is a stand-alone/desktop OS, not a network OS like Windows Server 2003, NetWare, Solaris, UNIX, or Linux.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (13).webp",
+    "answer": "B",
+    "answerText": "B. IP Fragment Scanning",
+    "explanation": "IP Fragment Scanning splits the TCP header across multiple small IP fragments so packet filters/IDS cannot easily inspect the full header.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (14).webp",
+    "answer": "C",
+    "answerText": "C. a user",
+    "explanation": "A Security Identifier (SID) in Windows uniquely identifies a user or group account (or domain), used for access control.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (15).webp",
+    "answer": "C",
+    "answerText": "C. Integer",
+    "explanation": "A pointer stores a memory address, which is represented internally as an integer value.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (16).webp",
+    "answer": "C",
+    "answerText": "C. 6",
+    "explanation": "A TCP header has 6 control flag bits: URG, ACK, PSH, RST, SYN, and FIN.",
+    "verifyAnswer": "C",
+    "agree": false,
+    "corrected": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (17).webp",
+    "answer": "C",
+    "answerText": "C. dw",
+    "explanation": "In vi, 'dw' deletes from the cursor to the end of the current word.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (18).webp",
+    "answer": "D",
+    "answerText": "D. The vulnerable application does not display errors with information about the injection result to the attacker.",
+    "explanation": "In a Blind SQL Injection attack, the application does not output database error messages or query results to the attacker on the web page. Instead, the attacker must infer data indirectly through boolean (true/false) responses or time delays.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false,
+    "corrected": true
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (19).webp",
+    "answer": "B",
+    "answerText": "B. Hacks without stealth",
+    "explanation": "A suicide hacker does not care about being caught or facing legal consequences, so they hack openly without attempting to remain stealthy/anonymous.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (2).webp",
+    "answer": "C",
+    "answerText": "C. sending email messages",
+    "explanation": "SMTP (Simple Mail Transfer Protocol) is used to send/relay email messages between mail servers.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (20).webp",
+    "answer": "A",
+    "answerText": "A. True",
+    "explanation": "Client-side scripts (e.g., JavaScript) are commonly allowed to execute in browsers to enable necessary interactive/dynamic functionality.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (21).webp",
+    "answer": "A",
+    "answerText": "A. Zone transfer",
+    "explanation": "A zone transfer is the process of copying an entire DNS zone file from a primary DNS server to a secondary server (or an attacker who abuses it).",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (22).webp",
+    "answer": "A",
+    "answerText": "A. New Technology File System",
+    "explanation": "NTFS stands for New Technology File System, the standard file system used by modern Windows operating systems.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (23).webp",
+    "answer": "C",
+    "answerText": "C. Complete knowledge",
+    "explanation": "White-box testing means the tester has complete knowledge of the internal workings/infrastructure of the target system, unlike black-box (no knowledge).",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (24).webp",
+    "answer": "C",
+    "answerText": "C. 128",
+    "explanation": "An IPv6 address is 128 bits long, compared to 32 bits for IPv4.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (25).webp",
+    "answer": "D",
+    "answerText": "D. Send a large ICMP packet (over 65535 bytes)",
+    "explanation": "Ping of Death exploits systems by sending oversized ICMP packets exceeding the maximum allowed IP packet size of 65,535 bytes, causing buffer overflows/crashes.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (26).webp",
+    "answer": "B",
+    "answerText": "B. Kevin Mitnick",
+    "explanation": "'Ghost in the Wires: My Adventures as the World's Most Wanted Hacker' is an autobiography written by Kevin Mitnick.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (27).webp",
+    "answer": "B",
+    "answerText": "B. Plaintext attack",
+    "explanation": "When an attacker has both ciphertext and can obtain/guess corresponding plaintext, a (known-)plaintext attack is used to try to derive the encryption key.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (28).webp",
+    "answer": "C",
+    "answerText": "C. Format String Attack",
+    "explanation": "Using printf(str) directly instead of printf(\"%s\", str) allows attacker-controlled format specifiers (%x, %n, etc.) in str to be interpreted by printf, leading to a format string vulnerability.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (29).webp",
+    "answer": "C",
+    "answerText": "C. port scanning",
+    "explanation": "Footprinting is passive/information-gathering (search engines, email, Google hacking); port scanning is an active technique used later in the scanning phase.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (3).webp",
+    "answer": "C",
+    "answerText": "C. Session Hijacking",
+    "explanation": "Session hijacking allows an attacker to take over a valid user's session on a dynamically generated web page by stealing/predicting the session token.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (30).webp",
+    "answer": "C",
+    "answerText": "C. Poorly written code",
+    "explanation": "Buffer overflows fundamentally stem from poorly written code that fails to properly validate/limit input size before writing to a fixed-size buffer.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (31).webp",
+    "answer": "D",
+    "answerText": "D. Brain",
+    "explanation": "Brain is the first PC boot-sector virus, not a worm; Nimda, Slammer, and Conficker are all well-known worms.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (32).webp",
+    "answer": "A",
+    "answerText": "A. Capture the WPA2 authentication handshake and then crack it.",
+    "explanation": "The standard method to obtain a WPA2 key is capturing the 4-way EAPOL authentication handshake and then performing an offline dictionary/brute-force crack against it.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (33).webp",
+    "answer": "A",
+    "answerText": "A. 4",
+    "explanation": "The TCP/IP model has 4 layers: Network Access (Link), Internet, Transport, and Application.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (34).webp",
+    "answer": "A, C, D",
+    "answerText": "A. Use ARPWALL system and block ARP spoofing attacks; C. Use private VLANS; D. Place static ARP entries on servers, workstation and routers",
+    "explanation": "Standard defenses against ARP spoofing are using a dedicated ARP-protection tool (ARPWALL), segmenting with private VLANs, and using static ARP entries; tuning IDS to watch for excess ARP traffic is a detection method, not a direct defense.",
+    "verifyAnswer": "A, C, D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (35).webp",
+    "answer": "A, B, D, E",
+    "answerText": "A. SamSpade; B. Maltego; D. Cheops; E. NSLookup",
+    "explanation": "SamSpade, Maltego, Cheops, and NSLookup are all footprinting/reconnaissance tools, while Burp Suite is primarily a web application security testing tool, not a footprinting tool.",
+    "verifyAnswer": "A, B, D, E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (36).webp",
+    "answer": "C",
+    "answerText": "C. NetWare and Solaris",
+    "explanation": "NetWare and Solaris are network/server operating systems, not stand-alone OSs like Windows Vista, Mac OS X, UNIX, or Linux (desktop usage).",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (37).webp",
+    "answer": "A",
+    "answerText": "A. Honeypot",
+    "explanation": "A honeypot emulates services such as mail and FTP to lure attackers and capture information about their logins and actions.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (38).webp",
+    "answer": "D",
+    "answerText": "D. fuel-injection systems in car engines.",
+    "explanation": "Real-time operating systems are used where deterministic, time-critical responses are required, such as automotive fuel-injection control systems.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (39).webp",
+    "answer": "B",
+    "answerText": "B. No",
+    "explanation": "Security awareness training best practice discourages instilling fear; effective user education relies on positive engagement rather than fear-based tactics.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (4).webp",
+    "answer": "C",
+    "answerText": "C. 32",
+    "explanation": "The TCP Initial Sequence Number (ISN) is a 32-bit value.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (40).webp",
+    "answer": "B",
+    "answerText": "B. *",
+    "explanation": "In C, a pointer variable is declared by prefixing the variable name with an asterisk (*), e.g., int *ptr.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (41).webp",
+    "answer": "B, C",
+    "answerText": "B. The MAC address of the AP; C. The SSID of the wireless network",
+    "explanation": "To perform fake authentication against a WEP AP, an attacker needs the AP's MAC address (BSSID) and the network's SSID.",
+    "verifyAnswer": "B, C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (42).webp",
+    "answer": "C",
+    "answerText": "C. Nessus",
+    "explanation": "Nessus is a widely used automated vulnerability assessment/scanning tool, unlike Hping (packet crafting), Nmap (port scanning), or Kismet (wireless sniffing).",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (43).webp",
+    "answer": "B",
+    "answerText": "B. Robert Morris Jr.",
+    "explanation": "Robert Tappan Morris Jr. released the Morris Worm in 1988, widely considered the first worm distributed over the Internet.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (44).webp",
+    "answer": "B",
+    "answerText": "B. 10 5",
+    "explanation": "The XOR swap algorithm (*a=*a^*b; *b=*a^*b; *a=*a^*b;) correctly swaps the values, so x=5,y=10 becomes x=10,y=5, and the pointers print '10 5'.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (5).webp",
+    "answer": "A",
+    "answerText": "A. real-time",
+    "explanation": "Devices requiring precise, guaranteed timing such as oscilloscopes and spacecraft (Mars Rovers/Orbiter) use real-time operating systems.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (6).webp",
+    "answer": "D",
+    "answerText": "D. Bad quality assurance on software produced.",
+    "explanation": "Today's most common cause of buffer overflow vulnerabilities is insufficient quality assurance/testing during software development, allowing unsafe input handling to slip through.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (7).webp",
+    "answer": "A",
+    "answerText": "A. find some insecurity in a cryptographic scheme",
+    "explanation": "Cryptanalysis is the study of analyzing and breaking cryptographic systems to find weaknesses, not for encrypting data or increasing speed.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (8).webp",
+    "answer": "C",
+    "answerText": "C. Hacks for political reasons",
+    "explanation": "A hacktivist uses hacking to promote a political agenda or social cause, typically via website defacement or data leaks tied to activism.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518 (9).webp",
+    "answer": "C",
+    "answerText": "C. from human beings",
+    "explanation": "Social engineering targets and exploits human psychology to extract information directly from people, rather than technical systems.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD401_-_RE_-_SU23362111_518.webp",
+    "answer": "A",
+    "answerText": "A. vrfy chell",
+    "explanation": "The SMTP VRFY command (e.g., 'vrfy chell') is used to confirm whether a given username/mailbox exists on the mail server.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  }
+]

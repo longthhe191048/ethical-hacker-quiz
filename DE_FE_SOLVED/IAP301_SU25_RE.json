@@ -1,0 +1,512 @@
+[
+  {
+    "image": "SU25_RE (1).webp",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "Operational consistency requires tracking consistency, quality, and results together, so all listed metrics apply.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (2).webp",
+    "answer": "A, B, C",
+    "answerText": "A. Unauthorized Access to and Use of the System; B. Unauthorized Disclosure of the Information; C. Disruption of the System or Services",
+    "explanation": "A policy framework must address the classic CIA-based risks (unauthorized access, unauthorized disclosure, and disruption); employee personal interests/background are not information-system factors.",
+    "verifyAnswer": "A, B, C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "SU25_RE (3).webp",
+    "answer": "A",
+    "answerText": "A. True",
+    "explanation": "This is the standard definition of information systems security (ISS): protecting information and the systems that store/process it.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (4).webp",
+    "answer": "D",
+    "answerText": "D. Regulator Audit",
+    "explanation": "An audit performed by a government agency to assess compliance with laws and regulations is specifically a regulator (regulatory) audit, distinct from a generic external audit.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (5).webp",
+    "answer": "C",
+    "answerText": "C. Procedure",
+    "explanation": "The description (written steps to implement a process, supporting policies/standards) is the textbook definition of a procedure.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (6).webp",
+    "answer": "C",
+    "answerText": "C. Defense in depth",
+    "explanation": "Defense in depth means layering multiple security controls so the weakness of one is offset by the strength of others.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (7).webp",
+    "answer": "B",
+    "answerText": "B. Integration principle",
+    "explanation": "The integration principle refers to maintaining a consistent, integrated system of security measures, practices, and procedures across the organization.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (8).webp",
+    "answer": "B",
+    "answerText": "B. To prevent misinterpretation and ensure compliance",
+    "explanation": "Vague ('squishy') wording in policy leaves room for interpretation, undermining enforceability; clear language avoids ambiguity and supports compliance.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (9).webp",
+    "answer": "C",
+    "answerText": "C. Absent user acceptance, the controls may not be consistently implemented.",
+    "explanation": "Without buy-in from users, the controls that enforce the policy will not be applied consistently, weakening the overall security program.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (10).webp",
+    "answer": "C",
+    "answerText": "C. Defining clear expectations and the impact of policies on the business.",
+    "explanation": "Executives respond to business-relevant framing; clearly articulating expectations and business impact builds executive support, unlike withholding information or skipping approval.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (11).webp",
+    "answer": "C",
+    "answerText": "C. Multi-factor authentication",
+    "explanation": "Requiring at least two different types of credentials (e.g., something you know + something you have) is the definition of multi-factor authentication; two-factor is one specific case of MFA.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (12).webp",
+    "answer": "A",
+    "answerText": "A. LAN",
+    "explanation": "A Local Area Network (LAN) is designed to efficiently connect computers within an office or group of nearby buildings, unlike a WAN which spans larger distances.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (13).webp",
+    "answer": "B",
+    "answerText": "B. Leaving a departmental laptop on your desk when you are not using it or at the end of the day",
+    "explanation": "Clear Desk and Screen Policy requires securing devices and documents when unattended; leaving a laptop out unsecured violates it, while locking screens/cabinets complies with it.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (14).webp",
+    "answer": "A",
+    "answerText": "A. Data Leakage Protection Inventory",
+    "explanation": "Discovering and cataloging where sensitive data currently resides is a data-discovery/inventory function associated with DLP programs, unlike the other distractor terms.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (15).webp",
+    "answer": "A",
+    "answerText": "A. Routers and firewalls",
+    "explanation": "Routers and firewalls are used to segment LANs into separate broadcast/security domains, controlling traffic between segments.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (16).webp",
+    "answer": "C",
+    "answerText": "C. All",
+    "explanation": "Confidential, Public, and Internal are all valid information classification levels, so 'All' is correct.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (17).webp",
+    "answer": "B",
+    "answerText": "B. By domain",
+    "explanation": "IT infrastructure security policies are commonly organized by the seven domains of a typical IT infrastructure (e.g., LAN, WAN, User, Workstation domains).",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (18).webp",
+    "answer": "A",
+    "answerText": "A. Connectivity",
+    "explanation": "LAN domain security policies primarily govern device connectivity and secure access controls for local network traffic.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (19).webp",
+    "answer": "A",
+    "answerText": "A. Enterprise Data Management",
+    "explanation": "EDM commonly stands for Enterprise Data Management, referring to organization-wide governance of data assets.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (20).webp",
+    "answer": "B",
+    "answerText": "B. Cleansing user input and managing secure communications",
+    "explanation": "The DMZ hosts public-facing services (e.g., proxies, web servers) that sanitize/validate incoming traffic and manage secure communication between untrusted external networks and the internal network.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (21).webp",
+    "answer": "B",
+    "answerText": "B. A coding error in the heartbeat routine.",
+    "explanation": "Heartbleed exploited a buffer over-read bug in OpenSSL's implementation of the TLS heartbeat extension, not a password, encryption, or SQL issue.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (22).webp",
+    "answer": "B",
+    "answerText": "B. Evaluating the completeness and fairness of financial statements.",
+    "explanation": "Financial auditors' core responsibility is assessing whether financial statements are complete and fairly presented, not managing IT or designing security controls.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (23).webp",
+    "answer": "B",
+    "answerText": "B. False",
+    "explanation": "Interactive service accounts (used for logon) do have passwords; it is typically non-interactive service accounts that may not require an interactive password/logon.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (24).webp",
+    "answer": "A",
+    "answerText": "A. Change management",
+    "explanation": "Change management is the formal process for planning, reviewing, and approving network changes to minimize the risk of outages.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (25).webp",
+    "answer": "B",
+    "answerText": "B. To serve as the foundation of an organization's information security program.",
+    "explanation": "An IT security policy framework establishes the foundational structure (policies, standards, procedures, guidelines) on which the entire information security program is built.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (26).webp",
+    "answer": "C",
+    "answerText": "C. Strategies",
+    "explanation": "The standard IT policy framework document types are policies, standards, baselines, guidelines, and procedures; 'strategies' is not one of these standard document types.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (28).webp",
+    "answer": "B",
+    "answerText": "B. A plan for maintaining business operations after a major outage",
+    "explanation": "A Business Continuity Plan (BCP) defines how an organization keeps critical operations running during and after a disruptive event.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (29).webp",
+    "answer": "B",
+    "answerText": "B. Providing authority and support for the IRT's efforts",
+    "explanation": "During incident response, management's role is to give the Incident Response Team the authority, resources, and organizational support needed, rather than perform technical fixes directly.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (30).webp",
+    "answer": "D",
+    "answerText": "D. Information Security Management System",
+    "explanation": "ISMS stands for Information Security Management System, the framework of policies and controls (e.g., per ISO 27001) for managing information risk.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (31).webp",
+    "answer": "A",
+    "answerText": "A. True",
+    "explanation": "A Business Impact Analysis (BIA) identifies critical processes and impact of disruptions, and is normally performed before developing the Business Continuity Plan so the BCP can address the findings.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (32).webp",
+    "answer": "D",
+    "answerText": "D. Vulnerability gap",
+    "explanation": "The window between discovery of a vulnerability and the start of patch development is commonly referred to as the vulnerability (window of vulnerability) gap.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (33).webp",
+    "answer": "B",
+    "answerText": "B. Imaging",
+    "explanation": "Creating a disk image of the fully configured system and deploying it to the other 50 computers is the fastest, most consistent way to replicate the OS, applications, and settings.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (34).webp",
+    "answer": "D",
+    "answerText": "D. All other choices",
+    "explanation": "Well-implemented security policies help maximize profit, reduce risk, and produce consistent/reliable products, so all listed benefits apply.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (35).webp",
+    "answer": "D",
+    "answerText": "D. All other choices",
+    "explanation": "Emphasizing business risk in a security awareness program makes risk relevant to employees, increases policy adherence, and equips staff to handle unexpected risk — all of the listed benefits apply.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (36).webp",
+    "answer": "D",
+    "answerText": "D. Background checks & Access rights reviews",
+    "explanation": "Background checks and access rights reviews are performed manually by people, whereas authentication is typically an automated/technical control.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (37).webp",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "Mapping regulatory requirements to policies and controls demonstrates compliance to regulators, ensures requirements are covered, and justifies the importance of each control — all reasons apply.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (38).webp",
+    "answer": "C",
+    "answerText": "C. Chief information security officer",
+    "explanation": "The CISO is typically responsible for reporting the organization's information security posture to the board of directors.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (39).webp",
+    "answer": "A",
+    "answerText": "A. COBIT specifies how to implement controls, while ISO focuses on broader IT management topics.",
+    "explanation": "COBIT is more prescriptive about control objectives/implementation for IT governance, while ISO standards (e.g., 27001/27002) cover broader information security management topics; the other options mischaracterize both frameworks.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (40).webp",
+    "answer": "A, B, C",
+    "answerText": "A. Network segregation; B. Penetration testing; C. Virus scanning",
+    "explanation": "PCI DSS requires network segmentation, regular penetration testing, and anti-virus/malware scanning; it explicitly prohibits insecure remote access and default credentials (D, E).",
+    "verifyAnswer": "A, B, C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "SU25_RE (41).webp",
+    "answer": "B",
+    "answerText": "B. Clean desk policy",
+    "explanation": "A clean desk policy requires employees to secure documents and digital media (locking them away) at the end of the day or when unattended.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (42).webp",
+    "answer": "C",
+    "answerText": "C. Built on domains like Risk Governance, Evaluation, and Response",
+    "explanation": "ISACA's Risk IT framework is structured around risk domains such as Risk Governance, Risk Evaluation, and Risk Response, not solely financial or external-audit-based approaches.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (43).webp",
+    "answer": "C",
+    "answerText": "C. Risk Exposure = Likelihood x Impact",
+    "explanation": "Risk exposure is calculated as the likelihood (probability) of an event occurring multiplied by its impact if it does occur.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (44).webp",
+    "answer": "A, B",
+    "answerText": "A. Risk avoidance; B. Risk acceptance",
+    "explanation": "The generally accepted high-level risk management strategies include avoiding the risk or accepting it (along with mitigation/transfer); 'collection' and 'monitoring' are not standard strategy categories here.",
+    "verifyAnswer": "A, B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "SU25_RE (45).webp",
+    "answer": "B",
+    "answerText": "B. Data on your USB drive",
+    "explanation": "Data at rest is data that is stored (not actively moving across a network), such as data saved on a USB drive; options describing data traversing a network refer to data in transit instead.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (46).webp",
+    "answer": "B",
+    "answerText": "B. Data stored on any physical or virtual storage device",
+    "explanation": "Data at rest broadly refers to data stored on any physical or virtual storage medium, as opposed to data actively being transmitted or processed.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (47).webp",
+    "answer": "B",
+    "answerText": "B. False",
+    "explanation": "Access should follow the principle of least privilege/need-to-know; not all staff in a business unit should automatically have access to all shared records.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (49).webp",
+    "answer": "A",
+    "answerText": "A. The actual reduction in risk",
+    "explanation": "The true measure of policy effectiveness is whether it actually reduces risk, not merely awareness or understanding of the policy.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (50).webp",
+    "answer": "B",
+    "answerText": "B. Automated escalation",
+    "explanation": "Automated escalation provides a redundant, reliable mechanism to detect and react to security breaches without depending solely on manual processes.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (51).webp",
+    "answer": "B",
+    "answerText": "B. A mix of hierarchical and flat structures",
+    "explanation": "Successful policy implementation typically needs both hierarchical authority (for enforcement/approval) and flatter structures (for communication/feedback), rather than relying on only one extreme.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (52).webp",
+    "answer": "B",
+    "answerText": "B. Firewalls",
+    "explanation": "Firewalls are a technical (logical) control implemented through technology, unlike training, guards, or policies which are administrative/physical controls.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU25_RE (53).webp",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "Operational consistency requires tracking consistency, quality, and results together, so all listed metrics apply (same question as item 1).",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  }
+]

@@ -1,0 +1,502 @@
+[
+  {
+    "image": "page_001.png",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "Operational consistency requires gauging consistency, quality, and results together, not any single metric alone.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_002.png",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "Achieving operational consistency requires measuring consistency, quality, and results collectively.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_003.png",
+    "answer": "A",
+    "answerText": "A. Company officers",
+    "explanation": "Regulators and the public hold corporate officers (executives/board) ultimately accountable for severe breaches, not the CIO or ISO individually.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_004.png",
+    "answer": "E",
+    "answerText": "E. All of the above",
+    "explanation": "A policy framework charter defines purpose/mission, scope, responsibilities, and compliance management together.",
+    "verifyAnswer": "E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_005.png",
+    "answer": "A, C",
+    "answerText": "A. Innovators, C. More likely to take risks",
+    "explanation": "Entrepreneurs are typically characterized as innovators and risk-takers, not necessarily formally trained in business or resistant to change.",
+    "verifyAnswer": "A, C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "page_006.png",
+    "answer": "A",
+    "answerText": "A. To avoid being interpreted as an unintended promise",
+    "explanation": "HR policy language is kept vague so it cannot be construed as a binding contractual promise to employees.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_007.png",
+    "answer": "A",
+    "answerText": "A. Data Leakage Protection Inventory",
+    "explanation": "A DLP inventory process is used to discover and catalog where sensitive data currently resides across the organization.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_008.png",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "Data retention is driven by legal/regulatory obligation, business needs, and recovery requirements combined.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_009.png",
+    "answer": "E",
+    "answerText": "E. All of the above",
+    "explanation": "An effective data owner needs seniority, operational knowledge, understanding of data's value, and awareness of risks from misuse - all of these qualities.",
+    "verifyAnswer": "E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_010.png",
+    "answer": "C",
+    "answerText": "C. Data traversing a network",
+    "explanation": "Data in transit refers specifically to data actively moving across a network, as opposed to stored (at rest) data.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_011.png",
+    "answer": "A",
+    "answerText": "A. Social engineering",
+    "explanation": "Asking to borrow someone's keycard is a classic social engineering tactic to gain unauthorized physical access.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_012.png",
+    "answer": "C",
+    "answerText": "C. ERM",
+    "explanation": "COBIT, ISO, and OCTAVE are IT/security-focused frameworks, whereas ERM (Enterprise Risk Management) is a general business risk framework, not an IT security policy framework.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_013.png",
+    "answer": "D",
+    "answerText": "D. All are correct",
+    "explanation": "PCI DSS mandates network segregation, regular penetration testing, and antivirus/malware scanning as part of its network security requirements.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_014.png",
+    "answer": "A",
+    "answerText": "A. Defines an approach to reduce risk",
+    "explanation": "Both GRC and ERM share the common goal of defining an approach to identify and reduce organizational risk.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_015.png",
+    "answer": "D",
+    "answerText": "D. A and B only",
+    "explanation": "PCI DSS control objectives include maintaining an information security policy and protecting cardholder data; it does not include real-time alerting on illegal card use.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_016.png",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "Security policies are driven by the need to protect shareholder value, comply with regulations, and address technology vulnerabilities/limitations.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_017.png",
+    "answer": "B",
+    "answerText": "B. Needs to have strong law enforcement background",
+    "explanation": "Modern CISOs need influence, relationship-building, and reliance on the org to enforce policy, but a law enforcement background is not a requirement.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_018.png",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "Companies commonly monitor employee internet use, e-mail, and computer activity as part of security oversight.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_019.png",
+    "answer": "E",
+    "answerText": "E. All of the above",
+    "explanation": "Good policy sources include government publications, vendor guidance, professional organizations, and commercial standards providers.",
+    "verifyAnswer": "E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_020.png",
+    "answer": "E",
+    "answerText": "E. Users accessing the Internet & Encryption when transmitting files",
+    "explanation": "An acceptable use policy governs end-user behavior such as internet access and file transmission practices, not server-to-server communication.",
+    "verifyAnswer": "E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_021.png",
+    "answer": "B",
+    "answerText": "B. Imaging",
+    "explanation": "Imaging captures the entire configured system (OS, apps, settings) into a single image that can be rapidly deployed to many machines, far easier than scripting or manual setup.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_022.png",
+    "answer": "A",
+    "answerText": "A. A BCP focuses on the business recovery and DRP focuses on technology recovery.",
+    "explanation": "A Business Continuity Plan addresses keeping the business running, while a Disaster Recovery Plan focuses specifically on restoring IT/technology systems.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_023.png",
+    "answer": "B",
+    "answerText": "B. Moderately important; nice to have but issue the report if not available",
+    "explanation": "Identifying the attacker is useful but not mandatory; the IRT report should still be issued to document and resolve the incident even without attacker attribution.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_024.png",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "Forensic tools gather evidence, produce court-admissible evidence, and can create bit-for-bit images of a machine.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_025.png",
+    "answer": "D",
+    "answerText": "D. All of the above",
+    "explanation": "Incident analysis must determine the attack tool used, the vulnerability exploited, and the resulting impact.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_026.png",
+    "answer": "D",
+    "answerText": "D. All are correct",
+    "explanation": "A policy framework charter includes purpose/mission, organizational scope, and assignment of implementation responsibilities.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_027.png",
+    "answer": "F",
+    "answerText": "F. All of the above",
+    "explanation": "Policy frameworks must consider unauthorized access, disclosure, disruption, modification, and destruction of information/systems - all these factors.",
+    "verifyAnswer": "F",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_028.png",
+    "answer": "B",
+    "answerText": "B. Risk appetite measures impact and likelihood, while risk tolerance measures variance from a target goal.",
+    "explanation": "Per standard risk management (COSO) definitions, risk tolerance is the acceptable variance around achieving objectives/targets, while risk appetite reflects the overall risk level (impact/likelihood) an organization accepts.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_029.png",
+    "answer": "A",
+    "answerText": "A. Insider",
+    "explanation": "An insider is defined as someone with inside knowledge of how the organization operates, distinct from shareholders or external auditors.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_030.png",
+    "answer": "D",
+    "answerText": "D. All are correct",
+    "explanation": "Legal requirements, customer expectations, and shareholder interests all drive the need for security awareness.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_031.png",
+    "answer": "D",
+    "answerText": "D. A and B",
+    "explanation": "An acceptable use policy pertains to users accessing the internet and general acceptable behavior, not server-to-server communication or encryption specifics.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_032.png",
+    "answer": "A",
+    "answerText": "A. Service",
+    "explanation": "System accounts used by applications/processes rather than humans are commonly referred to as service accounts.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_033.png",
+    "answer": "A",
+    "answerText": "A. Change management",
+    "explanation": "Change management is the formal process used to control and review network changes to minimize the risk of outages.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_034.png",
+    "answer": "D",
+    "answerText": "D. Procedure",
+    "explanation": "Step-by-step instructions for implementing controls (like firewall configuration) belong in a procedure document, which is more granular than a policy or standard.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_035.png",
+    "answer": "B",
+    "answerText": "B. Internet",
+    "explanation": "A DMZ (demilitarized zone) is a buffer network segment that separates an internal LAN from the untrusted Internet.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_036.png",
+    "answer": "D",
+    "answerText": "D. All are correct",
+    "explanation": "Both government sources and reputable private standards vendors are considered reliable sources for security policies and standards.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_037.png",
+    "answer": "B",
+    "answerText": "B. A stateless firewall looks at each packet individually and a stateful firewall examines the packet in context the connection and other packets.",
+    "explanation": "Stateless firewalls filter packets individually based on rules, while stateful firewalls track connection state and context across packets.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_038.png",
+    "answer": "D",
+    "answerText": "D. All are correct",
+    "explanation": "Without a policy restricting personal software installs, a company risks malware infection, software licensing lawsuits, and lost productivity.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_039.png",
+    "answer": "A",
+    "answerText": "A. IDs and Passwords",
+    "explanation": "ID/password authentication is the baseline minimum standard for business authentication, while retinal scans, smart cards, and biometrics are stronger/additional factors.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_040.png",
+    "answer": "A",
+    "answerText": "A. Concentrators",
+    "explanation": "VPN concentrators are dedicated devices designed specifically to establish and manage large numbers of VPN connections.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_041.png",
+    "answer": "A",
+    "answerText": "A. Private WANs may not need encryption.",
+    "explanation": "Because private WAN links (e.g., dedicated leased lines) are not shared over the public internet, they are often considered inherently more secure and may not require mandatory encryption, unlike public/VPN traffic.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_042.png",
+    "answer": "C",
+    "answerText": "C. Availability of the data",
+    "explanation": "John cannot access his presentation when and where he needs it, which is an availability issue - the data isn't accessible at the point of need, not a case of corruption, unauthorized access, or repudiation.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_043.png",
+    "answer": "B",
+    "answerText": "B. Surplus of funding",
+    "explanation": "A surplus of funding is not a challenge; the real organizational challenges are accountability, lack of priority, and tight schedules - typically caused by insufficient (not excess) funding.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_044.png",
+    "answer": "D",
+    "answerText": "D. Communications plan",
+    "explanation": "A communications plan ensures security awareness messaging is tailored and delivered effectively to specific user groups.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_045.png",
+    "answer": "C",
+    "answerText": "C. Initiation, evaluation, development, approval, publication, implementation, and maintenance",
+    "explanation": "This is the standard lifecycle for creating security policies, standards, and procedures, unlike software-development-style options involving coding/testing.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_046.png",
+    "answer": "C",
+    "answerText": "C. Corrective",
+    "explanation": "Corrective controls are specifically associated with responding to and resolving an incident after it has occurred.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_047.png",
+    "answer": "A, D",
+    "answerText": "A. Assesses policies and standards and makes recommendations for change, D. Reviews requested changes to the policy framework",
+    "explanation": "A policy change control board's core functions are assessing/recommending changes and reviewing requested changes, not implementing technical controls or numbering schemes.",
+    "verifyAnswer": "A, D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "page_048.png",
+    "answer": "D",
+    "answerText": "D. All are correct",
+    "explanation": "Business operations support is achieved through controlling IT infrastructure change, protecting data at rest/in transit, and protecting against insider threats.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_049.png",
+    "answer": "D",
+    "answerText": "D. Authentication",
+    "explanation": "Traditional ISS tenets are the CIA triad (Confidentiality, Integrity, Availability); Information Assurance adds Authentication (and non-repudiation) as an additional tenet not part of classic ISS.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "page_050.png",
+    "answer": "A",
+    "answerText": "A. Human",
+    "explanation": "The human element (resistance, non-compliance, behavior) is consistently cited as the biggest obstacle to implementing and enforcing security policy.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  }
+]

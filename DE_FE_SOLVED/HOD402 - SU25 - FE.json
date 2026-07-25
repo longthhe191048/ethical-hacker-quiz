@@ -1,0 +1,502 @@
+[
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (1).webp",
+    "answer": "B",
+    "answerText": "B. Steganography only works on color images.",
+    "explanation": "Steganography can be applied to many file types (text, audio, grayscale/color images, video), not just color images, so this statement is false while the others are true symptoms/techniques.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (10).webp",
+    "answer": "A",
+    "answerText": "A. the type of hardware and software used",
+    "explanation": "Job postings often list required skills with specific hardware/software/OS versions, which lets an attacker fingerprint the target's technology stack for exploit selection.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (11).webp",
+    "answer": "A",
+    "answerText": "A. Authenticated scans can provide a more detailed picture of the target attack surface.",
+    "explanation": "With valid credentials the scanner can log in and inspect patch levels, configurations, and installed software in depth, giving far more detail than an unauthenticated scan.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (12).webp",
+    "answer": "B",
+    "answerText": "B. Extended IP access lists are identified by numbers ranging from 100 to 199 and 2000 to 2699.",
+    "explanation": "Extended ACLs use number ranges 100-199 and 2000-2699 (or named lists) and can filter on source/destination address, protocol, and port, applied inbound or outbound.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (13).webp",
+    "answer": "D",
+    "answerText": "D. Circuit-level gateway",
+    "explanation": "A circuit-level gateway operates at the Session layer, verifying the handshake/session setup and then permitting traffic to flow without further packet inspection.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (14).webp",
+    "answer": "A",
+    "answerText": "A. Host-based IDS",
+    "explanation": "A HIDS runs on the endpoint, can confirm attack success/failure, detects what a NIDS misses, needs no extra hardware, and has a lower entry cost - matching all of Tremp's requirements.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (15).webp",
+    "answer": "B, C",
+    "answerText": "B. Manually open ports that are required for specific applications. / C. Allow a different software firewall to control access.",
+    "explanation": "Windows Firewall configuration lets you manually open specific ports for apps and, if needed, hand off firewall control to a different installed software firewall; port screening and MAC authentication are not native Windows Firewall options.",
+    "verifyAnswer": "B, C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (16).webp",
+    "answer": "B",
+    "answerText": "B. CVE",
+    "explanation": "CVE (Common Vulnerabilities and Exposures) is the industry-standard catalog/dictionary of publicly known vulnerabilities; in practice each CVE entry is enriched (via the NVD) with a CVSS severity score, so CVE is the 'catalog' referenced, not CVSS, which is only the scoring rubric itself and does not maintain a catalog of vulnerabilities.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (17).webp",
+    "answer": "B",
+    "answerText": "B. administrative",
+    "explanation": "Password requirements and documented policies/procedures are administrative (managerial) controls, as opposed to technical (software/hardware) or physical controls.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (18).webp",
+    "answer": "A",
+    "answerText": "A. OWASP",
+    "explanation": "The Open Web Application Security Project (OWASP) publishes cheat sheets and guidance for preventing XSS, SQL injection, command injection, and other web vulnerabilities.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (19).webp",
+    "answer": "D",
+    "answerText": "D. RBAC",
+    "explanation": "Role-Based Access Control lets administrators assign permissions broadly (by role) and granularly (per specific right), unlike a single blanket password policy or SDLC process.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (2).webp",
+    "answer": "B",
+    "answerText": "B. Bryan's public key; Alice's public key",
+    "explanation": "Alice encrypts with Bryan's public key so only Bryan (holding the matching private key) can decrypt; Bryan verifies Alice's digital signature using Alice's public key.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (20).webp",
+    "answer": "D",
+    "answerText": "D. remote file inclusion",
+    "explanation": "The page parameter points to an external URL (http://malicious.h4cker.org/cookie.html) to be included/executed by the vulnerable app, which is the definition of remote file inclusion (RFI).",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (21).webp",
+    "answer": "A",
+    "answerText": "A. blind",
+    "explanation": "Blind SQL injection sends crafted statements and infers/reconstructs data from the application's behavior (true/false or timing) rather than reading direct query output, unlike in-band or error-based techniques.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (22).webp",
+    "answer": "A",
+    "answerText": "A. ping",
+    "explanation": "The LIKE 'ping%' clause is a partial-match search term typically typed by the user into a search field, while group/attack/a-type are column names and 'network' is a fixed literal in the query structure.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (23).webp",
+    "answer": "D",
+    "answerText": "D. 1 - a, 2 - d, 3 - c, 4 - b, 5 - e",
+    "explanation": "1. 200 range = successful transactions (a); 2. 300 range = HTTP redirections (d); 3. 400 range = client errors (c); 4. 500 range = server errors (b); 5. 100 range = informational (e). Therefore, Option D is correct.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (24).webp",
+    "answer": "B",
+    "answerText": "B. Open Web Application Security Project (OWASP)",
+    "explanation": "OWASP is the international nonprofit dedicated to educating professionals and building free tools/best practices for securing web applications, unlike CVE (a vuln dictionary), IEEE (standards body), or SANS (training org).",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (25).webp",
+    "answer": "B",
+    "answerText": "B. SMS phishing",
+    "explanation": "A phishing attack delivered via text message asking the victim to click a link and enter bank details is SMS phishing (smishing), not vishing (voice), whaling (targeting executives), or a watering hole attack.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (26).webp",
+    "answer": "B",
+    "answerText": "B. BeEF",
+    "explanation": "The Browser Exploitation Framework (BeEF) hooks a victim's browser and can push fake notifications/prompts to it as part of its exploitation modules.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (27).webp",
+    "answer": "C",
+    "answerText": "C. SET",
+    "explanation": "The Social-Engineer Toolkit (SET) includes post-exploitation payload options such as Windows reverse VNC DLL and reverse TCP shell generation.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (28).webp",
+    "answer": "B",
+    "answerText": "B. deliver the pen drive to the security sector of the company",
+    "explanation": "A found USB drive should never be plugged into a work computer (it could be a malicious drop attack); proper procedure is to hand it to the security team for safe handling/analysis.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (29).webp",
+    "answer": "C",
+    "answerText": "C. An attack perpetrated by disgruntled employees inside an organization.",
+    "explanation": "An insider threat originates from within the organization (e.g., a disgruntled employee), distinguishing it from external nation-state, hacktivist, or organized-crime attacks.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (3).webp",
+    "answer": "B, D",
+    "answerText": "B. embedded microchip / D. primary account number",
+    "explanation": "The embossed/printed primary account number and the EMV chip are typically on the front of a credit card; the magnetic stripe and CVV/security code are on the back, and birth date is not printed on cards.",
+    "verifyAnswer": "B, D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (31).webp",
+    "answer": "A",
+    "answerText": "A. a full backup of the system",
+    "explanation": "When a production system cannot be tested in an isolated virtual environment, a full backup should be taken beforehand so the system can be restored if testing causes damage.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (32).webp",
+    "answer": "D",
+    "answerText": "D. a person who mimics an attacker to evaluate the security posture of a network",
+    "explanation": "An ethical hacker uses the same tools/techniques as malicious attackers, but with authorization, to legally assess and improve an organization's security.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (33).webp",
+    "answer": "C",
+    "answerText": "C. vulnerability scanning tool",
+    "explanation": "Vulnerability scanners (e.g., Nessus, OpenVAS) are the classic tool category for network infrastructure penetration testing, unlike interception proxies or mobile app testing tools which target other scopes.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (34).webp",
+    "answer": "B",
+    "answerText": "B. It is a collection of resources that can be reused by programs.",
+    "explanation": "A software library is a collection of reusable code/resources (functions, classes, etc.) that programs can call, as opposed to a single function, a tree structure, or a key/value data structure.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (35).webp",
+    "answer": "A, B",
+    "answerText": "A. Message templates / B. Subroutines",
+    "explanation": "Software libraries package reusable subroutines (functions and procedures) and message templates or data definitions for application development; basic control constructs (conditionals) and core data structures (trees, databases) are part of programming languages or database systems.",
+    "verifyAnswer": "A, B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (36).webp",
+    "answer": "A",
+    "answerText": "A. Veil",
+    "explanation": "Veil is a framework used alongside Metasploit to generate payloads that evade antivirus/security detection, maintaining stealth during exploitation.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (37).webp",
+    "answer": "C, E",
+    "answerText": "C. Mimikatz / E. Patator",
+    "explanation": "Mimikatz extracts/dumps credentials (hashes, plaintext passwords) and Patator performs brute-force credential attacks; Nslookup, FOCA, and Censys are recon/OSINT tools, not credential-attack tools.",
+    "verifyAnswer": "C, E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (38).webp",
+    "answer": "C",
+    "answerText": "C. privilege escalation",
+    "explanation": "Exploiting a software bug to gain access to resources a user should not normally have is the definition of privilege escalation.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (39).webp",
+    "answer": "A",
+    "answerText": "A. Social-Engineer Toolkit (SET)",
+    "explanation": "SET is designed to craft spear-phishing emails with malicious links/attachments to harvest credentials from targeted victims.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (4).webp",
+    "answer": "C",
+    "answerText": "C. BloodHound",
+    "explanation": "BloodHound is a single-page JavaScript web application that visualizes and identifies complex attack paths within Active Directory/Azure environments.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (40).webp",
+    "answer": "A",
+    "answerText": "A. VM escape vulnerability",
+    "explanation": "A VM escape vulnerability lets an attacker break out of the isolation boundary of one virtual machine to reach the hypervisor or other VMs' data on the same host.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (41).webp",
+    "answer": "C",
+    "answerText": "C. 1 - b; 2 - a; 3 - c",
+    "explanation": "Bluetooth Low Energy (BLE) pairing consists of 3 phases: Phase 1 = Pairing feature exchange (b); Phase 2 = Short-term key generation (a); Phase 3 = Transport-specific key distribution (c). Matching: 1 - b (Phase 1: Pairing feature exchange); 2 - a (Phase 2: Short-term key generation); 3 - c (Phase 3: Transport-specific key distribution). Option C (1 - b; 2 - a; 3 - c) is 100% correct.",
+    "verifyAnswer": "C (confirmed)",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (42).webp",
+    "answer": "D",
+    "answerText": "D. VM repository vulnerability",
+    "explanation": "Uploading a malicious VM image to a marketplace/repository so that organizations unknowingly deploy compromised images is a VM repository vulnerability.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (43).webp",
+    "answer": "B",
+    "answerText": "B. the amount of information provided to the consultant",
+    "explanation": "Known-environment (white-box) testing gives the tester full information/credentials in advance, while unknown-environment (black-box) testing provides little to none - that is the key difference.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (44).webp",
+    "answer": "B",
+    "answerText": "B. types of allowed or disallowed tests",
+    "explanation": "Restricting testing to only certain applications while explicitly excluding certain attack types (no social engineering, no XSS) is specified under the allowed/disallowed test types section of the rules of engagement.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (45).webp",
+    "answer": "C, E",
+    "answerText": "C. CAV2/CVC2/CVV2/CID / E. full magnetic strip data or equivalent data on a chip",
+    "explanation": "PCI DSS classifies the card verification code and full track/chip data as Sensitive Authentication Data (must never be stored); PAN, cardholder name, and expiration date are Cardholder Data, a different (less restricted) category.",
+    "verifyAnswer": "C, E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (46).webp",
+    "answer": "A",
+    "answerText": "A. statement of work (SOW)",
+    "explanation": "The Statement of Work details the scope, deliverables, quality expectations, timelines, and cost of the engagement, unlike an SLA (ongoing service metrics), NDA (confidentiality), or MSA (overarching contract terms).",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (47).webp",
+    "answer": "C",
+    "answerText": "C. The DNS resolver cache is manipulated.",
+    "explanation": "DNS poisoning (cache poisoning) injects false DNS records into a resolver's cache so it returns malicious IP addresses for legitimate domain names.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (48).webp",
+    "answer": "C",
+    "answerText": "C. 1 - b, 2 - c, 3 - a, 4 - d",
+    "explanation": "In a DNS amplification attack: 1. Open recursive DNS server = b (Servers configured to resolve DNS queries for any user); 2. Amplification factor = c (Ratio of response size to request size); 3. Spoofed IP address = a (Victim IP address); 4. Botnet = d (Network of compromised computers). Therefore, Option C is correct.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (49).webp",
+    "answer": "C",
+    "answerText": "C. An attack that can be performed using Bluetooth with vulnerable devices in range. This attack actually steals information from the device of the victim.",
+    "explanation": "Bluesnarfing is defined by data theft from a vulnerable Bluetooth device, distinguishing it from bluejacking (spam messages) or Bluetooth impersonation/MITM attacks.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (5).webp",
+    "answer": "C",
+    "answerText": "C. PowerShell",
+    "explanation": "PowerShell is a native living-off-the-land tool that can list directories, copy/move files, enumerate running processes, and perform administrative tasks without introducing external binaries.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (50).webp",
+    "answer": "A",
+    "answerText": "A. capture of a password hash (as opposed to the password characters) and using the same hashed value for authentication and lateral access to other networked systems",
+    "explanation": "Pass-the-hash reuses the captured NTLM/other hash directly for authentication without ever needing to crack it into plaintext.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (6).webp",
+    "answer": "C",
+    "answerText": "C. to obfuscate, to evade and to cover the attacker tracks",
+    "explanation": "Steghide hides data inside cover files (images/audio) using steganography, which serves to obfuscate and conceal data/tracks, unlike registry-manipulation, Azure attack-path mapping, or remote-desktop tools.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (7).webp",
+    "answer": "B",
+    "answerText": "B. WMImplant",
+    "explanation": "WMImplant is a PowerShell-based post-exploitation tool that leverages Windows Management Instrumentation (WMI) to establish a command-and-control channel.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (8).webp",
+    "answer": "C",
+    "answerText": "C. whois",
+    "explanation": "The whois command queries domain registration records, revealing the technical and administrative contacts registered for a domain, as part of passive reconnaissance.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186 (9).webp",
+    "answer": "A",
+    "answerText": "A. to identify all active IP addresses within the scope of the test",
+    "explanation": "Host enumeration at the start of a pentest aims to discover which hosts/IP addresses within scope are actually live, laying groundwork for later scanning and vulnerability assessment.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_-_SU25_-_FE_4186.webp",
+    "answer": "D",
+    "answerText": "D. Self-signed",
+    "explanation": "Generating a key pair locally with Apple's Keychain and using it to sign documents without involving a trusted external Certificate Authority produces a self-signed certificate.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  }
+]

@@ -1,0 +1,502 @@
+[
+  {
+    "image": "SP25_RE (1).webp",
+    "answer": "D",
+    "answerText": "D. Usernames and machine names",
+    "explanation": "NetBIOS enumeration (via tools like nbtstat) reveals usernames, machine names, shares and domain info registered on the NetBIOS name service, not password policies or uptime.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (2).webp",
+    "answer": "B",
+    "answerText": "B. Network Access",
+    "explanation": "In the TCP/IP model, the Network Access (Link) layer handles the physical transmission of bits over the medium; the Internet, Transport, and Application layers operate at higher abstraction levels.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (3).webp",
+    "answer": "C",
+    "answerText": "C. Fewer employees are around during nonstandard business hours.",
+    "explanation": "With fewer staff and less oversight during the night shift, an intruder or malicious insider has more unobserved opportunity to access physical infrastructure.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (4).webp",
+    "answer": "C",
+    "answerText": "C. Domain Dossier",
+    "explanation": "Domain Dossier gathers network-level footprinting data (WHOIS, DNS records, traceroute) that helps identify network vulnerabilities, whereas Maltego/White Pages focus on people/entity relationships and ZAP is an active web vulnerability scanner rather than a footprinting tool.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (5).webp",
+    "answer": "D",
+    "answerText": "D. These commands demonstrate that the true administrator is Joe.",
+    "explanation": "user2sid resolves the Guest account to RID 501; sid2user is then used with RID 500 (the well-known built-in Administrator RID) and returns the name \"Joe\" — proving that the account renamed to look ordinary is actually the true Administrator account.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (6).webp",
+    "answer": "A",
+    "answerText": "A. Determine live systems within a network",
+    "explanation": "A ping sweep sends ICMP echo requests to a range of addresses to identify which hosts are currently up and responding.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (7).webp",
+    "answer": "C",
+    "answerText": "C. vulnerability",
+    "explanation": "A vulnerability assessment specifically aims to identify and catalog all weaknesses in an application or system, unlike broader technical or network assessments.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (8).webp",
+    "answer": "B",
+    "answerText": "B. Using anti-wardriving software",
+    "explanation": "Anti-wardriving countermeasures make it harder for attackers to detect and map a WLAN's presence, while increasing signal strength or broadcasting the SSID more would make it easier to find, and disabling the firewall has nothing to do with discoverability.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (9).webp",
+    "answer": "C",
+    "answerText": "C. Nessus",
+    "explanation": "Nessus is a dedicated, widely used vulnerability scanner, whereas Wireshark is a packet analyzer and Metasploit is primarily an exploitation framework.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (10).webp",
+    "answer": "B",
+    "answerText": "B. Verifying and cleaning data from users to prevent exploits.",
+    "explanation": "Input sanitization means validating and cleansing user-supplied data to strip or neutralize malicious content (e.g., to prevent SQL injection or XSS).",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (11).webp",
+    "answer": "B",
+    "answerText": "B. Documents and spreadsheets.",
+    "explanation": "Macro viruses embed themselves in macro-enabled documents and spreadsheets (e.g., Word/Excel files), executing when the macros run.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (12).webp",
+    "answer": "A",
+    "answerText": "A. To automate repetitive tasks",
+    "explanation": "Scripting in cybersecurity is primarily used to automate repetitive tasks such as scanning, log parsing, and exploit execution.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (13).webp",
+    "answer": "D",
+    "answerText": "D. The main purpose of adware is to determine a user's purchasing habits, but spyware sends information, including confidential information, from the infected computer to the attacker.",
+    "explanation": "Adware mainly tracks browsing/purchasing behavior to serve targeted ads, while spyware covertly exfiltrates sensitive information (including confidential data) to an attacker, making it the more dangerous category.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (14).webp",
+    "answer": "A",
+    "answerText": "A. WPA",
+    "explanation": "WPA (Wi-Fi Protected Access) was introduced as an interim replacement to fix WEP's weaknesses before WPA2/WPA3 followed later.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (15).webp",
+    "answer": "B",
+    "answerText": "B. SYN scan",
+    "explanation": "A SYN (half-open) scan sends a SYN packet and analyzes the response without completing the three-way handshake, unlike a Connect scan which completes a full TCP connection.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (16).webp",
+    "answer": "A, B, C",
+    "answerText": "A. Authentication bypass attacks; B. Buffer overflow attacks; C. Password-guessing attacks",
+    "explanation": "Embedded router OSes are commonly vulnerable to authentication bypass, buffer overflow, and password-guessing attacks; \"RTOS clock corruption\" is not a recognized attack category.",
+    "verifyAnswer": "A, B, C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "SP25_RE (17).webp",
+    "answer": "B",
+    "answerText": "B. To attract and distract attackers from more valuable assets",
+    "explanation": "A honeypot is a decoy system designed to lure attackers away from real assets while allowing defenders to observe attacker behavior.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (18).webp",
+    "answer": "A",
+    "answerText": "A. X-ray",
+    "explanation": "X-ray is an Android vulnerability scanning tool; evasi0n7 and Pangu are iOS jailbreak tools, and DroidSheep Guard is an anti-session-hijacking tool, not a vulnerability scanner.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (19).webp",
+    "answer": "C",
+    "answerText": "C. The set of all possible keys that can be used with a cryptographic algorithm",
+    "explanation": "Key space is the total number of possible key values an algorithm supports, which determines resistance to brute-force attacks.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (20).webp",
+    "answer": "B",
+    "answerText": "B. These session ID names can be used to fingerprint the application framework employed.",
+    "explanation": "Default session ID names (e.g., PHPSESSID, JSESSIONID) reveal which web framework is in use, helping attackers target known framework-specific vulnerabilities.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (21).webp",
+    "answer": "C, E",
+    "answerText": "C. Reporting; E. Vulnerability identification",
+    "explanation": "ISSAF defines phases including planning, assessment (which covers vulnerability identification), and reporting; \"maintaining access\" and \"post-exploitation\" are penetration-testing-attack-phase terms rather than named ISSAF phases in this option set.",
+    "verifyAnswer": "C, E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "SP25_RE (22).webp",
+    "answer": "C",
+    "answerText": "C. White box",
+    "explanation": "White box testing is performed with full knowledge of the network/system layout, contrasting with black box (no knowledge) and gray box (partial knowledge) testing.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (23).webp",
+    "answer": "A, C",
+    "answerText": "A. Whois; C. SamSpade",
+    "explanation": "Whois and SamSpade both return domain registration details, including administrative/technical contact information for key IT personnel; Nbtstat queries local NetBIOS info and \"Whatis\" is not a real recon tool.",
+    "verifyAnswer": "A, C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "SP25_RE (24).webp",
+    "answer": "C",
+    "answerText": "C. TCP provides reliable data transmission with error checking and retransmission, whereas UDP sacrifices reliability for speed by not guaranteeing packet delivery.",
+    "explanation": "TCP is connection-oriented and reliable (acknowledgments, retransmission), while UDP is connectionless and faster but does not guarantee delivery — this correctly characterizes the trade-off.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (25).webp",
+    "answer": "D",
+    "answerText": "D. Mirai",
+    "explanation": "The Mirai botnet infected IoT devices and was used in the October 2016 Dyn DNS DDoS attack that disrupted major internet services across North America and Europe.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (26).webp",
+    "answer": "B",
+    "answerText": "B. Pivoting",
+    "explanation": "Using a compromised system as a launch point to attack other internal systems is called pivoting.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (27).webp",
+    "answer": "B",
+    "answerText": "B. To secure user sessions by ensuring that requests are coming from the same user",
+    "explanation": "Session tokens authenticate that subsequent requests belong to the same authenticated session, preventing session hijacking/fixation, rather than serving analytics or caching purposes.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (28).webp",
+    "answer": "A, C",
+    "answerText": "A. SMBRelay; C. L0phtcrack's SMB Packet Capture utility",
+    "explanation": "SMBRelay and L0phtcrack's SMB Packet Capture utility are well-known tools for SMB-based attacks (relay attacks and credential capture); \"SMBsnag\" and \"NTPass\" are not established SMB hacking tools.",
+    "verifyAnswer": "A, C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "SP25_RE (29).webp",
+    "answer": "B",
+    "answerText": "B. Rijndael",
+    "explanation": "NIST selected the Rijndael algorithm (by Daemen and Rijmen) as the Advanced Encryption Standard in 2001, beating out finalists Serpent, Twofish, and RC6.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (30).webp",
+    "answer": "E",
+    "answerText": "E. Hardwares",
+    "explanation": "Enumeration reveals logical information such as services, user accounts, ports, and shares, but not physical hardware inventory.",
+    "verifyAnswer": "E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (31).webp",
+    "answer": "C",
+    "answerText": "C. Automatic code correction",
+    "explanation": "Wfetch supports multiple HTTP methods, client certificates, and proxy configuration for crafting/testing HTTP requests, but it has no automatic code-correction feature.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (32).webp",
+    "answer": "C",
+    "answerText": "C. card access",
+    "explanation": "Card access systems both restrict physical entry and log timestamps of each entry, unlike simple mechanical locks (rotary, combination, deadbolt) which don't record who entered or when.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (33).webp",
+    "answer": "C",
+    "answerText": "C. NAT",
+    "explanation": "Network Address Translation (NAT) maps one IP address to another (e.g., private to public) on a firewall/router, masking internal addressing.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (34).webp",
+    "answer": "D",
+    "answerText": "D. Following the laws and behaving ethically are more important than passing an exam.",
+    "explanation": "Ethical and legal conduct is foundational to the security profession and takes precedence over exam success; certifications alone don't guarantee competence, and the field is constantly evolving, not static.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (35).webp",
+    "answer": "C",
+    "answerText": "C. TOR proxy",
+    "explanation": "TOR routes traffic through multiple relay/proxy nodes across different locations to anonymize the source, matching the described behavior of the connection bouncing between several proxy servers.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (36).webp",
+    "answer": "B",
+    "answerText": "B. chmod",
+    "explanation": "The chmod command changes file and directory permissions in Unix/Linux systems.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (37).webp",
+    "answer": "A",
+    "answerText": "A. To fine-tune search results",
+    "explanation": "Google hacking uses advanced search operators (site:, filetype:, inurl:, etc.) to fine-tune and narrow search results to expose sensitive information.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (38).webp",
+    "answer": "A",
+    "answerText": "A. to collect information about a network without being detected",
+    "explanation": "Passive reconnaissance gathers information without directly interacting with target systems, keeping the tester undetected, unlike active scanning which probes the network directly.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (39).webp",
+    "answer": "B",
+    "answerText": "B. By gathering information from a company's website.",
+    "explanation": "Most attacks begin with reconnaissance/footprinting, commonly starting by mining information from the target company's own public website.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (40).webp",
+    "answer": "B",
+    "answerText": "B. It sends alerts when traffic deviates from a baseline",
+    "explanation": "An anomaly-based IDS builds a baseline of normal behavior and alerts when traffic significantly deviates from it, rather than decrypting traffic or blocking it outright.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (41).webp",
+    "answer": "A",
+    "answerText": "A. c:\\> cat file1.txt:hidden.exe > visible.exe",
+    "explanation": "To extract an executable hidden in an NTFS alternate data stream, you read the stream (file1.txt:hidden.exe) with cat/type and redirect its output to a new visible file.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (42).webp",
+    "answer": "D",
+    "answerText": "D. TLS",
+    "explanation": "TLS (Transport Layer Security) is the modern cryptographic protocol designed for secure internet communication, having succeeded SSL; HTTPS is HTTP over TLS/SSL, and SSH serves remote shell access rather than general secure communication.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (43).webp",
+    "answer": "B",
+    "answerText": "B. It prevents the network from being easily discovered",
+    "explanation": "Disabling SSID broadcast stops the network name from being advertised in scans, making casual discovery harder (though it does not encrypt data or affect speed).",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (44).webp",
+    "answer": "A",
+    "answerText": "A. a valid list of users",
+    "explanation": "User enumeration's initial goal is to obtain a valid list of usernames on the target system, which can later be used for further attacks like password guessing.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (45).webp",
+    "answer": "A",
+    "answerText": "A. The opening sequence of a TCP connection",
+    "explanation": "The three-way handshake (SYN, SYN-ACK, ACK) is the standard process used to establish a TCP connection.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (46).webp",
+    "answer": "C",
+    "answerText": "C. Input validation to prevent injections",
+    "explanation": "Validating and constraining input is a core secure-coding practice that prevents injection attacks (SQL injection, XSS, command injection, etc.).",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (47).webp",
+    "answer": "C",
+    "answerText": "C. in a user input field in a web form",
+    "explanation": "XSS payload strings are injected into user-controllable input fields in web forms to test whether the application improperly reflects or stores unsanitized input.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (48).webp",
+    "answer": "C",
+    "answerText": "C. Patching",
+    "explanation": "Embedded operating systems are notoriously difficult to patch due to vendor support limitations, custom firmware, and update mechanisms, making patching a significant security challenge.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (49).webp",
+    "answer": "B",
+    "answerText": "B. Unauthorized access to or theft of information from a Bluetooth-enabled device",
+    "explanation": "Bluesnarfing is the unauthorized access to data (contacts, messages, files) on a Bluetooth-enabled device without the owner's knowledge.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SP25_RE (50).webp",
+    "answer": "B",
+    "answerText": "B. 127 address",
+    "explanation": "The 127.0.0.0/8 range is reserved for loopback addressing (e.g., 127.0.0.1) and cannot be assigned to a network interface for external communication.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  }
+]

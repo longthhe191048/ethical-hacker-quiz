@@ -1,0 +1,503 @@
+[
+  {
+    "image": "SU24_RE (1).webp",
+    "answer": "C",
+    "answerText": "C. Passive information gathering",
+    "explanation": "Every pentest should begin with passive reconnaissance (footprinting) that does not touch the target, before any active scanning like Nmap or OS fingerprinting.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (2).webp",
+    "answer": "C",
+    "answerText": "C. nmap -sP 192.168.1.0/24",
+    "explanation": "The -sP (ping scan) option performs a simple ping sweep to discover live hosts without port scanning.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (3).webp",
+    "answer": "B",
+    "answerText": "B. To secure user sessions by ensuring that requests are coming from the same user",
+    "explanation": "Session tokens authenticate that subsequent requests belong to the same authenticated session, preventing hijacking/impersonation; the other options describe unrelated benefits.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (4).webp",
+    "answer": "B",
+    "answerText": "B. These session ID names can be used to fingerprint the application framework employed.",
+    "explanation": "Default session ID names (e.g., PHPSESSID, JSESSIONID, ASP.NET_SessionId) reveal which framework is in use, aiding attackers in framework-specific exploits.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (5).webp",
+    "answer": "D",
+    "answerText": "D. Transport",
+    "explanation": "Transport mode encrypts only the payload and is typically used for end-to-end (internal, host-to-host) communications, whereas Tunnel mode is used for gateway-to-gateway (site-to-site) traffic.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (6).webp",
+    "answer": "A",
+    "answerText": "A. C (and C. C++ also apply)",
+    "explanation": "Buffer overflows arise from unsafe manual memory/pointer handling, which is characteristic of C and C++; Perl and Java manage memory/bounds automatically and are far less prone to classic overflow exploits.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (7).webp",
+    "answer": "B",
+    "answerText": "B. Stealth scan",
+    "explanation": "Stealth (SYN/half-open, FIN, NULL, XMAS) scans avoid completing the TCP handshake and are crafted to slip past simple firewall/IDS rules that only watch for full connections.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (8).webp",
+    "answer": "C",
+    "answerText": "C. Users can disable or circumvent updates just as they can if their computer is configured to use the vendor's online update service.",
+    "explanation": "This describes a persisting limitation/risk, not a benefit, of using an automated patch management service â€” the other options are genuine advantages (central approval, bandwidth savings, automatic hotfix deployment).",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (9).webp",
+    "answer": "B",
+    "answerText": "B. Verifying and cleaning data from users to prevent exploits.",
+    "explanation": "Input sanitization means validating and stripping/escaping malicious or malformed data (e.g., against SQL injection, XSS) before it is processed.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (10).webp",
+    "answer": "C",
+    "answerText": "C. DumpSec",
+    "explanation": "DumpSec is a dedicated Windows enumeration tool that dumps permissions, shares, users, and policies from Windows systems, unlike Nmap (scanning), Nessus (vulnerability scanning), or SNMPwalk (SNMP).",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (11).webp",
+    "answer": "B",
+    "answerText": "B. To replicate itself and spread to other systems",
+    "explanation": "By definition, a computer virus's core purpose is self-replication and propagation, attaching itself to files/programs to spread.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (12).webp",
+    "answer": "B",
+    "answerText": "B. Unknown.exe",
+    "explanation": "Application whitelisting only permits known, approved, and verified executables; an unidentified/unknown executable is exactly what whitelisting is designed to block.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (13).webp",
+    "answer": "B",
+    "answerText": "B. Direct interaction with system hardware",
+    "explanation": "C is a low-level, compiled language that allows direct memory and hardware access, which is why it's widely used in systems/security programming (and also why it is prone to buffer overflow vulnerabilities).",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (14).webp",
+    "answer": "A",
+    "answerText": "A. caching of HTTP messages (and D. enabling HTTP transfers across a firewall)",
+    "explanation": "Web proxies commonly cache HTTP responses to improve performance and act as an intermediary that allows HTTP traffic through a firewall on behalf of internal clients.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "SU24_RE (15).webp",
+    "answer": "D",
+    "answerText": "D. Zombies, compromised computers, are unaware that their systems are sending malicious packets.",
+    "explanation": "DDoS traffic originates from many innocent, compromised zombie hosts whose unwitting owners have no idea they are participating, making it hard to trace and block a single source, unlike a DoS attack which has one identifiable origin.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (16).webp",
+    "answer": "B",
+    "answerText": "B. Unauthorized access to or theft of information from a Bluetooth-enabled device",
+    "explanation": "Bluesnarfing is the theft of data (contacts, messages, files) from a Bluetooth device via an unauthorized connection, as opposed to bluejacking which just sends unsolicited messages.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (17).webp",
+    "answer": "B",
+    "answerText": "B. Honeyspot access point",
+    "explanation": "In CEH wireless-attack taxonomy, a honeypot/honeyspot AP is an attacker-configured access point that mimics a legitimate public hotspot (e.g., the McDonald's Wi-Fi) with a strong signal to lure users into connecting, so it can capture their credentials. A 'rogue access point' instead refers to an unauthorized AP attached to an organization's own internal network, which does not fit a public-hotspot scenario like Joe's.",
+    "verifyAnswer": "B",
+    "agree": false,
+    "corrected": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (18).webp",
+    "answer": "B",
+    "answerText": "B. It sends alerts when traffic deviates from a baseline",
+    "explanation": "Anomaly-based IDS builds a baseline of normal behavior and raises alerts when observed traffic significantly deviates from it, rather than matching known signatures or blocking traffic itself.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (19).webp",
+    "answer": "A",
+    "answerText": "A. Man-in-the-middle attack",
+    "explanation": "A MITM attack involves an attacker secretly intercepting and possibly altering communication between two parties who believe they are communicating directly with each other.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (20).webp",
+    "answer": "C",
+    "answerText": "C. Monitoring equipment in large-scale industries",
+    "explanation": "SCADA (Supervisory Control and Data Acquisition) systems monitor and control industrial processes and equipment such as power plants, water treatment, and manufacturing.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (21).webp",
+    "answer": "A",
+    "answerText": "A. Security update checks (and B. IIS checks)",
+    "explanation": "Microsoft Baseline Security Analyzer (MBSA) checks for missing security updates/patches and reviews configuration issues such as IIS settings; it does not do hardware or virtualization checks.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "SU24_RE (22).webp",
+    "answer": "A",
+    "answerText": "A. The extra packets required may trigger an IDS alarm.",
+    "explanation": "A TCP Connect scan completes the full three-way handshake (extra SYN-ACK-ACK-RST packets) for every port, generating more traffic/log entries that are far more likely to trigger IDS alerts than a stealthy SYN scan.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (23).webp",
+    "answer": "A",
+    "answerText": "A. Increased security.",
+    "explanation": "Subnetting segments a network into smaller broadcast domains, limiting exposure and making it harder for an attacker to move laterally across the entire network, improving security.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (24).webp",
+    "answer": "C",
+    "answerText": "C. Both knowledge of network and computer technology and the ability to communicate with management and IT personnel.",
+    "explanation": "Successful security professionals need strong technical skills as well as the soft skill of clearly communicating findings and risk to both management and technical staff.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (25).webp",
+    "answer": "A",
+    "answerText": "A. c:\\> cat file1.txt:hidden.exe > visible.exe",
+    "explanation": "To pull data back out of an NTFS Alternate Data Stream (file1.txt:hidden.exe), you read the stream with cat and redirect it out to a normal file; option C instead writes/creates a stream, and B and D use invalid syntax.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (26).webp",
+    "answer": "A",
+    "answerText": "A. spear phishing",
+    "explanation": "Spear phishing is a targeted social-engineering email attack aimed at specific individuals/organizations, often combined with exploit payloads, as opposed to generic mass email phishing.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (27).webp",
+    "answer": "E",
+    "answerText": "E. All of the above",
+    "explanation": "Google, NetworkSolutions/Namedroppers-type WHOIS lookups, Sam Spade, and ARIN are all commonly used, legitimate OSINT sources for gathering domain and IP registration information.",
+    "verifyAnswer": "E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (28).webp",
+    "answer": "B",
+    "answerText": "B. Rijndael",
+    "explanation": "NIST selected the Rijndael cipher, developed by Daemen and Rijmen, as the Advanced Encryption Standard (AES) in 2001, over finalists Serpent, Twofish, and RC6.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (29).webp",
+    "answer": "C",
+    "answerText": "C. A security contractor accesses computers that have classified information without authorization.",
+    "explanation": "The Stored Wire and Electronic Communications Act (18 U.S.C. Chapter 121) criminalizes unauthorized access to stored electronic communications/systems, which matches unauthorized access by a contractor; the other options involve authorized access or fall under different statutes (e.g., copyright, Economic Espionage Act).",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (30).webp",
+    "answer": "A",
+    "answerText": "A. To automate repetitive tasks",
+    "explanation": "Scripting in cybersecurity (Perl, Python, Bash, PowerShell, etc.) is primarily used to automate repetitive tasks such as scanning, log analysis, and exploit chaining.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (31).webp",
+    "answer": "C",
+    "answerText": "C. Patching",
+    "explanation": "Embedded operating systems are notoriously difficult to patch â€” updates are infrequent, vendor-dependent, and often require physical access or downtime, making patching a major security challenge.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (32).webp",
+    "answer": "B",
+    "answerText": "B. Network programming and administration",
+    "explanation": "Perl is widely used by system/network administrators for text processing, automation, and network scripting tasks, including many security tools.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (33).webp",
+    "answer": "A",
+    "answerText": "A. identifying the applications and services on the client and server that should handle transmitted data (also C and F apply)",
+    "explanation": "The transport layer (TCP/UDP) is responsible for identifying application/service ports, meeting reliability requirements, and multiplexing multiple conversations over one network â€” packet routing (D) and framing/error-checking of frames (B) belong to the network and data-link layers respectively.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "SU24_RE (34).webp",
+    "answer": "A",
+    "answerText": "A. X-ray",
+    "explanation": "X-ray is an Android vulnerability scanner app that checks a device for unpatched vulnerabilities, unlike evasi0n7/Pangu (iOS jailbreak tools) or DroidSheep Guard (session-hijacking protection).",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (35).webp",
+    "answer": "C",
+    "answerText": "C. NAT",
+    "explanation": "Network Address Translation (NAT) maps one IP address (typically private/internal) to another (public) address on a firewall/router, hiding internal addressing from external networks.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (36).webp",
+    "answer": "B",
+    "answerText": "B. User Security Identifiers in Windows environments",
+    "explanation": "SID enumeration targets Windows Security Identifiers to discover valid user and group accounts on a system or domain.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (37).webp",
+    "answer": "A",
+    "answerText": "A. NIDS",
+    "explanation": "A Network Intrusion Detection System (NIDS) passively monitors traffic and alerts administrators to malicious activity but does not itself block traffic, unlike a NIPS which actively prevents it.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (38).webp",
+    "answer": "A",
+    "answerText": "A. WPA",
+    "explanation": "WPA (Wi-Fi Protected Access) was introduced as an interim replacement to address WEP's serious cryptographic weaknesses, later followed by WPA2 and WPA3.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (39).webp",
+    "answer": "E",
+    "answerText": "E. Hardwares",
+    "explanation": "Enumeration reveals logical/network information such as services, user accounts, ports, and shares, but not physical hardware details.",
+    "verifyAnswer": "E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (40).webp",
+    "answer": "A",
+    "answerText": "A. IPv4 addresses use 32 bits represented in decimal format, while IPv6 addresses are 128 bits and written in hexadecimal format, providing a larger address space and better security.",
+    "explanation": "This correctly describes the core technical difference: IPv4 is a 32-bit dotted-decimal address, IPv6 is a 128-bit hexadecimal address giving a vastly larger space and built-in support for features like IPSec; the other options reverse or misstate these facts.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (41).webp",
+    "answer": "A",
+    "answerText": "A. retransmitting any unacknowledged data (and C. acknowledging received data)",
+    "explanation": "TCP is connection-oriented and reliable, providing acknowledgments and retransmission of lost data, features UDP (a connectionless, best-effort protocol) does not provide.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "SU24_RE (42).webp",
+    "answer": "D",
+    "answerText": "D. All of above",
+    "explanation": "Discarded documents can reveal passwords, meeting/vacation schedules useful for timing an intrusion, and manuals indicating the OS in use â€” all valid reasons dumpster diving is effective.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (43).webp",
+    "answer": "C",
+    "answerText": "C. scripts",
+    "explanation": "A sequence of instructions written to automate tasks on a system is a script, commonly used by penetration testers to streamline repetitive actions.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (44).webp",
+    "answer": "D",
+    "answerText": "D. Network security",
+    "explanation": "Network security specifically addresses protecting devices and infrastructure (routers, switches, firewalls) that make up the network, distinct from host/computer security which focuses on individual endpoints.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (45).webp",
+    "answer": "B",
+    "answerText": "B. Conducting ping sweeps",
+    "explanation": "Fping is a command-line utility designed to ping multiple hosts in parallel, making it an efficient tool for performing ping sweeps.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (46).webp",
+    "answer": "D",
+    "answerText": "D. Nondisclosure agreements assure clients that testers will not reveal or use any information they find.",
+    "explanation": "An NDA legally binds the pentesters to confidentiality, reassuring management that any passwords or sensitive data discovered during testing will not be disclosed or misused.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (47).webp",
+    "answer": "B",
+    "answerText": "B. To pass data between a web server and a web browser",
+    "explanation": "CGI defines a standard way for a web server to execute external programs and pass data (e.g., form input) between the server and client/browser to generate dynamic content.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (48).webp",
+    "answer": "C",
+    "answerText": "C. An unauthorized access point added to the network without the network administrator's consent",
+    "explanation": "A rogue access point is any wireless AP installed on a secure network without explicit authorization from the network administrator, creating a backdoor into the network.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "SU24_RE (49).webp",
+    "answer": "A",
+    "answerText": "A. SNMPUtil (also B. SNScan and D. Solarwinds IP Network Browser)",
+    "explanation": "SNMPUtil, SNScan, and Solarwinds IP Network Browser are all recognized SNMP enumeration tools; SNMPScan is not a real standard tool name and Nmap is a general-purpose scanner rather than a dedicated SNMP enumerator.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "SU24_RE (50).webp",
+    "answer": "A",
+    "answerText": "A. CONNECT",
+    "explanation": "The nmap http-methods script flags methods like CONNECT (and TRACE, PUT, DELETE) as potentially risky because CONNECT can be abused to proxy arbitrary traffic through the server, unlike the safe, common GET/POST/HEAD methods.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  }
+]

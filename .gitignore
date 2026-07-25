@@ -1,0 +1,18 @@
+DE_FE/
+DE_FE_OCR/
+DE_FE_MULTI/
+*.log
+report.txt
+scratch/
+.system_generated/
+*.ps1
+audit_*.py
+run_*.py
+apply_*.py
+verify_*.py
+ocr_cache_*.json
+
+# AI coding tooling — local only, not deployed to GitHub Pages
+.claude/
+AGENTS.md
+CLAUDE.md

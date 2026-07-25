@@ -1,0 +1,503 @@
+[
+  {
+    "image": "HOD402_SP26_RE (1).webp",
+    "answer": "C",
+    "answerText": "C. To initialize the Metasploit database",
+    "explanation": "msfdb init sets up and initializes the PostgreSQL database that Metasploit uses to store scan/host/loot data; it does not launch a GUI, run exploits, or schedule cron jobs.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (2).webp",
+    "answer": "A",
+    "answerText": "A. Google dork",
+    "explanation": "A crafted search string using operators like intext, inurl, and ext to find sensitive information via Google is called a Google dork (Google hacking).",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (3).webp",
+    "answer": "A",
+    "answerText": "A. cloud malware injection attack",
+    "explanation": "Creating a malicious application/service module and injecting it into a SaaS/PaaS/IaaS environment to run as a valid instance describes a cloud malware injection attack.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (4).webp",
+    "answer": "D",
+    "answerText": "D. It is a dictionary of known attacks.",
+    "explanation": "CVE is described as a standardized dictionary/list of publicly known vulnerabilities and exposures, letting testers cross-reference findings against a common naming scheme, rather than a tool database or scoring system.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (5).webp",
+    "answer": "A, B",
+    "answerText": "A. Expires; B. Max-Age",
+    "explanation": "A persistent cookie is one that survives browser close, which is achieved by setting an Expires date or a Max-Age duration; Domain, Secure, and Path control scope/transmission, not persistence.",
+    "verifyAnswer": "A, B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP26_RE (6).webp",
+    "answer": "B",
+    "answerText": "B. Increasing project scope beyond agreed terms",
+    "explanation": "Scope creep occurs when the engagement's boundaries expand beyond what was originally authorized/agreed in the rules of engagement.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (7).webp",
+    "answer": "D",
+    "answerText": "D. It helps defend against deauthentication attacks.",
+    "explanation": "802.11w Management Frame Protection (MFP) cryptographically protects management frames, primarily to prevent deauthentication/disassociation spoofing attacks.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (8).webp",
+    "answer": "D",
+    "answerText": "D. It gives a full, interactive GUI of the remote compromised computer.",
+    "explanation": "Unlike Sysinternals command-line utilities, Remote Desktop provides a complete graphical interactive session on the compromised host.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (9).webp",
+    "answer": "C",
+    "answerText": "C. Extract and crack service account hashes",
+    "explanation": "Kerberoasting requests service tickets (TGS) for accounts with SPNs and cracks the encrypted portion offline to recover the service account's password hash.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (10).webp",
+    "answer": "D",
+    "answerText": "D. 1 - d, 2 - c, 3 - b, 4 - a",
+    "explanation": "False negative = missed malicious activity (d); true negative = correctly identified benign activity (c); false positive = alarm with no real attack (b); true positive = correctly identified attack (a).",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (11).webp",
+    "answer": "B",
+    "answerText": "B. credential harvesting",
+    "explanation": "Breaching cloud infrastructure specifically to gather usernames, passwords, tokens, and PINs is credential harvesting; account takeover is the use of those stolen credentials, not the collection itself.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (12).webp",
+    "answer": "A",
+    "answerText": "A. NIDS",
+    "explanation": "A Network Intrusion Detection System only monitors and alerts (reports) administrators about malicious traffic; a NIPS would actively block it.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (13).webp",
+    "answer": "C",
+    "answerText": "C. Vishing",
+    "explanation": "Vishing is phishing conducted via voice/phone calls, as opposed to pharming (DNS redirection), whaling (targeting executives), or tailgating (physical access).",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (14).webp",
+    "answer": "A",
+    "answerText": "A. CVSS",
+    "explanation": "CVSS (Common Vulnerability Scoring System) is the industry-standard method that catalogs vulnerabilities and assigns a numeric severity score, distinguishing it from CVE (which just lists/names vulnerabilities without scoring).",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (15).webp",
+    "answer": "B, C, E",
+    "answerText": "B. IPS devices; C. switches; E. AAA servers",
+    "explanation": "A network infrastructure test targets networking/security devices such as IPS, switches, and AAA servers; cloud VMs and the digital storefront belong to cloud/application testing scopes, not network infrastructure.",
+    "verifyAnswer": "B, C, E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP26_RE (16).webp",
+    "answer": "C",
+    "answerText": "C. Use a well-thought-out scheme to provide meaningful error messages to the users but no useful information to an attacker.",
+    "explanation": "Best practice is generic, user-friendly error messages that avoid leaking stack traces, paths, or system details useful to attackers, while still logging details internally.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (17).webp",
+    "answer": "A, E",
+    "answerText": "A. TrevorC2; E. Twittor",
+    "explanation": "TrevorC2 and Twittor are both Python-based C2 frameworks; DNSCat2 is Ruby, Socat is C, and Wsc2 is written in C.",
+    "verifyAnswer": "A, E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP26_RE (18).webp",
+    "answer": "D",
+    "answerText": "D. Intelligent Platform Management Interface (IPMI)",
+    "explanation": "IPMI is a set of specifications for out-of-band hardware management/monitoring independent of the host CPU, firmware, and OS.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (19).webp",
+    "answer": "B",
+    "answerText": "B. To maintain state across HTTP requests",
+    "explanation": "Since HTTP is stateless, a session ID lets the server recognize a returning user/browser and maintain session state across multiple requests.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (20).webp",
+    "answer": "A, C, D, E",
+    "answerText": "A. hash value; C. SID; D. FQDN; E. target service",
+    "explanation": "A silver ticket forges a TGS using the service account's NTLM hash, the domain SID, the target server's FQDN, and the target service name/SPN.",
+    "verifyAnswer": "A, C, D, E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP26_RE (21).webp",
+    "answer": "C, D",
+    "answerText": "C. Arrays; D. Lists",
+    "explanation": "Arrays and lists are data structures used to store collections of values; procedures, functions, and libraries are code/organizational constructs, not data structures.",
+    "verifyAnswer": "C, D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP26_RE (22).webp",
+    "answer": "C",
+    "answerText": "C. Hijacking the hypervisor to control the entire environment",
+    "explanation": "Hyperjacking is the act of taking malicious control of the hypervisor, giving an attacker control over all VMs running on it.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (23).webp",
+    "answer": "B",
+    "answerText": "B. Symmetric encryption does not scale easily and does not provide for nonrepudiation.",
+    "explanation": "Symmetric encryption requires securely sharing a single key with every party (poor scalability) and, since the key is shared, cannot prove which party sent a message (no nonrepudiation); it is also fast and well suited to bulk encryption, ruling out C and D.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (24).webp",
+    "answer": "C",
+    "answerText": "C. BeEF",
+    "explanation": "The Browser Exploitation Framework (BeEF) hooks browsers of XSS victims and gives the attacker a web console to control and exploit them.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (25).webp",
+    "answer": "C, E",
+    "answerText": "C. Mimikatz; E. Patator",
+    "explanation": "Mimikatz extracts/cracks credentials from Windows memory, and Patator is a multi-purpose brute-force/credential attack tool; Nslookup, FOCA, and Censys are reconnaissance/OSINT tools, not credential attack tools.",
+    "verifyAnswer": "C, E",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP26_RE (26).webp",
+    "answer": "C",
+    "answerText": "C. Ping sweep",
+    "explanation": "A ping sweep sends ICMP echo requests across a range of addresses to quickly identify which hosts are alive on a network.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (27).webp",
+    "answer": "A",
+    "answerText": "A. CVE",
+    "explanation": "CVE (Common Vulnerabilities and Exposures) is the catalog that assigns each publicly known vulnerability a unique ID, description, and references.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (28).webp",
+    "answer": "D",
+    "answerText": "D. Certain operating systems and adapters do not collect the management or control packets.",
+    "explanation": "Some OS/wireless adapter combinations filter out or fail to capture 802.11 management and control frames even in monitor mode, so they never appear in the capture.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (29).webp",
+    "answer": "C",
+    "answerText": "C. badge cloning",
+    "explanation": "Posting a photo of an access badge can expose enough detail (RFID/QR data or visible ID info) for an attacker to clone the badge and gain unauthorized physical access.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (30).webp",
+    "answer": "D",
+    "answerText": "D. Shoulder surfing can be prevented by using special screen filters for computer displays.",
+    "explanation": "Privacy screen filters limit the viewing angle of a display, directly mitigating shoulder surfing; the tailgating/piggybacking definitions in A and B are reversed (tailgating = without consent, piggybacking = with consent), and badge cloning can absolutely be done via software/RFID tools.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (31).webp",
+    "answer": "A",
+    "answerText": "A. Federal Trade Commission (FTC)",
+    "explanation": "The FTC is the primary agency enforcing the GLB Act's Privacy of Consumer Financial Information Rule for non-bank financial institutions.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (32).webp",
+    "answer": "D",
+    "answerText": "D. Circuit-level gateway",
+    "explanation": "A circuit-level gateway operates at the Session layer, verifying the TCP handshake and then allowing packets to flow without further inspecting each packet's content.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (33).webp",
+    "answer": "B, D",
+    "answerText": "B. embedded microchip; D. primary account number",
+    "explanation": "The front of a standard payment card displays the embossed or printed Primary Account Number (PAN) and the embedded EMV microchip. The magnetic stripe, signature strip, and CVV/CVC security codes are located on the back.",
+    "verifyAnswer": "B, D",
+    "agree": true,
+    "corrected": true,
+    "recheck": "confirmed",
+    "isMulti": true
+  },
+  {
+    "image": "HOD402_SP26_RE (34).webp",
+    "answer": "A",
+    "answerText": "A. a full backup of the system",
+    "explanation": "If a live system cannot be virtualized/cloned for safe testing, taking a full backup beforehand is the standard precaution so the system can be restored if testing causes damage.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (35).webp",
+    "answer": "A",
+    "answerText": "A. PGP",
+    "explanation": "Pretty Good Privacy (PGP) is a well-known encryption protocol/standard specifically used to secure email communications (encryption and signing).",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (36).webp",
+    "answer": "C",
+    "answerText": "C. system and network architectural diagram",
+    "explanation": "An architectural diagram shows which systems, servers, and network segments exist, letting the consultant and client agree on and document exactly what is in scope.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (37).webp",
+    "answer": "B",
+    "answerText": "B. Three-leg perimeter configuration",
+    "explanation": "A three-leg (three-homed) perimeter uses a single firewall with three interfaces: internal network, DMZ, and external/Internet.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (38).webp",
+    "answer": "B",
+    "answerText": "B. Tools and techniques",
+    "explanation": "Penetration testing tools and techniques should always be validated in a controlled lab environment first to confirm they behave as expected before being used against live customer networks.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (39).webp",
+    "answer": "D",
+    "answerText": "D. VM repository vulnerability",
+    "explanation": "Uploading a malicious VM image to a public marketplace/repository so it gets deployed by unsuspecting organizations exploits a VM (image) repository vulnerability, distinct from hypervisor escape or hyperjacking issues.",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (40).webp",
+    "answer": "B",
+    "answerText": "B. Open Web Application Security Project (OWASP)",
+    "explanation": "OWASP is the nonprofit organization dedicated to improving software security through education, free tools, and best-practice guidance for web applications.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (41).webp",
+    "answer": "A",
+    "answerText": "A. Airmon-ng",
+    "explanation": "Airmon-ng (part of the Aircrack-ng suite) is used to set up monitor mode and, along with its companion tools, perform wireless disassociation/deauthentication attacks; nmap, POODLE, and EMPIRE are unrelated to wireless disassociation.",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (42).webp",
+    "answer": "C",
+    "answerText": "C. Open-source intelligence (OSINT)",
+    "explanation": "OSINT gathers information from publicly available sources without directly interacting with the target, making it passive; port scanning, packet crafting, and host enumeration all actively touch the target.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (43).webp",
+    "answer": "C",
+    "answerText": "C. Web Services Description Language (WSDL) document",
+    "explanation": "WSDL is an XML-based language specifically used to describe the functionality/interface of a web service (typically SOAP-based APIs).",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (44).webp",
+    "answer": "D",
+    "answerText": "D. Dictionary",
+    "explanation": "Using a pre-compiled list of common/known passwords as the candidate list for a cracking tool is the definition of a dictionary attack, as opposed to brute force (exhaustive) or spraying (one password across many accounts).",
+    "verifyAnswer": "D",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (45).webp",
+    "answer": "B",
+    "answerText": "B. PowerShell",
+    "explanation": "PowerShell is Microsoft's Windows utility combining traditional command-shell functionality with a scripting language and cmdlets for system administration.",
+    "verifyAnswer": "B",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (46).webp",
+    "answer": "C",
+    "answerText": "C. It forces the web browser to have the cookies processed only by the server.",
+    "explanation": "The HttpOnly flag blocks client-side scripts (e.g., JavaScript) from accessing the cookie, so it can only be sent to and processed by the server, mitigating cookie theft via XSS.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (47).webp",
+    "answer": "C",
+    "answerText": "C. true negatives",
+    "explanation": "A true negative is when an IDS correctly identifies benign activity as acceptable and no attack is actually occurring.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (48).webp",
+    "answer": "C",
+    "answerText": "C. BloodHound",
+    "explanation": "BloodHound is a single-page JavaScript web app (using graph theory) that reveals hidden and complex attack paths within Active Directory/Azure environments.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (49).webp",
+    "answer": "A",
+    "answerText": "A. It is a section of code that is created to perform a specific task.",
+    "explanation": "A procedure is a named block of reusable code written to perform a specific task, distinct from libraries (B), trees (C), or dictionaries/maps (D).",
+    "verifyAnswer": "A",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  },
+  {
+    "image": "HOD402_SP26_RE (50).webp",
+    "answer": "C",
+    "answerText": "C. vulnerability scanning tool",
+    "explanation": "Vulnerability scanners are core tools for network infrastructure penetration tests, identifying weaknesses across hosts and network devices; the other options are more specific to web/mobile testing or evasion tasks.",
+    "verifyAnswer": "C",
+    "agree": true,
+    "recheck": "confirmed",
+    "isMulti": false
+  }
+]
