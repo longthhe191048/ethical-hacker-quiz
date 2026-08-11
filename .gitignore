@@ -16,3 +16,7 @@ ocr_cache_*.json
 .claude/
 AGENTS.md
 CLAUDE.md
+DE_FE_SOLVED/
+onthi-fu-preview.html
+onthi-fu-tpl.html
+*.py
