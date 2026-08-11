@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ôn tập đề (FUoverflow)</title>
+<style>
+:root, :root[data-theme="dark"]{
+  --bg:#0d1117;--panel:#161b22;--panel2:#1c232d;--border:#30363d;--text:#e6edf3;--muted:#9aa7b4;
+  --accent:#3b82f6;--accent2:#2563eb;--green:#2ea043;--greenbg:#12261a;--red:#f85149;--redbg:#2b1517;
+  --amber:#d29922;--amberbg:#241c0e;--chip:#21262d;--selbg:#12203a;--topbar:rgba(13,17,23,.96);--shadow:rgba(0,0,0,.45);
+}
+:root[data-theme="light"]{
+  --bg:#f6f8fa;--panel:#fff;--panel2:#eef1f4;--border:#d0d7de;--text:#1f2328;--muted:#59636e;
+  --accent:#2563eb;--accent2:#1d4ed8;--green:#1a7f37;--greenbg:#d8f6e0;--red:#cf222e;--redbg:#ffe4e2;
+  --amber:#9a6700;--amberbg:#fff3bf;--chip:#eaeef2;--selbg:#dbe8ff;--topbar:rgba(255,255,255,.94);--shadow:rgba(140,149,159,.28);
+}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.55;font-size:16px;transition:background .2s,color .2s}
+.wrap{max-width:860px;margin:0 auto;padding:18px 16px 90px}
+body.testing .wrap{padding-top:66px}
+h1{font-size:1.3rem;margin:0}.sub{color:var(--muted);font-size:.9rem;margin-top:3px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px;margin:14px 0}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:1rem;font-weight:600;cursor:pointer}
+.btn:hover{background:var(--accent2)}.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.sec{background:var(--chip);color:var(--text);border:1px solid var(--border)}.btn.sec:hover{background:var(--panel2)}
+.btn.danger{background:var(--red)}
+.theme-btn{background:var(--chip);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:6px 11px;cursor:pointer;font-size:.85rem}
+label{font-size:.85rem;color:var(--muted)}
+select,input[type=number]{background:var(--panel2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:9px 11px;font-size:1rem;max-width:100%}
+.field{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+.modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.mode{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:15px;cursor:pointer}
+.mode:hover{border-color:var(--accent)}.mode.active{border-color:var(--accent);background:var(--selbg)}
+.mode .ic{font-size:1.5rem}.mode h3{margin:5px 0 3px;font-size:1.02rem}.mode p{margin:0;color:var(--muted);font-size:.83rem}
+.stat{display:inline-block;background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:6px 12px;margin:4px 6px 0 0;font-size:.85rem}.stat b{font-size:1.05rem}
+#topbar{position:fixed;top:0;left:0;right:0;z-index:40;background:var(--topbar);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);padding:8px 14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+#timer{font-weight:700;font-variant-numeric:tabular-nums;background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:3px 10px}
+#timer.warn{color:var(--amber);border-color:var(--amber)}#timer.crit{color:#fff;background:var(--red);border-color:var(--red)}
+#prog{font-weight:700;font-variant-numeric:tabular-nums}.src{color:var(--muted);font-size:.8rem}.grow{flex:1}
+.qh{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;margin-bottom:8px}
+.qnum{background:var(--accent);color:#fff;border-radius:6px;font-weight:700;font-size:.78rem;padding:2px 9px}
+.badge{background:var(--chip);color:var(--muted);border:1px solid var(--border);border-radius:6px;font-size:.72rem;padding:1px 8px}
+.stem{font-weight:600;white-space:pre-wrap;margin:0 0 12px;font-size:1.05rem}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border:1px solid var(--border);border-radius:9px;margin:7px 0;background:var(--panel2);cursor:pointer}
+.opt:hover{border-color:var(--accent)}.opt.sel{border-color:var(--accent);background:var(--selbg)}
+.opt.correct{border-color:var(--green);background:var(--greenbg)}.opt.wrong{border-color:var(--red);background:var(--redbg)}
+.opt .box{opacity:.75;flex-shrink:0}.opt .otext{flex:1}
+.opt .mk{margin-left:auto;font-weight:700;white-space:nowrap}.opt.correct .mk{color:var(--green)}.opt.wrong .mk{color:var(--red)}
+.notes{background:var(--panel2);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:9px 12px;margin:8px 0;font-size:.9rem;white-space:pre-wrap}
+.expl{background:var(--panel2);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:10px 13px;margin:9px 0;font-size:.93rem;color:#cdd9e5}
+.expl b{color:var(--text)}
+.vbadge{font-size:.7rem;border-radius:6px;padding:1px 7px;border:1px solid var(--border)}
+.vbadge.ok{color:var(--green);border-color:var(--green)}.vbadge.corr{color:var(--amber);border-color:var(--amber)}
+.navbtns{display:flex;gap:10px;justify-content:space-between;margin-top:14px}
+.jump{display:grid;grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:6px;margin-top:12px;max-height:160px;overflow-y:auto;padding:3px}
+.jump button{aspect-ratio:1;border:1px solid var(--border);background:var(--panel2);color:var(--muted);border-radius:7px;font-size:.72rem;font-weight:600;cursor:pointer;padding:0;transition:.12s}
+.jump button:hover{border-color:var(--accent)}
+.jump button.cur{box-shadow:inset 0 0 0 2px var(--accent);border-color:var(--accent);color:var(--text)}
+.jump button.done{background:var(--selbg);color:var(--text);border-color:var(--accent)}
+.jump button.correct{background:var(--greenbg);color:var(--green);border-color:var(--green)}.jump button.wrong{background:var(--redbg);color:var(--red);border-color:var(--red)}
+.ring{--v:0;width:120px;height:120px;border-radius:50%;margin:6px auto;display:grid;place-items:center;background:conic-gradient(var(--rc) calc(var(--v)*1%),var(--border) 0)}
+.ring .in{width:94px;height:94px;border-radius:50%;background:var(--panel);display:grid;place-items:center;text-align:center}
+.result-score{font-size:1.7rem;font-weight:800}
+.footer-note{color:var(--muted);font-size:.8rem;text-align:center;margin-top:22px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="start">
+    <div class="row" style="justify-content:space-between">
+      <div><h1 id="title">📝 Ôn tập đề</h1><div class="sub">Nguồn: FUoverflow · OCR + đáp án (Sonnet 5) · đã verify độc lập</div></div>
+      <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">☀️ Sáng</button>
+    </div>
+    <div id="stats" style="margin:12px 0"></div>
+    <div class="card">
+      <div class="field" id="subjField"><label>Môn</label><select id="subject" onchange="onSubjectChange()"></select></div>
+      <label style="display:block;margin-bottom:6px">Chọn chế độ</label>
+      <div class="modes">
+        <div class="mode" data-mode="random" onclick="pickMode('random')"><div class="ic">🎲</div><h3>1. Random câu hỏi</h3><p>Trộn ngẫu nhiên N câu trong phạm vi môn.</p></div>
+        <div class="mode" data-mode="exam" onclick="pickMode('exam')"><div class="ic">📄</div><h3>2. Ôn theo đề</h3><p>Làm 1 đề cụ thể.</p></div>
+        <div class="mode" data-mode="all" onclick="pickMode('all')"><div class="ic">📚</div><h3>3. Ôn tổng</h3><p>Toàn bộ câu hỏi của môn.</p></div>
+      </div>
+      <div id="modeCfg" style="margin-top:12px"></div>
+      <div class="field"><label>⏱ Thời gian làm bài (phút) — <b>0 = không giới hạn</b></label><input type="number" id="mins" value="0" min="0"></div>
+      <div class="field"><label><input type="checkbox" id="shuf" checked style="width:auto;vertical-align:middle"> 🔀 Trộn thứ tự đáp án (đảo A/B/C/D mỗi lần làm)</label></div>
+      <div class="row" style="margin-top:10px"><button class="btn" id="startBtn" onclick="startTest()" disabled>▶ Bắt đầu</button></div>
+    </div>
+    <div class="footer-note">Đáp án do AI giải &amp; verify từ đề FUoverflow (không phải đáp án chính thức) — dùng để tham khảo/ôn tập.</div>
+  </div>
+  <div id="test" style="display:none"></div>
+</div>
+
+<div id="topbar" style="display:none">
+  <button class="btn sec" style="padding:6px 11px" onclick="exitTest()">← Thoát</button>
+  <div id="timer">∞</div>
+  <div id="prog">1/1</div>
+  <div class="src" id="srcLabel"></div>
+  <div class="grow"></div>
+  <button class="theme-btn" onclick="toggleTheme()">🌓</button>
+  <button class="btn danger" style="padding:7px 13px" onclick="submitTest()">✔ Nộp bài</button>
+</div>
+
+<script>
+const FU_BANK = __FU_BANK__;
+function el(id){return document.getElementById(id)}
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function qsParam(k){return new URLSearchParams(location.search).get(k)}
+function optLetter(s){const m=/^\s*([A-Za-z])[\.\)]/.exec(s||'');return m?m[1].toUpperCase():null}
+function stripLabel(o){return String(o||'').replace(/^\s*[A-Za-z][.)]\s*/,'').trim()}
+
+function applyTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem('app_theme',t)}catch(e){}
+  const b=el('themeBtn');if(b)b.textContent=t==='dark'?'☀️ Sáng':'🌙 Tối';}
+function toggleTheme(){applyTheme((document.documentElement.dataset.theme||'dark')==='dark'?'light':'dark')}
+(function(){let t;try{t=localStorage.getItem('app_theme')}catch(e){}
+  if(!t)t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';applyTheme(t)})();
+
+const FORCED=qsParam('subject'); let MODE=null;
+function examsFor(sub){return FU_BANK.exams.filter(e=>sub==='__all__'||e.subject===sub)}
+(function init(){
+  const sel=el('subject');
+  if(FORCED){ el('title').textContent='📝 Ôn tập '+FORCED; el('subjField').style.display='none';
+    const o=document.createElement('option');o.value=FORCED;o.textContent=FORCED;sel.appendChild(o);sel.value=FORCED;
+  } else { const oa=document.createElement('option');oa.value='__all__';oa.textContent='Tất cả môn';sel.appendChild(oa);
+    [...new Set(FU_BANK.exams.map(e=>e.subject))].sort().forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;sel.appendChild(o)}); }
+  renderStats();
+})();
+function curSubject(){return FORCED||el('subject').value}
+function renderStats(){const exs=examsFor(curSubject());const q=exs.reduce((a,e)=>a+e.count,0);
+  const mult=exs.reduce((a,e)=>a+e.questions.filter(x=>x.multi).length,0);
+  el('stats').innerHTML=`<span class="stat"><b>${exs.length}</b> đề</span><span class="stat"><b>${q}</b> câu</span><span class="stat"><b>${mult}</b> câu nhiều đáp án</span>`;}
+function onSubjectChange(){renderStats(); if(MODE)pickMode(MODE);}
+function pickMode(m){MODE=m; document.querySelectorAll('.mode').forEach(x=>x.classList.toggle('active',x.dataset.mode===m));
+  const cfg=el('modeCfg'), exs=examsFor(curSubject());
+  if(m==='random'){const mx=exs.reduce((a,e)=>a+e.count,0);
+    cfg.innerHTML=`<div class="field"><label>Số câu ngẫu nhiên</label><input type="number" id="numQ" value="${Math.min(30,mx)}" min="1" max="${mx}"></div>`;}
+  else if(m==='exam'){cfg.innerHTML=`<div class="field"><label>Chọn đề</label><select id="examPick">`+exs.map((e,i)=>`<option value="${i}">${esc(e.name)} (${e.count} câu)</option>`).join('')+`</select></div>`;}
+  else {cfg.innerHTML=`<div class="sub">Sẽ làm toàn bộ <b>${exs.reduce((a,e)=>a+e.count,0)}</b> câu của ${curSubject()==='__all__'?'tất cả môn':curSubject()}.</div>`;}
+  el('startBtn').disabled=false;}
+
+let SESSION=[],IDX=0,submitted=false,timerInt=null,remaining=0,limited=false,REVEALED=new Set(),SHUF=true;
+function buildOpts(q,doShuffle){
+  const cs=new Set((q.a||[]).map(x=>String(x).toUpperCase()));
+  const items=(q.o||[]).map(o=>({text:stripLabel(o),correct:cs.has(optLetter(o))}));
+  let ord=items;
+  if(doShuffle){const pin=t=>/\b(none|all) of the\b/i.test(t);
+    ord=shuffle(items.filter(x=>!pin(x.text))).concat(items.filter(x=>pin(x.text)));}
+  const L='ABCDEFGHIJ';
+  return ord.map((x,i)=>({text:L[i]+'. '+x.text,correct:x.correct}));
+}
+function buildSession(){const exs=examsFor(curSubject());let list=[];
+  const push=e=>e.questions.forEach((q,i)=>{const opts=buildOpts(q,SHUF);
+    list.push(Object.assign({src:e.name,subject:e.subject,id:e.name+'#'+i,selSet:new Set(),opts,multi:!!q.multi,ncorrect:opts.filter(o=>o.correct).length},q));});
+  if(MODE==='exam')push(exs[parseInt(el('examPick').value)]); else exs.forEach(push);
+  if(MODE==='random'){list=shuffle(list);const n=Math.max(1,Math.min(parseInt(el('numQ').value)||30,list.length));list=list.slice(0,n);}
+  return list;}
+function startTest(){SHUF=el('shuf').checked;SESSION=buildSession();if(!SESSION.length){alert('Không có câu hỏi.');return;}
+  IDX=0;submitted=false;REVEALED=new Set();
+  const mins=Math.max(0,parseInt(el('mins').value)||0); limited=mins>0; remaining=mins*60;
+  el('start').style.display='none';el('test').style.display='block';el('topbar').style.display='flex';document.body.classList.add('testing');
+  if(limited)startTimer(); else el('timer').textContent='⏱ ∞';
+  renderQ();window.scrollTo(0,0);}
+function startTimer(){updateTimer();timerInt=setInterval(()=>{remaining--;updateTimer();if(remaining<=0){clearInterval(timerInt);submitTest(true);}},1000);}
+function updateTimer(){const m=Math.floor(remaining/60),s=remaining%60;const t=el('timer');t.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  t.className='';if(remaining<=30)t.classList.add('crit');else if(remaining<=120)t.classList.add('warn');}
+function exitTest(){if(timerInt)clearInterval(timerInt);el('test').style.display='none';el('topbar').style.display='none';el('start').style.display='block';document.body.classList.remove('testing');window.scrollTo(0,0);}
+function go(d){IDX=Math.max(0,Math.min(SESSION.length-1,IDX+d));renderQ();window.scrollTo(0,0);}
+function jumpTo(i){IDX=i;renderQ();window.scrollTo(0,0);}
+function pick(i){if(submitted)return;const it=SESSION[IDX];
+  if(it.multi){if(it.selSet.has(i))it.selSet.delete(i);else it.selSet.add(i);}else it.selSet=new Set([i]);
+  renderQ();}
+function revealAns(){REVEALED.add(SESSION[IDX].id);renderQ();}
+function isAnswered(it){return it.selSet.size>0;}
+function graded(it){return it.selSet.size===it.ncorrect && it.ncorrect>0 && [...it.selSet].every(i=>it.opts[i]&&it.opts[i].correct);}
+
+function renderQ(){const q=SESSION[IDX];const showAns=submitted||REVEALED.has(q.id);
+  el('prog').textContent=(IDX+1)+'/'+SESSION.length;
+  el('srcLabel').textContent=q.src+(q.n?' · Câu '+q.n:'');
+  let h=`<div class="card"><div class="qh"><span class="qnum">${IDX+1}</span><span class="badge">${esc(q.subject)}</span><span class="badge">${esc(q.src)}</span>`;
+  if(q.multi)h+=`<span class="badge" style="color:var(--amber);border-color:var(--amber)">☑ Chọn ${q.ncorrect} đáp án</span>`;
+  if(submitted){const ok=graded(q);const cl=q.selSet.size===0?'var(--amber)':ok?'var(--green)':'var(--red)';const tx=q.selSet.size===0?'⊘ Chưa làm':ok?'✔ Đúng':'✘ Sai';
+    h+=`<span class="vbadge" style="margin-left:auto;color:${cl};border-color:${cl}">${tx}</span>`;}
+  h+=`</div><p class="stem">${esc(q.q)||'<i>(không đọc được)</i>'}</p>`;
+  q.opts.forEach((o,i)=>{let cls='opt';const sel=q.selSet.has(i);
+    if(showAns){if(o.correct)cls+=' correct';else if(sel)cls+=' wrong';}else if(sel)cls+=' sel';
+    const box=q.multi?(sel?'☑':'☐'):(sel?'⦿':'○');
+    let mk='';if(showAns){if(o.correct)mk='<span class="mk">✔ đáp án đúng</span>';else if(sel)mk='<span class="mk">✗ bạn chọn</span>';}
+    h+=`<div class="${cls}" onclick="pick(${i})"><span class="box">${box}</span><span class="otext">${esc(o.text)}</span>${mk}</div>`;});
+  if(q.nt)h+=`<div class="notes">📝 ${esc(q.nt)}</div>`;
+  if(!showAns)h+=`<div style="margin-top:8px"><button class="btn sec" onclick="revealAns()">👁 Xem đáp án</button></div>`;
+  if(showAns){const vb=q.vf==='corrected'?'<span class="vbadge corr">✎ đã sửa khi verify</span>':'<span class="vbadge ok">✓ verify khớp</span>';
+    const ca=q.opts.filter(o=>o.correct).map(o=>esc(o.text)).join(' &nbsp;|&nbsp; ');
+    h+=`<div class="expl"><b>Đáp án${q.ncorrect>1?' ('+q.ncorrect+')':''}: ${ca||'?'}</b> — ${esc(q.ex)||'<i>(không có giải thích)</i>'} <span style="margin-left:6px">${vb}</span></div>`;}
+  h+=`<div class="navbtns"><button class="btn sec" onclick="go(-1)" ${IDX===0?'disabled':''}>← Trước</button><button class="btn" onclick="go(1)" ${IDX===SESSION.length-1?'disabled':''}>Sau →</button></div>`;
+  h+=`<div class="jump">`+SESSION.map((s,i)=>{let c=i===IDX?'cur ':'';if(submitted)c+=(s.selSet.size===0?'':graded(s)?'correct':'wrong');else c+=(s.selSet.size>0?'done':'');return `<button class="${c}" onclick="jumpTo(${i})">${i+1}</button>`;}).join('')+`</div></div>`;
+  el('test').innerHTML=h;
+  if(submitted && window._hero){ el('test').insertAdjacentHTML('afterbegin', window._hero); }
+}
+
+function submitTest(auto){if(submitted)return;
+  const done=SESSION.filter(isAnswered).length;
+  if(!auto && !confirm(`Đã trả lời ${done}/${SESSION.length} câu. Nộp bài?`))return;
+  submitted=true;if(timerInt)clearInterval(timerInt);el('topbar').style.display='none';document.body.classList.remove('testing');
+  const score=SESSION.filter(graded).length,total=SESSION.length,pct=Math.round(score/total*100);
+  const rc=pct>=50?'var(--green)':'var(--red)';
+  const wrong=SESSION.filter(s=>s.selSet.size>0&&!graded(s)).length, blank=SESSION.filter(s=>s.selSet.size===0).length;
+  const usedNote=limited?` · còn ${Math.floor(remaining/60)}m${remaining%60}s`:'';
+  window._hero=`<div class="card" style="text-align:center" id="hero">
+    <div class="ring" style="--v:${pct};--rc:${rc}"><div class="in"><div class="result-score" style="color:${rc}">${score}/${total}</div><div style="color:${rc};font-weight:700">${pct}%</div></div></div>
+    <div class="sub">✔ Đúng ${score} · ✘ Sai ${wrong} · ⊘ Chưa làm ${blank}${usedNote}</div>
+    <div class="row" style="justify-content:center;margin-top:12px">
+      <button class="btn" onclick="location.reload()">🔄 Làm lại</button>
+      <button class="btn sec" onclick="jumpTo(0)">📋 Xem lại từ câu 1</button>
+      <button class="btn sec" onclick="exitTest()">← Về menu</button></div></div>`;
+  IDX=0; renderQ(); window.scrollTo(0,0);}
+</script>
+</body>
+</html>
