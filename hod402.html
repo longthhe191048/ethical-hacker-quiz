@@ -89,7 +89,7 @@ input[type=number],select{background:var(--panel2);border:1px solid var(--border
 .mans{font-size:.85rem;margin-top:4px;padding-left:2px}
 .mans .good{color:var(--green)} .mans .bad{color:var(--red)}
 
-.expl{background:var(--panel2);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:11px 14px;margin:10px 0 14px;font-size:.94rem;color:#cdd9e5}
+.expl{background:var(--panel2);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:11px 14px;margin:10px 0 14px;font-size:.94rem;color:var(--text)}
 .expl b{color:var(--text)}
 .rev-status{font-weight:700;font-size:.85rem;padding:2px 10px;border-radius:6px;margin-left:auto}
 .rev-status.ok{background:var(--greenbg);color:var(--green)}
@@ -315,7 +315,7 @@ function backToStart(){ el('histDetail').classList.add('hidden'); el('start').cl
   renderHistory();
 })();
 
-let RUN=null, timerInt=null, remaining=0, submitted=false;
+let RUN=null, timerInt=null, remaining=0, deadline=0, submitted=false;
 
 function startTest(){ startWith(el('scope').value); }
 function startMatchingOnly(){ startWith('__matching__'); }
@@ -355,10 +355,23 @@ function buildItem(q,doShuf){
   return { q, kind:'mcq', order, sel:new Set() };
 }
 
+/* Wall-clock timer: remaining is derived from an absolute deadline captured at start,
+   so a locked phone / backgrounded tab (which throttles setInterval) cannot slow the exam clock. */
 function startTimer(){
+  deadline = Date.now() + remaining*1000;
   updateTimer();
-  timerInt=setInterval(()=>{ remaining--; updateTimer(); if(remaining<=0){clearInterval(timerInt); submitTest(true);} },1000);
+  timerInt=setInterval(tickTimer,1000);
+  document.addEventListener('visibilitychange',onVisTimer);
+  addEventListener('pageshow',onVisTimer);
 }
+function tickTimer(){
+  if(submitted) return;
+  remaining = Math.max(0, Math.round((deadline-Date.now())/1000));
+  updateTimer();
+  if(remaining<=0){ clearInterval(timerInt); timerInt=null; submitTest(true); }
+}
+/* resync the instant the tab comes back, instead of waiting for the next throttled tick */
+function onVisTimer(){ if(timerInt && !document.hidden) tickTimer(); }
 function updateTimer(){
   const m=Math.floor(remaining/60), s=remaining%60;
   const t=el('timer'); t.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
@@ -442,7 +455,8 @@ function submitTest(auto){
     const done=RUN.items.filter(isAnswered).length;
     if(!confirm(`Bạn đã hoàn tất ${done}/${RUN.total} câu. Nộp bài ngay?`)) return;
   }
-  submitted=true; clearInterval(timerInt); document.body.classList.remove('testing');
+  submitted=true; clearInterval(timerInt); timerInt=null; document.body.classList.remove('testing');
+  remaining = Math.max(0, Math.min(RUN.mins*60, Math.round((deadline-Date.now())/1000)));
   let score=0; const byMod={}; let full=0,partial=0,wrong=0,skipped=0;
   RUN.items.forEach(it=>{
     const f=scoreOf(it); it.frac=f; it.graded=(f===1);
