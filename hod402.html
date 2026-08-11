@@ -336,8 +336,13 @@ function startWith(scope){
   el('topbar').classList.remove('hidden');
   el('nav').classList.remove('hidden');
   document.body.classList.add('testing');
-  renderTest(); startTimer(); window.scrollTo(0,0);
+  renderTest(); startTimer(); syncTopbar(); window.scrollTo(0,0);
 }
+/* keep content clear of the fixed topbar no matter how many rows it wraps to (mobile) */
+function syncTopbar(){const tb=el('topbar'),w=document.querySelector('.wrap');if(!w)return;
+  w.style.paddingTop=(tb&&!tb.classList.contains('hidden'))?(tb.offsetHeight+12)+'px':'';}
+addEventListener('resize',syncTopbar);
+addEventListener('orientationchange',()=>setTimeout(syncTopbar,150));
 function buildItem(q,doShuf){
   if(q.type==='matching'){
     const lefts=q.pairs.map(p=>p[0]);
@@ -455,7 +460,7 @@ function submitTest(auto){
     details: RUN.items.map(it=> it.kind==='matching'
       ? { id:it.q.id, kind:'matching', chosen: it.lefts.map((_,li)=> it.assign[li]>=0 ? it.rightOptions[it.assign[li]] : null) }
       : { id:it.q.id, kind:'mcq', chosen: [...it.sel].map(di=>it.order[di]) }) });
-  el('topbar').classList.add('hidden');
+  el('topbar').classList.add('hidden'); syncTopbar();
   showResults(); revealAnswers(); updateNav(); window.scrollTo(0,0);
 }
 
