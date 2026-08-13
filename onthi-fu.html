@@ -48,7 +48,7 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--border
 .qh{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;margin-bottom:8px}
 .qnum{background:var(--accent);color:#fff;border-radius:6px;font-weight:700;font-size:.78rem;padding:2px 9px}
 .badge{background:var(--chip);color:var(--muted);border:1px solid var(--border);border-radius:6px;font-size:.72rem;padding:1px 8px}
-.stem{font-weight:600;white-space:pre-wrap;margin:0 0 12px;font-size:1.05rem}
+.stem{font-weight:600;margin:0 0 12px;font-size:1.05rem}
 .opt{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border:1px solid var(--border);border-radius:9px;margin:7px 0;background:var(--panel2);cursor:pointer}
 .opt:hover{border-color:var(--accent)}.opt.sel{border-color:var(--accent);background:var(--selbg)}
 .opt.correct{border-color:var(--green);background:var(--greenbg)}.opt.wrong{border-color:var(--red);background:var(--redbg)}
@@ -93,6 +93,18 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--border
 .sc-item{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:.88rem;padding:8px 12px;background:var(--panel2);border-radius:8px;border:1px solid var(--border)}
 .sc-item span{color:var(--muted);text-align:right}
 kbd{background:var(--chip);border:1px solid var(--border);border-radius:5px;padding:2px 7px;font-family:monospace;font-size:.82rem;font-weight:700;color:var(--accent);box-shadow:0 2px 0 var(--border)}
+/* ---- flashcard + search + bookmark ---- */
+.flash-card{background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:18px;cursor:pointer;min-height:220px}
+.flash-card:hover{border-color:var(--accent)}
+.flip-hint{margin-top:14px;text-align:center;color:var(--muted);font-size:.82rem;border-top:1px dashed var(--border);padding-top:10px}
+.flash-opt{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border:1px solid var(--border);border-radius:9px;margin:6px 0;background:var(--panel)}
+.flash-opt.correct{border-color:var(--green);background:var(--greenbg)}
+.search-wrap{position:relative;display:flex;align-items:center}
+.search-wrap input{flex:1;background:var(--panel2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:10px 34px 10px 34px;font-size:1rem;width:100%}
+.search-ic{position:absolute;left:10px;pointer-events:none;opacity:.7}
+.search-clear{position:absolute;right:6px;background:var(--chip);border:1px solid var(--border);color:var(--text);border-radius:6px;cursor:pointer;padding:2px 8px;display:none}
+.search-wrap.has-text .search-clear{display:block}
+.bmk{cursor:pointer;font-size:1rem;user-select:none;margin-left:4px}
 /* ---- mobile (keep last: these must override the base rules above) ---- */
 @media(max-width:560px){
   /* exam names are long and near-identical — stack the label above the bar instead of truncating it */
@@ -126,6 +138,10 @@ kbd{background:var(--chip);border:1px solid var(--border);border-radius:5px;padd
     <div id="resume"></div>
     <div class="card">
       <div class="field" id="subjField"><label>Môn</label><select id="subject" onchange="onSubjectChange()"></select></div>
+      <div class="field"><label>🔍 Tìm kiếm từ khóa (VD: SQL Injection, WPA2, hypervisor)</label>
+        <div class="search-wrap" id="searchWrap"><span class="search-ic">🔍</span>
+          <input type="text" id="globalSearch" placeholder="Gõ từ khóa để lọc &amp; làm bài riêng..." oninput="onSearchInput()" autocomplete="off" spellcheck="false">
+          <button type="button" class="search-clear" onclick="clearSearch()" title="Xóa tìm kiếm">✕</button></div></div>
       <label style="display:block;margin-bottom:6px">Chọn chế độ</label>
       <div class="modes">
         <div class="mode" data-mode="random" onclick="pickMode('random')"><div class="ic">🎲</div><h3>1. Random câu hỏi</h3><p>Trộn ngẫu nhiên N câu trong phạm vi môn.</p></div>
@@ -134,6 +150,9 @@ kbd{background:var(--chip);border:1px solid var(--border);border-radius:5px;padd
         <div class="mode" data-mode="wrong" onclick="pickMode('wrong')"><div class="ic">🔁</div><h3>4. Ôn lại câu sai</h3><p>Chỉ các câu bạn làm sai lần trước.</p></div>
         <div class="mode" data-mode="learn" onclick="pickMode('learn')"><div class="ic">🧠</div><h3>5. Học thông minh</h3><p>Thích ứng: ưu tiên câu chưa làm / hay sai / chưa thuộc.</p></div>
         <div class="mode" data-mode="review" onclick="pickMode('review')"><div class="ic">⏰</div><h3>6. Ôn tập đến hạn</h3><p>Lặp lại ngắt quãng (SRS) — chỉ câu đã tới hạn ôn.</p></div>
+        <div class="mode" data-mode="flash" onclick="pickMode('flash')"><div class="ic">🎴</div><h3>7. Flashcard / Ôn nhanh</h3><p>Lật thẻ xem đáp án, không tính giờ, không chấm điểm.</p></div>
+        <div class="mode" data-mode="book" onclick="pickMode('book')"><div class="ic">🔖</div><h3>8. Câu đã đánh dấu</h3><p>Ôn riêng các câu khó bạn đã bấm 🔖.</p></div>
+        <div class="mode" data-mode="seen" onclick="pickMode('seen')"><div class="ic">👁</div><h3>9. Câu đã xem đáp án</h3><p>Các câu bạn từng bấm "Xem đáp án" — nên ôn lại.</p></div>
       </div>
       <div id="modeCfg" style="margin-top:12px"></div>
       <div class="field"><label>⏱ Thời gian làm bài (phút) — <b>0 = không giới hạn</b></label><input type="number" id="mins" value="0" min="0"></div>
@@ -193,6 +212,17 @@ function stripPrefix(s){return String(s==null?'':s).replace(/^\s*[A-Za-z][\.\)]\
 function sameSet(a,b){if(a.length!==b.length)return false;const s=new Set(b);return a.every(x=>s.has(x))}
 function num1(x){return (Math.round(x*10)/10).toString().replace(/\.0$/,'')}
 function isMatch(q){return /^\s*match\b/i.test(q.q||'')}
+/* Structured stems (matching questions especially) arrive as one long run of text —
+   break them onto lines and bold the labels so they can be read. */
+function formatQStem(x){
+  if(!x)return '<i>(không đọc được)</i>';
+  let t=esc(x);
+  t=t.replace(/\r?\n/g,'<br>');
+  // a short line ending in ':' is a label ("Phase:", "HTTP status code:", "Description:")
+  t=t.replace(/(^|<br>)\s*([^<>:]{1,32}):(?=<br>|$)/g,'$1<b>$2:</b>');
+  t=t.replace(/(^|<br>)\s*([1-9])\.\s+/g,'$1&nbsp;&nbsp;<b>$2.</b> ');
+  t=t.replace(/(^|<br>)\s*([a-f])\.\s+/g,'$1&nbsp;&nbsp;<b>$2.</b> ');
+  return t;}
 const MODELABEL={random:'Random',exam:'Theo đề',all:'Ôn tổng',wrong:'Ôn câu sai',learn:'Học thông minh',review:'Ôn đến hạn'};
 
 /* theme */
@@ -250,6 +280,9 @@ function dedupeCross(list){const seen={};return list.filter(x=>{const dk=x.dk||(
 function loadSet(pfx){try{return new Set(JSON.parse(localStorage.getItem(pfx+'_'+scopeKey())||'[]'))}catch(e){return new Set()}}
 function saveSet(pfx,s){try{localStorage.setItem(pfx+'_'+scopeKey(),JSON.stringify([...s]))}catch(e){storageWarn(e)}}
 let KNOWN=new Set(), WRONG=new Set();
+/* 🔖 = "câu khó, ôn lại" (deliberately separate from ★ đã thuộc, which HIDES a question)
+   👁 = every question whose answer was revealed, kept across sessions */
+let BOOK=new Set(), SEEN=new Set();
 let lastNumQ=null, startedAt=0;
 
 /* ---- SRS (Leitner) + mastery + streak ---- */
@@ -299,6 +332,9 @@ function refreshScope(){const bi=bankIndex();
   KNOWN=new Set([...loadSet('fu_known')].filter(id=>bi[id]));
   WRONG=new Set([...loadSet('fu_wrong')].filter(id=>bi[id]));
   saveSet('fu_known',KNOWN);saveSet('fu_wrong',WRONG);
+  BOOK=new Set([...loadSet('fu_book')].filter(id=>bi[id]));
+  SEEN=new Set([...loadSet('fu_seen')].filter(id=>bi[id]));
+  saveSet('fu_book',BOOK);saveSet('fu_seen',SEEN);
   SRS=loadSRS();let ch=false;Object.keys(SRS).forEach(id=>{if(!bi[id]){delete SRS[id];ch=true}});if(ch)saveSRS();}
 function renderStats(){const exs=examsFor(curSubject());const q=exs.reduce((a,e)=>a+e.count,0);
   const sq=scopeQuestions();const mp=masteryPct(sq);const due=dueCount();
@@ -317,6 +353,20 @@ function renderMastery(){const box=el('masteryBox');if(!box)return;const dl=el('
     return `<div class="modbar"><span class="mlabel">${esc(e.name)}</span><div class="barwrap"><div class="bar" style="width:${mp}%;background:${mp>=70?'var(--green)':mp>=40?'var(--amber)':'var(--accent)'}"></div></div><span>${mp}%${due?' · ⏰'+due:''}</span></div>`}).join('');
   box.innerHTML=rows||'<div class="hist-empty">Chưa có dữ liệu.</div>';
   if(dl){const due=dueCount();dl.textContent=due?('⏰ '+due+' câu cần ôn hôm nay'):'Không có câu đến hạn';}}
+function clearSearch(){const g=el('globalSearch');if(!g)return;g.value='';onSearchInput();g.focus();}
+function onSearchInput(){const raw=(el('globalSearch').value||'').trim();const k=raw.toLowerCase();
+  const w=el('searchWrap');if(w)w.classList.toggle('has-text',raw.length>0);
+  if(k.length>=2){MODE='search';document.querySelectorAll('.mode').forEach(m=>m.classList.remove('active'));
+    const n=searchMatches(k).length;
+    el('startBtn').disabled=n===0;
+    el('modeCfg').innerHTML=n
+      ? `<div class="sub" style="padding:8px;background:var(--selbg);border:1px solid var(--accent);border-radius:8px;color:var(--text)">🔍 Tìm thấy <b>${n}</b> câu khớp "<b>${esc(raw)}</b>" — nhấn <b>Bắt đầu</b> hoặc Enter</div>`
+      : `<div class="hist-empty" style="padding:8px">🔍 Không có câu nào khớp "<b>${esc(raw)}</b>"</div>`;
+  } else if(MODE==='search'){pickMode('random');}}
+function searchMatches(k){const out=[];examsFor(curSubject()).forEach(e=>e.questions.forEach((q,i)=>{
+    if((q.q||'').toLowerCase().includes(k)||(q.o||[]).some(o=>(o||'').toLowerCase().includes(k)))
+      out.push({...q,src:e.name,subject:e.subject,id:e.name+'#'+i,dk:e.subject+'|'+normStem(q.q)});}));
+  return dedupeCross(out);}
 function onSubjectChange(){refreshScope();renderStats();renderHistory();renderResume();if(MODE)pickMode(MODE)}
 function pickMode(m){MODE=m;document.querySelectorAll('.mode').forEach(x=>x.classList.toggle('active',x.dataset.mode===m));
   const cfg=el('modeCfg'),exs=examsFor(curSubject());let disabled=false;
@@ -329,6 +379,15 @@ function pickMode(m){MODE=m;document.querySelectorAll('.mode').forEach(x=>x.clas
     const wn=ws.size;cfg.innerHTML=`<div class="sub">Sẽ ôn lại <b>${wn}</b> câu bạn làm sai (đã lưu). Làm đúng sẽ tự bỏ khỏi danh sách.</div>`;disabled=wn===0;}
   else if(m==='review'){const due=dueCount();const mx=Math.max(1,due);
     cfg.innerHTML=`<div class="sub" style="margin-bottom:6px">⏰ Có <b>${due}</b> câu đã tới hạn ôn (lặp lại ngắt quãng). Câu yếu (box thấp) hiện trước.</div>`+(due?`<div class="field"><label>Số câu (tối đa ${due})</label><input type="number" id="numQ" value="${Math.min(lastNumQ||30,mx)}" min="1" max="${mx}" oninput="lastNumQ=parseInt(this.value)||null"></div>`:'<div class="hist-empty">Chưa có câu nào đến hạn — hãy làm bài ở chế độ khác để nạp vào lịch ôn.</div>');disabled=due===0;}
+  else if(m==='book'||m==='seen'){const set=m==='book'?BOOK:SEEN,bi=bankIndex(),ks=new Set();
+    [...set].forEach(id=>{const q=bi[id];if(q&&(curSubject()==='__all__'||q.subject===curSubject()))ks.add(q.dk)});
+    const label=m==='book'?'câu bạn đã đánh dấu 🔖':'câu bạn đã xem đáp án 👁';
+    cfg.innerHTML=ks.size?`<div class="sub">Sẽ ôn <b>${ks.size}</b> ${label}.</div>`
+      :`<div class="hist-empty">Chưa có ${label}.</div>`;
+    disabled=ks.size===0;}
+  else if(m==='flash'){const mx=Math.max(1,scopeQuestions().length);
+    cfg.innerHTML=`<div class="sub" style="margin-bottom:6px">🎴 Lật thẻ để xem đáp án. Không tính giờ, không chấm điểm.</div>`+
+      `<div class="field"><label>Số thẻ</label><input type="number" id="numQ" value="${Math.min(lastNumQ||20,mx)}" min="1" max="${mx}" oninput="lastNumQ=parseInt(this.value)||null"></div>`;}
   else {cfg.innerHTML=`<div class="sub">Sẽ làm toàn bộ <b>${exs.reduce((a,e)=>a+e.count,0)}</b> câu của ${curSubject()==='__all__'?'tất cả môn':curSubject()}.</div>`;}
   el('startBtn').disabled=disabled;}
 
@@ -337,6 +396,10 @@ function buildSession(){const exs=examsFor(curSubject());let list=[];const t=tod
   const mk=(q,extra)=>({...q,...extra,sels:[],ci:correctIdxOf(q),oi:(q.o||[]).map((_,i)=>i)});
   const push=e=>e.questions.forEach((q,i)=>list.push(mk(q,{src:e.name,subject:e.subject,id:e.name+'#'+i,dk:e.subject+'|'+normStem(q.q)})));
   if(MODE==='wrong'){const bi=bankIndex();[...WRONG].forEach(id=>{if(bi[id]&&(curSubject()==='__all__'||bi[id].subject===curSubject()))list.push(mk(bi[id],{}))})}
+  else if(MODE==='book'||MODE==='seen'){const bi=bankIndex(),set=MODE==='book'?BOOK:SEEN;
+    [...set].forEach(id=>{if(bi[id]&&(curSubject()==='__all__'||bi[id].subject===curSubject()))list.push(mk(bi[id],{}))})}
+  else if(MODE==='search'){const k=((el('globalSearch')||{}).value||'').trim().toLowerCase();
+    searchMatches(k).forEach(q=>list.push(mk(q,{})))}
   else if(MODE==='exam')push(exs[parseInt(el('examPick').value)]); else exs.forEach(push);
   // "Ôn theo đề" reproduces the paper as printed; every other mode studies each question once
   if(MODE!=='exam')list=dedupeCross(list);
@@ -352,12 +415,14 @@ function buildSession(){const exs=examsFor(curSubject());let list=[];const t=tod
     list=shuffle(list);list.sort((a,b)=>wt(a)-wt(b));
     const n=Math.max(1,Math.min(numQ()||30,list.length));list=list.slice(0,n);}
   else if(MODE==='random'){list=shuffle(list);const n=Math.max(1,Math.min(numQ()||30,list.length));list=list.slice(0,n);}
+  else if(MODE==='flash'){list=shuffle(list);const n=Math.max(1,Math.min(numQ()||20,list.length));list=list.slice(0,n);}
   return list;}
 function startTest(){SESSION=buildSession();if(!SESSION.length){alert('Không có câu hỏi cho lựa chọn này.');return;}
   IDX=0;submitted=false;REVEALED=new Set();
-  const mins=Math.max(0,parseInt(el('mins').value)||0);limited=mins>0;remaining=mins*60;initSec=mins*60;startedAt=Date.now();deadline=startedAt+mins*60000;
+  const mins=isFlash()?0:Math.max(0,parseInt(el('mins').value)||0);limited=mins>0;FLIPPED=false;remaining=mins*60;initSec=mins*60;startedAt=Date.now();deadline=startedAt+mins*60000;
   enterTestUI();
-  if(limited)startTimer();else el('timer').textContent='⏱ ∞';
+  document.querySelector('#topbar .btn.danger').style.display=isFlash()?'none':'';
+  if(limited)startTimer();else el('timer').textContent=isFlash()?'🎴 Flashcard':'⏱ ∞';
   renderQ();syncTopbar();saveDraft();window.scrollTo(0,0);}
 function enterTestUI(){el('start').style.display='none';el('matching').style.display='none';el('histDetail').style.display='none';el('test').style.display='block';el('topbar').style.display='flex';document.body.classList.add('testing');}
 
@@ -401,7 +466,7 @@ function updateTimer(){const m=Math.floor(remaining/60),s=remaining%60;const t=e
 function exitTest(){
   if(!submitted&&SESSION.length){if(!confirm('Thoát bài? Bài làm dở sẽ được lưu lại để bạn tiếp tục sau.'))return;saveDraft();}
   if(timerInt)clearInterval(timerInt);el('test').style.display='none';el('topbar').style.display='none';el('start').style.display='block';document.body.classList.remove('testing');syncTopbar();renderStats();renderHistory();renderResume();window.scrollTo(0,0);}
-function go(d){IDX=Math.max(0,Math.min(SESSION.length-1,IDX+d));renderQ();saveDraft();window.scrollTo(0,0);}
+function go(d){IDX=Math.max(0,Math.min(SESSION.length-1,IDX+d));FLIPPED=false;renderQ();saveDraft();window.scrollTo(0,0);}
 function jumpTo(i){IDX=i;renderQ();saveDraft();window.scrollTo(0,0);}
 function isMulti(it){return (it.ci||[]).length>1}
 /* `i` is a DISPLAY index; we store the original index so history survives shuffling */
@@ -410,7 +475,12 @@ function pick(i){if(submitted)return;const it=SESSION[IDX],oi=it.oi[i];
   else it.sels=[oi];
   renderQ();saveDraft();}
 function setConf(v){if(submitted)return;SESSION[IDX].conf=v;renderQ();saveDraft();}
-function revealAns(){REVEALED.add(SESSION[IDX].id);renderQ();saveDraft();}
+function revealAns(){const id=SESSION[IDX].id;REVEALED.add(id);
+  siblings(id).forEach(sid=>SEEN.add(sid));saveSet('fu_seen',SEEN);
+  renderQ();saveDraft();}
+function toggleBook(){const id=SESSION[IDX].id,add=!BOOK.has(id);
+  siblings(id).forEach(sid=>{if(add)BOOK.add(sid);else BOOK.delete(sid)});
+  saveSet('fu_book',BOOK);renderQ();}
 function toggleKnown(){const id=SESSION[IDX].id,add=!KNOWN.has(id);
   siblings(id).forEach(sid=>{if(add)KNOWN.add(sid);else KNOWN.delete(sid)});
   saveSet('fu_known',KNOWN);renderQ();}
@@ -418,14 +488,37 @@ function isAnswered(it){return (it.sels||[]).length>0}
 /* a peeked question can never count as correct — otherwise "Xem đáp án" launders into score + SRS */
 function graded(it){return isAnswered(it) && !REVEALED.has(it.id) && sameSet(it.sels,it.ci||[])}
 
-function renderQ(){const q=SESSION[IDX];const showAns=submitted||REVEALED.has(q.id);const known=KNOWN.has(q.id);
+let FLIPPED=false;
+function isFlash(){return MODE==='flash'}
+function toggleFlip(){FLIPPED=!FLIPPED;renderQ();}
+function renderFlashcard(q){
+  el('prog').textContent=(IDX+1)+'/'+SESSION.length;
+  el('srcLabel').textContent=q.src+(q.n?' · Câu '+q.n:'');syncTopbar();
+  const opts=q.oi.map((oi,i)=>{const right=(q.ci||[]).indexOf(oi)>=0;
+    const cls='flash-opt'+(FLIPPED&&right?' correct':'');
+    const mk=FLIPPED&&right?'<span class="mk" style="margin-left:auto;color:var(--green);font-weight:700">✔ đúng</span>':'';
+    return `<div class="${cls}"><span class="olet">${String.fromCharCode(65+i)}.</span><span class="otext">${esc(stripPrefix(q.o[oi]))}</span>${mk}</div>`}).join('');
+  const span=examSpan(q.dk||(q.subject+'|'+normStem(q.q)));
+  let h=`<div class="flash-card" onclick="toggleFlip()">
+    <div class="qh"><span class="qnum">Thẻ ${IDX+1}</span><span class="badge">${esc(q.src)}${q.n?' · Câu '+q.n:''}</span>`;
+  if(isMulti(q))h+=`<span class="badge multi">☑ Chọn ${q.ci.length} đáp án</span>`;
+  if(span>1)h+=`<span class="badge hot">🔥 Hay ra ×${span}</span>`;
+  h+=`<span class="star" onclick="event.stopPropagation();toggleKnown()">${KNOWN.has(q.id)?'★':'☆'}</span>`+
+     `<span class="bmk" onclick="event.stopPropagation();toggleBook()">${BOOK.has(q.id)?'🔖':'🏳'}</span></div>`+
+     `<p class="stem">${formatQStem(q.q)}</p>${opts}`;
+  if(q.nt)h+=`<div class="notes">📝 ${esc(q.nt)}</div>`;
+  if(FLIPPED)h+=`<div class="expl"><b>Đáp án: ${esc((q.ci||[]).map(oi=>q.oi.indexOf(oi)).filter(j=>j>=0).sort((a,b)=>a-b).map(j=>String.fromCharCode(65+j)).join(', ')||'?')}</b> — ${esc(q.ex)||'<i>(không có giải thích)</i>'}</div>`;
+  h+=`<div class="flip-hint">${FLIPPED?'👆 Nhấn để úp thẻ lại':'👆 Nhấn vào thẻ hoặc phím Space để xem đáp án'}</div></div>`;
+  h+=`<div class="navbtns"><button class="btn sec" onclick="go(-1)" ${IDX===0?'disabled':''}>← Trước</button><button class="btn" onclick="go(1)" ${IDX===SESSION.length-1?'disabled':''}>Sau →</button></div>`;
+  el('test').innerHTML=h;}
+function renderQ(){if(isFlash()){renderFlashcard(SESSION[IDX]);return}const q=SESSION[IDX];const showAns=submitted||REVEALED.has(q.id);const known=KNOWN.has(q.id);
   el('prog').textContent=(IDX+1)+'/'+SESSION.length;el('srcLabel').textContent=q.src+(q.n?' · Câu '+q.n:'');syncTopbar();
-  let h=`<div class="card"><div class="qh"><span class="qnum">Câu ${IDX+1}</span><span class="badge">${esc(q.subject)}</span><span class="badge">${esc(q.src)}${q.n?' · Câu '+q.n:''}</span><span class="star" onclick="toggleKnown()">${known?'★':'☆'}</span>`;
+  let h=`<div class="card"><div class="qh"><span class="qnum">Câu ${IDX+1}</span><span class="badge">${esc(q.subject)}</span><span class="badge">${esc(q.src)}${q.n?' · Câu '+q.n:''}</span><span class="star" onclick="toggleKnown()">${known?'★':'☆'}</span><span class="bmk" onclick="toggleBook()" title="Đánh dấu câu khó (ôn riêng)">${BOOK.has(q.id)?'🔖':'🏳'}</span>`;
   if(isMulti(q))h+=`<span class="badge multi">☑ Chọn ${q.ci.length} đáp án</span>`;
   const span=examSpan(q.dk||(q.subject+'|'+normStem(q.q)));
   if(span>1)h+=`<span class="badge hot" title="Câu này xuất hiện trong ${span} đề khác nhau">🔥 Hay ra ×${span}</span>`;
   if(submitted){const ok=graded(q);const st=!isAnswered(q)?['skip','⊘ Chưa làm']:ok?['ok','✔ Đúng']:['no','✘ Sai'];h+=`<span class="rev-status ${st[0]}">${st[1]}</span>`;}
-  h+=`</div><p class="stem">${esc(q.q)||'<i>(không đọc được)</i>'}</p>`;
+  h+=`</div><p class="stem">${formatQStem(q.q)}</p>`;
   const multi=isMulti(q);
   q.oi.forEach((oi,i)=>{const chosen=q.sels.indexOf(oi)>=0, right=(q.ci||[]).indexOf(oi)>=0;
     let cls='opt';if(showAns){if(right)cls+=' correct';else if(chosen)cls+=' wrong';}else if(chosen)cls+=' sel';
@@ -507,7 +600,7 @@ function openHistoryDetail(idx){const a=loadHistory()[idx];if(!a)return;const bi
       return `<div class="${cls}"><span class="olet">${String.fromCharCode(65+j)}.</span><span class="otext">${esc(stripPrefix(o))}</span>${mk}</div>`}).join('');
     const key=ci.map(j=>String.fromCharCode(65+j)).join(', ')||'?';
     const tags=(rec.cf?`<span class="badge">${CFLABEL[rec.cf]||rec.cf}</span>`:'')+(rec.rv?'<span class="badge multi">👁 đã xem đáp án</span>':'')+(ci.length>1?`<span class="badge multi">☑ ${ci.length} đáp án</span>`:'');
-    return `<div class="card"><div class="qh"><span class="qnum">Câu ${i+1}</span><span class="badge">${esc(q.src)}</span>${tags}<span class="rev-status ${st[0]}">${st[1]}</span></div><p class="stem">${esc(q.q)}</p>${oh}<div class="expl"><b>Đáp án: ${esc(key)}</b> — ${esc(q.ex)||'<i>(không có giải thích)</i>'}</div></div>`}).join('');
+    return `<div class="card"><div class="qh"><span class="qnum">Câu ${i+1}</span><span class="badge">${esc(q.src)}</span>${tags}<span class="rev-status ${st[0]}">${st[1]}</span></div><p class="stem">${formatQStem(q.q)}</p>${oh}<div class="expl"><b>Đáp án: ${esc(key)}</b> — ${esc(q.ex)||'<i>(không có giải thích)</i>'}</div></div>`}).join('');
   box.innerHTML=`<div class="row" style="margin:6px 0"><button class="btn sec" onclick="backToStart()">← Về lịch sử</button></div>
     <div class="card" style="text-align:center"><div class="ring" style="--v:${a.pct};--rc:${rc}"><div class="in"><div class="result-score" style="color:${rc}">${a.score}/${a.total}</div><div style="color:${rc};font-weight:700">${a.pct}%</div></div></div>
     <div class="sub">${esc(new Date(a.ts).toLocaleString('vi-VN'))} · ${MODELABEL[a.mode]||a.mode} · ${a.pass?'✅ ĐẠT':'❌ CHƯA ĐẠT'}</div><div class="modbars" style="margin-top:10px">${bars}</div></div>
@@ -520,7 +613,7 @@ function showMatching(){const exs=examsFor(curSubject());const ms=[];exs.forEach
   el('start').style.display='none';const box=el('matching');box.style.display='block';
   let h=`<div class="row" style="margin:6px 0;justify-content:space-between"><h1>📎 Câu Matching (${ms.length})</h1><button class="btn sec" onclick="backToStart()">← Về menu</button></div><div class="sub" style="margin-bottom:8px">Các câu "Match X to Y" — xem đề, các phương án ánh xạ và đáp án đúng.</div>`;
   if(!ms.length)h+='<div class="hist-empty">Môn này không có câu matching.</div>';
-  ms.forEach((q,i)=>{h+=`<div class="card"><div class="qh"><span class="qnum">${i+1}</span><span class="badge">${esc(q.src)}</span></div><p class="stem">${esc(q.q)}</p>`;
+  ms.forEach((q,i)=>{h+=`<div class="card"><div class="qh"><span class="qnum">${i+1}</span><span class="badge">${esc(q.src)}</span></div><p class="stem">${formatQStem(q.q)}</p>`;
     const ci=correctIdxOf(q);
     q.o.forEach((o,i)=>{const right=ci.indexOf(i)>=0;h+=`<div class="opt${right?' correct':''}"><span class="olet">${String.fromCharCode(65+i)}.</span><span class="otext">${esc(stripPrefix(o))}</span>${right?'<span class="mk">✔ đúng</span>':''}</div>`});
     h+=`<div class="expl"><b>Đáp án: ${esc(ci.map(i=>String.fromCharCode(65+i)).join(', ')||'?')}</b> — ${esc(q.ex)||''}</div></div>`});
@@ -533,7 +626,7 @@ function modalOpen(){const m=el('shortcutModal');return m&&m.style.display==='fl
 function clearAnswer(){if(submitted)return;const q=SESSION[IDX];if(!q)return;q.sels=[];renderQ();saveDraft();}
 function onStartScreen(){const a=el('start');return a&&a.style.display!=='none'}
 function onTestScreen(){const t=el('test');return t&&t.style.display!=='none'}
-const KEY_MODES=['random','exam','all','wrong','learn','review'];
+const KEY_MODES=['random','exam','all','wrong','learn','review','flash','book','seen'];
 /* index of the pressed 1..6 / A..F key, or -1 */
 function keyIndex(e){
   let m=/^Digit([1-9])$/.exec(e.code)||/^Numpad([1-9])$/.exec(e.code);
@@ -561,9 +654,14 @@ addEventListener('keydown',function(e){
   if(onTestScreen()){
     if(e.code==='ArrowRight'||e.code==='ArrowDown'){e.preventDefault();go(1);return}
     if(e.code==='ArrowLeft'||e.code==='ArrowUp'){e.preventDefault();go(-1);return}
-    if(e.code==='Space'){e.preventDefault();if(!submitted&&!REVEALED.has(SESSION[IDX].id))revealAns();return}
+    if(e.code==='Space'){e.preventDefault();
+      if(isFlash())toggleFlip();
+      else if(!submitted&&!REVEALED.has(SESSION[IDX].id))revealAns();
+      return}
+    if(e.code==='KeyB'&&isFlash()){e.preventDefault();toggleBook();return}
     if(e.code==='Backspace'||e.code==='Delete'){e.preventDefault();clearAnswer();return}
     if(e.code==='KeyS'){e.preventDefault();toggleKnown();return}
+    if(isFlash())return;   // a flashcard has nothing to select
     const i=keyIndex(e);
     if(i>=0&&i<(SESSION[IDX].o||[]).length){e.preventDefault();pick(i);}
   }
@@ -576,12 +674,12 @@ addEventListener('keydown',function(e){
       <button class="theme-btn" onclick="closeShortcutModal()">✕ Đóng</button>
     </div>
     <div class="shortcut-grid">
-      <div class="sc-item"><div><kbd>1</kbd> - <kbd>6</kbd> / <kbd>A</kbd> - <kbd>F</kbd></div><span>Chọn nhanh chế độ ôn tập</span></div>
+      <div class="sc-item"><div><kbd>1</kbd> - <kbd>9</kbd></div><span>Chọn nhanh chế độ ôn tập</span></div>
       <div class="sc-item"><div><kbd>Enter</kbd></div><span>Bắt đầu làm bài</span></div>
       <div class="sc-item"><div><kbd>1</kbd> - <kbd>6</kbd> / <kbd>A</kbd> - <kbd>F</kbd></div><span>Chọn đáp án (trong bài làm)</span></div>
       <div class="sc-item"><div><kbd>←</kbd> <kbd>→</kbd> / <kbd>↑</kbd> <kbd>↓</kbd></div><span>Câu trước / câu sau</span></div>
       <div class="sc-item"><div><kbd>⌫</kbd> Backspace</div><span>Xóa lựa chọn của câu hiện tại</span></div>
-      <div class="sc-item"><div><kbd>Space</kbd></div><span>Xem đáp án câu hiện tại</span></div>
+      <div class="sc-item"><div><kbd>Space</kbd></div><span>Xem đáp án / lật thẻ Flashcard</span></div>
       <div class="sc-item"><div><kbd>S</kbd></div><span>Đánh dấu ★ đã thuộc</span></div>
       <div class="sc-item"><div><kbd>?</kbd> / <kbd>H</kbd></div><span>Bật / tắt bảng phím tắt</span></div>
       <div class="sc-item"><div><kbd>Esc</kbd></div><span>Đóng bảng phím tắt</span></div>
