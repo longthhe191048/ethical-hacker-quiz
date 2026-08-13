@@ -50,6 +50,7 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--border
 .badge{background:var(--chip);color:var(--muted);border:1px solid var(--border);border-radius:6px;font-size:.72rem;padding:1px 8px}
 .stem{font-weight:600;margin:0 0 12px;font-size:1.05rem;overflow-wrap:anywhere}
 .opt{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border:1px solid var(--border);border-radius:9px;margin:7px 0;background:var(--panel2);cursor:pointer}
+.opt.locked{cursor:default}.opt.locked:hover{border-color:var(--border)}
 .opt:hover{border-color:var(--accent)}.opt.sel{border-color:var(--accent);background:var(--selbg)}
 .opt.correct{border-color:var(--green);background:var(--greenbg)}.opt.wrong{border-color:var(--red);background:var(--redbg)}
 .opt .cbox{font-size:1.05rem;line-height:1.4}
@@ -487,7 +488,8 @@ function go(d){IDX=Math.max(0,Math.min(SESSION.length-1,IDX+d));FLIPPED=false;re
 function jumpTo(i){IDX=i;renderQ();saveDraft();window.scrollTo(0,0);}
 function isMulti(it){return (it.ci||[]).length>1}
 /* `i` is a DISPLAY index; we store the original index so history survives shuffling */
-function pick(i){if(submitted)return;const it=SESSION[IDX],oi=it.oi[i];
+function locked(){const q=SESSION[IDX];return submitted||(q&&REVEALED.has(q.id));}
+function pick(i){if(locked())return;const it=SESSION[IDX],oi=it.oi[i];
   if(isMulti(it)){const k=it.sels.indexOf(oi);if(k>=0)it.sels.splice(k,1);else it.sels.push(oi);}
   else it.sels=(it.sels[0]===oi)?[]:[oi];   // picking the current choice again clears it
   renderQ();saveDraft();}
@@ -539,7 +541,7 @@ function renderQ(){if(isFlash()){renderFlashcard(SESSION[IDX]);return}const q=SE
   h+=`</div><p class="stem">${formatQStem(q.q)}</p>`;
   const multi=isMulti(q);
   q.oi.forEach((oi,i)=>{const chosen=q.sels.indexOf(oi)>=0, right=(q.ci||[]).indexOf(oi)>=0;
-    let cls='opt';if(showAns){if(right)cls+=' correct';else if(chosen)cls+=' wrong';}else if(chosen)cls+=' sel';
+    let cls='opt';if(showAns){cls+=' locked';if(right)cls+=' correct';else if(chosen)cls+=' wrong';}else if(chosen)cls+=' sel';
     let mk='';if(showAns){if(right)mk='<span class="mk">✔ đáp án đúng</span>';else if(chosen)mk='<span class="mk">✗ bạn chọn</span>';}
     const box=multi?`<span class="cbox">${chosen?'☑':'☐'}</span>`:'';
     h+=`<div class="${cls}" onclick="pick(${i})">${box}<span class="olet">${String.fromCharCode(65+i)}.</span><span class="otext">${esc(stripPrefix(q.o[oi]))}</span>${mk}</div>`;});
@@ -548,7 +550,7 @@ function renderQ(){if(isFlash()){renderFlashcard(SESSION[IDX]);return}const q=SE
   if(!showAns)h+=`<div style="margin-top:8px"><button class="btn sec" onclick="revealAns()">👁 Xem đáp án</button></div>`;
   if(showAns){const vb=q.vf==='corrected'?'<span class="vbadge corr">✎ đã sửa khi verify</span>':'<span class="vbadge ok">✓ verify khớp</span>';
     const key=(q.ci||[]).map(oi=>q.oi.indexOf(oi)).filter(j=>j>=0).sort((a,b)=>a-b).map(j=>String.fromCharCode(65+j)).join(', ')||'?';
-    const peek=REVEALED.has(q.id)&&!submitted?' <span class="vbadge corr">👁 đã xem trước — không tính điểm</span>':'';
+    const peek=REVEALED.has(q.id)&&!submitted?' <span class="vbadge corr">👁 đã xem trước — không tính điểm, đã khóa chọn</span>':'';
     h+=`<div class="expl"><b>Đáp án: ${esc(key)}</b> — ${esc(q.ex)||'<i>(không có giải thích)</i>'} <span style="margin-left:6px">${vb}</span>${peek}</div>`;}
   h+=`<div class="navbtns"><button class="btn sec" onclick="go(-1)" ${IDX===0?'disabled':''}>← Trước</button><button class="btn" onclick="go(1)" ${IDX===SESSION.length-1?'disabled':''}>Sau →</button></div>`;
   h+=`<div class="jump">`+SESSION.map((s,i)=>{let c=i===IDX?'cur ':'';const ans=isAnswered(s);if(submitted)c+=(!ans?'':graded(s)?'correct':'wrong');else c+=(ans?'done':'');if(KNOWN.has(s.id))c+=' known';return `<button class="${c}" onclick="jumpTo(${i})">${i+1}</button>`}).join('')+`</div></div>`;
@@ -642,7 +644,7 @@ function showMatching(){const exs=examsFor(curSubject());const ms=[];exs.forEach
 function openShortcutModal(){el('shortcutModal').style.display='flex'}
 function closeShortcutModal(e){if(!e||e.target.id==='shortcutModal'||e.target.tagName==='BUTTON')el('shortcutModal').style.display='none'}
 function modalOpen(){const m=el('shortcutModal');return m&&m.style.display==='flex'}
-function clearAnswer(){if(submitted)return;const q=SESSION[IDX];if(!q)return;q.sels=[];renderQ();saveDraft();}
+function clearAnswer(){if(locked())return;const q=SESSION[IDX];if(!q)return;q.sels=[];renderQ();saveDraft();}
 function onStartScreen(){const a=el('start');return a&&a.style.display!=='none'}
 function onTestScreen(){const t=el('test');return t&&t.style.display!=='none'}
 const KEY_MODES=['random','exam','all','wrong','learn','review','flash','book','seen'];
