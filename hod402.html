@@ -119,7 +119,13 @@ input[type=number],select{background:var(--panel2);border:1px solid var(--border
 .modbar .bar{height:100%;background:var(--green)}
 .modbar .mlabel{width:230px;color:var(--muted);text-align:left}
 .footer-note{color:var(--muted);font-size:.8rem;text-align:center;margin-top:30px}
-@media(max-width:560px){#nav{display:none} #navToggle.show{display:block} .modbar .mlabel{width:130px} .mleft{flex-basis:100%;max-width:100%}}
+@media(max-width:560px){
+  #nav{left:10px;right:10px;bottom:74px;width:auto;max-height:52vh;overflow:auto}
+  #nav.hidden{display:none!important}
+  #nav .navgrid{grid-template-columns:repeat(6,1fr);max-height:40vh}
+  body.testing #navToggle{display:block}
+  .modbar .mlabel{width:130px} .mleft{flex-basis:100%;max-width:100%}
+}
 </style>
 </head>
 <body>
@@ -311,7 +317,7 @@ function backToStart(){ el('histDetail').classList.add('hidden'); el('start').cl
   const om=document.createElement('option'); om.value='__matching__'; om.textContent='Chỉ câu Matching (ghép cặp)'; sel.appendChild(om);
   [...new Set(fullPool().map(q=>q.module))].forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent=m;sel.appendChild(o)});
   el('numQ').max=c.total_playable;
-  el('navToggleClose').onclick=()=>{el('nav').classList.add('hidden');el('navToggle').classList.add('show')};
+  el('navToggleClose').onclick=()=>{el('nav').classList.add('hidden')};
   renderHistory();
 })();
 
@@ -335,6 +341,7 @@ function startWith(scope){
   el('test').classList.remove('hidden');
   el('topbar').classList.remove('hidden');
   el('nav').classList.remove('hidden');
+  if(matchMedia('(max-width:560px)').matches) el('nav').classList.add('hidden');
   document.body.classList.add('testing');
   renderTest(); startTimer(); syncTopbar(); window.scrollTo(0,0);
 }

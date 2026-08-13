@@ -48,7 +48,7 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--border
 .qh{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;margin-bottom:8px}
 .qnum{background:var(--accent);color:#fff;border-radius:6px;font-weight:700;font-size:.78rem;padding:2px 9px}
 .badge{background:var(--chip);color:var(--muted);border:1px solid var(--border);border-radius:6px;font-size:.72rem;padding:1px 8px}
-.stem{font-weight:600;margin:0 0 12px;font-size:1.05rem}
+.stem{font-weight:600;margin:0 0 12px;font-size:1.05rem;overflow-wrap:anywhere}
 .opt{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border:1px solid var(--border);border-radius:9px;margin:7px 0;background:var(--panel2);cursor:pointer}
 .opt:hover{border-color:var(--accent)}.opt.sel{border-color:var(--accent);background:var(--selbg)}
 .opt.correct{border-color:var(--green);background:var(--greenbg)}.opt.wrong{border-color:var(--red);background:var(--redbg)}
@@ -57,14 +57,17 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--border
 .opt.sel .olet,.opt.correct .olet{color:var(--text)}
 .badge.multi{background:var(--amberbg);color:var(--amber);border-color:var(--amber);font-weight:700}
 .badge.hot{background:var(--redbg);color:var(--red);border-color:var(--red);font-weight:700}
-.opt .otext{flex:1}.opt .mk{margin-left:auto;font-weight:700;white-space:nowrap}.opt.correct .mk{color:var(--green)}.opt.wrong .mk{color:var(--red)}
+.opt .otext{flex:1;overflow-wrap:anywhere}.opt .mk{margin-left:auto;font-weight:700;white-space:nowrap}.opt.correct .mk{color:var(--green)}.opt.wrong .mk{color:var(--red)}
 .notes{background:var(--panel2);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:9px 12px;margin:8px 0;font-size:.9rem;white-space:pre-wrap}
 .expl{background:var(--panel2);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:10px 13px;margin:9px 0;font-size:.93rem;color:var(--text)}.expl b{color:var(--text)}
 .vbadge{font-size:.7rem;border-radius:6px;padding:1px 7px;border:1px solid var(--border)}
 .vbadge.ok{color:var(--green);border-color:var(--green)}.vbadge.corr{color:var(--amber);border-color:var(--amber)}
 .rev-status{font-weight:700;font-size:.8rem;padding:2px 9px;border-radius:6px;margin-left:auto}
 .rev-status.ok{background:var(--greenbg);color:var(--green)}.rev-status.no{background:var(--redbg);color:var(--red)}.rev-status.skip{background:var(--amberbg);color:var(--amber)}
-.star{cursor:pointer;font-size:1rem;user-select:none;margin-left:6px}
+.star,.fc-acts{display:inline-flex;align-items:center;margin-left:auto}
+.bmk{cursor:pointer;font-size:1.1rem;user-select:none;line-height:1;
+  padding:5px 7px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center}
+.star{margin-left:2px}.star:hover,.bmk:hover{background:var(--chip)}
 .navbtns{display:flex;gap:10px;justify-content:space-between;margin-top:14px}
 .jump{display:grid;grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:6px;margin-top:12px;max-height:160px;overflow-y:auto;padding:3px}
 .jump button{aspect-ratio:1;border:1px solid var(--border);background:var(--panel2);color:var(--muted);border-radius:7px;font-size:.72rem;font-weight:600;cursor:pointer;padding:0}
@@ -97,14 +100,14 @@ kbd{background:var(--chip);border:1px solid var(--border);border-radius:5px;padd
 .flash-card{background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:18px;cursor:pointer;min-height:220px}
 .flash-card:hover{border-color:var(--accent)}
 .flip-hint{margin-top:14px;text-align:center;color:var(--muted);font-size:.82rem;border-top:1px dashed var(--border);padding-top:10px}
-.flash-opt{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border:1px solid var(--border);border-radius:9px;margin:6px 0;background:var(--panel)}
+.flash-opt{overflow-wrap:anywhere;display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border:1px solid var(--border);border-radius:9px;margin:6px 0;background:var(--panel)}
 .flash-opt.correct{border-color:var(--green);background:var(--greenbg)}
 .search-wrap{position:relative;display:flex;align-items:center}
 .search-wrap input{flex:1;background:var(--panel2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:10px 34px 10px 34px;font-size:1rem;width:100%}
 .search-ic{position:absolute;left:10px;pointer-events:none;opacity:.7}
 .search-clear{position:absolute;right:6px;background:var(--chip);border:1px solid var(--border);color:var(--text);border-radius:6px;cursor:pointer;padding:2px 8px;display:none}
 .search-wrap.has-text .search-clear{display:block}
-.bmk{cursor:pointer;font-size:1rem;user-select:none;margin-left:4px}
+
 /* ---- mobile (keep last: these must override the base rules above) ---- */
 @media(max-width:560px){
   /* exam names are long and near-identical — stack the label above the bar instead of truncating it */
@@ -121,6 +124,17 @@ kbd{background:var(--chip);border:1px solid var(--border);border-radius:5px;padd
   .wrap{padding-left:12px;padding-right:12px}
   .card{padding:14px}
   .jump{max-height:132px}
+  /* nine modes stacked one-per-row buried the ▶ Bắt đầu button ~3 screens down */
+  .modes{grid-template-columns:repeat(2,1fr);gap:8px}
+  .mode{padding:10px 11px}
+  .mode p{display:none}
+  .mode .ic{font-size:1.15rem;display:inline;margin-right:5px}
+  .mode h3{display:inline;font-size:.92rem}
+  .star,.bmk{min-width:44px;min-height:44px;padding:0;margin:0 2px;font-size:1.25rem}
+  .qh{align-items:center}
+  /* the mode list is still a long scroll on a small phone — keep ▶ Bắt đầu reachable */
+  #startRow{position:sticky;bottom:0;z-index:5;background:var(--panel);
+    margin:8px -14px -14px;padding:10px 14px;border-top:1px solid var(--border)}
   .theme-btn{padding:9px 13px}
 }
 </style>
@@ -141,7 +155,8 @@ kbd{background:var(--chip);border:1px solid var(--border);border-radius:5px;padd
       <div class="field"><label>🔍 Tìm kiếm từ khóa (VD: SQL Injection, WPA2, hypervisor)</label>
         <div class="search-wrap" id="searchWrap"><span class="search-ic">🔍</span>
           <input type="text" id="globalSearch" placeholder="Gõ từ khóa để lọc &amp; làm bài riêng..." oninput="onSearchInput()" autocomplete="off" spellcheck="false">
-          <button type="button" class="search-clear" onclick="clearSearch()" title="Xóa tìm kiếm">✕</button></div></div>
+          <button type="button" class="search-clear" onclick="clearSearch()" title="Xóa tìm kiếm">✕</button></div>
+        <div class="sub" id="searchCount" style="margin-top:6px"></div></div>
       <label style="display:block;margin-bottom:6px">Chọn chế độ</label>
       <div class="modes">
         <div class="mode" data-mode="random" onclick="pickMode('random')"><div class="ic">🎲</div><h3>1. Random câu hỏi</h3><p>Trộn ngẫu nhiên N câu trong phạm vi môn.</p></div>
@@ -158,7 +173,7 @@ kbd{background:var(--chip);border:1px solid var(--border);border-radius:5px;padd
       <div class="field"><label>⏱ Thời gian làm bài (phút) — <b>0 = không giới hạn</b></label><input type="number" id="mins" value="0" min="0"></div>
       <div class="field"><label><input type="checkbox" id="hideKnown" style="width:auto;vertical-align:middle"> Ẩn các câu đã đánh dấu ★ thuộc</label></div>
       <div class="field"><label><input type="checkbox" id="shufOpts" checked style="width:auto;vertical-align:middle"> 🔀 Trộn thứ tự đáp án (tránh học vẹt vị trí)</label></div>
-      <div class="row" style="margin-top:8px">
+      <div class="row" id="startRow" style="margin-top:8px">
         <button class="btn" id="startBtn" onclick="startTest()" disabled>▶ Bắt đầu</button>
         <button class="btn sec" onclick="showMatching()">📎 Ôn câu Matching</button>
       </div>
@@ -256,7 +271,7 @@ function importProgress(input){const f=input.files&&input.files[0];if(!f)return;
   r.readAsText(f);}
 
 /* subject scoping + bank index */
-const FORCED=qsParam('subject'); let MODE=null;
+const FORCED=qsParam('subject'); let MODE=null, PREV_MODE=null;
 function examsFor(sub){return FU_BANK.exams.filter(e=>sub==='__all__'||e.subject===sub)}
 function scopeKey(){return 'fu_'+(FORCED||(el('subject')&&el('subject').value)||'all')}
 function bankIndex(){ if(!window._bi){window._bi={};FU_BANK.exams.forEach(e=>e.questions.forEach((q,i)=>{
@@ -356,13 +371,15 @@ function renderMastery(){const box=el('masteryBox');if(!box)return;const dl=el('
 function clearSearch(){const g=el('globalSearch');if(!g)return;g.value='';onSearchInput();g.focus();}
 function onSearchInput(){const raw=(el('globalSearch').value||'').trim();const k=raw.toLowerCase();
   const w=el('searchWrap');if(w)w.classList.toggle('has-text',raw.length>0);
-  if(k.length>=2){MODE='search';document.querySelectorAll('.mode').forEach(m=>m.classList.remove('active'));
+  const sc0=el('searchCount');if(sc0&&k.length<2)sc0.innerHTML='';
+  if(k.length>=2){if(MODE!=='search')PREV_MODE=MODE;MODE='search';document.querySelectorAll('.mode').forEach(m=>m.classList.remove('active'));
     const n=searchMatches(k).length;
     el('startBtn').disabled=n===0;
+    const sc=el('searchCount');if(sc)sc.innerHTML=n?`🔍 <b>${n}</b> câu khớp — kéo xuống bấm <b>▶ Bắt đầu</b>`:'🔍 Không có câu nào khớp';
     el('modeCfg').innerHTML=n
       ? `<div class="sub" style="padding:8px;background:var(--selbg);border:1px solid var(--accent);border-radius:8px;color:var(--text)">🔍 Tìm thấy <b>${n}</b> câu khớp "<b>${esc(raw)}</b>" — nhấn <b>Bắt đầu</b> hoặc Enter</div>`
       : `<div class="hist-empty" style="padding:8px">🔍 Không có câu nào khớp "<b>${esc(raw)}</b>"</div>`;
-  } else if(MODE==='search'){pickMode('random');}}
+  } else if(MODE==='search'){pickMode(PREV_MODE||'random');}}
 function searchMatches(k){const out=[];examsFor(curSubject()).forEach(e=>e.questions.forEach((q,i)=>{
     if((q.q||'').toLowerCase().includes(k)||(q.o||[]).some(o=>(o||'').toLowerCase().includes(k)))
       out.push({...q,src:e.name,subject:e.subject,id:e.name+'#'+i,dk:e.subject+'|'+normStem(q.q)});}));
@@ -472,7 +489,7 @@ function isMulti(it){return (it.ci||[]).length>1}
 /* `i` is a DISPLAY index; we store the original index so history survives shuffling */
 function pick(i){if(submitted)return;const it=SESSION[IDX],oi=it.oi[i];
   if(isMulti(it)){const k=it.sels.indexOf(oi);if(k>=0)it.sels.splice(k,1);else it.sels.push(oi);}
-  else it.sels=[oi];
+  else it.sels=(it.sels[0]===oi)?[]:[oi];   // picking the current choice again clears it
   renderQ();saveDraft();}
 function setConf(v){if(submitted)return;SESSION[IDX].conf=v;renderQ();saveDraft();}
 function revealAns(){const id=SESSION[IDX].id;REVEALED.add(id);
@@ -503,8 +520,9 @@ function renderFlashcard(q){
     <div class="qh"><span class="qnum">Thẻ ${IDX+1}</span><span class="badge">${esc(q.src)}${q.n?' · Câu '+q.n:''}</span>`;
   if(isMulti(q))h+=`<span class="badge multi">☑ Chọn ${q.ci.length} đáp án</span>`;
   if(span>1)h+=`<span class="badge hot">🔥 Hay ra ×${span}</span>`;
-  h+=`<span class="star" onclick="event.stopPropagation();toggleKnown()">${KNOWN.has(q.id)?'★':'☆'}</span>`+
-     `<span class="bmk" onclick="event.stopPropagation();toggleBook()">${BOOK.has(q.id)?'🔖':'🏳'}</span></div>`+
+  h+=`<span class="fc-acts" onclick="event.stopPropagation()">`+
+     `<span class="star" onclick="toggleKnown()">${KNOWN.has(q.id)?'★':'☆'}</span>`+
+     `<span class="bmk" onclick="toggleBook()">${BOOK.has(q.id)?'🔖':'🏳'}</span></span></div>`+
      `<p class="stem">${formatQStem(q.q)}</p>${opts}`;
   if(q.nt)h+=`<div class="notes">📝 ${esc(q.nt)}</div>`;
   if(FLIPPED)h+=`<div class="expl"><b>Đáp án: ${esc((q.ci||[]).map(oi=>q.oi.indexOf(oi)).filter(j=>j>=0).sort((a,b)=>a-b).map(j=>String.fromCharCode(65+j)).join(', ')||'?')}</b> — ${esc(q.ex)||'<i>(không có giải thích)</i>'}</div>`;
@@ -536,7 +554,8 @@ function renderQ(){if(isFlash()){renderFlashcard(SESSION[IDX]);return}const q=SE
   h+=`<div class="jump">`+SESSION.map((s,i)=>{let c=i===IDX?'cur ':'';const ans=isAnswered(s);if(submitted)c+=(!ans?'':graded(s)?'correct':'wrong');else c+=(ans?'done':'');if(KNOWN.has(s.id))c+=' known';return `<button class="${c}" onclick="jumpTo(${i})">${i+1}</button>`}).join('')+`</div></div>`;
   el('test').innerHTML=h;if(submitted&&window._hero)el('test').insertAdjacentHTML('afterbegin',window._hero);
   // the grid is rebuilt every render, so its scroll resets — bring the current question back into view
-  const cur=el('test').querySelector('.jump .cur');if(cur)cur.scrollIntoView({block:'nearest'});}
+  const jw=el('test').querySelector('.jump'),cur=jw&&jw.querySelector('.cur');
+  if(jw&&cur)jw.scrollTop+=cur.getBoundingClientRect().top-jw.getBoundingClientRect().top-(jw.clientHeight-cur.offsetHeight)/2;}
 
 function submitTest(auto){if(submitted)return;const done=SESSION.filter(isAnswered).length;
   if(!auto&&!confirm(`Đã trả lời ${done}/${SESSION.length} câu. Nộp bài?`))return;
