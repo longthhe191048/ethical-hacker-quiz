@@ -84,6 +84,15 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--border
 .streakbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:8px 14px}
 .streakbar .flame{font-size:1.3rem}.streakbar b{font-size:1.05rem}
 .gbar{flex:1;min-width:120px;max-width:260px;background:var(--chip);border-radius:6px;overflow:hidden;height:10px}.gbar>div{height:100%;background:var(--accent)}
+/* ---- keyboard shortcuts ---- */
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.65);backdrop-filter:blur(5px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px}
+.modal-card{background:var(--panel);border:1px solid var(--border);border-radius:14px;width:100%;max-width:500px;padding:20px;box-shadow:0 10px 30px var(--shadow);max-height:86vh;overflow-y:auto}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;border-bottom:1px solid var(--border);padding-bottom:10px}
+.modal-header h3{margin:0;font-size:1.1rem;color:var(--text)}
+.shortcut-grid{display:flex;flex-direction:column;gap:8px}
+.sc-item{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:.88rem;padding:8px 12px;background:var(--panel2);border-radius:8px;border:1px solid var(--border)}
+.sc-item span{color:var(--muted);text-align:right}
+kbd{background:var(--chip);border:1px solid var(--border);border-radius:5px;padding:2px 7px;font-family:monospace;font-size:.82rem;font-weight:700;color:var(--accent);box-shadow:0 2px 0 var(--border)}
 /* ---- mobile (keep last: these must override the base rules above) ---- */
 @media(max-width:560px){
   /* exam names are long and near-identical — stack the label above the bar instead of truncating it */
@@ -109,7 +118,7 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--border
   <div id="start">
     <div class="row" style="justify-content:space-between">
       <div><h1 id="title">📝 Ôn tập đề</h1><div class="sub">Nguồn: FUoverflow · OCR + đáp án (Opus/Sonnet) · verify độc lập nhiều lượt</div></div>
-      <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">☀️ Sáng</button>
+      <div class="row" style="gap:8px"><button class="theme-btn" onclick="openShortcutModal()" title="Phím tắt (? hoặc H)">❓ Phím tắt</button><button class="theme-btn" id="themeBtn" onclick="toggleTheme()">☀️ Sáng</button></div>
     </div>
     <div id="storeWarn" class="notes" style="display:none;border-left-color:var(--red)"></div>
     <div id="stats" style="margin:12px 0"></div>
@@ -516,6 +525,68 @@ function showMatching(){const exs=examsFor(curSubject());const ms=[];exs.forEach
     q.o.forEach((o,i)=>{const right=ci.indexOf(i)>=0;h+=`<div class="opt${right?' correct':''}"><span class="olet">${String.fromCharCode(65+i)}.</span><span class="otext">${esc(stripPrefix(o))}</span>${right?'<span class="mk">✔ đúng</span>':''}</div>`});
     h+=`<div class="expl"><b>Đáp án: ${esc(ci.map(i=>String.fromCharCode(65+i)).join(', ')||'?')}</b> — ${esc(q.ex)||''}</div></div>`});
   box.innerHTML=h;window.scrollTo(0,0);}
+
+/* ---- keyboard shortcuts ---- */
+function openShortcutModal(){el('shortcutModal').style.display='flex'}
+function closeShortcutModal(e){if(!e||e.target.id==='shortcutModal'||e.target.tagName==='BUTTON')el('shortcutModal').style.display='none'}
+function modalOpen(){const m=el('shortcutModal');return m&&m.style.display==='flex'}
+function clearAnswer(){if(submitted)return;const q=SESSION[IDX];if(!q)return;q.sels=[];renderQ();saveDraft();}
+function onStartScreen(){const a=el('start');return a&&a.style.display!=='none'}
+function onTestScreen(){const t=el('test');return t&&t.style.display!=='none'}
+const KEY_MODES=['random','exam','all','wrong','learn','review'];
+/* index of the pressed 1..6 / A..F key, or -1 */
+function keyIndex(e){
+  let m=/^Digit([1-9])$/.exec(e.code)||/^Numpad([1-9])$/.exec(e.code);
+  if(m)return parseInt(m[1])-1;
+  m=/^Key([A-F])$/.exec(e.code);
+  if(m)return m[1].charCodeAt(0)-65;
+  return -1;}
+addEventListener('keydown',function(e){
+  if(e.ctrlKey||e.altKey||e.metaKey)return;
+  if(e.code==='Escape'){closeShortcutModal();return}
+  // Enter starts the test even from the "số câu"/"phút" inputs, so it is handled before the input guard
+  if(e.code==='Enter'&&onStartScreen()&&!modalOpen()){
+    if(el('startBtn').disabled)return;
+    e.preventDefault();if(e.target&&e.target.blur)e.target.blur();startTest();return;}
+  const tag=(e.target.tagName||'').toLowerCase();
+  if(tag==='input'||tag==='textarea'||tag==='select')return;
+  if(e.key==='?'||e.code==='KeyH'){e.preventDefault();modalOpen()?closeShortcutModal():openShortcutModal();return}
+  if(modalOpen())return;
+
+  if(onStartScreen()){
+    const i=keyIndex(e);
+    if(i>=0&&i<KEY_MODES.length){e.preventDefault();pickMode(KEY_MODES[i]);}
+    return;}
+
+  if(onTestScreen()){
+    if(e.code==='ArrowRight'||e.code==='ArrowDown'){e.preventDefault();go(1);return}
+    if(e.code==='ArrowLeft'||e.code==='ArrowUp'){e.preventDefault();go(-1);return}
+    if(e.code==='Space'){e.preventDefault();if(!submitted&&!REVEALED.has(SESSION[IDX].id))revealAns();return}
+    if(e.code==='Backspace'||e.code==='Delete'){e.preventDefault();clearAnswer();return}
+    if(e.code==='KeyS'){e.preventDefault();toggleKnown();return}
+    const i=keyIndex(e);
+    if(i>=0&&i<(SESSION[IDX].o||[]).length){e.preventDefault();pick(i);}
+  }
+});
 </script>
+<div id="shortcutModal" class="modal-overlay" onclick="closeShortcutModal(event)" style="display:none">
+  <div class="modal-card" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <h3>⌨️ Bảng phím tắt nhanh</h3>
+      <button class="theme-btn" onclick="closeShortcutModal()">✕ Đóng</button>
+    </div>
+    <div class="shortcut-grid">
+      <div class="sc-item"><div><kbd>1</kbd> - <kbd>6</kbd> / <kbd>A</kbd> - <kbd>F</kbd></div><span>Chọn nhanh chế độ ôn tập</span></div>
+      <div class="sc-item"><div><kbd>Enter</kbd></div><span>Bắt đầu làm bài</span></div>
+      <div class="sc-item"><div><kbd>1</kbd> - <kbd>6</kbd> / <kbd>A</kbd> - <kbd>F</kbd></div><span>Chọn đáp án (trong bài làm)</span></div>
+      <div class="sc-item"><div><kbd>←</kbd> <kbd>→</kbd> / <kbd>↑</kbd> <kbd>↓</kbd></div><span>Câu trước / câu sau</span></div>
+      <div class="sc-item"><div><kbd>⌫</kbd> Backspace</div><span>Xóa lựa chọn của câu hiện tại</span></div>
+      <div class="sc-item"><div><kbd>Space</kbd></div><span>Xem đáp án câu hiện tại</span></div>
+      <div class="sc-item"><div><kbd>S</kbd></div><span>Đánh dấu ★ đã thuộc</span></div>
+      <div class="sc-item"><div><kbd>?</kbd> / <kbd>H</kbd></div><span>Bật / tắt bảng phím tắt</span></div>
+      <div class="sc-item"><div><kbd>Esc</kbd></div><span>Đóng bảng phím tắt</span></div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
