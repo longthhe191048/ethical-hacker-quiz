@@ -380,6 +380,13 @@ function migrateIds(){
 }
 
 function applyOrigin(){
+  // a bank may describe its own provenance (e.g. a file the user supplied)
+  const m=FU_BANK.meta;
+  if(m){const sn=el('srcNote'),fn=el('footNote');
+    if(sn&&m.srcNote)sn.textContent=m.srcNote;
+    if(fn&&m.footNote)fn.textContent=m.footNote;
+    if(m.titleSuffix)document.title='Ôn tập '+(FORCED||m.titleSuffix);
+    return;}
   const ex=FU_BANK.exams||[];if(!ex.length||!ex.every(e=>e.origin==='quizlet-study'))return;
   const sn=el('srcNote'),fn=el('footNote');
   if(sn)sn.textContent='Nguồn: quizlet-study.vercel.app (Ôn Thi Cùng Ngọc Dương) · câu hỏi trích từ PDF, đáp án theo nguồn';
