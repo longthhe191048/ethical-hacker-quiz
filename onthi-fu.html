@@ -235,6 +235,7 @@ function vfBadge(vf){
     case 'review':        return '<span class="vbadge warn">⚠ nguồn đánh dấu cần rà soát</span>';
     case 'corrected-src': return '<span class="vbadge src">📥 nguồn đã hiệu đính</span>';
     case 'imported':      return '<span class="vbadge src">📥 đáp án theo nguồn</span>';
+    case 'checked':       return '<span class="vbadge ok">✓ đã đối chiếu</span>';
     default:              return '<span class="vbadge ok">✓ verify khớp</span>';
   }}
 function isMatch(q){return /^\s*match\b/i.test(q.q||'')}
@@ -389,8 +390,8 @@ function applyOrigin(){
     return;}
   const ex=FU_BANK.exams||[];if(!ex.length||!ex.every(e=>e.origin==='quizlet-study'))return;
   const sn=el('srcNote'),fn=el('footNote');
-  if(sn)sn.textContent='Nguồn: quizlet-study.vercel.app (Ôn Thi Cùng Ngọc Dương) · câu hỏi trích từ PDF, đáp án theo nguồn';
-  if(fn)fn.textContent='Bộ câu hỏi nhập từ quizlet-study.vercel.app (Ngọc Dương) — đáp án giữ nguyên theo nguồn, CHƯA được kiểm chứng lại như các đề FUoverflow. Câu gắn ⚠ là câu chính nguồn đánh dấu cần rà soát. Lịch sử, câu đã thuộc & câu sai lưu trên máy bạn.';
+  if(sn)sn.textContent='Nguồn: quizlet-study.vercel.app (Ôn Thi Cùng Ngọc Dương) · câu hỏi trích từ PDF, đáp án đã đối chiếu lại';
+  if(fn)fn.textContent='Bộ câu hỏi nhập từ quizlet-study.vercel.app (Ngọc Dương) — đáp án đã được đối chiếu lại từng câu (✓ đã đối chiếu); câu gắn ✎ là câu đã sửa đáp án so với nguồn, lý do ghi ở phần ghi chú. Lịch sử, câu đã thuộc & câu sai lưu trên máy bạn.';
   document.title='Ôn tập '+(FORCED||'')+' (Ngọc Dương)';}
 (function init(){
   const sel=el('subject');
