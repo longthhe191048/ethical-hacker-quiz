@@ -62,7 +62,7 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--border
 .notes{background:var(--panel2);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:9px 12px;margin:8px 0;font-size:.9rem;white-space:pre-wrap}
 .expl{background:var(--panel2);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:10px 13px;margin:9px 0;font-size:.93rem;color:var(--text)}.expl b{color:var(--text)}
 .vbadge{font-size:.7rem;border-radius:6px;padding:1px 7px;border:1px solid var(--border)}
-.vbadge.ok{color:var(--green);border-color:var(--green)}.vbadge.corr{color:var(--amber);border-color:var(--amber)}
+.vbadge.ok{color:var(--green);border-color:var(--green)}.vbadge.warn{color:var(--amber);border-color:var(--amber);background:var(--amberbg)}.vbadge.src{color:var(--muted)}.vbadge.corr{color:var(--amber);border-color:var(--amber)}
 .rev-status{font-weight:700;font-size:.8rem;padding:2px 9px;border-radius:6px;margin-left:auto}
 .rev-status.ok{background:var(--greenbg);color:var(--green)}.rev-status.no{background:var(--redbg);color:var(--red)}.rev-status.skip{background:var(--amberbg);color:var(--amber)}
 .star,.fc-acts{display:inline-flex;align-items:center;margin-left:auto}
@@ -144,7 +144,7 @@ kbd{background:var(--chip);border:1px solid var(--border);border-radius:5px;padd
 <div class="wrap">
   <div id="start">
     <div class="row" style="justify-content:space-between">
-      <div><h1 id="title">📝 Ôn tập đề</h1><div class="sub">Nguồn: FUoverflow · OCR + đáp án (Opus/Sonnet) · verify độc lập nhiều lượt</div></div>
+      <div><h1 id="title">📝 Ôn tập đề</h1><div class="sub" id="srcNote">Nguồn: FUoverflow · OCR + đáp án (Opus/Sonnet) · verify độc lập nhiều lượt</div></div>
       <div class="row" style="gap:8px"><button class="theme-btn" onclick="openShortcutModal()" title="Phím tắt (? hoặc H)">❓ Phím tắt</button><button class="theme-btn" id="themeBtn" onclick="toggleTheme()">☀️ Sáng</button></div>
     </div>
     <div id="storeWarn" class="notes" style="display:none;border-left-color:var(--red)"></div>
@@ -193,7 +193,7 @@ kbd{background:var(--chip);border:1px solid var(--border);border-radius:5px;padd
         </div></div>
       <div id="historyBox" style="margin-top:10px"></div>
     </div>
-    <div class="footer-note">Đáp án do AI giải &amp; verify từ đề FUoverflow (không phải đáp án chính thức) — dùng để tham khảo/ôn tập. Lịch sử, câu đã thuộc &amp; câu sai lưu trên máy bạn.</div>
+    <div class="footer-note" id="footNote">Đáp án do AI giải &amp; verify từ đề FUoverflow (không phải đáp án chính thức) — dùng để tham khảo/ôn tập. Lịch sử, câu đã thuộc &amp; câu sai lưu trên máy bạn.</div>
   </div>
   <div id="test" style="display:none"></div>
   <div id="matching" style="display:none"></div>
@@ -227,6 +227,16 @@ function correctIdxOf(q){const ls=ansLetters(q).map(x=>String(x).toUpperCase());
 function stripPrefix(s){return String(s==null?'':s).replace(/^\s*[A-Za-z][\.\)]\s*/,'')}
 function sameSet(a,b){if(a.length!==b.length)return false;const s=new Set(b);return a.every(x=>s.has(x))}
 function num1(x){return (Math.round(x*10)/10).toString().replace(/\.0$/,'')}
+/* verify badge — honest about provenance.
+   FU papers were OCR'd, solved and verified here; imported sets were not. */
+function vfBadge(vf){
+  switch(vf){
+    case 'corrected':     return '<span class="vbadge corr">✎ đã sửa khi verify</span>';
+    case 'review':        return '<span class="vbadge warn">⚠ nguồn đánh dấu cần rà soát</span>';
+    case 'corrected-src': return '<span class="vbadge src">📥 nguồn đã hiệu đính</span>';
+    case 'imported':      return '<span class="vbadge src">📥 đáp án theo nguồn</span>';
+    default:              return '<span class="vbadge ok">✓ verify khớp</span>';
+  }}
 function isMatch(q){return /^\s*match\b/i.test(q.q||'')}
 /* Structured stems (matching questions especially) arrive as one long run of text —
    break them onto lines and bold the labels so they can be read. */
@@ -369,12 +379,19 @@ function migrateIds(){
   }catch(e){storageWarn(e)}
 }
 
+function applyOrigin(){
+  const ex=FU_BANK.exams||[];if(!ex.length||!ex.every(e=>e.origin==='quizlet-study'))return;
+  const sn=el('srcNote'),fn=el('footNote');
+  if(sn)sn.textContent='Nguồn: quizlet-study.vercel.app (Ôn Thi Cùng Ngọc Dương) · câu hỏi trích từ PDF, đáp án theo nguồn';
+  if(fn)fn.textContent='Bộ câu hỏi nhập từ quizlet-study.vercel.app (Ngọc Dương) — đáp án giữ nguyên theo nguồn, CHƯA được kiểm chứng lại như các đề FUoverflow. Câu gắn ⚠ là câu chính nguồn đánh dấu cần rà soát. Lịch sử, câu đã thuộc & câu sai lưu trên máy bạn.';
+  document.title='Ôn tập '+(FORCED||'')+' (Ngọc Dương)';}
 (function init(){
   const sel=el('subject');
   if(FORCED){el('title').textContent='📝 Ôn tập '+FORCED;el('subjField').style.display='none';
     const o=document.createElement('option');o.value=FORCED;o.textContent=FORCED;sel.appendChild(o);sel.value=FORCED;
   } else {const oa=document.createElement('option');oa.value='__all__';oa.textContent='Tất cả môn';sel.appendChild(oa);
     [...new Set(FU_BANK.exams.map(e=>e.subject))].sort().forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;sel.appendChild(o)});}
+  applyOrigin();
   migrateIds();
   refreshScope(); renderStats(); renderHistory(); renderResume();
 })();
@@ -583,7 +600,7 @@ function renderQ(){if(isFlash()){renderFlashcard(SESSION[IDX]);return}const q=SE
   if(q.nt)h+=`<div class="notes">📝 ${esc(q.nt)}</div>`;
   if(!showAns){const cf=q.conf||'';h+=`<div class="conf-row"><span class="sub">Mức độ tự tin:</span><span class="conf-chip${cf==='sure'?' sel':''}" onclick="setConf('sure')">✅ Chắc chắn</span><span class="conf-chip${cf==='unsure'?' sel':''}" onclick="setConf('unsure')">🤔 Không chắc</span><span class="conf-chip${cf==='guess'?' sel':''}" onclick="setConf('guess')">🎲 Đoán</span></div>`;}
   if(!showAns)h+=`<div style="margin-top:8px"><button class="btn sec" onclick="revealAns()">👁 Xem đáp án</button></div>`;
-  if(showAns){const vb=q.vf==='corrected'?'<span class="vbadge corr">✎ đã sửa khi verify</span>':'<span class="vbadge ok">✓ verify khớp</span>';
+  if(showAns){const vb=vfBadge(q.vf);
     const key=(q.ci||[]).map(oi=>q.oi.indexOf(oi)).filter(j=>j>=0).sort((a,b)=>a-b).map(j=>String.fromCharCode(65+j)).join(', ')||'?';
     const peek=REVEALED.has(q.id)&&!submitted?' <span class="vbadge corr">👁 đã xem trước — không tính điểm, đã khóa chọn</span>':'';
     h+=`<div class="expl"><b>Đáp án: ${esc(key)}</b> — ${esc(q.ex)||'<i>(không có giải thích)</i>'} <span style="margin-left:6px">${vb}</span>${peek}</div>`;}

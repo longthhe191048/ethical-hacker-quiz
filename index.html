@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dashboard ôn thi — HOD402 · HOD401 · CES202 · IAP301</title>
+<title>Dashboard ôn thi — FU · VNR · HCM202 · MLN · PMG · SWD · MMA</title>
 <style>
 :root, :root[data-theme="dark"]{
   --bg:#0d1117;--panel:#161b22;--panel2:#1c232d;--border:#30363d;--text:#e6edf3;--muted:#9aa7b4;
@@ -24,6 +24,8 @@ header{background:var(--topbar);backdrop-filter:blur(6px);border-bottom:1px soli
   padding:8px 16px;font-size:.92rem;font-weight:600;cursor:pointer;transition:.15s}
 .tab:hover{border-color:var(--accent)}.tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 .grow{flex:1}
+.tab-sep{align-self:center;color:var(--muted);font-size:.95rem;padding:0 2px;flex:0 0 auto}
+.tab.qs{border-style:dashed}.tab.qs.active{border-style:solid}
 .theme-btn{background:var(--chip);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:7px 12px;cursor:pointer;font-size:.9rem;white-space:nowrap}
 .theme-btn:hover{background:var(--panel2)}
 #content{flex:1;min-height:0;position:relative;overflow:hidden}
@@ -53,6 +55,14 @@ header{background:var(--topbar);backdrop-filter:blur(6px);border-bottom:1px soli
     <button class="tab" data-tab="ces202" onclick="selectTab('ces202')">CES202</button>
     <button class="tab" data-tab="iap301" onclick="selectTab('iap301')">IAP301</button>
     <button class="tab" data-tab="frs401c" onclick="selectTab('frs401c')">FRS401C</button>
+    <span class="tab-sep" title="Các môn dưới đây nhập từ quizlet-study.vercel.app (Ngọc Dương)">📥</span>
+    <button class="tab qs" data-tab="vnr" onclick="selectTab('vnr')">VNR</button>
+    <button class="tab qs" data-tab="hcm202" onclick="selectTab('hcm202')">HCM202</button>
+    <button class="tab qs" data-tab="mln131" onclick="selectTab('mln131')">MLN131</button>
+    <button class="tab qs" data-tab="mln122" onclick="selectTab('mln122')">MLN122</button>
+    <button class="tab qs" data-tab="pmg201c" onclick="selectTab('pmg201c')">PMG201c</button>
+    <button class="tab qs" data-tab="swd392" onclick="selectTab('swd392')">SWD392</button>
+    <button class="tab qs" data-tab="mma301" onclick="selectTab('mma301')">MMA301</button>
   </div>
   <div class="grow"></div>
   <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">☀️ Sáng</button>
@@ -65,6 +75,13 @@ header{background:var(--topbar);backdrop-filter:blur(6px);border-bottom:1px soli
   <div class="panel" id="panel-ces202"><iframe title="CES202"    data-src="onthi-fu.html?subject=CES202"></iframe><div class="loading">Đang tải…</div></div>
   <div class="panel" id="panel-iap301"><iframe title="IAP301"    data-src="onthi-fu.html?subject=IAP301"></iframe><div class="loading">Đang tải…</div></div>
   <div class="panel" id="panel-frs401c"><iframe title="FRS401C" data-src="onthi-fu.html?subject=FRS401C"></iframe><div class="loading">Đang tải…</div></div>
+  <div class="panel" id="panel-vnr"><iframe title="VNR" data-src="onthi-vnr.html?subject=VNR"></iframe><div class="loading">Đang tải…</div></div>
+  <div class="panel" id="panel-hcm202"><iframe title="HCM202" data-src="onthi-hcm202.html?subject=HCM202"></iframe><div class="loading">Đang tải…</div></div>
+  <div class="panel" id="panel-mln131"><iframe title="MLN131" data-src="onthi-mln131.html?subject=MLN131"></iframe><div class="loading">Đang tải…</div></div>
+  <div class="panel" id="panel-mln122"><iframe title="MLN122" data-src="onthi-mln122.html?subject=MLN122"></iframe><div class="loading">Đang tải…</div></div>
+  <div class="panel" id="panel-pmg201c"><iframe title="PMG201c" data-src="onthi-pmg201c.html?subject=PMG201c"></iframe><div class="loading">Đang tải…</div></div>
+  <div class="panel" id="panel-swd392"><iframe title="SWD392" data-src="onthi-swd392.html?subject=SWD392"></iframe><div class="loading">Đang tải…</div></div>
+  <div class="panel" id="panel-mma301"><iframe title="MMA301" data-src="onthi-mma301.html?subject=MMA301"></iframe><div class="loading">Đang tải…</div></div>
 </div>
 
 <script>
@@ -75,7 +92,7 @@ function toggleTheme(){applyTheme((document.documentElement.dataset.theme||'dark
 (function(){let t;try{t=localStorage.getItem('app_theme')}catch(e){}
   if(!t)t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';applyTheme(t)})();
 
-const TABS=['hod402','hodfu','hod401','ces202','iap301','frs401c'];
+const TABS=['hod402','hodfu','hod401','ces202','iap301','frs401c','vnr','hcm202','mln131','mln122','pmg201c','swd392','mma301'];
 function selectTab(name){
   if(!TABS.includes(name))name='hod402';
   TABS.forEach(t=>{

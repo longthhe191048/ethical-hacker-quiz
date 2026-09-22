@@ -25,3 +25,4 @@ onthi-fu-v2-tpl.html
 # build input for rebuild.py (derived from DE_FE_OCR + DE_FE_SOLVED)
 fu_bank.json
 fu_bank_current.json
+fu_bank_qs.json
