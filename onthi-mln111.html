@@ -30,11 +30,6 @@ h1{font-size:1.3rem;margin:0}.sub{color:var(--muted);font-size:.9rem;margin-top:
 label{font-size:.85rem;color:var(--muted)}
 select,input[type=number]{background:var(--panel2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:9px 11px;font-size:1rem;max-width:100%}
 .field{display:flex;flex-direction:column;gap:6px;margin:8px 0}
-.modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
-.mode{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:15px;cursor:pointer}
-.mode:hover{border-color:var(--accent)}.mode.active{border-color:var(--accent);background:var(--selbg)}
-.mode .ic{font-size:1.5rem}.mode h3{margin:5px 0 3px;font-size:1.02rem}.mode p{margin:0;color:var(--muted);font-size:.83rem}
-.stat{display:inline-block;background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:6px 12px;margin:4px 6px 0 0;font-size:.85rem}.stat b{font-size:1.05rem}
 .hist-item{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:9px 12px;border:1px solid var(--border);border-radius:8px;margin:6px 0;background:var(--panel2);font-size:.9rem}
 .hist-item .hdate{color:var(--muted);font-size:.8rem;min-width:130px}.hist-item .hscore{font-weight:700}
 .hbadge{border-radius:6px;font-size:.72rem;padding:1px 8px;font-weight:700}.hbadge.p{background:var(--greenbg);color:var(--green)}.hbadge.f{background:var(--redbg);color:var(--red)}
@@ -85,9 +80,6 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--border
 .conf-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0 2px}
 .conf-chip{border:1px solid var(--border);background:var(--panel2);color:var(--muted);border-radius:999px;padding:4px 13px;font-size:.82rem;cursor:pointer;user-select:none}
 .conf-chip:hover{border-color:var(--accent)}.conf-chip.sel{border-color:var(--accent);color:var(--text);background:var(--selbg)}
-.streakbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:8px 14px}
-.streakbar .flame{font-size:1.3rem}.streakbar b{font-size:1.05rem}
-.gbar{flex:1;min-width:120px;max-width:260px;background:var(--chip);border-radius:6px;overflow:hidden;height:10px}.gbar>div{height:100%;background:var(--accent)}
 /* ---- keyboard shortcuts ---- */
 .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.65);backdrop-filter:blur(5px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px}
 .modal-card{background:var(--panel);border:1px solid var(--border);border-radius:14px;width:100%;max-width:500px;padding:20px;box-shadow:0 10px 30px var(--shadow);max-height:86vh;overflow-y:auto}
@@ -109,6 +101,100 @@ kbd{background:var(--chip);border:1px solid var(--border);border-radius:5px;padd
 .search-clear{position:absolute;right:6px;background:var(--chip);border:1px solid var(--border);color:var(--text);border-radius:6px;cursor:pointer;padding:2px 8px;display:none}
 .search-wrap.has-text .search-clear{display:block}
 
+/* ---- start screen ---- */
+label.theme-btn{display:inline-flex;align-items:center}
+.hero{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.hero-txt{flex:1;min-width:0}
+.hero-acts{display:flex;gap:8px;flex:0 0 auto}
+.embed .theme-toggle{display:none!important}          /* inside the dashboard its header owns the theme */
+.sumbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;margin:12px 0 0;font-size:.88rem}
+#streak{flex:1 1 260px;min-width:0}
+#stats{flex:0 0 auto}
+.streakbar{display:flex;align-items:center;gap:8px;min-width:0}
+.streakbar .flame{font-size:1.1rem;line-height:1}
+.streakbar b,.kpi b{font-size:1.02rem}
+.gbar{flex:1;min-width:48px;max-width:200px;height:8px;border-radius:6px;overflow:hidden;background:var(--chip)}.gbar>div{height:100%;background:var(--accent)}
+.kpi{white-space:nowrap}
+#searchCount{margin-top:6px}#searchCount:empty{display:none}
+/* mode groups: 3 columns (one per group) on desktop */
+.mgroups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:16px}
+.mg-h{margin:0 0 10px;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.mlist{display:flex;flex-direction:column;gap:10px}
+.mode{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"ic mt mc";align-items:center;gap:4px 10px;
+  width:100%;min-height:64px;padding:10px 12px;background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:12px;
+  font:inherit;text-align:left;cursor:pointer}
+.mode:hover{border-color:var(--accent)}
+.mode.active{border-color:var(--accent);background:var(--selbg);box-shadow:inset 0 0 0 1px var(--accent)}
+.mode:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mode .ic{grid-area:ic;font-size:1.35rem;line-height:1}
+.mode .mt{grid-area:mt;display:flex;flex-direction:column;min-width:0}
+.mode .mt b{font-size:.95rem;line-height:1.25}
+.mode .mt small{margin-top:2px;font-size:.78rem;line-height:1.3;color:var(--muted)}
+.mode .mkey{display:inline-grid;place-items:center;min-width:1.25rem;height:1.25rem;margin-right:6px;padding:0 3px;border-radius:5px;
+  background:var(--chip);border:1px solid var(--border);color:var(--muted);font-size:.68rem;font-weight:700;vertical-align:1px}
+.mode.active .mkey{background:var(--accent);border-color:var(--accent);color:#fff}
+.mode .mc{grid-area:mc;justify-self:end;padding:1px 8px;border-radius:999px;background:var(--chip);border:1px solid var(--border);
+  color:var(--muted);font-size:.76rem;font-weight:700;white-space:nowrap}
+.mode .mc:empty{display:none}
+.mode .mc.zero{opacity:.55}
+.mode .mc.bad{color:var(--red);background:var(--redbg);border-color:var(--red)}
+.mode .mc.due{color:var(--amber);background:var(--amberbg);border-color:var(--amber)}
+.mode.rec::before{content:'Gợi ý';position:absolute;top:-9px;left:10px;padding:0 7px;border-radius:999px;line-height:16px;
+  font-size:.66rem;font-weight:700;color:var(--green);background:var(--greenbg);border:1px solid var(--green)}
+.match-btn{margin-top:12px;min-height:44px}
+/* per-mode config */
+.mode-cfg{margin-top:16px}.mode-cfg:empty{display:none}
+.cfg-desc{margin:0 0 8px;font-size:.9rem}
+.qty{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{min-width:44px;min-height:40px;padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:var(--panel2);color:var(--text);
+  font:inherit;font-size:.88rem;font-weight:600;cursor:pointer}
+.chip:hover{border-color:var(--accent)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.qty input[type=number]{width:84px;min-height:40px;text-align:center}
+/* exam picker (replaces the native <select>) */
+.exam-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.exam-grp{grid-column:1/-1;margin:8px 0 0;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.exam-row{position:relative;display:flex;align-items:center;gap:10px;min-height:56px;padding:8px 10px;border:1px solid var(--border);border-radius:10px;
+  background:var(--panel2);color:var(--text);font-size:.9rem;cursor:pointer}
+.exam-row:hover{border-color:var(--accent)}
+.exam-row.sel{border-color:var(--accent);background:var(--selbg);box-shadow:inset 0 0 0 1px var(--accent)}
+.exam-row:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.exam-row input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.ex-badge{flex:0 0 58px;padding:6px 0;border-radius:8px;text-align:center;font-weight:800;font-size:.88rem;font-variant-numeric:tabular-nums;
+  background:var(--chip);border:1px solid var(--border)}
+.exam-row.sel .ex-badge{background:var(--accent);border-color:var(--accent);color:#fff}
+.ex-main{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.3}
+.ex-title{font-weight:700}
+.ex-sub{font-size:.8rem;color:var(--muted)}.ex-sub b{color:var(--text)}
+.ex-raw{font-size:.72rem;color:var(--muted);opacity:.8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ex-mp{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;line-height:1.2}
+.ex-mp b{font-size:.95rem}.ex-mp small{font-size:.68rem;color:var(--muted)}
+/* folded options */
+.opts{margin-top:16px;border:1px solid var(--border);border-radius:10px;background:var(--panel2)}
+.opts>summary{display:flex;align-items:center;gap:10px;min-height:44px;padding:8px 12px;cursor:pointer;list-style:none}
+.opts>summary::-webkit-details-marker{display:none}
+.opts>summary::after{content:'▾';margin-left:auto;color:var(--muted);transition:transform .15s}
+.opts[open]>summary::after{transform:rotate(180deg)}
+.opts-t{font-weight:700;font-size:.9rem;white-space:nowrap}
+.opts-s{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.8rem;color:var(--muted)}
+.opts-body{padding:6px 12px 10px;border-top:1px solid var(--border)}
+.switch{display:flex;align-items:center;gap:10px;min-height:44px;font-size:.9rem;color:var(--text);cursor:pointer}
+.switch input{flex:0 0 auto;width:20px;height:20px;margin:0;accent-color:var(--accent)}
+/* start band: sticky at the card bottom on wide screens (fixed bar on phones, see mobile block) */
+#startRow{position:sticky;bottom:0;z-index:5;display:flex;align-items:center;gap:12px;margin:16px -18px -18px;padding:12px 18px;
+  background:var(--panel);border-top:1px solid var(--border);border-radius:0 0 12px 12px}
+.start-sum{flex:1;min-width:0;font-size:.9rem;line-height:1.35;color:var(--muted)}
+.start-sum b{color:var(--text)}
+.start-btn{flex:0 0 auto;min-height:48px;padding:10px 26px;font-size:1.05rem;border-radius:10px}
+
+/* narrow tablets: groups stack, tiles go 3-across with the icon/count on top */
+@media(max-width:720px){
+  .mgroups{grid-template-columns:1fr;gap:12px}
+  .mlist{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .mode{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"ic mc" "mt mt";align-items:start;gap:4px}
+}
+
 /* ---- mobile (keep last: these must override the base rules above) ---- */
 @media(max-width:560px){
   /* exam names are long and near-identical — stack the label above the bar instead of truncating it */
@@ -121,75 +207,129 @@ kbd{background:var(--chip);border:1px solid var(--border);border-radius:5px;padd
     min-height:44px;display:inline-flex;align-items:center;justify-content:center}
   /* the exam name + question number already appear as badges in the question card */
   .src{display:none}
+  /* the theme switch is on the start screen (and in the dashboard): dropping it here keeps the
+     in-test topbar on ONE row, which is 50px of question area back on a 360px screen */
+  #topbar .theme-toggle{display:none}
   .conf-chip{padding:9px 15px;font-size:.85rem}
-  .wrap{padding-left:12px;padding-right:12px}
+  .wrap{padding:12px 12px 112px}                  /* bottom room for the fixed start bar */
   .card{padding:14px}
   .jump{max-height:132px}
-  /* nine modes stacked one-per-row buried the ▶ Bắt đầu button ~3 screens down */
-  .modes{grid-template-columns:repeat(2,1fr);gap:8px}
-  .mode{padding:10px 11px}
-  .mode p{display:none}
-  .mode .ic{font-size:1.15rem;display:inline;margin-right:5px}
-  .mode h3{display:inline;font-size:.92rem}
   .star,.bmk{min-width:44px;min-height:44px;padding:0;margin:0 2px;font-size:1.25rem}
   .qh{align-items:center}
-  /* the mode list is still a long scroll on a small phone — keep ▶ Bắt đầu reachable */
-  #startRow{position:sticky;bottom:0;z-index:5;background:var(--panel);
-    margin:8px -14px -14px;padding:10px 14px;border-top:1px solid var(--border)}
-  .theme-btn{padding:9px 13px}
+  .theme-btn{padding:9px 13px;min-height:44px}
+  select{width:100%;min-height:44px}
+  /* ---- start screen: subject -> mode -> play, inside one thumb-sized screen ---- */
+  h1{font-size:1.12rem}
+  .kbd-only{display:none}                         /* keyboard help is useless on a phone */
+  #srcNote{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.78rem}
+  #srcNote.open{white-space:normal}               /* tap to read the full source line */
+  .sumbar{margin-top:8px;gap:4px 12px;font-size:.82rem}
+  #streak{flex-basis:170px}
+  .m-hide{display:none}
+  .search-wrap input{padding-right:46px}
+  .search-clear{right:0;min-width:44px;min-height:44px;background:transparent;border:0}
+  .mgroups{gap:10px;margin-top:12px}
+  .mlist{gap:6px}
+  .mode{min-height:74px;padding:8px 8px 9px;border-radius:10px}
+  .mode .ic{font-size:1.15rem}
+  .mode .mt b{font-size:.84rem;line-height:1.22}
+  .mode .mt small{display:none}                   /* the picked mode's description shows in #modeCfg */
+  .mode .mkey{min-width:1.1rem;height:1.1rem;margin-right:4px;font-size:.64rem}
+  .mode .mc{padding:0 6px;font-size:.7rem}
+  .mode.rec::before{left:8px}
+  .chip,.qty input[type=number]{min-height:44px}
+  .exam-list{grid-template-columns:1fr;gap:6px}
+  .ex-raw{display:none}
+  .ex-badge{flex-basis:52px;font-size:.84rem}
+  /* the start button lives in the thumb zone: pinned to the bottom of the screen */
+  #startRow{position:fixed;left:0;right:0;bottom:0;z-index:30;margin:0;padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+    border-radius:0;border-top:1px solid var(--border);background:var(--topbar);backdrop-filter:blur(6px);box-shadow:0 -6px 18px var(--shadow)}
+  .start-sum{font-size:.84rem}
+  .start-btn{min-height:50px;padding:10px 20px}
 }
 </style>
+<script>(function(d){try{if(window.self!==window.top)d.classList.add('embed')}catch(e){d.classList.add('embed')}
+try{var t=localStorage.getItem('app_theme');if(t==='dark'||t==='light')d.setAttribute('data-theme',t)}catch(e){}})(document.documentElement);</script>
 </head>
 <body>
 <div class="wrap">
   <div id="start">
-    <div class="row" style="justify-content:space-between">
-      <div><h1 id="title">📝 Ôn tập đề</h1><div class="sub" id="srcNote">Nguồn: FUoverflow · OCR + đáp án (Opus/Sonnet) · verify độc lập nhiều lượt</div></div>
-      <div class="row" style="gap:8px"><button class="theme-btn" onclick="openShortcutModal()" title="Phím tắt (? hoặc H)">❓ Phím tắt</button><button class="theme-btn" id="themeBtn" onclick="toggleTheme()">☀️ Sáng</button></div>
+    <div class="hero">
+      <div class="hero-txt">
+        <h1 id="title">📝 Ôn tập đề</h1>
+        <div class="sub" id="srcNote" onclick="this.classList.toggle('open')">Nguồn: FUoverflow · OCR + đáp án (Opus/Sonnet) · verify độc lập nhiều lượt</div>
+      </div>
+      <div class="hero-acts">
+        <button type="button" class="theme-btn kbd-only" onclick="openShortcutModal()" title="Phím tắt (? hoặc H)">⌨️ Phím tắt</button>
+        <button type="button" class="theme-btn theme-toggle" id="themeBtn" onclick="toggleTheme()">☀️ Sáng</button>
+      </div>
     </div>
     <div id="storeWarn" class="notes" style="display:none;border-left-color:var(--red)"></div>
-    <div id="stats" style="margin:12px 0"></div>
-    <div id="streak" style="margin:0 0 10px"></div>
     <div id="resume"></div>
-    <div class="card">
-      <div class="field" id="subjField"><label>Môn</label><select id="subject" onchange="onSubjectChange()"></select></div>
-      <div class="field"><label>🔍 Tìm kiếm từ khóa (VD: SQL Injection, WPA2, hypervisor)</label>
-        <div class="search-wrap" id="searchWrap"><span class="search-ic">🔍</span>
-          <input type="text" id="globalSearch" placeholder="Gõ từ khóa để lọc &amp; làm bài riêng..." oninput="onSearchInput()" autocomplete="off" spellcheck="false">
-          <button type="button" class="search-clear" onclick="clearSearch()" title="Xóa tìm kiếm">✕</button></div>
-        <div class="sub" id="searchCount" style="margin-top:6px"></div></div>
-      <label style="display:block;margin-bottom:6px">Chọn chế độ</label>
-      <div class="modes">
-        <div class="mode" data-mode="random" onclick="pickMode('random')"><div class="ic">🎲</div><h3>1. Random câu hỏi</h3><p>Trộn ngẫu nhiên N câu trong phạm vi môn.</p></div>
-        <div class="mode" data-mode="exam" onclick="pickMode('exam')"><div class="ic">📄</div><h3>2. Ôn theo đề</h3><p>Làm 1 đề cụ thể, nguyên vẹn như đề gốc.</p></div>
-        <div class="mode" data-mode="all" onclick="pickMode('all')"><div class="ic">📚</div><h3>3. Ôn tổng</h3><p>Toàn bộ câu của môn, câu trùng giữa các đề chỉ hiện 1 lần.</p></div>
-        <div class="mode" data-mode="wrong" onclick="pickMode('wrong')"><div class="ic">🔁</div><h3>4. Ôn lại câu sai</h3><p>Chỉ các câu bạn làm sai lần trước.</p></div>
-        <div class="mode" data-mode="learn" onclick="pickMode('learn')"><div class="ic">🧠</div><h3>5. Học thông minh</h3><p>Thích ứng: ưu tiên câu chưa làm / hay sai / chưa thuộc.</p></div>
-        <div class="mode" data-mode="review" onclick="pickMode('review')"><div class="ic">⏰</div><h3>6. Ôn tập đến hạn</h3><p>Lặp lại ngắt quãng (SRS) — chỉ câu đã tới hạn ôn.</p></div>
-        <div class="mode" data-mode="flash" onclick="pickMode('flash')"><div class="ic">🎴</div><h3>7. Flashcard / Ôn nhanh</h3><p>Lật thẻ xem đáp án, không tính giờ, không chấm điểm.</p></div>
-        <div class="mode" data-mode="book" onclick="pickMode('book')"><div class="ic">🔖</div><h3>8. Câu đã đánh dấu</h3><p>Ôn riêng các câu khó bạn đã bấm 🔖.</p></div>
-        <div class="mode" data-mode="seen" onclick="pickMode('seen')"><div class="ic">👁</div><h3>9. Câu đã xem đáp án</h3><p>Các câu bạn từng bấm "Xem đáp án" — nên ôn lại.</p></div>
+    <div class="sumbar"><div id="streak"></div><div id="stats"></div></div>
+
+    <div class="card main-card">
+      <div class="field" id="subjField"><label for="subject">Môn</label><select id="subject" onchange="onSubjectChange()"></select></div>
+      <div class="search-wrap" id="searchWrap"><span class="search-ic" aria-hidden="true">🔍</span>
+        <input type="text" id="globalSearch" placeholder="Tìm câu theo từ khóa rồi làm riêng…" aria-label="Tìm câu hỏi theo từ khóa" oninput="onSearchInput()" autocomplete="off" spellcheck="false" enterkeyhint="go">
+        <button type="button" class="search-clear" onclick="clearSearch()" aria-label="Xóa tìm kiếm">✕</button></div>
+      <div class="sub" id="searchCount"></div>
+
+      <div class="mgroups">
+        <section class="mgroup" aria-label="Làm bài"><h2 class="mg-h">Làm bài</h2><div class="mlist">
+          <button type="button" class="mode" data-mode="random" aria-pressed="false" onclick="pickMode('random',1)"><span class="ic" aria-hidden="true">🎲</span><span class="mt"><b><span class="mkey">1</span>Ngẫu nhiên</b><small>Trộn N câu bất kỳ trong môn</small></span></button>
+          <button type="button" class="mode" data-mode="exam" aria-pressed="false" onclick="pickMode('exam',1)"><span class="ic" aria-hidden="true">📄</span><span class="mt"><b><span class="mkey">2</span>Theo đề</b><small>Làm nguyên 1 đề như đề gốc</small></span><span class="mc" data-c="exam"></span></button>
+          <button type="button" class="mode" data-mode="all" aria-pressed="false" onclick="pickMode('all',1)"><span class="ic" aria-hidden="true">📚</span><span class="mt"><b><span class="mkey">3</span>Ôn tổng</b><small>Toàn bộ câu, câu trùng chỉ hiện 1 lần</small></span><span class="mc" data-c="all"></span></button>
+        </div></section>
+        <section class="mgroup" aria-label="Ôn chỗ yếu"><h2 class="mg-h">Ôn chỗ yếu</h2><div class="mlist">
+          <button type="button" class="mode" data-mode="wrong" aria-pressed="false" onclick="pickMode('wrong',1)"><span class="ic" aria-hidden="true">🔁</span><span class="mt"><b><span class="mkey">4</span>Câu sai</b><small>Các câu bạn làm sai lần trước</small></span><span class="mc" data-c="wrong"></span></button>
+          <button type="button" class="mode" data-mode="learn" aria-pressed="false" onclick="pickMode('learn',1)"><span class="ic" aria-hidden="true">🧠</span><span class="mt"><b><span class="mkey">5</span>Học thông minh</b><small>Ưu tiên câu mới, hay sai, chưa thuộc</small></span><span class="mc" data-c="learn"></span></button>
+          <button type="button" class="mode" data-mode="review" aria-pressed="false" onclick="pickMode('review',1)"><span class="ic" aria-hidden="true">⏰</span><span class="mt"><b><span class="mkey">6</span>Đến hạn ôn</b><small>Lặp lại ngắt quãng — câu tới hạn hôm nay</small></span><span class="mc" data-c="review"></span></button>
+        </div></section>
+        <section class="mgroup" aria-label="Ôn nhanh"><h2 class="mg-h">Ôn nhanh</h2><div class="mlist">
+          <button type="button" class="mode" data-mode="flash" aria-pressed="false" onclick="pickMode('flash',1)"><span class="ic" aria-hidden="true">🎴</span><span class="mt"><b><span class="mkey">7</span>Flashcard</b><small>Lật thẻ, không tính giờ, không chấm điểm</small></span></button>
+          <button type="button" class="mode" data-mode="book" aria-pressed="false" onclick="pickMode('book',1)"><span class="ic" aria-hidden="true">🔖</span><span class="mt"><b><span class="mkey">8</span>Đã đánh dấu</b><small>Câu khó bạn đã bấm 🔖 trong bài</small></span><span class="mc" data-c="book"></span></button>
+          <button type="button" class="mode" data-mode="seen" aria-pressed="false" onclick="pickMode('seen',1)"><span class="ic" aria-hidden="true">👁</span><span class="mt"><b><span class="mkey">9</span>Đã xem đáp án</b><small>Câu từng bấm “Xem đáp án” — nên ôn lại</small></span><span class="mc" data-c="seen"></span></button>
+        </div></section>
       </div>
-      <div id="modeCfg" style="margin-top:12px"></div>
-      <div class="field"><label>⏱ Thời gian làm bài (phút) — <b>0 = không giới hạn</b></label><input type="number" id="mins" value="0" min="0"></div>
-      <div class="field"><label><input type="checkbox" id="hideKnown" style="width:auto;vertical-align:middle"> Ẩn các câu đã đánh dấu ★ thuộc</label></div>
-      <div class="field"><label><input type="checkbox" id="shufOpts" checked style="width:auto;vertical-align:middle"> 🔀 Trộn thứ tự đáp án (tránh học vẹt vị trí)</label></div>
-      <div class="row" id="startRow" style="margin-top:8px">
-        <button class="btn" id="startBtn" onclick="startTest()" disabled>▶ Bắt đầu</button>
-        <button class="btn sec" onclick="showMatching()">📎 Ôn câu Matching</button>
+      <button type="button" class="btn sec match-btn" id="matchBtn" onclick="showMatching()" style="display:none">📎 Xem câu Matching <span id="matchN"></span></button>
+
+      <div id="modeCfg" class="mode-cfg"></div>
+
+      <details class="opts" id="optsBox">
+        <summary><span class="opts-t">⚙️ Tùy chọn</span><span class="opts-s" id="optsSum"></span></summary>
+        <div class="opts-body">
+          <div class="field" id="minsField"><label for="mins">⏱ Thời gian làm bài (phút)</label>
+            <div class="qty"><div class="chips" data-for="mins">
+              <button type="button" class="chip" data-v="0" onclick="setVal('mins',0)">Không giới hạn</button>
+              <button type="button" class="chip" data-v="15" onclick="setVal('mins',15)">15</button>
+              <button type="button" class="chip" data-v="30" onclick="setVal('mins',30)">30</button>
+              <button type="button" class="chip" data-v="45" onclick="setVal('mins',45)">45</button>
+              <button type="button" class="chip" data-v="60" onclick="setVal('mins',60)">60</button>
+            </div><input type="number" id="mins" value="0" min="0" inputmode="numeric" aria-label="Số phút (0 = không giới hạn)" oninput="syncChips();updateStartSub()"></div></div>
+          <label class="switch"><input type="checkbox" id="hideKnown" onchange="updateStartSub()"><span>Ẩn câu đã đánh dấu ★ thuộc <b id="knownN"></b></span></label>
+          <label class="switch"><input type="checkbox" id="shufOpts" checked onchange="updateStartSub()"><span>🔀 Trộn thứ tự đáp án (tránh học vẹt vị trí)</span></label>
+        </div>
+      </details>
+
+      <div id="startRow">
+        <div class="start-sum" id="startSub" aria-live="polite">Chọn một chế độ ở trên</div>
+        <button type="button" class="btn start-btn" id="startBtn" onclick="startTest()" disabled>▶ Bắt đầu</button>
       </div>
     </div>
+
     <div class="card" id="masteryCard">
       <div class="row" style="justify-content:space-between"><b>🎯 Tiến độ thành thạo</b><span class="sub" id="dueLine"></span></div>
+      <div class="sub" id="scopeLine"></div>
       <div id="masteryBox" style="margin-top:10px"></div>
       <div class="sub" style="margin-top:6px">Thành thạo = câu đã lên box ≥4 sau nhiều lần trả lời đúng (SRS).</div>
     </div>
     <div class="card" id="historyCard">
       <div class="row" style="justify-content:space-between"><b>📊 Lịch sử làm bài</b>
-        <div class="row">
-          <button class="theme-btn" onclick="exportProgress()" title="Tải file sao lưu toàn bộ tiến độ">💾 Sao lưu</button>
+        <div class="row" style="gap:8px">
+          <button type="button" class="theme-btn" onclick="exportProgress()" title="Tải file sao lưu toàn bộ tiến độ">💾 Sao lưu</button>
           <label class="theme-btn" style="cursor:pointer">📂 Khôi phục<input type="file" accept="application/json,.json" onchange="importProgress(this)" style="display:none"></label>
-          <button class="theme-btn" onclick="clearHistory()">🗑 Xóa lịch sử</button>
+          <button type="button" class="theme-btn" onclick="clearHistory()">🗑 Xóa lịch sử</button>
         </div></div>
       <div id="historyBox" style="margin-top:10px"></div>
     </div>
@@ -203,7 +343,7 @@ kbd{background:var(--chip);border:1px solid var(--border);border-radius:5px;padd
 <div id="topbar" style="display:none">
   <button class="btn sec" onclick="exitTest()">← Thoát</button>
   <div id="timer">∞</div><div id="prog">1/1</div><div class="src" id="srcLabel"></div><div class="grow"></div>
-  <button class="theme-btn" onclick="toggleTheme()">🌓</button>
+  <button class="theme-btn theme-toggle" onclick="toggleTheme()" aria-label="Đổi giao diện sáng/tối">🌓</button>
   <button class="btn danger" onclick="submitTest()">✔ Nộp bài</button>
 </div>
 
@@ -233,8 +373,8 @@ function vfBadge(vf){
   switch(vf){
     case 'corrected':     return '<span class="vbadge corr">✎ đã sửa khi verify</span>';
     case 'review':        return '<span class="vbadge warn">⚠ nguồn đánh dấu cần rà soát</span>';
-    case 'corrected-src': return '<span class="vbadge src">📥 nguồn đã hiệu đính</span>';
-    case 'imported':      return '<span class="vbadge src">📥 đáp án theo nguồn</span>';
+    case 'corrected-src': return '<span class="vbadge src">nguồn đã hiệu đính</span>';
+    case 'imported':      return '<span class="vbadge warn">⚠ đáp án theo nguồn, chưa đối chiếu</span>';
     case 'checked':       return '<span class="vbadge ok">✓ đã đối chiếu</span>';
     default:              return '<span class="vbadge ok">✓ verify khớp</span>';
   }}
@@ -250,14 +390,16 @@ function formatQStem(x){
   t=t.replace(/(^|<br>)\s*([1-9])\.\s+/g,'$1&nbsp;&nbsp;<b>$2.</b> ');
   t=t.replace(/(^|<br>)\s*([a-f])\.\s+/g,'$1&nbsp;&nbsp;<b>$2.</b> ');
   return t;}
-const MODELABEL={random:'Random',exam:'Theo đề',all:'Ôn tổng',wrong:'Ôn câu sai',learn:'Học thông minh',review:'Ôn đến hạn'};
-
+const MODELABEL={random:'Random',exam:'Theo đề',all:'Ôn tổng',wrong:'Ôn câu sai',learn:'Học thông minh',review:'Ôn đến hạn',
+  flash:'Flashcard',book:'Câu đánh dấu',seen:'Câu đã xem đáp án',search:'Tìm kiếm'};
 /* theme */
 function applyTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem('app_theme',t)}catch(e){}
   const b=el('themeBtn');if(b)b.textContent=t==='dark'?'☀️ Sáng':'🌙 Tối';}
 function toggleTheme(){applyTheme((document.documentElement.dataset.theme||'dark')==='dark'?'light':'dark')}
 (function(){let t;try{t=localStorage.getItem('app_theme')}catch(e){}
   if(!t)t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';applyTheme(t)})();
+addEventListener('storage',e=>{if(e.key==='app_theme'&&(e.newValue==='dark'||e.newValue==='light')&&e.newValue!==document.documentElement.dataset.theme)applyTheme(e.newValue)});
+addEventListener('message',e=>{const d=e.data;if(e.source===window.parent&&d&&d.type==='app_theme'&&(d.theme==='dark'||d.theme==='light'))applyTheme(d.theme)});
 
 /* ---- storage failures must be visible: a full quota silently stops persisting SRS/history ---- */
 let _warned=false;
@@ -283,7 +425,10 @@ function importProgress(input){const f=input.files&&input.files[0];if(!f)return;
   r.readAsText(f);}
 
 /* subject scoping + bank index */
-const FORCED=qsParam('subject'); let MODE=null, PREV_MODE=null;
+const FORCED=qsParam('subject'); let MODE=null, PREV_MODE=null, REC_MODE='learn', EXAM_SEL=null, SEARCH_N=0;
+const SEASON={SP:1,SU:2,FA:3};
+const EX_TYPE={FE:'Thi cuối kỳ (FE)',FE2:'FE lần 2',RE:'Thi lại (RE)',PT:'Progress Test'};
+const _EXM=new WeakMap();
 function examsFor(sub){return FU_BANK.exams.filter(e=>sub==='__all__'||e.subject===sub)}
 function scopeKey(){return 'fu_'+(FORCED||(el('subject')&&el('subject').value)||'all')}
 function bankIndex(){ if(!window._bi){window._bi={};FU_BANK.exams.forEach(e=>e.questions.forEach((q,i)=>{
@@ -402,6 +547,9 @@ function applyOrigin(){
   applyOrigin();
   migrateIds();
   refreshScope(); renderStats(); renderHistory(); renderResume();
+  // tablet/desktop have room for the options; phones keep them folded behind a one-line summary
+  if(window.matchMedia&&matchMedia('(min-width:561px)').matches){const o=el('optsBox');if(o)o.open=true;}
+  pickMode(REC_MODE);   // a mode is always picked, so the start button is live on arrival
 })();
 function curSubject(){return FORCED||el('subject').value}
 function refreshScope(){const bi=bankIndex();
@@ -412,63 +560,174 @@ function refreshScope(){const bi=bankIndex();
   SEEN=new Set([...loadSet('fu_seen')].filter(id=>bi[id]));
   saveSet('fu_book',BOOK);saveSet('fu_seen',SEEN);
   SRS=loadSRS();let ch=false;Object.keys(SRS).forEach(id=>{if(!bi[id]){delete SRS[id];ch=true}});if(ch)saveSRS();}
-function renderStats(){const exs=examsFor(curSubject());const q=exs.reduce((a,e)=>a+e.count,0);
-  const sq=scopeQuestions();const mp=masteryPct(sq);const due=dueCount();
-  const dedup=q-sq.length;
-  const kn=new Set(),wr=new Set();sq.forEach(x=>{if(KNOWN.has(x.id))kn.add(x.dk);if(WRONG.has(x.id))wr.add(x.dk)});
-  el('stats').innerHTML=`<span class="stat"><b>${exs.length}</b> đề</span>`+
-    `<span class="stat"><b>${sq.length}</b> câu${dedup?` <span style="color:var(--muted)">(${q} lượt, ${dedup} trùng đã gộp)</span>`:''}</span>`+
-    `<span class="stat">★ thuộc: <b>${kn.size}</b></span><span class="stat">🔁 câu sai: <b>${wr.size}</b></span>`+
-    `<span class="stat">🎯 thành thạo: <b>${mp}%</b></span><span class="stat">⏰ đến hạn: <b>${due}</b></span>`;
-  renderStreak();renderMastery();}
-function renderStreak(){const box=el('streak');if(!box)return;const s=streakInfo();const pct=Math.min(100,Math.round(s.todayCount/s.goal*100));
-  box.innerHTML=`<div class="streakbar"><span class="flame">🔥</span><b>${s.streak}</b><span class="sub">ngày liên tục</span><div class="gbar"><div style="width:${pct}%"></div></div><span class="sub">hôm nay ${s.todayCount}/${s.goal} câu${s.todayCount>=s.goal?' ✅':''}</span></div>`;}
+function renderStats(){const exs=examsFor(curSubject()),raw=exs.reduce((a,e)=>a+e.count,0);
+  const sq=scopeQuestions(),mp=masteryPct(sq),dedup=raw-sq.length;
+  const kn=new Set();sq.forEach(x=>{if(KNOWN.has(x.id))kn.add(x.dk)});
+  el('stats').innerHTML=`<span class="kpi"><span aria-hidden="true">🎯</span> Thành thạo <b>${mp}%</b></span>`;
+  const sl=el('scopeLine');if(sl)sl.textContent=`${exs.length} đề · ${sq.length} câu`+(dedup?` (${raw} lượt, ${dedup} câu trùng đã gộp)`:'');
+  const kN=el('knownN');if(kN)kN.textContent=kn.size?`(${kn.size} câu)`:'';
+  renderStreak();renderMastery();renderModeCounts(exs,sq);
+  // back from a test / subject switch: the picked mode's counts and start state may have changed
+  if(MODE==='search')onSearchInput();else if(MODE)pickMode(MODE);}
+/* distinct questions of a saved set (WRONG/BOOK/SEEN) that belong to the current subject */
+function scopeCount(set){const bi=bankIndex(),s=curSubject(),ks=new Set();
+  set.forEach(id=>{const q=bi[id];if(q&&(s==='__all__'||q.subject===s))ks.add(q.dk)});return ks.size;}
+/* live counts on the tiles + the "Gợi ý" pick: due reviews > wrong answers > adaptive learning */
+function renderModeCounts(exs,sq){
+  const c={exam:exs.length,all:sq.length,wrong:scopeCount(WRONG),learn:sq.filter(x=>!SRS[x.id]).length,
+           review:dueCount(),book:scopeCount(BOOK),seen:scopeCount(SEEN)};
+  const txt={exam:c.exam+' đề',all:c.all+' câu',wrong:String(c.wrong),learn:c.learn?c.learn+' mới':'',
+             review:String(c.review),book:String(c.book),seen:String(c.seen)};
+  document.querySelectorAll('.mode .mc').forEach(b=>{const k=b.dataset.c;b.textContent=txt[k]||'';
+    b.classList.toggle('zero',c[k]===0);b.classList.toggle('bad',k==='wrong'&&c[k]>0);b.classList.toggle('due',k==='review'&&c[k]>0);});
+  REC_MODE=c.review>0?'review':c.wrong>0?'wrong':'learn';
+  document.querySelectorAll('.mode').forEach(m=>m.classList.toggle('rec',m.dataset.mode===REC_MODE));
+  const mb=el('matchBtn');if(mb){const n=exs.reduce((a,e)=>a+e.questions.filter(isMatch).length,0);
+    mb.style.display=n?'':'none';const mn=el('matchN');if(mn)mn.textContent='('+n+')';}}
+function renderStreak(){const box=el('streak');if(!box)return;const s=streakInfo(),pct=Math.min(100,Math.round(s.todayCount/s.goal*100));
+  box.innerHTML=`<div class="streakbar"><span class="flame" aria-hidden="true">🔥</span><span><b>${s.streak}</b> ngày<span class="m-hide"> liên tục</span></span>`+
+    `<div class="gbar" role="progressbar" aria-label="Mục tiêu hôm nay" aria-valuemin="0" aria-valuemax="${s.goal}" aria-valuenow="${Math.min(s.todayCount,s.goal)}"><div style="width:${pct}%"></div></div>`+
+    `<span class="sub" style="margin:0">${s.todayCount}/${s.goal} câu<span class="m-hide"> hôm nay</span>${s.todayCount>=s.goal?' ✅':''}</span></div>`;}
 function renderMastery(){const box=el('masteryBox');if(!box)return;const dl=el('dueLine');const t=today();const exs=examsFor(curSubject());
-  const rows=exs.map(e=>{const items=e.questions.map((q,i)=>({id:e.name+'#'+i}));const mp=masteryPct(items);
+  const rows=exs.map((e,i)=>({e,i,m:examMeta(e)})).sort(examCmp).map(({e,m})=>{
+    const items=e.questions.map((q,i)=>({id:e.name+'#'+i}));const mp=masteryPct(items);
     const due=items.filter(x=>{const r=SRS[x.id];return r&&r.due<=t}).length;
-    return `<div class="modbar"><span class="mlabel">${esc(e.name)}</span><div class="barwrap"><div class="bar" style="width:${mp}%;background:${mp>=70?'var(--green)':mp>=40?'var(--amber)':'var(--accent)'}"></div></div><span>${mp}%${due?' · ⏰'+due:''}</span></div>`}).join('');
+    const lbl=[m.code,m.title].filter(Boolean).join(' · ')||e.name;
+    return `<div class="modbar" title="${esc(e.name)}"><span class="mlabel">${esc(lbl)}</span><div class="barwrap"><div class="bar" style="width:${mp}%;background:${mp>=70?'var(--green)':mp>=40?'var(--amber)':'var(--accent)'}"></div></div><span>${mp}%${due?' · ⏰'+due:''}</span></div>`}).join('');
   box.innerHTML=rows||'<div class="hist-empty">Chưa có dữ liệu.</div>';
   if(dl){const due=dueCount();dl.textContent=due?('⏰ '+due+' câu cần ôn hôm nay'):'Không có câu đến hạn';}}
 function clearSearch(){const g=el('globalSearch');if(!g)return;g.value='';onSearchInput();g.focus();}
 function onSearchInput(){const raw=(el('globalSearch').value||'').trim();const k=raw.toLowerCase();
   const w=el('searchWrap');if(w)w.classList.toggle('has-text',raw.length>0);
-  const sc0=el('searchCount');if(sc0&&k.length<2)sc0.innerHTML='';
-  if(k.length>=2){if(MODE!=='search')PREV_MODE=MODE;MODE='search';document.querySelectorAll('.mode').forEach(m=>m.classList.remove('active'));
-    const n=searchMatches(k).length;
+  const sc=el('searchCount');if(sc&&k.length<2)sc.innerHTML='';
+  if(k.length>=2){if(MODE!=='search')PREV_MODE=MODE;MODE='search';
+    document.querySelectorAll('.mode').forEach(m=>{m.classList.remove('active');m.setAttribute('aria-pressed','false')});
+    const n=SEARCH_N=searchMatches(k).length;
     el('startBtn').disabled=n===0;
-    const sc=el('searchCount');if(sc)sc.innerHTML=n?`🔍 <b>${n}</b> câu khớp — kéo xuống bấm <b>▶ Bắt đầu</b>`:'🔍 Không có câu nào khớp';
-    el('modeCfg').innerHTML=n
-      ? `<div class="sub" style="padding:8px;background:var(--selbg);border:1px solid var(--accent);border-radius:8px;color:var(--text)">🔍 Tìm thấy <b>${n}</b> câu khớp "<b>${esc(raw)}</b>" — nhấn <b>Bắt đầu</b> hoặc Enter</div>`
-      : `<div class="hist-empty" style="padding:8px">🔍 Không có câu nào khớp "<b>${esc(raw)}</b>"</div>`;
-  } else if(MODE==='search'){pickMode(PREV_MODE||'random');}}
+    if(sc)sc.innerHTML=n?`🔍 <b>${n}</b> câu khớp — bấm <b>▶ Bắt đầu</b> hoặc Enter`:'🔍 Không có câu nào khớp';
+    el('modeCfg').innerHTML=n?cfgDesc(`🔍 Làm riêng <b>${n}</b> câu khớp “<b>${esc(raw)}</b>”.`)
+      :`<div class="hist-empty">🔍 Không có câu nào khớp “<b>${esc(raw)}</b>”.</div>`;
+    const mf=el('minsField');if(mf)mf.style.display='';
+    updateStartSub();
+  // was: if(MODE)pickMode(MODE) — that fed pickMode('search'), which is not a mode
+  } else if(MODE==='search'){pickMode(PREV_MODE||REC_MODE);}}
 function searchMatches(k){const out=[];examsFor(curSubject()).forEach(e=>e.questions.forEach((q,i)=>{
     if((q.q||'').toLowerCase().includes(k)||(q.o||[]).some(o=>(o||'').toLowerCase().includes(k)))
       out.push({...q,src:e.name,subject:e.subject,id:e.name+'#'+i,dk:e.subject+'|'+normStem(q.q)});}));
   return dedupeCross(out);}
-function onSubjectChange(){refreshScope();renderStats();renderHistory();renderResume();if(MODE)pickMode(MODE)}
-function pickMode(m){MODE=m;document.querySelectorAll('.mode').forEach(x=>x.classList.toggle('active',x.dataset.mode===m));
-  const cfg=el('modeCfg'),exs=examsFor(curSubject());let disabled=false;
-  if(m==='random'||m==='learn'){const mx=Math.max(1,exs.reduce((a,e)=>a+e.count,0));const dv=Math.min(lastNumQ||30,mx);
-    const hint=m==='learn'?'<div class="sub" style="margin-bottom:6px">🧠 Sắp xếp thích ứng: câu chưa làm → câu hay sai → câu box thấp lên trước.</div>':'';
-    cfg.innerHTML=hint+`<div class="field"><label>Số câu</label><input type="number" id="numQ" value="${dv}" min="1" max="${mx}" oninput="lastNumQ=parseInt(this.value)||null"></div>`;}
-  else if(m==='exam'){cfg.innerHTML=`<div class="field"><label>Chọn đề</label><select id="examPick">`+exs.map((e,i)=>`<option value="${i}">${esc(e.name)} (${e.count} câu)</option>`).join('')+`</select></div>`;}
-  else if(m==='wrong'){const bi=bankIndex(),ws=new Set();
-    [...WRONG].forEach(id=>{const q=bi[id];if(q&&(curSubject()==='__all__'||q.subject===curSubject()))ws.add(q.dk)});
-    const wn=ws.size;cfg.innerHTML=`<div class="sub">Sẽ ôn lại <b>${wn}</b> câu bạn làm sai (đã lưu). Làm đúng sẽ tự bỏ khỏi danh sách.</div>`;disabled=wn===0;}
-  else if(m==='review'){const due=dueCount();const mx=Math.max(1,due);
-    cfg.innerHTML=`<div class="sub" style="margin-bottom:6px">⏰ Có <b>${due}</b> câu đã tới hạn ôn (lặp lại ngắt quãng). Câu yếu (box thấp) hiện trước.</div>`+(due?`<div class="field"><label>Số câu (tối đa ${due})</label><input type="number" id="numQ" value="${Math.min(lastNumQ||30,mx)}" min="1" max="${mx}" oninput="lastNumQ=parseInt(this.value)||null"></div>`:'<div class="hist-empty">Chưa có câu nào đến hạn — hãy làm bài ở chế độ khác để nạp vào lịch ôn.</div>');disabled=due===0;}
-  else if(m==='book'||m==='seen'){const set=m==='book'?BOOK:SEEN,bi=bankIndex(),ks=new Set();
-    [...set].forEach(id=>{const q=bi[id];if(q&&(curSubject()==='__all__'||q.subject===curSubject()))ks.add(q.dk)});
-    const label=m==='book'?'câu bạn đã đánh dấu 🔖':'câu bạn đã xem đáp án 👁';
-    cfg.innerHTML=ks.size?`<div class="sub">Sẽ ôn <b>${ks.size}</b> ${label}.</div>`
-      :`<div class="hist-empty">Chưa có ${label}.</div>`;
-    disabled=ks.size===0;}
+function onSubjectChange(){EXAM_SEL=null;refreshScope();renderStats();renderHistory();renderResume();}
+function cfgDesc(h){return '<div class="cfg-desc">'+h+'</div>'}
+/* count chips + the exact number; #numQ is still what buildSession reads */
+function numField(label,val,mx,steps){
+  const ch=steps.filter(x=>x<mx).map(x=>[x,String(x)]).concat([[mx,'Tất cả']]);
+  return `<div class="qty"><div class="chips" data-for="numQ">`+
+    ch.map(([n,l])=>`<button type="button" class="chip" data-v="${n}" onclick="setVal('numQ',${n})">${l}</button>`).join('')+
+    `</div><input type="number" id="numQ" value="${val}" min="1" max="${mx}" inputmode="numeric" aria-label="${label}" oninput="lastNumQ=parseInt(this.value)||null;syncChips();updateStartSub()"></div>`;}
+function setVal(id,v){const i=el(id);if(!i)return;i.value=v;if(id==='numQ')lastNumQ=v;syncChips();updateStartSub();}
+function syncChips(){document.querySelectorAll('.chips[data-for]').forEach(c=>{const i=el(c.dataset.for),v=i?parseInt(i.value):NaN;
+  c.querySelectorAll('.chip').forEach(b=>{const on=parseInt(b.dataset.v)===v;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on?'true':'false')})})}
+/* exam names -> {code,title}: "IAP301_SP25_FE_HCM" -> SP25 · Thi cuối kỳ (FE) · HCM;
+   "FRS401c - 2ndFE - SU 2023" -> SU23 · FE lần 2; "VNR - Final Exam - Chu Be Dan" -> Thi cuối kỳ (FE) · Chu Be Dan */
+function examMeta(e){let m=_EXM.get(e);if(m)return m;
+  const raw=String(e.name||''),sub=String(e.subject||'').replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  const tm=/(?:^|[^A-Za-z])(SP|SU|FA)\s?(?:20)?(\d{2})/.exec(raw);
+  const type=/2nd\s?FE/i.test(raw)?'FE2'
+    :(/(?:^|[^A-Za-z])FE(?![A-Za-z])/.test(raw)||/final exam/i.test(raw))?'FE'
+    :/(?:^|[^A-Za-z])RE(?![A-Za-z])/.test(raw)?'RE':/progress test/i.test(raw)?'PT':'';
+  // what is left after the code, term, type and numeric ids: a campus ("HCM"), an author, a set title
+  const extra=raw.replace(new RegExp('^'+sub+'[A-Za-z]?','i'),'').replace(/_/g,' ')
+    .replace(/2nd\s?FE|final exam|progress test/gi,' ')
+    .replace(/(^|[^A-Za-z])(SP|SU|FA)\s?\d{2,}/g,'$1 ')
+    .replace(/(^|[^A-Za-z])(FE|RE)(?![A-Za-z])/g,'$1 ')
+    .replace(/(^|\s)\d{4,}(?=\s|$)/g,' ')
+    .replace(/(\s*-\s*)+/g,' - ').replace(/^[\s-]+|[\s-]+$/g,'');
+  const term=tm?{s:tm[1],y:+tm[2]}:null,code=tm?tm[1]+tm[2]:'';
+  m={term,code,type,extra,
+     title:[EX_TYPE[type],extra].filter(Boolean).join(' · ')||raw,
+     short:[code,type==='FE2'?'FE lần 2':type,extra].filter(Boolean).join(' · ')||raw};
+  _EXM.set(e,m);return m;}
+/* newest paper first: year desc, FA > SU > SP, then FE, FE lần 2, RE, PT, then bank order */
+function examCmp(a,b){
+  if(a.e.subject!==b.e.subject)return a.e.subject<b.e.subject?-1:1;      // only matters for "Tất cả môn"
+  const ta=a.m.term,tb=b.m.term;
+  if(ta&&tb){if(ta.y!==tb.y)return tb.y-ta.y;if(ta.s!==tb.s)return SEASON[tb.s]-SEASON[ta.s];}
+  else if(ta||tb)return ta?-1:1;
+  const o={FE:0,FE2:1,RE:2,PT:3,'':4};return (o[a.m.type]-o[b.m.type])||(a.i-b.i);}
+/* exam name -> {n attempts, last attempt}; history is newest-first */
+function examHistory(){const out={};loadHistory().forEach(a=>{
+  if(a.mode!=='exam'||!Array.isArray(a.details)||!a.details.length)return;
+  const id=String(a.details[0].id),k=id.slice(0,id.lastIndexOf('#'));
+  const o=out[k]||(out[k]={n:0,last:a});o.n++;});return out;}
+/* #examPick stays, as a hidden input holding the index into examsFor(curSubject()) — buildSession is unchanged */
+function examList(exs){
+  if(!exs.length)return '<div class="hist-empty">Chưa có đề nào.</div>';
+  const hist=examHistory(),multi=new Set(exs.map(e=>e.subject)).size>1;
+  const rows=exs.map((e,i)=>({e,i,m:examMeta(e)})).sort(examCmp);
+  if(EXAM_SEL==null||!exs[EXAM_SEL])EXAM_SEL=rows[0].i;
+  let h=`<input type="hidden" id="examPick" value="${EXAM_SEL}"><div class="exam-list" role="radiogroup" aria-label="Chọn đề">`,sub=null,k=0;
+  rows.forEach(({e,i,m})=>{
+    if(multi&&e.subject!==sub){sub=e.subject;k=0;h+=`<div class="exam-grp">${esc(sub)}</div>`;}
+    k++;
+    const mp=masteryPct(e.questions.map((q,j)=>({id:e.name+'#'+j}))),hs=hist[e.name],on=i===EXAM_SEL;
+    const done=hs?`đã làm ${hs.n} lần · gần nhất <b>${Math.round(+hs.last.pct)||0}%</b>`:'chưa làm';
+    h+=`<label class="exam-row${on?' sel':''}"><input type="radio" name="examR" value="${i}"${on?' checked':''} onchange="pickExam(${i})">`+
+       `<span class="ex-badge">${esc(m.code||('Đề '+k))}</span>`+
+       `<span class="ex-main"><span class="ex-title">${esc(m.title)}</span>`+
+       `<span class="ex-sub">${e.count} câu · ${done}</span><span class="ex-raw">${esc(e.name)}</span></span>`+
+       `<span class="ex-mp"><b>${mp}%</b><small>thành thạo</small></span></label>`;});
+  return h+'</div>';}
+function pickExam(i){EXAM_SEL=i;const p=el('examPick');if(p)p.value=String(i);
+  document.querySelectorAll('.exam-row').forEach(r=>{const inp=r.querySelector('input');r.classList.toggle('sel',!!(inp&&inp.checked))});
+  updateStartSub();}
+/* `user` = a tile tap or a digit key: that also drops an active keyword search */
+function pickMode(m,user){
+  if(user){const g=el('globalSearch');if(g&&g.value){g.value='';const w=el('searchWrap');if(w)w.classList.remove('has-text');
+    const sc=el('searchCount');if(sc)sc.innerHTML='';}}
+  MODE=m;
+  document.querySelectorAll('.mode').forEach(x=>{const on=x.dataset.mode===m;x.classList.toggle('active',on);x.setAttribute('aria-pressed',on?'true':'false')});
+  const cfg=el('modeCfg'),sub=curSubject(),exs=examsFor(sub),where=sub==='__all__'?'tất cả môn':esc(sub);let disabled=false;
+  if(m==='random'||m==='learn'){const mx=Math.max(1,scopeQuestions().length);   // sessions are de-duplicated, so the max is too
+    cfg.innerHTML=cfgDesc(m==='learn'?'🧠 Thích ứng: câu chưa làm → câu hay sai → câu chưa thuộc lên trước. Chọn số câu:'
+        :'🎲 Trộn ngẫu nhiên các câu của '+where+'. Chọn số câu:')+
+      numField('Số câu',Math.min(lastNumQ||30,mx),mx,[20,30,50]);}
+  else if(m==='exam'){cfg.innerHTML=cfgDesc('📄 Làm nguyên 1 đề như đề gốc (đề mới nhất ở trên). Chọn đề:')+examList(exs);disabled=!exs.length;}
+  else if(m==='wrong'){const n=scopeCount(WRONG);
+    cfg.innerHTML=cfgDesc(n?`🔁 Ôn lại <b>${n}</b> câu bạn làm sai. Làm đúng sẽ tự bỏ khỏi danh sách.`:'🔁 Chưa có câu sai nào — hãy làm bài ở chế độ khác trước.');disabled=!n;}
+  else if(m==='review'){const due=dueCount();
+    cfg.innerHTML=due?cfgDesc(`⏰ <b>${due}</b> câu đã tới hạn ôn (lặp lại ngắt quãng) — câu yếu hiện trước. Chọn số câu:`)+numField('Số câu',Math.min(lastNumQ||30,due),due,[10,20,30])
+      :cfgDesc('⏰ Chưa có câu nào đến hạn — hãy làm bài ở chế độ khác để nạp vào lịch ôn.');disabled=!due;}
+  else if(m==='book'||m==='seen'){const n=scopeCount(m==='book'?BOOK:SEEN),label=m==='book'?'câu bạn đã đánh dấu 🔖':'câu bạn đã xem đáp án 👁';
+    cfg.innerHTML=cfgDesc(n?`Sẽ ôn <b>${n}</b> ${label}.`:`Chưa có ${label}.`+(m==='book'?' Trong bài làm, bấm 🔖 để đánh dấu câu khó.':''));disabled=!n;}
   else if(m==='flash'){const mx=Math.max(1,scopeQuestions().length);
-    cfg.innerHTML=`<div class="sub" style="margin-bottom:6px">🎴 Lật thẻ để xem đáp án. Không tính giờ, không chấm điểm.</div>`+
-      `<div class="field"><label>Số thẻ</label><input type="number" id="numQ" value="${Math.min(lastNumQ||20,mx)}" min="1" max="${mx}" oninput="lastNumQ=parseInt(this.value)||null"></div>`;}
-  else {cfg.innerHTML=`<div class="sub">Sẽ làm toàn bộ <b>${exs.reduce((a,e)=>a+e.count,0)}</b> câu của ${curSubject()==='__all__'?'tất cả môn':curSubject()}.</div>`;}
-  el('startBtn').disabled=disabled;}
-
+    cfg.innerHTML=cfgDesc('🎴 Lật thẻ xem đáp án — không tính giờ, không chấm điểm. Chọn số thẻ:')+numField('Số thẻ',Math.min(lastNumQ||20,mx),mx,[10,20,30]);}
+  else {const sq=scopeQuestions().length,raw=exs.reduce((a,e)=>a+e.count,0);   // 'all' — the real, de-duplicated size
+    cfg.innerHTML=cfgDesc(`📚 Toàn bộ <b>${sq}</b> câu của ${where}`+(raw>sq?` (đã gộp ${raw-sq} câu trùng giữa các đề)`:'')+'.');}
+  el('startBtn').disabled=disabled;
+  const mf=el('minsField');if(mf)mf.style.display=m==='flash'?'none':'';   // flashcards ignore the timer
+  syncChips();updateStartSub();}
+/* the one-line summary next to the start button, and the folded options row */
+function updateStartSub(){const s=el('startSub');if(!s)return;
+  const nq=()=>{const i=el('numQ');return i?Math.max(1,parseInt(i.value)||0):0};
+  const cnt=(n,w)=>`<b>${n}</b> ${w}`;let t;
+  switch(MODE){
+    case 'random':t=`🎲 Ngẫu nhiên · ${cnt(nq(),'câu')}`;break;
+    case 'learn':t=`🧠 Học thông minh · ${cnt(nq(),'câu')}`;break;
+    case 'flash':t=`🎴 Flashcard · ${cnt(nq(),'thẻ')}`;break;
+    case 'review':t=el('numQ')?`⏰ Đến hạn · ${cnt(nq(),'câu')}`:'⏰ Chưa có câu đến hạn';break;
+    case 'exam':{const e=examsFor(curSubject())[EXAM_SEL];t=e?`📄 ${esc(examMeta(e).short)} · ${cnt(e.count,'câu')}`:'📄 Chưa có đề';break;}
+    case 'all':t=`📚 Ôn tổng · ${cnt(scopeQuestions().length,'câu')}`;break;
+    case 'wrong':{const n=scopeCount(WRONG);t=n?`🔁 Câu sai · ${cnt(n,'câu')}`:'🔁 Chưa có câu sai';break;}
+    case 'book':{const n=scopeCount(BOOK);t=n?`🔖 Đã đánh dấu · ${cnt(n,'câu')}`:'🔖 Chưa đánh dấu câu nào';break;}
+    case 'seen':{const n=scopeCount(SEEN);t=n?`👁 Đã xem đáp án · ${cnt(n,'câu')}`:'👁 Chưa xem đáp án câu nào';break;}
+    case 'search':t=SEARCH_N?`🔍 ${cnt(SEARCH_N,'câu')} khớp từ khóa`:'🔍 Không có câu nào khớp';break;
+    default:t='Chọn một chế độ ở trên';}
+  const mins=Math.max(0,parseInt(el('mins').value)||0);
+  if(MODE&&MODE!=='flash'&&mins>0)t+=` · ⏱ ${mins} phút`;
+  if(MODE&&el('hideKnown').checked)t+=' · ẩn ★';
+  s.innerHTML=t;updateOptsSum();}
+function updateOptsSum(){const o=el('optsSum');if(!o)return;const mins=Math.max(0,parseInt(el('mins').value)||0);
+  o.textContent=[MODE==='flash'?'':(mins?`⏱ ${mins} phút`:'⏱ Không giới hạn'),
+    el('shufOpts').checked?'🔀 Trộn đáp án':'Giữ thứ tự đáp án',el('hideKnown').checked?'Ẩn câu ★':''].filter(Boolean).join(' · ');}
 let SESSION=[],IDX=0,submitted=false,timerInt=null,remaining=0,limited=false,REVEALED=new Set(),initSec=0,deadline=0;
 function buildSession(){const exs=examsFor(curSubject());let list=[];const t=today();
   const mk=(q,extra)=>({...q,...extra,sels:[],ci:correctIdxOf(q),oi:(q.o||[]).map((_,i)=>i)});
@@ -720,8 +979,9 @@ addEventListener('keydown',function(e){
   if(e.code==='Escape'){closeShortcutModal();return}
   // Enter starts the test even from the "số câu"/"phút" inputs, so it is handled before the input guard
   if(e.code==='Enter'&&onStartScreen()&&!modalOpen()){
+    const t=e.target;if(t&&t.matches&&t.matches('button,summary,a,label'))return;   // let a focused control keep its own Enter
     if(el('startBtn').disabled)return;
-    e.preventDefault();if(e.target&&e.target.blur)e.target.blur();startTest();return;}
+    e.preventDefault();if(t&&t.blur)t.blur();startTest();return;}
   const tag=(e.target.tagName||'').toLowerCase();
   if(tag==='input'||tag==='textarea'||tag==='select')return;
   if(e.key==='?'||e.code==='KeyH'){e.preventDefault();modalOpen()?closeShortcutModal():openShortcutModal();return}
@@ -729,7 +989,7 @@ addEventListener('keydown',function(e){
 
   if(onStartScreen()){
     const i=keyIndex(e);
-    if(i>=0&&i<KEY_MODES.length){e.preventDefault();pickMode(KEY_MODES[i]);}
+    if(i>=0&&i<KEY_MODES.length){e.preventDefault();pickMode(KEY_MODES[i],1);}
     return;}
 
   if(onTestScreen()){
@@ -755,8 +1015,9 @@ addEventListener('keydown',function(e){
       <button class="theme-btn" onclick="closeShortcutModal()">✕ Đóng</button>
     </div>
     <div class="shortcut-grid">
-      <div class="sc-item"><div><kbd>1</kbd> - <kbd>9</kbd></div><span>Chọn nhanh chế độ ôn tập</span></div>
-      <div class="sc-item"><div><kbd>Enter</kbd></div><span>Bắt đầu làm bài</span></div>
+      <div class="sc-item"><div><kbd>1</kbd> - <kbd>9</kbd></div><span>Chọn chế độ theo số trên ô (1-3 Làm bài · 4-6 Ôn chỗ yếu · 7-9 Ôn nhanh)</span></div>
+      <div class="sc-item"><div><kbd>Enter</kbd></div><span>Bắt đầu với chế độ đang chọn</span></div>
+      <div class="sc-item"><div><kbd>↑</kbd> <kbd>↓</kbd></div><span>Chọn đề trong danh sách (chế độ Theo đề)</span></div>
       <div class="sc-item"><div><kbd>1</kbd> - <kbd>6</kbd> / <kbd>A</kbd> - <kbd>F</kbd></div><span>Chọn đáp án (trong bài làm)</span></div>
       <div class="sc-item"><div><kbd>←</kbd> <kbd>→</kbd> / <kbd>↑</kbd> <kbd>↓</kbd></div><span>Câu trước / câu sau</span></div>
       <div class="sc-item"><div><kbd>⌫</kbd> Backspace</div><span>Xóa lựa chọn của câu hiện tại</span></div>

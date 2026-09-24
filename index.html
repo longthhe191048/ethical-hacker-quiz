@@ -3,111 +3,249 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dashboard ôn thi — FU · VNR · HCM202 · MLN111/122/131 · PMG · SWD · MMA</title>
+<title>Dashboard ôn thi FU — 14 môn</title>
 <style>
 :root, :root[data-theme="dark"]{
   --bg:#0d1117;--panel:#161b22;--panel2:#1c232d;--border:#30363d;--text:#e6edf3;--muted:#9aa7b4;
   --accent:#3b82f6;--accent2:#2563eb;--chip:#21262d;--topbar:rgba(13,17,23,.96);--shadow:rgba(0,0,0,.45);
+  --amber:#d29922;
 }
 :root[data-theme="light"]{
   --bg:#f6f8fa;--panel:#fff;--panel2:#eef1f4;--border:#d0d7de;--text:#1f2328;--muted:#59636e;
   --accent:#2563eb;--accent2:#1d4ed8;--chip:#eaeef2;--topbar:rgba(255,255,255,.94);--shadow:rgba(140,149,159,.28);
+  --amber:#9a6700;
 }
 *{box-sizing:border-box}html,body{margin:0;padding:0;height:100%}
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   display:flex;flex-direction:column;height:100vh;height:100dvh;transition:background .2s,color .2s}
-header{background:var(--topbar);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);
-  padding:10px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;flex:0 0 auto}
-.brand{font-weight:800;font-size:1.15rem;white-space:nowrap}.brand .em{margin-right:6px}
-.tabs{display:flex;gap:8px;flex-wrap:wrap}
-.tab{background:var(--chip);color:var(--text);border:1px solid var(--border);border-radius:999px;
-  padding:8px 16px;font-size:.92rem;font-weight:600;cursor:pointer;transition:.15s}
-.tab:hover{border-color:var(--accent)}.tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+button{font:inherit;color:inherit}
+header{position:relative;z-index:20;flex:0 0 auto;display:flex;align-items:center;gap:12px;min-height:56px;padding:6px 16px;
+  background:var(--topbar);backdrop-filter:blur(6px);border-bottom:1px solid var(--border)}
+.brand{font-weight:800;font-size:1.1rem;white-space:nowrap}.brand .em{margin-right:6px}
+.cur-title{display:none;min-width:0;font-weight:700;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cur-title::before{content:'/';margin-right:10px;opacity:.5}
 .grow{flex:1}
-.tab-sep{align-self:center;color:var(--muted);font-size:.95rem;padding:0 2px;flex:0 0 auto}
-.tab.qs{border-style:dashed}.tab.qs.active{border-style:solid}
-.theme-btn{background:var(--chip);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:7px 12px;cursor:pointer;font-size:.9rem;white-space:nowrap}
+/* one button that says which subject is open; it opens the picker (sheet on phones, sidebar from 900px) */
+.subj-btn{display:flex;align-items:center;gap:10px;min-width:0;min-height:44px;padding:4px 12px 4px 14px;text-align:left;cursor:pointer;
+  background:var(--chip);border:1px solid var(--border);border-radius:12px}
+.subj-btn:hover{border-color:var(--accent)}
+.sb-txt{display:flex;flex-direction:column;min-width:0;line-height:1.2}
+.sb-grp{font-size:.7rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-cur{font-size:.98rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-caret{margin-left:auto;padding-left:4px;font-size:.8rem;color:var(--muted);transition:transform .15s}
+.subj-btn[aria-expanded="true"] .sb-caret{transform:rotate(180deg)}
+.theme-btn{min-height:44px;padding:7px 12px;border-radius:10px;cursor:pointer;white-space:nowrap;font-size:.9rem;
+  background:var(--chip);border:1px solid var(--border)}
 .theme-btn:hover{background:var(--panel2)}
-#content{flex:1;min-height:0;position:relative;overflow:hidden}
+.subj-btn:focus-visible,.theme-btn:focus-visible,.tab:focus-visible,.nav-close:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#main{flex:1;min-height:0;display:flex}
+#content{flex:1;min-width:0;min-height:0;position:relative;overflow:hidden}
 .panel{position:absolute;inset:0;display:none}.panel.active{display:block}
 .panel iframe{width:100%;height:100%;border:0;display:block;background:var(--bg)}
-.loading{position:absolute;inset:0;background:var(--bg);z-index:1;display:flex;align-items:center;justify-content:center;color:var(--muted)}
-@media(max-width:560px){
-  header{padding:8px 12px;gap:8px;row-gap:8px}
-  .brand{order:1;font-size:1rem}
-  .grow{order:2}
-  .theme-btn{order:3}
-  /* tabs get their own row and scroll horizontally instead of wrapping to 2-3 rows */
-  .tabs{order:4;flex:0 0 100%;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;
-        scrollbar-width:none;-ms-overflow-style:none;margin:0 -12px;padding:2px 12px}
-  .tabs::-webkit-scrollbar{display:none}
-  .tab{flex:0 0 auto;padding:9px 14px;font-size:.85rem;min-height:40px}
+.loading{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--muted)}
+
+/* ---- subject picker: bottom sheet below 900px, sidebar from 900px (one <nav>, two layouts) ---- */
+#navScrim{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .2s}
+#navScrim.open{opacity:1;pointer-events:auto}
+#subjNav{position:fixed;left:0;right:0;bottom:0;z-index:50;max-width:640px;margin:0 auto;max-height:88vh;max-height:88dvh;
+  overflow-y:auto;overscroll-behavior:contain;padding:6px 14px calc(14px + env(safe-area-inset-bottom));
+  background:var(--panel);border:1px solid var(--border);border-bottom:0;border-radius:18px 18px 0 0;box-shadow:0 -12px 32px var(--shadow);
+  transform:translateY(105%);visibility:hidden;transition:transform .22s ease,visibility 0s linear .22s}
+#subjNav.open{transform:none;visibility:visible;transition:transform .22s ease,visibility 0s}
+.nav-handle{width:40px;height:4px;margin:4px auto 2px;border-radius:2px;background:var(--border)}
+.nav-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.nav-head b{font-size:1.05rem}
+.nav-close{min-width:44px;min-height:44px;border-radius:10px;cursor:pointer;background:transparent;border:1px solid transparent;color:var(--muted);font-size:1.1rem}
+.nav-close:hover{background:var(--chip)}
+.grp{margin:6px 0 12px}
+.grp-h{margin:0 2px 8px;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.grp-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.tab{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;min-width:0;min-height:56px;padding:8px 10px;
+  text-align:left;cursor:pointer;background:var(--panel2);border:1px solid var(--border);border-radius:12px;transition:border-color .15s,background .15s}
+.tab b{font-size:.95rem;white-space:nowrap}
+.tab small{font-size:.74rem;line-height:1.2;color:var(--muted)}
+.tab:hover{border-color:var(--accent)}
+.tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.tab.active small{color:rgba(255,255,255,.85)}
+/* amber dot = this subject has SRS questions due today */
+.tab.due::after{content:'';position:absolute;top:8px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--amber)}
+.tab.active.due::after{background:#fff}
+.sb-dot{display:none;width:8px;height:8px;border-radius:50%;background:var(--amber);flex:0 0 auto}
+.sb-dot.on{display:block}
+
+@media(min-width:900px){
+  .subj-btn,#navScrim,.nav-handle,.nav-head{display:none}
+  .cur-title{display:block}
+  #subjNav{position:static;flex:0 0 228px;max-width:none;max-height:none;margin:0;padding:10px 10px 16px;overflow-y:auto;
+    transform:none;visibility:visible;transition:none;border:0;border-right:1px solid var(--border);border-radius:0;box-shadow:none}
+  .grp{margin:6px 0 16px}
+  .grp-h{margin:0 10px 6px}
+  .grp-list{grid-template-columns:1fr;gap:2px}
+  .tab{flex-direction:row;align-items:baseline;gap:8px;min-height:40px;padding:8px 10px;background:transparent;border-color:transparent;border-radius:9px}
+  .tab b{min-width:4.8em}
+  .tab small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tab:hover{background:var(--chip);border-color:transparent}
+  .tab.active{background:var(--accent);border-color:var(--accent)}
+  .tab.due::after{top:50%;margin-top:-4px}
 }
+@media(max-width:560px){
+  header{padding:6px 10px;gap:8px}
+  .brand,.grow{display:none}
+  .subj-btn{flex:1 1 auto}
+  .theme-btn{min-width:44px;padding:7px 10px}
+  .theme-btn .tl{display:none}
+}
+@media(max-width:340px){.grp-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){#subjNav,#navScrim,.sb-caret{transition:none}}
 </style>
 </head>
 <body>
 <header>
-  <div class="brand"><span class="em">📚</span>Dashboard ôn thi</div>
-  <div class="tabs">
-    <button class="tab" data-tab="hod402" onclick="selectTab('hod402')">HOD402 - ITexam</button>
-    <button class="tab" data-tab="hodfu" onclick="selectTab('hodfu')">HOD402 - FU</button>
-    <button class="tab" data-tab="hod401" onclick="selectTab('hod401')">HOD401</button>
-    <button class="tab" data-tab="ces202" onclick="selectTab('ces202')">CES202</button>
-    <button class="tab" data-tab="iap301" onclick="selectTab('iap301')">IAP301</button>
-    <button class="tab" data-tab="frs401c" onclick="selectTab('frs401c')">FRS401C</button>
-    <span class="tab-sep" title="Các môn dưới đây nhập từ nguồn ngoài (quizlet-study.vercel.app, file MLN111) — đáp án theo nguồn, chưa kiểm chứng lại">📥</span>
-    <button class="tab qs" data-tab="vnr" onclick="selectTab('vnr')">VNR</button>
-    <button class="tab qs" data-tab="hcm202" onclick="selectTab('hcm202')">HCM202</button>
-    <button class="tab qs" data-tab="mln111" onclick="selectTab('mln111')">MLN111</button>
-    <button class="tab qs" data-tab="mln131" onclick="selectTab('mln131')">MLN131</button>
-    <button class="tab qs" data-tab="mln122" onclick="selectTab('mln122')">MLN122</button>
-    <button class="tab qs" data-tab="pmg201c" onclick="selectTab('pmg201c')">PMG201c</button>
-    <button class="tab qs" data-tab="swd392" onclick="selectTab('swd392')">SWD392</button>
-    <button class="tab qs" data-tab="mma301" onclick="selectTab('mma301')">MMA301</button>
-  </div>
+  <div class="brand"><span class="em" aria-hidden="true">📚</span>Dashboard ôn thi</div>
+  <div class="cur-title" id="curTitle"></div>
+  <button type="button" class="subj-btn" id="subjBtn" aria-expanded="false" aria-controls="subjNav" onclick="toggleNav()">
+    <span class="sb-txt"><span class="sb-grp" id="sbGrp"></span><span class="sb-cur" id="sbCur">Chọn môn</span></span>
+    <span class="sb-dot" id="sbDot" title="Môn khác đang có câu đến hạn ôn"></span>
+    <span class="sb-caret" aria-hidden="true">▾</span>
+  </button>
   <div class="grow"></div>
-  <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">☀️ Sáng</button>
+  <button type="button" class="theme-btn" id="themeBtn" onclick="toggleTheme()">☀️<span class="tl"> Sáng</span></button>
 </header>
 
-<div id="content">
-  <div class="panel" id="panel-hod402"><iframe title="HOD402 ITexam" data-src="hod402.html"></iframe><div class="loading">Đang tải…</div></div>
-  <div class="panel" id="panel-hodfu"><iframe title="HOD402 FU"  data-src="onthi-fu.html?subject=HOD402"></iframe><div class="loading">Đang tải…</div></div>
-  <div class="panel" id="panel-hod401"><iframe title="HOD401"    data-src="onthi-fu.html?subject=HOD401"></iframe><div class="loading">Đang tải…</div></div>
-  <div class="panel" id="panel-ces202"><iframe title="CES202"    data-src="onthi-fu.html?subject=CES202"></iframe><div class="loading">Đang tải…</div></div>
-  <div class="panel" id="panel-iap301"><iframe title="IAP301"    data-src="onthi-fu.html?subject=IAP301"></iframe><div class="loading">Đang tải…</div></div>
-  <div class="panel" id="panel-frs401c"><iframe title="FRS401C" data-src="onthi-fu.html?subject=FRS401C"></iframe><div class="loading">Đang tải…</div></div>
-  <div class="panel" id="panel-vnr"><iframe title="VNR" data-src="onthi-vnr.html?subject=VNR"></iframe><div class="loading">Đang tải…</div></div>
-  <div class="panel" id="panel-hcm202"><iframe title="HCM202" data-src="onthi-hcm202.html?subject=HCM202"></iframe><div class="loading">Đang tải…</div></div>
-  <div class="panel" id="panel-mln111"><iframe title="MLN111" data-src="onthi-mln111.html?subject=MLN111"></iframe><div class="loading">Đang tải…</div></div>
-  <div class="panel" id="panel-mln131"><iframe title="MLN131" data-src="onthi-mln131.html?subject=MLN131"></iframe><div class="loading">Đang tải…</div></div>
-  <div class="panel" id="panel-mln122"><iframe title="MLN122" data-src="onthi-mln122.html?subject=MLN122"></iframe><div class="loading">Đang tải…</div></div>
-  <div class="panel" id="panel-pmg201c"><iframe title="PMG201c" data-src="onthi-pmg201c.html?subject=PMG201c"></iframe><div class="loading">Đang tải…</div></div>
-  <div class="panel" id="panel-swd392"><iframe title="SWD392" data-src="onthi-swd392.html?subject=SWD392"></iframe><div class="loading">Đang tải…</div></div>
-  <div class="panel" id="panel-mma301"><iframe title="MMA301" data-src="onthi-mma301.html?subject=MMA301"></iframe><div class="loading">Đang tải…</div></div>
+<div id="main">
+  <div id="navScrim" onclick="closeNav()"></div>
+  <nav id="subjNav" aria-label="Chọn môn học">
+    <div class="nav-handle" aria-hidden="true"></div>
+    <div class="nav-head"><b>Chọn môn</b><button type="button" class="nav-close" onclick="closeNav()" aria-label="Đóng">✕</button></div>
+
+    <div class="grp"><div class="grp-h">An toàn thông tin</div><div class="grp-list">
+      <button type="button" class="tab" data-tab="hod402"  data-scope="ETHICAL_HACKER" data-label="HOD402 · ITexam" onclick="selectTab('hod402')"><b>HOD402</b><small>ITexam (Cisco)</small></button>
+      <button type="button" class="tab" data-tab="hodfu"   data-scope="HOD402"  data-label="HOD402 · Đề FU"  onclick="selectTab('hodfu')"><b>HOD402</b><small>Đề thi FU</small></button>
+      <button type="button" class="tab" data-tab="hod401"  data-scope="HOD401"  data-label="HOD401 · Đề FU"  onclick="selectTab('hod401')"><b>HOD401</b><small>Đề thi FU</small></button>
+      <button type="button" class="tab" data-tab="ces202"  data-scope="CES202"  data-label="CES202 · Đề FU"  onclick="selectTab('ces202')"><b>CES202</b><small>Đề thi FU</small></button>
+      <button type="button" class="tab" data-tab="iap301"  data-scope="IAP301"  data-label="IAP301 · Đề FU"  onclick="selectTab('iap301')"><b>IAP301</b><small>Đề thi FU</small></button>
+      <button type="button" class="tab" data-tab="frs401c" data-scope="FRS401C" data-label="FRS401C · Đề FU" onclick="selectTab('frs401c')"><b>FRS401C</b><small>Đề thi FU</small></button>
+    </div></div>
+
+    <div class="grp"><div class="grp-h">Lý luận chính trị</div><div class="grp-list">
+      <button type="button" class="tab" data-tab="mln111" data-scope="MLN111" data-label="MLN111 · Triết học"         onclick="selectTab('mln111')"><b>MLN111</b><small>Triết học Mác–Lênin</small></button>
+      <button type="button" class="tab" data-tab="mln122" data-scope="MLN122" data-label="MLN122 · Kinh tế chính trị" onclick="selectTab('mln122')"><b>MLN122</b><small>Kinh tế chính trị</small></button>
+      <button type="button" class="tab" data-tab="mln131" data-scope="MLN131" data-label="MLN131 · CNXH khoa học"     onclick="selectTab('mln131')"><b>MLN131</b><small>CNXH khoa học</small></button>
+      <button type="button" class="tab" data-tab="hcm202" data-scope="HCM202" data-label="HCM202 · Tư tưởng HCM"      onclick="selectTab('hcm202')"><b>HCM202</b><small>Tư tưởng Hồ Chí Minh</small></button>
+      <button type="button" class="tab" data-tab="vnr"    data-scope="VNR"    data-label="VNR · Lịch sử Đảng"        onclick="selectTab('vnr')"><b>VNR</b><small>Lịch sử Đảng CSVN</small></button>
+    </div></div>
+
+    <div class="grp"><div class="grp-h">Phần mềm</div><div class="grp-list">
+      <button type="button" class="tab" data-tab="pmg201c" data-scope="PMG201c" data-label="PMG201c · Quản lý dự án"     onclick="selectTab('pmg201c')"><b>PMG201c</b><small>Quản lý dự án</small></button>
+      <button type="button" class="tab" data-tab="swd392"  data-scope="SWD392"  data-label="SWD392 · Kiến trúc phần mềm" onclick="selectTab('swd392')"><b>SWD392</b><small>Kiến trúc phần mềm</small></button>
+      <button type="button" class="tab" data-tab="mma301"  data-scope="MMA301"  data-label="MMA301 · Lập trình mobile"   onclick="selectTab('mma301')"><b>MMA301</b><small>Lập trình mobile</small></button>
+    </div></div>
+  </nav>
+
+  <div id="content">
+    <div class="panel" id="panel-hod402"><iframe title="HOD402 ITexam" data-src="hod402.html"></iframe><div class="loading">Đang tải…</div></div>
+    <div class="panel" id="panel-hodfu"><iframe title="HOD402 FU"  data-src="onthi-fu.html?subject=HOD402"></iframe><div class="loading">Đang tải…</div></div>
+    <div class="panel" id="panel-hod401"><iframe title="HOD401"    data-src="onthi-fu.html?subject=HOD401"></iframe><div class="loading">Đang tải…</div></div>
+    <div class="panel" id="panel-ces202"><iframe title="CES202"    data-src="onthi-fu.html?subject=CES202"></iframe><div class="loading">Đang tải…</div></div>
+    <div class="panel" id="panel-iap301"><iframe title="IAP301"    data-src="onthi-fu.html?subject=IAP301"></iframe><div class="loading">Đang tải…</div></div>
+    <div class="panel" id="panel-frs401c"><iframe title="FRS401C" data-src="onthi-fu.html?subject=FRS401C"></iframe><div class="loading">Đang tải…</div></div>
+    <div class="panel" id="panel-vnr"><iframe title="VNR" data-src="onthi-vnr.html?subject=VNR"></iframe><div class="loading">Đang tải…</div></div>
+    <div class="panel" id="panel-hcm202"><iframe title="HCM202" data-src="onthi-hcm202.html?subject=HCM202"></iframe><div class="loading">Đang tải…</div></div>
+    <div class="panel" id="panel-mln111"><iframe title="MLN111" data-src="onthi-mln111.html?subject=MLN111"></iframe><div class="loading">Đang tải…</div></div>
+    <div class="panel" id="panel-mln131"><iframe title="MLN131" data-src="onthi-mln131.html?subject=MLN131"></iframe><div class="loading">Đang tải…</div></div>
+    <div class="panel" id="panel-mln122"><iframe title="MLN122" data-src="onthi-mln122.html?subject=MLN122"></iframe><div class="loading">Đang tải…</div></div>
+    <div class="panel" id="panel-pmg201c"><iframe title="PMG201c" data-src="onthi-pmg201c.html?subject=PMG201c"></iframe><div class="loading">Đang tải…</div></div>
+    <div class="panel" id="panel-swd392"><iframe title="SWD392" data-src="onthi-swd392.html?subject=SWD392"></iframe><div class="loading">Đang tải…</div></div>
+    <div class="panel" id="panel-mma301"><iframe title="MMA301" data-src="onthi-mma301.html?subject=MMA301"></iframe><div class="loading">Đang tải…</div></div>
+  </div>
 </div>
 
 <script>
 function el(id){return document.getElementById(id)}
-function applyTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem('app_theme',t)}catch(e){}
-  const b=el('themeBtn');if(b)b.textContent=t==='dark'?'☀️ Sáng':'🌙 Tối';}
+const TABS=['hod402','hodfu','hod401','ces202','iap301','frs401c','vnr','hcm202','mln111','mln131','mln122','pmg201c','swd392','mma301'];
+const DESK=window.matchMedia?matchMedia('(min-width:900px)'):null;
+
+/* ---- theme: the switch in this header is the only one; every loaded page follows it live ---- */
+function syncFrame(f){
+  const t=document.documentElement.dataset.theme==='light'?'light':'dark';
+  let w=null,d=null;try{w=f.contentWindow;d=f.contentDocument}catch(e){}
+  if(d&&d.documentElement){
+    try{
+      // hide the page's own theme buttons (quiz template + legacy hod402.html) while it is embedded
+      if(!d.getElementById('dashEmbedCss')){const s=d.createElement('style');s.id='dashEmbedCss';
+        s.textContent='#themeBtn,#themeBtn2,.theme-toggle{display:none!important}';(d.head||d.documentElement).appendChild(s);}
+      // both page types define a global applyTheme(); calling it also relabels their (hidden) buttons
+      if(w&&typeof w.applyTheme==='function')w.applyTheme(t);else d.documentElement.dataset.theme=t;
+      return;
+    }catch(e){}
+  }
+  // opaque origin (e.g. opened from file://): the quiz template listens for this message
+  try{if(w)w.postMessage({type:'app_theme',theme:t},'*')}catch(e){}
+}
+function applyTheme(t){
+  t=t==='light'?'light':'dark';
+  document.documentElement.dataset.theme=t;try{localStorage.setItem('app_theme',t)}catch(e){}
+  const b=el('themeBtn');
+  if(b){const toLight=t==='dark',lbl=toLight?'Chuyển sang giao diện sáng':'Chuyển sang giao diện tối';
+    b.innerHTML=toLight?'<span aria-hidden="true">☀️</span><span class="tl"> Sáng</span>':'<span aria-hidden="true">🌙</span><span class="tl"> Tối</span>';
+    b.setAttribute('aria-label',lbl);b.title=lbl;}
+  document.querySelectorAll('.panel iframe[src]').forEach(syncFrame);   // already-loaded pages update now, not on reload
+}
 function toggleTheme(){applyTheme((document.documentElement.dataset.theme||'dark')==='dark'?'light':'dark')}
+addEventListener('storage',e=>{if(e.key==='app_theme'&&(e.newValue==='dark'||e.newValue==='light')&&e.newValue!==document.documentElement.dataset.theme)applyTheme(e.newValue);
+  if(e.key&&e.key.indexOf('fu_srs_')===0)markDue();});
 (function(){let t;try{t=localStorage.getItem('app_theme')}catch(e){}
   if(!t)t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';applyTheme(t)})();
 
-const TABS=['hod402','hodfu','hod401','ces202','iap301','frs401c','vnr','hcm202','mln111','mln131','mln122','pmg201c','swd392','mma301'];
+/* ---- an amber dot on subjects that have SRS questions due today (read straight from their storage) ---- */
+function markDue(){
+  const day=Math.floor(Date.now()/86400000);let any=false;
+  document.querySelectorAll('.tab[data-scope]').forEach(b=>{
+    let due=false;
+    try{const raw=localStorage.getItem('fu_srs_fu_'+b.dataset.scope);
+      if(raw){const o=JSON.parse(raw);for(const k in o){if(o[k]&&o[k].due<=day){due=true;break}}}
+    }catch(e){}
+    b.classList.toggle('due',due);
+    if(due&&!b.classList.contains('active'))any=true;});   // the dot on the picker nudges about OTHER subjects
+  const d=el('sbDot');if(d)d.classList.toggle('on',any);
+}
+
+/* ---- subject picker: bottom sheet under 900px, sidebar from 900px (same <nav>) ---- */
+function navOpen(){return el('subjNav').classList.contains('open')}
+function openNav(){if(DESK&&DESK.matches)return;
+  markDue();
+  const n=el('subjNav');n.classList.add('open');el('navScrim').classList.add('open');el('subjBtn').setAttribute('aria-expanded','true');
+  const a=n.querySelector('.tab.active');
+  if(a){a.scrollIntoView({block:'nearest'});setTimeout(()=>{try{a.focus({preventScroll:true})}catch(e){a.focus()}},60);}}
+function closeNav(keepFocus){if(!navOpen())return;
+  el('subjNav').classList.remove('open');el('navScrim').classList.remove('open');
+  const b=el('subjBtn');b.setAttribute('aria-expanded','false');if(!keepFocus)b.focus();}
+function toggleNav(){navOpen()?closeNav():openNav()}
+addEventListener('keydown',e=>{if(e.key==='Escape'&&navOpen()){e.preventDefault();closeNav();}});
+if(DESK){const f=()=>closeNav(true);DESK.addEventListener?DESK.addEventListener('change',f):DESK.addListener(f);}
+
 function selectTab(name){
   if(!TABS.includes(name))name='hod402';
   TABS.forEach(t=>{
-    const p=el('panel-'+t), active=(t===name);
+    const p=el('panel-'+t),b=document.querySelector('.tab[data-tab="'+t+'"]'),active=(t===name);
     p.classList.toggle('active',active);
-    document.querySelector('.tab[data-tab="'+t+'"]').classList.toggle('active',active);
-    if(active){ const f=p.querySelector('iframe[data-src]');
-      if(f && !f.getAttribute('src')){ f.addEventListener('load',()=>{const l=p.querySelector('.loading'); if(l) l.style.display='none';},{once:true});
-        f.setAttribute('src',f.getAttribute('data-src')); } }
+    b.classList.toggle('active',active);
+    if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');
+    if(active){const f=p.querySelector('iframe[data-src]');
+      if(f&&!f.getAttribute('src')){
+        // not {once:true}: pages reload themselves ("Khôi phục" does) and must be re-synced each time
+        f.addEventListener('load',()=>{const l=p.querySelector('.loading');if(l)l.style.display='none';syncFrame(f);markDue();});
+        f.setAttribute('src',f.getAttribute('data-src'));}}
   });
+  const b=document.querySelector('.tab[data-tab="'+name+'"]'),g=b.closest('.grp'),h=g&&g.querySelector('.grp-h');
+  const label=b.dataset.label||b.textContent.trim();
+  el('sbCur').textContent=label;el('sbGrp').textContent=h?h.textContent:'';el('curTitle').textContent=label;
+  document.title=label+' — Dashboard ôn thi';
   try{localStorage.setItem('dash_tab',name)}catch(e){}
+  closeNav();
 }
-(function(){let t;try{t=localStorage.getItem('dash_tab')}catch(e){}selectTab(t||'hod402')})();
+addEventListener('focus',markDue);
+(function(){let t;try{t=localStorage.getItem('dash_tab')}catch(e){}selectTab(t||'hod402');markDue();})();
 </script>
 </body>
 </html>
