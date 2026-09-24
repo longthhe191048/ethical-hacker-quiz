@@ -119,7 +119,70 @@ input[type=number],select{background:var(--panel2);border:1px solid var(--border
 .modbar .bar{height:100%;background:var(--green)}
 .modbar .mlabel{width:230px;color:var(--muted);text-align:left}
 .footer-note{color:var(--muted);font-size:.8rem;text-align:center;margin-top:30px}
+/* ---- start screen (same design language as the onthi-* pages) ---- */
+.hero{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.hero-txt{flex:1;min-width:0}
+.hero-acts{display:flex;gap:8px;flex:0 0 auto}
+.embed .theme-toggle{display:none!important}     /* inside the dashboard its header owns the theme */
+.sumbar{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;margin:12px 0 0;font-size:.88rem;color:var(--muted)}
+.sumbar b{color:var(--text)}
+.kpi{white-space:nowrap}
+.mg-h{margin:0 0 10px;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.scope-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.scope-row{position:relative;display:flex;align-items:center;gap:10px;min-height:56px;padding:8px 10px;border:1px solid var(--border);border-radius:10px;
+  background:var(--panel2);color:var(--text);font-size:.9rem;cursor:pointer;text-align:left}
+.scope-row:hover{border-color:var(--accent)}
+.scope-row.sel{border-color:var(--accent);background:var(--selbg);box-shadow:inset 0 0 0 1px var(--accent)}
+.scope-row:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.scope-row input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.scope-badge{flex:0 0 52px;padding:6px 0;border-radius:8px;text-align:center;font-weight:800;font-size:.85rem;
+  background:var(--chip);border:1px solid var(--border)}
+.scope-row.sel .scope-badge{background:var(--accent);border-color:var(--accent);color:#fff}
+.scope-main{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.3}
+.scope-title{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.scope-sub{font-size:.8rem;color:var(--muted)}.scope-sub b{color:var(--text)}
+.scope-mp{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;line-height:1.2}
+.scope-mp b{font-size:.95rem}.scope-mp small{font-size:.68rem;color:var(--muted)}
+.qty{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{min-width:44px;min-height:40px;padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:var(--panel2);color:var(--text);
+  font:inherit;font-size:.88rem;font-weight:600;cursor:pointer}
+.chip:hover{border-color:var(--accent)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.qty input[type=number]{width:84px;min-height:40px;text-align:center;max-width:none}
+.opts{margin-top:16px;border:1px solid var(--border);border-radius:10px;background:var(--panel2)}
+.opts>summary{display:flex;align-items:center;gap:10px;min-height:44px;padding:8px 12px;cursor:pointer;list-style:none}
+.opts>summary::-webkit-details-marker{display:none}
+.opts>summary::after{content:'▾';margin-left:auto;color:var(--muted);transition:transform .15s}
+.opts[open]>summary::after{transform:rotate(180deg)}
+.opts-t{font-weight:700;font-size:.9rem;white-space:nowrap}
+.opts-s{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.8rem;color:var(--muted)}
+.opts-body{padding:6px 12px 10px;border-top:1px solid var(--border)}
+.switch{display:flex;align-items:center;gap:10px;min-height:44px;font-size:.9rem;color:var(--text);cursor:pointer}
+.switch input{flex:0 0 auto;width:20px;height:20px;margin:0;accent-color:var(--accent)}
+#startRow{position:sticky;bottom:0;z-index:5;display:flex;align-items:center;gap:12px;margin:16px -20px -20px;padding:12px 20px;
+  background:var(--panel);border-top:1px solid var(--border);border-radius:0 0 12px 12px}
+.start-sum{flex:1;min-width:0;font-size:.9rem;line-height:1.35;color:var(--muted)}
+.start-sum b{color:var(--text)}
+.start-btn{flex:0 0 auto;min-height:48px;padding:10px 26px;font-size:1.05rem;border-radius:10px}
+.kbd-hint{color:var(--muted);font-size:.78rem;margin-top:8px}
 @media(max-width:560px){
+  /* ---- start screen: the picker and the start button in the thumb zone ---- */
+  h1{font-size:1.12rem}
+  .sub{font-size:.85rem}
+  .wrap{padding:12px 12px 112px}
+  .card{padding:14px}
+  .kbd-hint{display:none}
+  .sumbar{gap:2px 10px;font-size:.8rem}
+  .scope-list{grid-template-columns:minmax(0,1fr);gap:6px}   /* 1fr lets a long nowrap title widen the page */
+  .chip,.qty input[type=number]{min-height:44px}
+  .theme-btn{min-height:44px}
+  /* the theme switch lives on the start screen: dropping it here keeps the in-test topbar on one row */
+  #topbar .theme-toggle{display:none}
+  #startRow{position:fixed;left:0;right:0;bottom:0;z-index:30;margin:0;padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+    border-radius:0;border-top:1px solid var(--border);background:var(--topbar);backdrop-filter:blur(6px);box-shadow:0 -6px 18px var(--shadow)}
+  .start-sum{font-size:.84rem}
+  .start-btn{min-height:50px;padding:10px 20px}
   #nav{left:10px;right:10px;bottom:74px;width:auto;max-height:52vh;overflow:auto}
   #nav.hidden{display:none!important}
   #nav .navgrid{grid-template-columns:repeat(6,1fr);max-height:40vh}
@@ -127,41 +190,63 @@ input[type=number],select{background:var(--panel2);border:1px solid var(--border
   .modbar .mlabel{width:130px} .mleft{flex-basis:100%;max-width:100%}
 }
 </style>
+<script>(function(d){try{if(window.self!==window.top)d.classList.add('embed')}catch(e){d.classList.add('embed')}
+try{var t=localStorage.getItem('app_theme');if(t==='dark'||t==='light')d.setAttribute('data-theme',t)}catch(e){}})(document.documentElement);</script>
 </head>
 <body>
 <div class="wrap">
   <div id="start">
-    <div class="row" style="justify-content:space-between;align-items:flex-start;gap:10px">
-      <h1>🛡️ HOD402 - ITexam — Luyện thi trắc nghiệm</h1>
-      <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">☀️ Sáng</button>
+    <div class="hero">
+      <div class="hero-txt">
+        <h1>🛡️ HOD402 - ITexam</h1>
+        <div class="sub">Ethical Hacker (Cisco NetAcad) · "Welcome to the Ethical Hacker Course" · Nguồn câu hỏi: itexamanswers.net</div>
+      </div>
+      <div class="hero-acts">
+        <button type="button" class="theme-btn theme-toggle" id="themeBtn" onclick="toggleTheme()">☀️ Sáng</button>
+      </div>
     </div>
-    <div class="sub">Ethical Hacker (Cisco NetAcad) · "Welcome to the Ethical Hacker Course" · Nguồn câu hỏi: itexamanswers.net</div>
-    <div class="stats" id="startStats"></div>
-    <div class="card">
-      <div class="field">
-        <label>Số câu mỗi lần (ngẫu nhiên)</label>
-        <input type="number" id="numQ" value="50" min="1">
+    <div class="sumbar" id="startStats"></div>
+
+    <div class="card main-card">
+      <h2 class="mg-h">Chọn phạm vi ôn</h2>
+      <div id="scopeList"></div>
+      <input type="hidden" id="scope" value="__all__">
+
+      <div class="field" style="margin-top:14px"><label for="numQ">Số câu mỗi lần (bốc ngẫu nhiên)</label>
+        <div class="qty"><div class="chips" data-for="numQ" id="numQChips"></div>
+          <input type="number" id="numQ" value="50" min="1" inputmode="numeric" aria-label="Số câu" oninput="syncChips();updateStartSub()"></div></div>
+
+      <details class="opts" id="optsBox">
+        <summary><span class="opts-t">⚙️ Tùy chọn</span><span class="opts-s" id="optsSum"></span></summary>
+        <div class="opts-body">
+          <div class="field"><label for="numMin">⏱ Thời gian làm bài (phút)</label>
+            <div class="qty"><div class="chips" data-for="numMin">
+              <button type="button" class="chip" data-v="15" onclick="setVal('numMin',15)">15</button>
+              <button type="button" class="chip" data-v="30" onclick="setVal('numMin',30)">30</button>
+              <button type="button" class="chip" data-v="45" onclick="setVal('numMin',45)">45</button>
+              <button type="button" class="chip" data-v="60" onclick="setVal('numMin',60)">60</button>
+              <button type="button" class="chip" data-v="90" onclick="setVal('numMin',90)">90</button>
+            </div><input type="number" id="numMin" value="60" min="1" inputmode="numeric" aria-label="Số phút" oninput="syncChips();updateStartSub()"></div></div>
+          <label class="switch"><input type="checkbox" id="shuf" checked onchange="updateStartSub()"><span>🔀 Trộn thứ tự đáp án trong mỗi câu</span></label>
+        </div>
+      </details>
+
+      <div id="startRow">
+        <div class="start-sum" id="startSub" aria-live="polite"></div>
+        <button type="button" class="btn start-btn" onclick="startTest()">▶ Bắt đầu</button>
       </div>
-      <div class="field">
-        <label>Thời gian làm bài (phút)</label>
-        <input type="number" id="numMin" value="60" min="1">
-      </div>
-      <div class="field">
-        <label>Phạm vi câu hỏi</label>
-        <select id="scope"><option value="__all__">Tất cả module + Final Exam</option></select>
-      </div>
-      <div class="field">
-        <label><input type="checkbox" id="shuf" checked style="width:auto;accent-color:var(--accent)"> Trộn thứ tự đáp án trong mỗi câu</label>
-      </div>
-      <div class="row" style="margin-top:8px">
-        <button class="btn" onclick="startTest()">▶ Bắt đầu làm bài</button>
-        <button class="btn sec" onclick="startMatchingOnly()">📎 Luyện riêng câu Matching</button>
-      </div>
+      <div class="kbd-hint">Phím tắt: <b>↑ ↓</b> chọn phạm vi · <b>Enter</b> bắt đầu làm bài</div>
+    </div>
+
+    <div class="card" id="modCard" style="display:none">
+      <div class="row" style="justify-content:space-between"><b>🎯 Độ chính xác theo module</b><span class="sub" id="modLine"></span></div>
+      <div id="modBox" style="margin-top:10px"></div>
+      <div class="sub" style="margin-top:6px">Tính từ tất cả các lần bạn đã làm (matching tính theo số cặp đúng).</div>
     </div>
     <div class="card" id="historyCard">
       <div class="row" style="justify-content:space-between">
         <b>📊 Lịch sử làm bài</b>
-        <button class="theme-btn" onclick="clearHistory()">🗑 Xóa lịch sử</button>
+        <button type="button" class="theme-btn" onclick="clearHistory()">🗑 Xóa lịch sử</button>
       </div>
       <div id="historyBox" style="margin-top:10px"></div>
     </div>
@@ -175,7 +260,7 @@ input[type=number],select{background:var(--panel2);border:1px solid var(--border
   <div id="timer">60:00</div>
   <div id="answered">Đã trả lời: 0/0</div>
   <div class="grow"></div>
-  <button class="theme-btn" id="themeBtn2" onclick="toggleTheme()" title="Đổi giao diện">☀️</button>
+  <button class="theme-btn theme-toggle" id="themeBtn2" onclick="toggleTheme()" title="Đổi giao diện">☀️</button>
   <button class="btn danger" onclick="submitTest()">✔ Nộp bài</button>
 </div>
 
@@ -213,12 +298,14 @@ function toggleTheme(){ const cur=document.documentElement.dataset.theme||'dark'
   if(!t) t=(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
   applyTheme(t);
 })();
+addEventListener('storage',e=>{if(e.key==='app_theme'&&(e.newValue==='dark'||e.newValue==='light')&&e.newValue!==document.documentElement.dataset.theme)applyTheme(e.newValue)});
+addEventListener('message',e=>{const d=e.data;if(e.source===window.parent&&d&&d.type==='app_theme'&&(d.theme==='dark'||d.theme==='light'))applyTheme(d.theme)});
 
 /* ---------- test history (localStorage) ---------- */
 const HKEY='hod402_history';
 function loadHistory(){ try{ return JSON.parse(localStorage.getItem(HKEY)||'[]'); }catch(e){ return []; } }
 function saveAttempt(a){ try{ const h=loadHistory(); h.unshift(a); if(h.length>100)h.length=100; localStorage.setItem(HKEY,JSON.stringify(h)); }catch(e){} }
-function clearHistory(){ if(!confirm('Xóa toàn bộ lịch sử làm bài?'))return; try{ localStorage.removeItem(HKEY); }catch(e){} renderHistory(); }
+function clearHistory(){ if(!confirm('Xóa toàn bộ lịch sử làm bài?'))return; try{ localStorage.removeItem(HKEY); }catch(e){} renderStartUI(); }
 function renderHistory(){
   const box=el('historyBox'); if(!box)return;
   const h=loadHistory();
@@ -307,19 +394,128 @@ function openHistoryDetail(idx){
     <div class="row" style="margin:10px 0"><button class="btn sec" onclick="backToStart()">← Về lịch sử</button></div>`;
   window.scrollTo(0,0);
 }
-function backToStart(){ el('histDetail').classList.add('hidden'); el('start').classList.remove('hidden'); renderHistory(); window.scrollTo(0,0); }
+function backToStart(){ el('histDetail').classList.add('hidden'); el('start').classList.remove('hidden');
+  el('nav').classList.add('hidden');            // the floating question grid belongs to a running test
+  renderStartUI(); window.scrollTo(0,0); }
 
+/* ---------- start screen: scope list, chips, summary ---------- */
+let SCOPE='__all__';
+const SCOPE_ALL='__all__', SCOPE_MATCH='__matching__';
+function poolOf(scope){const all=fullPool();
+  return scope===SCOPE_ALL?all:scope===SCOPE_MATCH?EH_BANK.matching.slice():all.filter(q=>q.module===scope);}
+function scopeLabelOf(scope){return scope===SCOPE_ALL?'Tất cả module + Final Exam':scope===SCOPE_MATCH?'Chỉ câu ghép cặp':scope;}
+/* "M1 Introduction to ..." -> badge M1 + title "Introduction to ..." */
+function scopeMeta(scope){
+  if(scope===SCOPE_ALL)return {badge:'TẤT CẢ',title:'Tất cả module + Final Exam'};
+  if(scope===SCOPE_MATCH)return {badge:'GHÉP',title:'Chỉ câu ghép cặp (matching)'};
+  if(/^Final Exam/i.test(scope))return {badge:'FE',title:'Final Exam'};
+  const m=/^(M\d+)\s*(.*)$/.exec(scope);
+  return m?{badge:m[1],title:m[2]||scope}:{badge:'ĐỀ',title:scope};
+}
+/* scopes in study order: everything, Final Exam, M1..M10, then matching-only */
+function scopeKeys(){
+  const mods=[...new Set(fullPool().map(q=>q.module))];
+  const num=x=>{const m=/^M(\d+)/.exec(x);return m?+m[1]:/^Final Exam/i.test(x)?0:99};
+  mods.sort((a,b)=>num(a)-num(b)||(a<b?-1:1));
+  return [SCOPE_ALL].concat(mods,[SCOPE_MATCH]);
+}
+/* lifetime accuracy per module, from this page's own attempt history */
+function modStats(){
+  if(window._ms)return window._ms;
+  const bi=bankIndex(),out={};
+  loadHistory().forEach(a=>(a.details||[]).forEach(rec=>{
+    const q=bi[rec.id];if(!q)return;
+    const o=out[q.module]||(out[q.module]={n:0,f:0});
+    o.n++;o.f+=scoreDetail(rec,q).frac;}));
+  Object.keys(out).forEach(k=>out[k].pct=Math.round(out[k].f/out[k].n*100));
+  return (window._ms=out);
+}
+function scopeAccuracy(scope){
+  if(scope===SCOPE_MATCH){                                   // matching questions live in every module
+    const bi=bankIndex();let n=0,f=0;
+    loadHistory().forEach(a=>(a.details||[]).forEach(rec=>{const q=bi[rec.id];
+      if(q&&rec.kind==='matching'){n++;f+=scoreDetail(rec,q).frac}}));
+    return n?{n,pct:Math.round(f/n*100)}:null;}
+  const ms=modStats(),mods=scope===SCOPE_ALL?Object.keys(ms):[scope];
+  let n=0,f=0;mods.forEach(m=>{if(ms[m]){n+=ms[m].n;f+=ms[m].f}});
+  return n?{n,pct:Math.round(f/n*100)}:null;
+}
+function renderScopeList(){
+  const box=el('scopeList');if(!box)return;
+  box.innerHTML='<div class="scope-list" role="radiogroup" aria-label="Chọn phạm vi ôn">'+scopeKeys().map(k=>{
+    const m=scopeMeta(k),n=poolOf(k).length,acc=scopeAccuracy(k),on=k===SCOPE;
+    return `<label class="scope-row${on?' sel':''}"><input type="radio" name="scopeR" value="${esc(k)}"${on?' checked':''} onchange="pickScope(this.value)">`+
+      `<span class="scope-badge">${esc(m.badge)}</span>`+
+      `<span class="scope-main"><span class="scope-title" title="${esc(m.title)}">${esc(m.title)}</span>`+
+      `<span class="scope-sub">${n} câu${acc?` · đã làm <b>${acc.n}</b> lượt`:' · chưa làm'}</span></span>`+
+      (acc?`<span class="scope-mp"><b>${acc.pct}%</b><small>chính xác</small></span>`:'')+
+      `</label>`;}).join('')+'</div>';
+}
+function pickScope(k){
+  SCOPE=k;el('scope').value=k;
+  document.querySelectorAll('.scope-row').forEach(r=>{const i=r.querySelector('input');r.classList.toggle('sel',!!(i&&i.checked))});
+  const mx=Math.max(1,poolOf(k).length),q=el('numQ');
+  q.max=mx;if((parseInt(q.value)||0)>mx)q.value=mx;
+  renderNumChips(mx);updateStartSub();
+}
+function renderNumChips(mx){
+  const box=el('numQChips');if(!box)return;
+  const steps=[10,20,30,50].filter(x=>x<mx).concat([mx]);
+  box.innerHTML=steps.map((n,i)=>`<button type="button" class="chip" data-v="${n}" onclick="setVal('numQ',${n})">${i===steps.length-1?'Tất cả ('+n+')':n}</button>`).join('');
+  syncChips();
+}
+function setVal(id,v){const i=el(id);if(!i)return;i.value=v;syncChips();updateStartSub();}
+function syncChips(){document.querySelectorAll('.chips[data-for]').forEach(c=>{const i=el(c.dataset.for),v=i?parseInt(i.value):NaN;
+  c.querySelectorAll('.chip').forEach(b=>{const on=parseInt(b.dataset.v)===v;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on?'true':'false')})})}
+function updateStartSub(){
+  const s=el('startSub');if(!s)return;
+  const mx=Math.max(1,poolOf(SCOPE).length);
+  const n=Math.max(1,Math.min(parseInt(el('numQ').value)||50,mx));
+  const mins=Math.max(1,parseInt(el('numMin').value)||60);
+  const m=scopeMeta(SCOPE);
+  s.innerHTML=`${esc(m.badge==='TẤT CẢ'?'📚':m.badge==='GHÉP'?'📎':'📄')} ${esc(m.title)} · <b>${n}</b> câu · ⏱ <b>${mins}</b> phút`;
+  const o=el('optsSum');if(o)o.textContent=[`⏱ ${mins} phút`,el('shuf').checked?'🔀 Trộn đáp án':'Giữ thứ tự đáp án'].join(' · ');
+}
+function renderModProgress(){
+  const ms=modStats(),keys=Object.keys(ms);
+  const card=el('modCard');if(!card)return;
+  if(!keys.length){card.style.display='none';return;}
+  card.style.display='';
+  const num=x=>{const m=/^M(\d+)/.exec(x);return m?+m[1]:/^Final Exam/i.test(x)?0:99};
+  keys.sort((a,b)=>num(a)-num(b)||(a<b?-1:1));
+  el('modBox').innerHTML=keys.map(k=>{const v=ms[k],p=v.pct,mm=scopeMeta(k);
+    return `<div class="modbar" title="${esc(k)}"><span class="mlabel">${esc(mm.badge+' '+mm.title)}</span><div class="barwrap"><div class="bar" style="width:${p}%;background:${p>=70?'var(--green)':p>=40?'var(--amber)':'var(--red)'}"></div></div><span>${p}% · ${v.n} lượt</span></div>`}).join('');
+  const tot=keys.reduce((a,k)=>({n:a.n+ms[k].n,f:a.f+ms[k].f}),{n:0,f:0});
+  el('modLine').textContent=`Trung bình ${Math.round(tot.f/tot.n*100)}% trên ${tot.n} lượt trả lời`;
+}
+function renderStartUI(){
+  window._ms=null;                                  // history may have changed (new attempt / cleared)
+  const c=EH_BANK.counts,h=loadHistory();
+  const avg=h.length?Math.round(h.reduce((a,x)=>a+(+x.pct||0),0)/h.length):null;
+  el('startStats').innerHTML=`<span><b>${c.total_playable}</b> câu làm được</span><span><b>${c.single}</b> 1 đáp án</span>`+
+    `<span><b>${c.multi}</b> nhiều đáp án</span><span><b>${c.matching}</b> ghép cặp</span><span><b>${modCount()}</b> module</span>`+
+    (avg!==null?`<span class="kpi">🎯 Trung bình <b>${avg}%</b> · ${h.length} lần làm</span>`:'');
+  renderScopeList();pickScope(SCOPE);renderModProgress();renderHistory();
+}
 (function initStart(){
-  const c=EH_BANK.counts;
-  el('startStats').innerHTML =
-    stat(c.total_playable,'câu làm được')+stat(c.single,'1 đáp án')+stat(c.multi,'nhiều đáp án')+stat(c.matching,'ghép cặp')+stat(modCount(),'module');
-  const sel=el('scope');
-  const om=document.createElement('option'); om.value='__matching__'; om.textContent='Chỉ câu Matching (ghép cặp)'; sel.appendChild(om);
-  [...new Set(fullPool().map(q=>q.module))].forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent=m;sel.appendChild(o)});
-  el('numQ').max=c.total_playable;
   el('navToggleClose').onclick=()=>{el('nav').classList.add('hidden')};
-  renderHistory();
+  if(window.matchMedia&&matchMedia('(min-width:561px)').matches){const o=el('optsBox');if(o)o.open=true;}
+  renderStartUI();
 })();
+/* keyboard: arrows move the scope selection, Enter starts (as on the onthi-* pages) */
+function onStartScreen(){const a=el('start');return a&&!a.classList.contains('hidden')}
+addEventListener('keydown',function(e){
+  if(e.ctrlKey||e.altKey||e.metaKey||!onStartScreen())return;
+  const tag=(e.target.tagName||'').toLowerCase();
+  if(e.code==='Enter'){
+    const t=e.target;if(t&&t.matches&&t.matches('button,summary,a,label'))return;
+    e.preventDefault();if(t&&t.blur)t.blur();startTest();return;}
+  if(tag==='input'||tag==='textarea'||tag==='select')return;
+  if(e.code==='ArrowDown'||e.code==='ArrowUp'){
+    const ks=scopeKeys(),i=ks.indexOf(SCOPE);
+    if(i<0)return;e.preventDefault();
+    pickScope(ks[(i+(e.code==='ArrowDown'?1:ks.length-1))%ks.length]);}
+});
 
 let RUN=null, timerInt=null, remaining=0, deadline=0, submitted=false;
 
