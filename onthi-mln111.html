@@ -117,30 +117,37 @@ label.theme-btn{display:inline-flex;align-items:center}
 .kpi{white-space:nowrap}
 #searchCount{margin-top:6px}#searchCount:empty{display:none}
 /* mode groups: 3 columns (one per group) on desktop */
-.mgroups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:16px}
+.mgroups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:16px;align-items:stretch}
+.mgroup{display:flex;flex-direction:column;min-width:0}
 .mg-h{margin:0 0 10px;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.mlist{display:flex;flex-direction:column;gap:10px}
-.mode{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"ic mt mc";align-items:center;gap:4px 10px;
-  width:100%;min-height:64px;padding:10px 12px;background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:12px;
+/* equal rows + stretched groups = the 9 tiles line up as a grid instead of a ragged stack */
+.mlist{flex:1;display:grid;grid-template-rows:repeat(3,1fr);gap:10px}
+.mode{display:flex;flex-direction:column;gap:5px;width:100%;min-height:96px;padding:10px 12px;
+  background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:12px;
   font:inherit;text-align:left;cursor:pointer}
 .mode:hover{border-color:var(--accent)}
 .mode.active{border-color:var(--accent);background:var(--selbg);box-shadow:inset 0 0 0 1px var(--accent)}
 .mode:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.mode .ic{grid-area:ic;font-size:1.35rem;line-height:1}
-.mode .mt{grid-area:mt;display:flex;flex-direction:column;min-width:0}
-.mode .mt b{font-size:.95rem;line-height:1.25}
-.mode .mt small{margin-top:2px;font-size:.78rem;line-height:1.3;color:var(--muted)}
-.mode .mkey{display:inline-grid;place-items:center;min-width:1.25rem;height:1.25rem;margin-right:6px;padding:0 3px;border-radius:5px;
-  background:var(--chip);border:1px solid var(--border);color:var(--muted);font-size:.68rem;font-weight:700;vertical-align:1px}
-.mode.active .mkey{background:var(--accent);border-color:var(--accent);color:#fff}
-.mode .mc{grid-area:mc;justify-self:end;padding:1px 8px;border-radius:999px;background:var(--chip);border:1px solid var(--border);
+.mtop{display:flex;align-items:center;gap:6px;min-height:24px}
+.mode .ic{font-size:1.3rem;line-height:1}
+/* both sit on the right: the first one takes the free space, the second follows it */
+.mrec,.mode .mc{margin-left:auto}
+.mrec{display:none;padding:1px 8px;border-radius:999px;line-height:17px;font-size:.66rem;font-weight:700;
+  color:var(--green);background:var(--greenbg);border:1px solid var(--green);white-space:nowrap}
+.mode.rec .mrec{display:inline-block}
+.mode .mc{padding:1px 8px;border-radius:999px;background:var(--chip);border:1px solid var(--border);
   color:var(--muted);font-size:.76rem;font-weight:700;white-space:nowrap}
 .mode .mc:empty{display:none}
 .mode .mc.zero{opacity:.55}
 .mode .mc.bad{color:var(--red);background:var(--redbg);border-color:var(--red)}
 .mode .mc.due{color:var(--amber);background:var(--amberbg);border-color:var(--amber)}
-.mode.rec::before{content:'Gợi ý';position:absolute;top:-9px;left:10px;padding:0 7px;border-radius:999px;line-height:16px;
-  font-size:.66rem;font-weight:700;color:var(--green);background:var(--greenbg);border:1px solid var(--green)}
+.mode .mt{display:flex;flex-direction:column;min-width:0}
+.mode .mt b{font-size:.95rem;line-height:1.25;overflow-wrap:anywhere}
+.mode .mt small{margin-top:3px;font-size:.78rem;line-height:1.3;color:var(--muted);
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mode .mkey{display:inline-grid;place-items:center;min-width:1.25rem;height:1.25rem;margin-right:6px;padding:0 3px;border-radius:5px;
+  background:var(--chip);border:1px solid var(--border);color:var(--muted);font-size:.68rem;font-weight:700;vertical-align:1px}
+.mode.active .mkey{background:var(--accent);border-color:var(--accent);color:#fff}
 .match-btn{margin-top:12px;min-height:44px}
 /* per-mode config */
 .mode-cfg{margin-top:16px}.mode-cfg:empty{display:none}
@@ -191,8 +198,7 @@ label.theme-btn{display:inline-flex;align-items:center}
 /* narrow tablets: groups stack, tiles go 3-across with the icon/count on top */
 @media(max-width:720px){
   .mgroups{grid-template-columns:1fr;gap:12px}
-  .mlist{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-  .mode{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"ic mc" "mt mt";align-items:start;gap:4px}
+  .mlist{grid-template-rows:none;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 }
 
 /* ---- mobile (keep last: these must override the base rules above) ---- */
@@ -230,13 +236,16 @@ label.theme-btn{display:inline-flex;align-items:center}
   .search-clear{right:0;min-width:44px;min-height:44px;background:transparent;border:0}
   .mgroups{gap:10px;margin-top:12px}
   .mlist{gap:6px}
-  .mode{min-height:74px;padding:8px 8px 9px;border-radius:10px}
+  .mode{min-height:74px;padding:8px 8px 9px;border-radius:10px;gap:3px}
+  .mtop{min-height:20px;gap:4px}
   .mode .ic{font-size:1.15rem}
   .mode .mt b{font-size:.84rem;line-height:1.22}
   .mode .mt small{display:none}                   /* the picked mode's description shows in #modeCfg */
   .mode .mkey{min-width:1.1rem;height:1.1rem;margin-right:4px;font-size:.64rem}
-  .mode .mc{padding:0 6px;font-size:.7rem}
-  .mode.rec::before{left:8px}
+  /* a 97px-wide tile cannot hold both "Gợi ý" and the count: the label becomes a green dot */
+  .mrec{width:9px;height:9px;padding:0;border-radius:50%;font-size:0;line-height:0;flex:0 0 auto}
+  .mode .mc{padding:0 5px;font-size:.68rem;line-height:16px;min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .mcx{display:none}                              /* "533 mới" -> "533" */
   .chip,.qty input[type=number]{min-height:44px}
   .exam-list{grid-template-columns:1fr;gap:6px}
   .ex-raw{display:none}
@@ -277,19 +286,19 @@ try{var t=localStorage.getItem('app_theme');if(t==='dark'||t==='light')d.setAttr
 
       <div class="mgroups">
         <section class="mgroup" aria-label="Làm bài"><h2 class="mg-h">Làm bài</h2><div class="mlist">
-          <button type="button" class="mode" data-mode="random" aria-pressed="false" onclick="pickMode('random',1)"><span class="ic" aria-hidden="true">🎲</span><span class="mt"><b><span class="mkey">1</span>Ngẫu nhiên</b><small>Trộn N câu bất kỳ trong môn</small></span></button>
-          <button type="button" class="mode" data-mode="exam" aria-pressed="false" onclick="pickMode('exam',1)"><span class="ic" aria-hidden="true">📄</span><span class="mt"><b><span class="mkey">2</span>Theo đề</b><small>Làm nguyên 1 đề như đề gốc</small></span><span class="mc" data-c="exam"></span></button>
-          <button type="button" class="mode" data-mode="all" aria-pressed="false" onclick="pickMode('all',1)"><span class="ic" aria-hidden="true">📚</span><span class="mt"><b><span class="mkey">3</span>Ôn tổng</b><small>Toàn bộ câu, câu trùng chỉ hiện 1 lần</small></span><span class="mc" data-c="all"></span></button>
+          <button type="button" class="mode" data-mode="random" aria-pressed="false" onclick="pickMode('random',1)"><span class="mtop"><span class="ic" aria-hidden="true">🎲</span><span class="mrec">Gợi ý</span></span><span class="mt"><b><span class="mkey">1</span>Ngẫu nhiên</b><small>Trộn ngẫu nhiên N câu trong môn</small></span></button>
+          <button type="button" class="mode" data-mode="exam" aria-pressed="false" onclick="pickMode('exam',1)"><span class="mtop"><span class="ic" aria-hidden="true">📄</span><span class="mrec">Gợi ý</span><span class="mc" data-c="exam"></span></span><span class="mt"><b><span class="mkey">2</span>Theo đề</b><small>Làm nguyên 1 đề như đề gốc</small></span></button>
+          <button type="button" class="mode" data-mode="all" aria-pressed="false" onclick="pickMode('all',1)"><span class="mtop"><span class="ic" aria-hidden="true">📚</span><span class="mrec">Gợi ý</span><span class="mc" data-c="all"></span></span><span class="mt"><b><span class="mkey">3</span>Ôn tổng</b><small>Tất cả câu, bỏ câu trùng giữa các đề</small></span></button>
         </div></section>
         <section class="mgroup" aria-label="Ôn chỗ yếu"><h2 class="mg-h">Ôn chỗ yếu</h2><div class="mlist">
-          <button type="button" class="mode" data-mode="wrong" aria-pressed="false" onclick="pickMode('wrong',1)"><span class="ic" aria-hidden="true">🔁</span><span class="mt"><b><span class="mkey">4</span>Câu sai</b><small>Các câu bạn làm sai lần trước</small></span><span class="mc" data-c="wrong"></span></button>
-          <button type="button" class="mode" data-mode="learn" aria-pressed="false" onclick="pickMode('learn',1)"><span class="ic" aria-hidden="true">🧠</span><span class="mt"><b><span class="mkey">5</span>Học thông minh</b><small>Ưu tiên câu mới, hay sai, chưa thuộc</small></span><span class="mc" data-c="learn"></span></button>
-          <button type="button" class="mode" data-mode="review" aria-pressed="false" onclick="pickMode('review',1)"><span class="ic" aria-hidden="true">⏰</span><span class="mt"><b><span class="mkey">6</span>Đến hạn ôn</b><small>Lặp lại ngắt quãng — câu tới hạn hôm nay</small></span><span class="mc" data-c="review"></span></button>
+          <button type="button" class="mode" data-mode="wrong" aria-pressed="false" onclick="pickMode('wrong',1)"><span class="mtop"><span class="ic" aria-hidden="true">🔁</span><span class="mrec">Gợi ý</span><span class="mc" data-c="wrong"></span></span><span class="mt"><b><span class="mkey">4</span>Câu sai</b><small>Những câu bạn từng làm sai</small></span></button>
+          <button type="button" class="mode" data-mode="learn" aria-pressed="false" onclick="pickMode('learn',1)"><span class="mtop"><span class="ic" aria-hidden="true">🧠</span><span class="mrec">Gợi ý</span><span class="mc" data-c="learn"></span></span><span class="mt"><b><span class="mkey">5</span>Học thông minh</b><small>Ưu tiên câu mới &amp; câu hay sai</small></span></button>
+          <button type="button" class="mode" data-mode="review" aria-pressed="false" onclick="pickMode('review',1)"><span class="mtop"><span class="ic" aria-hidden="true">⏰</span><span class="mrec">Gợi ý</span><span class="mc" data-c="review"></span></span><span class="mt"><b><span class="mkey">6</span>Đến hạn ôn</b><small>Lặp ngắt quãng — câu tới hạn hôm nay</small></span></button>
         </div></section>
         <section class="mgroup" aria-label="Ôn nhanh"><h2 class="mg-h">Ôn nhanh</h2><div class="mlist">
-          <button type="button" class="mode" data-mode="flash" aria-pressed="false" onclick="pickMode('flash',1)"><span class="ic" aria-hidden="true">🎴</span><span class="mt"><b><span class="mkey">7</span>Flashcard</b><small>Lật thẻ, không tính giờ, không chấm điểm</small></span></button>
-          <button type="button" class="mode" data-mode="book" aria-pressed="false" onclick="pickMode('book',1)"><span class="ic" aria-hidden="true">🔖</span><span class="mt"><b><span class="mkey">8</span>Đã đánh dấu</b><small>Câu khó bạn đã bấm 🔖 trong bài</small></span><span class="mc" data-c="book"></span></button>
-          <button type="button" class="mode" data-mode="seen" aria-pressed="false" onclick="pickMode('seen',1)"><span class="ic" aria-hidden="true">👁</span><span class="mt"><b><span class="mkey">9</span>Đã xem đáp án</b><small>Câu từng bấm “Xem đáp án” — nên ôn lại</small></span><span class="mc" data-c="seen"></span></button>
+          <button type="button" class="mode" data-mode="flash" aria-pressed="false" onclick="pickMode('flash',1)"><span class="mtop"><span class="ic" aria-hidden="true">🎴</span><span class="mrec">Gợi ý</span></span><span class="mt"><b><span class="mkey">7</span>Flashcard</b><small>Lật thẻ, không tính giờ, không chấm điểm</small></span></button>
+          <button type="button" class="mode" data-mode="book" aria-pressed="false" onclick="pickMode('book',1)"><span class="mtop"><span class="ic" aria-hidden="true">🔖</span><span class="mrec">Gợi ý</span><span class="mc" data-c="book"></span></span><span class="mt"><b><span class="mkey">8</span>Đã đánh dấu</b><small>Câu khó bạn đã bấm 🔖 trong bài</small></span></button>
+          <button type="button" class="mode" data-mode="seen" aria-pressed="false" onclick="pickMode('seen',1)"><span class="mtop"><span class="ic" aria-hidden="true">👁</span><span class="mrec">Gợi ý</span><span class="mc" data-c="seen"></span></span><span class="mt"><b><span class="mkey">9</span>Đã xem đáp án</b><small>Câu bạn từng bấm “Xem đáp án”</small></span></button>
         </div></section>
       </div>
       <button type="button" class="btn sec match-btn" id="matchBtn" onclick="showMatching()" style="display:none">📎 Xem câu Matching <span id="matchN"></span></button>
@@ -576,9 +585,11 @@ function scopeCount(set){const bi=bankIndex(),s=curSubject(),ks=new Set();
 function renderModeCounts(exs,sq){
   const c={exam:exs.length,all:sq.length,wrong:scopeCount(WRONG),learn:sq.filter(x=>!SRS[x.id]).length,
            review:dueCount(),book:scopeCount(BOOK),seen:scopeCount(SEEN)};
-  const txt={exam:c.exam+' đề',all:c.all+' câu',wrong:String(c.wrong),learn:c.learn?c.learn+' mới':'',
-             review:String(c.review),book:String(c.book),seen:String(c.seen)};
-  document.querySelectorAll('.mode .mc').forEach(b=>{const k=b.dataset.c;b.textContent=txt[k]||'';
+  // the unit is a separate span: a 97px phone tile only has room for the number
+  const sfx={exam:'đề',all:'câu',learn:'mới'};
+  document.querySelectorAll('.mode .mc').forEach(b=>{const k=b.dataset.c,n=c[k];
+    if(n==null||(k==='learn'&&!n))b.textContent='';
+    else b.innerHTML=n+(sfx[k]?' <span class="mcx">'+sfx[k]+'</span>':'');
     b.classList.toggle('zero',c[k]===0);b.classList.toggle('bad',k==='wrong'&&c[k]>0);b.classList.toggle('due',k==='review'&&c[k]>0);});
   REC_MODE=c.review>0?'review':c.wrong>0?'wrong':'learn';
   document.querySelectorAll('.mode').forEach(m=>m.classList.toggle('rec',m.dataset.mode===REC_MODE));
