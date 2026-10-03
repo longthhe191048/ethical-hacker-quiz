@@ -53,6 +53,7 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--border
 .opt.sel .olet,.opt.correct .olet{color:var(--text)}
 .badge.multi{background:var(--amberbg);color:var(--amber);border-color:var(--amber);font-weight:700}
 .badge.hot{background:var(--redbg);color:var(--red);border-color:var(--red);font-weight:700}
+.badge.xr{color:var(--green);border-color:var(--green)}
 .opt .otext{flex:1;overflow-wrap:anywhere}.opt .mk{margin-left:auto;font-weight:700;white-space:nowrap}.opt.correct .mk{color:var(--green)}.opt.wrong .mk{color:var(--red)}
 .notes{background:var(--panel2);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:9px 12px;margin:8px 0;font-size:.9rem;white-space:pre-wrap}
 .expl{background:var(--panel2);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:10px 13px;margin:9px 0;font-size:.93rem;color:var(--text)}.expl b{color:var(--text)}
@@ -576,7 +577,10 @@ function renderStats(){const exs=examsFor(curSubject()),raw=exs.reduce((a,e)=>a+
   const sq=scopeQuestions(),mp=masteryPct(sq),dedup=raw-sq.length;
   const kn=new Set();sq.forEach(x=>{if(KNOWN.has(x.id))kn.add(x.dk)});
   el('stats').innerHTML=`<span class="kpi"><span aria-hidden="true">🎯</span> Thành thạo <b>${mp}%</b></span>`;
-  const sl=el('scopeLine');if(sl)sl.textContent=`${exs.length} đề · ${sq.length} câu`+(dedup?` (${raw} lượt, ${dedup} câu trùng đã gộp)`:'');
+  const xr=exs.reduce((a,e)=>a+e.questions.filter(q=>q.xr&&!q.xrn).length,0);
+  const xn=exs.reduce((a,e)=>a+e.questions.filter(q=>q.xrn).length,0);
+  const sl=el('scopeLine');if(sl)sl.textContent=`${exs.length} đề · ${sq.length} câu`+(dedup?` (${raw} lượt, ${dedup} câu trùng đã gộp)`:'')
+    +(xr?` · ${xr} câu đã có ở MLN111`:'')+(xn?` · ${xn} câu gần giống`:'');
   const kN=el('knownN');if(kN)kN.textContent=kn.size?`(${kn.size} câu)`:'';
   renderStreak();renderMastery();renderModeCounts(exs,sq);
   // back from a test / subject switch: the picked mode's counts and start state may have changed
@@ -857,6 +861,7 @@ function renderFlashcard(q){
     <div class="qh"><span class="qnum">Thẻ ${IDX+1}</span><span class="badge">${esc(q.src)}${q.n?' · Câu '+q.n:''}</span>`;
   if(isMulti(q))h+=`<span class="badge multi">☑ Chọn ${q.ci.length} đáp án</span>`;
   if(span>1)h+=`<span class="badge hot">🔥 Hay ra ×${span}</span>`;
+  h+=xrBadge(q);
   h+=`<span class="fc-acts" onclick="event.stopPropagation()">`+
      `<span class="star" onclick="toggleKnown()">${KNOWN.has(q.id)?'★':'☆'}</span>`+
      `<span class="bmk" onclick="toggleBook()">${BOOK.has(q.id)?'🔖':'🏳'}</span></span></div>`+
@@ -866,12 +871,18 @@ function renderFlashcard(q){
   h+=`<div class="flip-hint">${FLIPPED?'👆 Nhấn để úp thẻ lại':'👆 Nhấn vào thẻ hoặc phím Space để xem đáp án'}</div></div>`;
   h+=`<div class="navbtns"><button class="btn sec" onclick="go(-1)" ${IDX===0?'disabled':''}>← Trước</button><button class="btn" onclick="go(1)" ${IDX===SESSION.length-1?'disabled':''}>Sau →</button></div>`;
   el('test').innerHTML=h;}
+/* a question the subject's other bank already covers (set by scratchpad pt_xref.py) */
+function xrBadge(q){
+  if(!q.xr)return '';
+  const t=q.xrc?'⚠ MLN111 ghi đáp án khác':q.xrn?'≈ gần giống câu ở MLN111':'📚 đã có ở MLN111';
+  return `<span class="badge ${q.xrc?'multi':q.xrn?'':'xr'}" title="${esc(q.xr)}${q.xrn?' — đề hỏi khác chữ, đọc kỹ':''}">${t}</span>`;}
 function renderQ(){if(isFlash()){renderFlashcard(SESSION[IDX]);return}const q=SESSION[IDX];const showAns=submitted||REVEALED.has(q.id);const known=KNOWN.has(q.id);
   el('prog').textContent=(IDX+1)+'/'+SESSION.length;el('srcLabel').textContent=q.src+(q.n?' · Câu '+q.n:'');syncTopbar();
   let h=`<div class="card"><div class="qh"><span class="qnum">Câu ${IDX+1}</span><span class="badge">${esc(q.subject)}</span><span class="badge">${esc(q.src)}${q.n?' · Câu '+q.n:''}</span><span class="star" onclick="toggleKnown()">${known?'★':'☆'}</span><span class="bmk" onclick="toggleBook()" title="Đánh dấu câu khó (ôn riêng)">${BOOK.has(q.id)?'🔖':'🏳'}</span>`;
   if(isMulti(q))h+=`<span class="badge multi">☑ Chọn ${q.ci.length} đáp án</span>`;
   const span=examSpan(q.dk||(q.subject+'|'+normStem(q.q)));
   if(span>1)h+=`<span class="badge hot" title="Câu này xuất hiện trong ${span} đề khác nhau">🔥 Hay ra ×${span}</span>`;
+  h+=xrBadge(q);
   if(submitted){const ok=graded(q);const st=!isAnswered(q)?['skip','⊘ Chưa làm']:ok?['ok','✔ Đúng']:['no','✘ Sai'];h+=`<span class="rev-status ${st[0]}">${st[1]}</span>`;}
   h+=`</div><p class="stem">${formatQStem(q.q)}</p>`;
   const multi=isMulti(q);
