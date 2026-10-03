@@ -385,6 +385,7 @@ function vfBadge(vf){
     case 'corrected-src': return '<span class="vbadge src">nguồn đã hiệu đính</span>';
     case 'imported':      return '<span class="vbadge warn">⚠ đáp án theo nguồn, chưa đối chiếu</span>';
     case 'checked':       return '<span class="vbadge ok">✓ đã đối chiếu</span>';
+    case 'formkey':       return '<span class="vbadge ok">✓ đáp án chấm của form</span>';
     default:              return '<span class="vbadge ok">✓ verify khớp</span>';
   }}
 function isMatch(q){return /^\s*match\b/i.test(q.q||'')}
@@ -541,6 +542,8 @@ function applyOrigin(){
     if(sn&&m.srcNote)sn.textContent=m.srcNote;
     if(fn&&m.footNote)fn.textContent=m.footNote;
     if(m.titleSuffix)document.title='Ôn tập '+(FORCED||m.titleSuffix);
+    // a bank may also name the heading, so a page is not stuck with its subject code
+    if(m.displayTitle){const h=el('title');if(h)h.textContent='📝 Ôn tập '+m.displayTitle;}
     return;}
   const ex=FU_BANK.exams||[];if(!ex.length||!ex.every(e=>e.origin==='quizlet-study'))return;
   const sn=el('srcNote'),fn=el('footNote');
@@ -684,7 +687,9 @@ function examList(exs){
     h+=`<label class="exam-row${on?' sel':''}"><input type="radio" name="examR" value="${i}"${on?' checked':''} onchange="pickExam(${i})">`+
        `<span class="ex-badge">${esc(m.code||('Đề '+k))}</span>`+
        `<span class="ex-main"><span class="ex-title">${esc(m.title)}</span>`+
-       `<span class="ex-sub">${e.count} câu · ${done}</span><span class="ex-raw">${esc(e.name)}</span></span>`+
+       `<span class="ex-sub">${e.count} câu · ${done}</span>`+
+       // the raw file name only helps when it differs from the title we show
+       (m.title!==e.name?`<span class="ex-raw">${esc(e.name)}</span>`:'')+`</span>`+
        `<span class="ex-mp"><b>${mp}%</b><small>thành thạo</small></span></label>`;});
   return h+'</div>';}
 function pickExam(i){EXAM_SEL=i;const p=el('examPick');if(p)p.value=String(i);
