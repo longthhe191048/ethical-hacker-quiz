@@ -56,9 +56,78 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--border
 .badge.xr{color:var(--green);border-color:var(--green)}
 .opt .otext{flex:1;overflow-wrap:anywhere}.opt .mk{margin-left:auto;font-weight:700;white-space:nowrap}.opt.correct .mk{color:var(--green)}.opt.wrong .mk{color:var(--red)}
 .notes{background:var(--panel2);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:9px 12px;margin:8px 0;font-size:.9rem;white-space:pre-wrap}
-.expl{background:var(--panel2);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:10px 13px;margin:9px 0;font-size:.93rem;color:var(--text);white-space:pre-line;overflow-wrap:anywhere}.expl b{color:var(--text)}
 .vbadge{font-size:.7rem;border-radius:6px;padding:1px 7px;border:1px solid var(--border)}
 .vbadge.ok{color:var(--green);border-color:var(--green)}.vbadge.warn{color:var(--amber);border-color:var(--amber);background:var(--amberbg)}.vbadge.src{color:var(--muted)}.vbadge.corr{color:var(--amber);border-color:var(--amber)}
+/* ===== CHANGES TO EXISTING RULES (eh-site/onthi-fu-v2-tpl.html <style>) =====
+   - DELETE line 59: .expl{…white-space:pre-line…}.expl b{…}
+     Only the four callers below used it, and all four switch to answerCard(). Its pre-line sat on a
+     container that also held markup. Now pre-line lives only on .ac-why p, a text-only node.
+     Never wrap answerCard()/preNotesHTML() output in .expl or .notes.
+   - KEEP line 58 .notes: #storeWarn (line 277) still uses it. q.nt simply stops using it.
+   - KEEP .vbadge (line 60) as is. Badges now only render inside .ac-meta, which raises them to .74rem.
+   Paste everything below right after line 61 (the .vbadge rules). */
+
+/* ---- question aids (preNotesHTML): under the options, before AND after revealing ---- */
+.qaid{margin:10px 0 4px;padding:8px 12px;background:var(--panel2);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;
+  font-size:.88rem;line-height:1.5;color:var(--text);overflow-wrap:anywhere}
+.qaid p{margin:0}
+.qaid p+p,.qaid pre+p{margin-top:4px}
+.qaid-h{font-weight:700}
+.qaid pre{margin:6px 0 0;padding:6px 8px;background:var(--panel);border:1px solid var(--border);border-radius:6px;color:var(--text);
+  white-space:pre-wrap;overflow-wrap:anywhere;font:.82rem/1.45 ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace}
+
+/* ---- revealed answer card (answerCard): answer -> why -> notes -> evidence + source -> status ---- */
+.ac{margin:12px 0 4px;border:1px solid var(--border);border-radius:12px;background:var(--panel2);overflow:hidden;
+  font-size:.95rem;line-height:1.6;color:var(--text);overflow-wrap:anywhere}
+.ac p{margin:0}
+.ac-lbl{margin:0 0 4px;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;line-height:1.4;color:var(--muted)}
+/* 1. the right answer: the only tinted band. Letter = the DISPLAYED letter, text = the option text */
+.ac-key{padding:10px 14px 12px;background:var(--greenbg)}
+.ac-key:not(:last-child){border-bottom:1px solid var(--border)}
+.ac-row{display:flex;gap:10px;align-items:flex-start}
+.ac-row+.ac-row{margin-top:8px}
+.ac-L{flex:0 0 auto;display:inline-grid;place-items:center;min-width:1.75rem;height:1.75rem;padding:0 5px;border-radius:7px;
+  background:var(--green);color:var(--panel);font-weight:800;font-size:.92rem;line-height:1}   /* ~5:1 in both themes */
+.ac-tx{flex:1;min-width:0;padding-top:.15rem;font-weight:600;line-height:1.5}
+/* 2-5 */
+.ac-body{display:flex;flex-direction:column;gap:12px;padding:12px 14px 14px}
+.ac-why p{white-space:pre-line}                 /* legacy ex may contain \n; text-only node */
+.ac-exs{font-size:.9rem;color:var(--muted)}
+.ac-notes{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:.88rem;line-height:1.5}
+.ac-notes li{display:flex;gap:8px;align-items:flex-start;color:var(--muted)}
+.ac-notes li.fix,.ac-notes li.warn{padding:6px 10px;background:var(--amberbg);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;color:var(--text)}
+.ac-ni{flex:0 0 1.1em;text-align:center}
+.ac-notes .fix .ac-ni,.ac-notes .warn .ac-ni{color:var(--amber);font-weight:700}
+.ac-nt{flex:1;min-width:0}
+/* 4. evidence: one 44px header row; open by default, a fold is remembered */
+.ac-ev{border-top:1px solid var(--border)}
+.ac-body>.ac-ev:first-child{border-top:0}
+.ac-ev>summary{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:0 8px;min-height:44px;padding:6px 28px 6px 0;
+  cursor:pointer;list-style:none;-webkit-tap-highlight-color:transparent}
+.ac-ev>summary::-webkit-details-marker{display:none}
+.ac-ev>summary::after{content:'▾';position:absolute;right:4px;top:50%;transform:translateY(-50%);color:var(--muted);transition:transform .15s}
+.ac-ev[open]>summary::after{transform:translateY(-50%) rotate(180deg)}
+.ac-ev>summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.ev-t{font-size:.9rem;font-weight:700}
+.ev-sum{min-width:0;font-size:.8rem;color:var(--muted)}
+.ev-body{padding-top:4px}
+.ev-g+.ev-g{margin-top:14px}
+.ev-q{margin:0 0 8px;padding:1px 0 1px 12px;border-left:3px solid var(--accent);font-size:.9rem;line-height:1.6}
+.ev-q.unv{border-left-style:dashed;border-left-color:var(--amber)}
+.ev-qm{font-size:.78rem;color:var(--muted);white-space:nowrap}
+.ev-cite{padding-left:15px;font-size:.78rem;line-height:1.45;color:var(--muted)}
+.ev-bk{font-weight:700;color:var(--text)}
+.ev-loc{display:block;margin-top:2px}
+.ev-unv{display:inline-block;padding:0 6px;border:1px solid var(--amber);border-radius:5px;background:var(--amberbg);color:var(--text);
+  font-size:.74rem;font-weight:700;line-height:1.5;white-space:nowrap}   /* text in --text: amber text is ~4.2:1 in light */
+.ev-src{margin-top:12px;padding-top:8px;border-top:1px dashed var(--border);font-size:.74rem;line-height:1.45;color:var(--muted)}
+.ev-src p+p{margin-top:3px}
+/* 5. status */
+.ac-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ac-meta .vbadge{font-size:.74rem;padding:2px 8px;line-height:1.4;max-width:100%}   /* base .vbadge is .7rem, below the floor */
+/* the flash card itself is --panel2 */
+.flash-card .ac,.flash-card .qaid{background:var(--panel)}
+.flash-card .qaid pre{background:var(--panel2)}
 .rev-status{font-weight:700;font-size:.8rem;padding:2px 9px;border-radius:6px;margin-left:auto}
 .rev-status.ok{background:var(--greenbg);color:var(--green)}.rev-status.no{background:var(--redbg);color:var(--red)}.rev-status.skip{background:var(--amberbg);color:var(--amber)}
 .star,.fc-acts{display:inline-flex;align-items:center;margin-left:auto}
@@ -256,6 +325,9 @@ label.theme-btn{display:inline-flex;align-items:center}
     border-radius:0;border-top:1px solid var(--border);background:var(--topbar);backdrop-filter:blur(6px);box-shadow:0 -6px 18px var(--shadow)}
   .start-sum{font-size:.84rem}
   .start-btn{min-height:50px;padding:10px 20px}
+  /* revealed answer card: a little less side padding on phones (text column ~282px at 360px) */
+  .ac-key{padding:10px 12px 12px}
+  .ac-body{padding:12px 12px 14px}
 }
 </style>
 <script>(function(d){try{if(window.self!==window.top)d.classList.add('embed')}catch(e){d.classList.add('embed')}
@@ -389,6 +461,207 @@ function vfBadge(vf){
     case 'formkey':       return '<span class="vbadge ok">✓ đáp án chấm của form</span>';
     default:              return '<span class="vbadge ok">✓ verify khớp</span>';
   }}
+/* ===== revealed-answer card + question aids ==================================
+   Paste right after vfBadge() (template line 391). Uses esc, stripPrefix, optLetterAt,
+   correctIdxOf from above. Reading order of the card:
+     1. right answer  - DISPLAYED letter + option text (no looking back up)
+     2. why           - q.ex, or one muted line when q.exs says the book can't settle it
+     3. answer notes  - corrections / cross-bank warnings / file notes from q.nt
+     4. evidence      - q.exq quotes; one citation per same-place group; full source once per book
+     5. status        - caller's verify/peek badges
+   Notes that help READ the question go under the options instead (preNotesHTML). */
+const BOOKS={
+  tht:{short:'Giáo trình Triết học Mác - Lênin (2021)',tag:'Triết học',
+    full:'Giáo trình Triết học Mác - Lênin (Dành cho bậc đại học hệ không chuyên lý luận chính trị), Bộ Giáo dục và Đào tạo, Nxb. Chính trị quốc gia Sự thật, Hà Nội, 2021',
+    pageNote:'số trang theo file .doc'},
+  ktct:{short:'Giáo trình Kinh tế chính trị Mác - Lênin',tag:'Kinh tế chính trị',
+    full:'Giáo trình Kinh tế chính trị Mác - Lênin (file “GIÁO TRÌNH FULL.pdf” đi kèm bộ câu hỏi nhập từ quizlet-study)',
+    pageNote:'số trang theo file PDF'}};
+function bookOf(b){return Object.prototype.hasOwnProperty.call(BOOKS,b)?BOOKS[b]
+  :{short:'Giáo trình'+(b?' ('+b+')':''),tag:'Giáo trình',full:'',pageNote:''}}
+/* one-line text: control chars (a loc label carries a stray \u0002) and runs of whitespace -> one space */
+function clean(s){return String(s==null?'':s).replace(/[\u0000-\u001F\u007F]+/g,' ').replace(/\s+/g,' ').trim()}
+
+/* ---- notes: q.nt = items joined by " · " ----
+   pre   reading aids (cut-off stem, legend, code, typo in an option) -> under the options, always
+   post  commentary on the key (corrections, "đã có ở MLN111", "Lưu ý…", file notes) -> only after reveal
+   noise import bookkeeping (duplicates, label mapping, "checkbox B is marked") -> never shown
+   Every Vietnamese item is our own commentary -> post (safe default: hidden until reveal).
+   English items come from OCR/import; they are split per sentence so "…not visible. Choose 1 answer"
+   or "Choose 1 answer. Checkbox B is marked…" sort cleanly. */
+const NT_VI=/[ĂăĐđƠơƯưẠ-ỹ]/;                       // ă đ ơ ư + the Vietnamese tone-letter block
+const NT_AID_VI=/^(?:hãy\s+)?chọn\s+\d+\s+(?:đáp án|phương án)/i;
+const NT_ANSWER=/\b(?:answer key|correct[- ]answer|source key|answer label)\b/i;
+const NT_NOISE=/^(?:duplicate\b|exact duplicate\b|question prompt duplicates\b|conflicting answer\b|source option labels are irregular\b|source pdf omits\b|a source note supplies\b|the source content was preserved\b|a stray green-highlighted\b|(?:python |c |sql )?code snippet included\b|contains a code\/command snippet\b|options contain command-line code\b|matching question\.?$|(?:the )?(?:checkbox|option) (?:for option )?[a-h] (?:is shown selected|is marked|rendered in)\b)/i;
+function ntSentences(s){
+  if(s.indexOf('\n')>=0)return [s];                  // code / verbatim blocks stay whole
+  // splits "…image. Choose 1 answer" but not "Legend: 1. Preserver" or "marker(s): A. Source"
+  return s.replace(/([a-z)\]'"”])\.\s+(?=[A-Z(])/g,'$1.\u0001').split('\u0001');}
+function splitNotes(nt){
+  const pre=[],post=[];
+  String(nt==null?'':nt).split(' · ').forEach(raw=>{
+    const item=raw.replace(/[\u0000-\u0008\u000B-\u001F\u007F]/g,'').trim();   // keep \t and \n (code)
+    if(!item)return;
+    if(NT_VI.test(item)){(NT_AID_VI.test(item)?pre:post).push(item);return}
+    const aid=[],ans=[];
+    ntSentences(item).forEach(x=>{const s=x.trim();
+      if(!s||NT_NOISE.test(s))return;
+      (NT_ANSWER.test(s)?ans:aid).push(s)});
+    if(aid.length)pre.push(aid.join(' '));
+    if(ans.length)post.push(ans.join(' '));});
+  return {pre,post};}
+
+/* "Choose 2 answers" / "Multiple-select question (choose two)" only repeat the "☑ Chọn N đáp án" badge the
+   header already shows before answering (or the single-answer default): drop them when they agree with
+   the key, show a short Vietnamese line when they don't. */
+const NT_NUM={one:1,two:2,three:3,four:4,five:5,six:6};
+function ntNum(w){w=String(w).toLowerCase();return NT_NUM[w]||parseInt(w,10)||0}
+function chooseCount(s){            // n>0: "pick n"; -1: "pick several"; 0: not a count sentence
+  let m=/^\(?\s*(?:choose|select)\s+(\d+|one|two|three|four|five|six)\s+answers?\s*\)?\.?$/i.exec(s);
+  if(m)return ntNum(m[1]);
+  m=/^multiple-(?:select|answer|choice) question\b(.*)$/i.exec(s);
+  if(m){const n=/\b(\d+|one|two|three|four|five|six)\b/i.exec(m[1]);return n?ntNum(n[1]):-1}
+  return 0;}
+function tidyAid(s,k){
+  if(s.indexOf('\n')>=0)return s;
+  return ntSentences(s).map(x=>{x=x.trim();const n=chooseCount(x);
+    if(!n)return x;
+    if(n===k||(n<0&&k>1))return '';
+    return n>0?'Đề gốc ghi: chọn '+n+' đáp án.':x;
+  }).filter(Boolean).join(' ');}
+
+/* Notes name options by their SOURCE letter ("Option D", "options A, C, D", "key is C", "chọn C").
+   Options are shuffled on screen (q.oi = display index -> source index), so rewrite them to the letter
+   actually shown. Bank items (history / matching) have no q.oi: those screens print source order. */
+const NT_LETTER=/(^|[\s(“"'])([Oo]ptions?|[Cc]heckbox|[Cc]họn|[Pp]hương án|[Đđ]áp án|key is)(\s+)([A-H](?:(?:\s*,\s*(?:and\s+|or\s+)?|\s+(?:and|or|và|hoặc)\s+)[A-H])*)(?![0-9A-Za-zÀ-ỹ\-–])/g;
+function ntLetters(s,q){
+  const o=(q&&q.o)||[];if(!o.length)return String(s);
+  const shown=L=>{let i=-1;for(let k=0;k<o.length;k++)if(optLetterAt(q,k)===L){i=k;break}
+    const d=i<0?-1:Array.isArray(q.oi)?q.oi.indexOf(i):i;
+    return d<0?L:String.fromCharCode(65+d)};
+  return String(s).replace(NT_LETTER,(m,p,w,sp,list)=>p+w+sp+list.replace(/[A-H]/g,shown));}
+
+/* question aids, under the options before AND after revealing; '' when there are none */
+function preNotesHTML(q){
+  if(!q||!q.nt)return '';
+  const k=(Array.isArray(q.ci)?q.ci:correctIdxOf(q)).length;
+  const items=splitNotes(q.nt).pre.map(s=>tidyAid(s,k)).filter(Boolean);
+  if(!items.length)return '';
+  const lab='<b class="qaid-h">📝 Lưu ý về đề:</b> ';
+  return '<div class="qaid" role="note">'+items.map((s,i)=>{
+    const lb=i?'':lab,nl=s.indexOf('\n');
+    if(nl<0)return '<p>'+lb+esc(ntLetters(s,q))+'</p>';
+    const head=s.slice(0,nl).trim();                // "Code snippet:\n#include…" -> label + code block
+    return /:$/.test(head)?'<p>'+lb+esc(ntLetters(head,q))+'</p><pre>'+esc(s.slice(nl+1))+'</pre>'
+                          :(lb?'<p>'+lb+'</p>':'')+'<pre>'+esc(s)+'</pre>';
+  }).join('')+'</div>';}
+
+/* ---- evidence ---- */
+function excerpt(t){t=clean(t);if(!t)return t;     // mark cut-off quotes as excerpts (no words changed)
+  const a=t.charAt(0);if(a!==a.toUpperCase())t='…'+t;
+  if(!/[.!?…:;)”"»]$/.test(t))t+='…';
+  return t;}
+/* open by default (citations must be complete); a student who folds it keeps it folded ('fu_ev'='0') */
+function evOpenPref(){try{return localStorage.getItem('fu_ev')!=='0'}catch(e){return true}}
+// runs on the summary CLICK, before the toggle (never on 'toggle': a forced-open card must not overwrite the choice)
+function evRemember(d){try{localStorage.setItem('fu_ev',d.open?'0':'1')}catch(e){}}
+function pagesOf(list){const ps=[];
+  list.forEach(x=>{if(x.pg!=null&&x.pg!==''&&ps.indexOf(x.pg)<0)ps.push(x.pg)});
+  return ps.sort((a,b)=>a-b);}
+function evidenceHTML(exq,forceOpen){
+  const groups=[],books=[];   // consecutive quotes from the same book + section share ONE citation
+  exq.forEach(x=>{
+    const loc=(Array.isArray(x.loc)?x.loc:[]).map(clean).filter(Boolean),key=x.b+'|'+loc.join('|'),g=groups[groups.length-1];
+    if(g&&g.key===key)g.qs.push(x);else groups.push({key,b:x.b,loc,qs:[x]});
+    if(books.indexOf(x.b)<0)books.push(x.b);});
+  const where=books.map(b=>{const ps=pagesOf(exq.filter(x=>x.b===b));
+    return [books.length>1?bookOf(b).tag:'',ps.length?'tr. '+ps.join(', '):''].filter(Boolean).join(' ')}).filter(Boolean).join(' · ');
+  let h='<details class="ac-ev"'+(forceOpen||evOpenPref()?' open':'')+' onclick="event.stopPropagation()">'+
+    '<summary onclick="evRemember(this.parentNode)"><span class="ev-t">📖 Trích giáo trình</span>'+
+    '<span class="ev-sum">'+esc(exq.length+' đoạn'+(where?' · '+where:''))+'</span></summary><div class="ev-body">';
+  groups.forEach(g=>{
+    const bk=bookOf(g.b),ps=pagesOf(g.qs),onePg=ps.length<2,allU=g.qs.every(x=>x.v===false);
+    h+='<div class="ev-g">'+g.qs.map(x=>{
+        let tail='';
+        if(!onePg&&x.pg!=null&&x.pg!=='')tail+=' <span class="ev-qm">tr. '+esc(x.pg)+'</span>';
+        if(!allU&&x.v===false)tail+=' <span class="ev-unv">⚠ chưa xác minh</span>';
+        return '<blockquote class="ev-q'+(x.v===false?' unv':'')+'">'+esc(excerpt(x.t))+tail+'</blockquote>';
+      }).join('')+
+      '<div class="ev-cite"><span class="ev-bk">'+esc(bk.short)+'</span>'+(onePg&&ps.length?' · tr. '+esc(ps[0]):'')+
+      (allU?' <span class="ev-unv">⚠ trích dẫn chưa xác minh</span>':'')+
+      (g.loc.length?'<span class="ev-loc">'+g.loc.map(esc).join(' › ')+'</span>':'')+'</div></div>';});
+  // the full bibliographic line: once per book, small, at the end
+  h+='<div class="ev-src">'+books.map(b=>{const bk=bookOf(b);
+    return '<p>Nguồn: '+esc(bk.full||bk.short)+(bk.pageNote?' — '+esc(bk.pageNote):'')+'.</p>'}).join('')+'</div>';
+  return h+'</div></details>';}
+
+/* ---- the card ---- */
+const EXS_TEXT={
+  none:'Giáo trình không đề cập nội dung này — đáp án giữ theo nguồn đề.',
+  unclear:'Giáo trình có nói tới chủ đề này nhưng không đủ để chốt đáp án — đáp án giữ theo nguồn đề.'};
+function noteKind(n){
+  if(/^(?:Đáp án (?:đã )?sửa|Đã bổ sung|File nguồn ghép nhầm|Form gốc)/i.test(n))return ['fix','✎'];
+  if(/^(?:Lưu ý|Gần giống|Source note)|nghiêng về đáp án khác|answer key|source key/i.test(n))return ['warn','⚠'];
+  return ['info','ℹ'];}
+/* correct options as [{L,text}] in DISPLAY order with DISPLAY letters. Session items carry q.oi/q.ci;
+   bank items (history, matching) don't, so they fall back to source order = the letters those screens print. */
+function keyRowsOf(q){
+  const o=q.o||[],ci=Array.isArray(q.ci)?q.ci:correctIdxOf(q),
+        oi=Array.isArray(q.oi)&&q.oi.length===o.length?q.oi:o.map((_,i)=>i);
+  return oi.map((orig,d)=>ci.indexOf(orig)<0?null:{L:String.fromCharCode(65+d),text:stripPrefix(o[orig])}).filter(Boolean);}
+/* keyRows=[{L,text}] in display order; badgesHTML = caller-rendered verify/peek badges (trusted HTML) */
+function answerCard(q,keyRows,badgesHTML,fmt){
+  q=q||{};
+  const F=typeof fmt==='function'?fmt:(x=>x);   // e.g. abbrify; applied to escaped prose, never to quotes
+  const rows=(keyRows||[]).filter(r=>r&&r.L);
+  let h='<section class="ac" aria-label="Đáp án và giải thích"><div class="ac-key">'+
+    '<div class="ac-lbl">'+(rows.length>1?rows.length+' đáp án đúng':'Đáp án đúng')+'</div>'+
+    (rows.length?rows:[{L:'?',text:'Chưa có đáp án cho câu này'}]).map(r=>
+      '<div class="ac-row"><span class="ac-L">'+esc(r.L)+'</span><span class="ac-tx">'+
+      (F(esc(clean(r.text)))||'<i>(lựa chọn trống)</i>')+'</span></div>').join('')+'</div>';
+  const body=[],ex=String(q.ex==null?'':q.ex).trim(),
+        exq=(Array.isArray(q.exq)?q.exq:[]).filter(x=>x&&clean(x.t));
+  if(ex)body.push('<div class="ac-why"><div class="ac-lbl">Giải thích</div><p>'+F(esc(ex))+'</p></div>');
+  else if(q.exs==='none'||q.exs==='unclear')body.push('<p class="ac-exs">📕 '+EXS_TEXT[q.exs]+'</p>');
+  const post=splitNotes(q.nt).post;
+  if(post.length)body.push('<ul class="ac-notes">'+post.map(n=>{const k=noteKind(n);
+    return '<li class="'+k[0]+'"><span class="ac-ni" aria-hidden="true">'+k[1]+'</span><span class="ac-nt">'+F(esc(ntLetters(n,q)))+'</span></li>'}).join('')+'</ul>');
+  if(exq.length)body.push(evidenceHTML(exq,!ex));      // no ex: the quotes ARE the explanation -> always open
+  const bd=String(badgesHTML==null?'':badgesHTML).trim();
+  if(bd)body.push('<div class="ac-meta">'+bd+'</div>');
+  if(body.length)h+='<div class="ac-body">'+body.join('')+'</div>';
+  return h+'</section>';}
+/* abbreviations of the political-theory subjects -> their meaning, shown once per question in brackets.
+   Built from the banks by scratchpad mln_ex/_abbr_result.json (proposed, then adversarially verified);
+   tokens that are option letters, names, formulas or the very answer of a "gọi tắt là gì" question are
+   deliberately absent. */
+const ABBR_SUBJ=new Set(["MLN111", "MLN111PT", "MLN122", "MLN131", "HCM202", "VNR"]);
+const ABBR={"QHSX":"quan hệ sản xuất","LLSX":"lực lượng sản xuất","CNXH":"chủ nghĩa xã hội","HCM":"Hồ Chí Minh","XHCN":"xã hội chủ nghĩa","USD":"đô la Mỹ","TW":"Trung ương","NQ":"Nghị quyết","TTHCM":"tư tưởng Hồ Chí Minh","VN":"Việt Nam","CNDV":"chủ nghĩa duy vật","CNDT":"chủ nghĩa duy tâm","ASEAN":"Hiệp hội các quốc gia Đông Nam Á","WTO":"Tổ chức Thương mại Thế giới","CNDVBC":"chủ nghĩa duy vật biện chứng","PTSX":"phương thức sản xuất","APEC":"Diễn đàn Hợp tác Kinh tế châu Á – Thái Bình Dương","ASEM":"Diễn đàn Hợp tác Á – Âu","XH":"xã hội","CNTB":"chủ nghĩa tư bản","TBCN":"tư bản chủ nghĩa","KTCT":"kinh tế chính trị","KVI":"khu vực I","KVII":"khu vực II","VNDCCH":"Việt Nam Dân chủ Cộng hòa","NSLĐ":"năng suất lao động","TLSX":"tư liệu sản xuất","GDP":"tổng sản phẩm quốc nội","CSHT":"cơ sở hạ tầng","KT":"kinh tế","CHXHCNVN":"Cộng hòa xã hội chủ nghĩa Việt Nam","UNESCO":"Tổ chức Giáo dục, Khoa học và Văn hóa Liên Hợp Quốc","AFTA":"Khu vực Mậu dịch Tự do ASEAN","GNP":"tổng sản phẩm quốc dân","CN":"Công nguyên","SH":"siêu hình","CNH":"công nghiệp hóa","HĐH":"hiện đại hóa","THDQ":"Trung Hoa Dân Quốc","TQ":"Trung Quốc","CT":"Chỉ thị","ĐN":"Đà Nẵng","ĐCS":"Đảng Cộng sản","ĐA":"đáp án","ĐCSVN":"Đảng Cộng sản Việt Nam","CMT8":"Cách mạng Tháng Tám","CM":"cách mạng","G20":"Nhóm 20 nền kinh tế lớn","EU":"Liên minh châu Âu","ECOWAS":"Cộng đồng Kinh tế các quốc gia Tây Phi","AI":"trí tuệ nhân tạo","CLĐ":"công lao động","FDI":"đầu tư trực tiếp nước ngoài"};
+const ABBR_BY_SUBJ={"MLN111PT":{"KTTT":"kiến trúc thượng tầng"},"VNR":{"KTTT":"kinh tế thị trường"}};
+/* add "(meaning)" after the first abbreviation of each kind in one question card. s is escaped
+   text (abbreviations contain no & < >); "NQ/TW" -> "NQ/TW (Nghị quyết Trung ương)". Skipped when
+   the meaning is already written next to it, e.g. "Hiệp hội các quốc gia Đông Nam Á (ASEAN)". */
+const ABBR_TOK=/(^|[^A-Za-zÀ-ỹĐđ0-9])([A-ZĐ][A-ZĐ0-9]{1,9}(?:[\/\-][A-ZĐ][A-ZĐ0-9]{1,9})*)(?![A-Za-zÀ-ỹĐđ0-9])/g;
+function abbrOf(k,subj){const by=ABBR_BY_SUBJ[subj];return (by&&by[k])||ABBR[k]||''}
+function abbrify(s,subj,seen){
+  if(!s||!ABBR_SUBJ.has(subj))return s;
+  return String(s).replace(ABBR_TOK,(m,pre,tok,off,str)=>{
+    const parts=tok.split(/([\/\-])/),words=parts.filter((_,i)=>i%2===0),seps=parts.filter((_,i)=>i%2===1);
+    const exps=words.map(w=>abbrOf(w,subj));
+    if(!exps.every(Boolean))return m;
+    const full=exps.reduce((a,e,i)=>i?a+(seps[i-1]==='-'?' - ':' ')+e:e,'');
+    if(seen.has(tok))return m;
+    seen.add(tok);
+    const start=off+pre.length,end=start+tok.length;
+    if(str.charAt(start-1)==='('&&str.charAt(end)===')')return m;            // "(ASEAN)" after its full name
+    if(/^\s*\(/.test(str.slice(end,end+4)))return m;                         // already followed by a bracket
+    if(str.slice(Math.max(0,start-160),end+160).toLowerCase().indexOf(full.toLowerCase())>=0)return m;
+    return pre+tok+' ('+full+')';});}
+/* one filter per question card; part=1 marks the stem/options, left alone when the question asks
+   for the abbreviation itself */
+function abbrFor(q){
+  const subj=(q&&q.subject)||curSubject(),seen=new Set(),asks=/gọi tắt|viết tắt/i.test((q&&q.q)||'');
+  return (s,part)=>asks&&part?s:abbrify(s,subj,seen);}
 function isMatch(q){return /^\s*match\b/i.test(q.q||'')}
 /* Structured stems (matching questions especially) arrive as one long run of text —
    break them onto lines and bold the labels so they can be read. */
@@ -854,12 +1127,13 @@ let FLIPPED=false;
 function isFlash(){return MODE==='flash'}
 function toggleFlip(){FLIPPED=!FLIPPED;renderQ();}
 function renderFlashcard(q){
+  const AB=abbrFor(q);
   el('prog').textContent=(IDX+1)+'/'+SESSION.length;
   el('srcLabel').textContent=q.src+(q.n?' · Câu '+q.n:'');syncTopbar();
   const opts=q.oi.map((oi,i)=>{const right=(q.ci||[]).indexOf(oi)>=0;
     const cls='flash-opt'+(FLIPPED&&right?' correct':'');
     const mk=FLIPPED&&right?'<span class="mk" style="margin-left:auto;color:var(--green);font-weight:700">✔ đúng</span>':'';
-    return `<div class="${cls}"><span class="olet">${String.fromCharCode(65+i)}.</span><span class="otext">${esc(stripPrefix(q.o[oi]))}</span>${mk}</div>`}).join('');
+    return `<div class="${cls}"><span class="olet">${String.fromCharCode(65+i)}.</span><span class="otext">${AB(esc(stripPrefix(q.o[oi])),1)}</span>${mk}</div>`}).join('');
   const span=examSpan(q.dk||(q.subject+'|'+normStem(q.q)));
   let h=`<div class="flash-card" onclick="toggleFlip()">
     <div class="qh"><span class="qnum">Thẻ ${IDX+1}</span><span class="badge">${esc(q.src)}${q.n?' · Câu '+q.n:''}</span>`;
@@ -869,9 +1143,9 @@ function renderFlashcard(q){
   h+=`<span class="fc-acts" onclick="event.stopPropagation()">`+
      `<span class="star" onclick="toggleKnown()">${KNOWN.has(q.id)?'★':'☆'}</span>`+
      `<span class="bmk" onclick="toggleBook()">${BOOK.has(q.id)?'🔖':'🏳'}</span></span></div>`+
-     `<p class="stem">${formatQStem(q.q)}</p>${opts}`;
-  if(q.nt)h+=`<div class="notes">📝 ${esc(q.nt)}</div>`;
-  if(FLIPPED)h+=`<div class="expl"><b>Đáp án: ${esc((q.ci||[]).map(oi=>q.oi.indexOf(oi)).filter(j=>j>=0).sort((a,b)=>a-b).map(j=>String.fromCharCode(65+j)).join(', ')||'?')}</b> — ${esc(q.ex)||'<i>(không có giải thích)</i>'}</div>`;
+     `<p class="stem">${AB(formatQStem(q.q),1)}</p>${opts}`;
+  h+=preNotesHTML(q);
+  if(FLIPPED)h+=answerCard(q,keyRowsOf(q),vfBadge(q.vf),x=>AB(x,0));
   h+=`<div class="flip-hint">${FLIPPED?'👆 Nhấn để úp thẻ lại':'👆 Nhấn vào thẻ hoặc phím Space để xem đáp án'}</div></div>`;
   h+=`<div class="navbtns"><button class="btn sec" onclick="go(-1)" ${IDX===0?'disabled':''}>← Trước</button><button class="btn" onclick="go(1)" ${IDX===SESSION.length-1?'disabled':''}>Sau →</button></div>`;
   el('test').innerHTML=h;}
@@ -880,7 +1154,7 @@ function xrBadge(q){
   if(!q.xr)return '';
   const t=q.xrc?'⚠ MLN111 ghi đáp án khác':q.xrn?'≈ gần giống câu ở MLN111':'📚 đã có ở MLN111';
   return `<span class="badge ${q.xrc?'multi':q.xrn?'':'xr'}" title="${esc(q.xr)}${q.xrn?' — đề hỏi khác chữ, đọc kỹ':''}">${t}</span>`;}
-function renderQ(){if(isFlash()){renderFlashcard(SESSION[IDX]);return}const q=SESSION[IDX];const showAns=submitted||REVEALED.has(q.id);const known=KNOWN.has(q.id);
+function renderQ(){if(isFlash()){renderFlashcard(SESSION[IDX]);return}const q=SESSION[IDX];const AB=abbrFor(q);const showAns=submitted||REVEALED.has(q.id);const known=KNOWN.has(q.id);
   el('prog').textContent=(IDX+1)+'/'+SESSION.length;el('srcLabel').textContent=q.src+(q.n?' · Câu '+q.n:'');syncTopbar();
   let h=`<div class="card"><div class="qh"><span class="qnum">Câu ${IDX+1}</span><span class="badge">${esc(q.subject)}</span><span class="badge">${esc(q.src)}${q.n?' · Câu '+q.n:''}</span><span class="star" onclick="toggleKnown()">${known?'★':'☆'}</span><span class="bmk" onclick="toggleBook()" title="Đánh dấu câu khó (ôn riêng)">${BOOK.has(q.id)?'🔖':'🏳'}</span>`;
   if(isMulti(q))h+=`<span class="badge multi">☑ Chọn ${q.ci.length} đáp án</span>`;
@@ -888,20 +1162,19 @@ function renderQ(){if(isFlash()){renderFlashcard(SESSION[IDX]);return}const q=SE
   if(span>1)h+=`<span class="badge hot" title="Câu này xuất hiện trong ${span} đề khác nhau">🔥 Hay ra ×${span}</span>`;
   h+=xrBadge(q);
   if(submitted){const ok=graded(q);const st=!isAnswered(q)?['skip','⊘ Chưa làm']:ok?['ok','✔ Đúng']:['no','✘ Sai'];h+=`<span class="rev-status ${st[0]}">${st[1]}</span>`;}
-  h+=`</div><p class="stem">${formatQStem(q.q)}</p>`;
+  h+=`</div><p class="stem">${AB(formatQStem(q.q),1)}</p>`;
   const multi=isMulti(q);
   q.oi.forEach((oi,i)=>{const chosen=q.sels.indexOf(oi)>=0, right=(q.ci||[]).indexOf(oi)>=0;
     let cls='opt';if(showAns){cls+=' locked';if(right)cls+=' correct';else if(chosen)cls+=' wrong';}else if(chosen)cls+=' sel';
     let mk='';if(showAns){if(right)mk='<span class="mk">✔ đáp án đúng</span>';else if(chosen)mk='<span class="mk">✗ bạn chọn</span>';}
     const box=multi?`<span class="cbox">${chosen?'☑':'☐'}</span>`:'';
-    h+=`<div class="${cls}" onclick="pick(${i})">${box}<span class="olet">${String.fromCharCode(65+i)}.</span><span class="otext">${esc(stripPrefix(q.o[oi]))}</span>${mk}</div>`;});
-  if(q.nt)h+=`<div class="notes">📝 ${esc(q.nt)}</div>`;
+    h+=`<div class="${cls}" onclick="pick(${i})">${box}<span class="olet">${String.fromCharCode(65+i)}.</span><span class="otext">${AB(esc(stripPrefix(q.o[oi])),1)}</span>${mk}</div>`;});
+  h+=preNotesHTML(q);
   if(!showAns){const cf=q.conf||'';h+=`<div class="conf-row"><span class="sub">Mức độ tự tin:</span><span class="conf-chip${cf==='sure'?' sel':''}" onclick="setConf('sure')">✅ Chắc chắn</span><span class="conf-chip${cf==='unsure'?' sel':''}" onclick="setConf('unsure')">🤔 Không chắc</span><span class="conf-chip${cf==='guess'?' sel':''}" onclick="setConf('guess')">🎲 Đoán</span></div>`;}
   if(!showAns)h+=`<div style="margin-top:8px"><button class="btn sec" onclick="revealAns()">👁 Xem đáp án</button></div>`;
-  if(showAns){const vb=vfBadge(q.vf);
-    const key=(q.ci||[]).map(oi=>q.oi.indexOf(oi)).filter(j=>j>=0).sort((a,b)=>a-b).map(j=>String.fromCharCode(65+j)).join(', ')||'?';
-    const peek=REVEALED.has(q.id)&&!submitted?' <span class="vbadge corr">👁 đã xem trước — không tính điểm, đã khóa chọn</span>':'';
-    h+=`<div class="expl"><b>Đáp án: ${esc(key)}</b> — ${esc(q.ex)||'<i>(không có giải thích)</i>'} <span style="margin-left:6px">${vb}</span>${peek}</div>`;}
+  if(showAns){
+    const peek=REVEALED.has(q.id)&&!submitted?'<span class="vbadge corr">👁 đã xem trước — không tính điểm, đã khóa chọn</span>':'';
+    h+=answerCard(q,keyRowsOf(q),vfBadge(q.vf)+peek,x=>AB(x,0));}
   h+=`<div class="navbtns"><button class="btn sec" onclick="go(-1)" ${IDX===0?'disabled':''}>← Trước</button><button class="btn" onclick="go(1)" ${IDX===SESSION.length-1?'disabled':''}>Sau →</button></div>`;
   h+=`<div class="jump">`+SESSION.map((s,i)=>{let c=i===IDX?'cur ':'';const ans=isAnswered(s);if(submitted)c+=(!ans?'':graded(s)?'correct':'wrong');else c+=(ans?'done':'');if(KNOWN.has(s.id))c+=' known';return `<button class="${c}" onclick="jumpTo(${i})">${i+1}</button>`}).join('')+`</div></div>`;
   el('test').innerHTML=h;if(submitted&&window._hero)el('test').insertAdjacentHTML('afterbegin',window._hero);
@@ -964,14 +1237,14 @@ function openHistoryDetail(idx){const a=loadHistory()[idx];if(!a)return;const bi
   const bars=Object.entries(byMod).sort().map(([m,v])=>{const p=Math.round(v.c/v.t*100);return `<div class="modbar"><span class="mlabel">${esc(m)}</span><div class="barwrap"><div class="bar" style="width:${p}%;background:${p>=70?'var(--green)':p>=40?'var(--amber)':'var(--red)'}"></div></div><span>${v.c}/${v.t}</span></div>`}).join('');
   const CFLABEL={sure:'✅ Chắc chắn',unsure:'🤔 Không chắc',guess:'🎲 Đoán'};
   const cards=(a.details||[]).map((rec,i)=>{const q=bi[rec.id];if(!q)return `<div class="card"><i>Câu ${i+1} không còn trong ngân hàng</i></div>`;
+    const AB=abbrFor(q);
     const sels=selsOf(rec),ci=correctIdxOf(q),ok=okOf(rec,q);
     const st=!sels.length?['skip','⊘ Chưa làm']:ok?['ok','✔ Đúng']:['no','✘ Sai'];
     let oh=q.o.map((o,j)=>{const right=ci.indexOf(j)>=0,chosen=sels.indexOf(j)>=0;let cls='opt';if(right)cls+=' correct';else if(chosen)cls+=' wrong';
       let mk=right?'<span class="mk">✔ đáp án đúng</span>':(chosen?'<span class="mk">✗ bạn chọn</span>':'');
-      return `<div class="${cls}"><span class="olet">${String.fromCharCode(65+j)}.</span><span class="otext">${esc(stripPrefix(o))}</span>${mk}</div>`}).join('');
-    const key=ci.map(j=>String.fromCharCode(65+j)).join(', ')||'?';
+      return `<div class="${cls}"><span class="olet">${String.fromCharCode(65+j)}.</span><span class="otext">${AB(esc(stripPrefix(o)),1)}</span>${mk}</div>`}).join('');
     const tags=(rec.cf?`<span class="badge">${CFLABEL[rec.cf]||rec.cf}</span>`:'')+(rec.rv?'<span class="badge multi">👁 đã xem đáp án</span>':'')+(ci.length>1?`<span class="badge multi">☑ ${ci.length} đáp án</span>`:'');
-    return `<div class="card"><div class="qh"><span class="qnum">Câu ${i+1}</span><span class="badge">${esc(q.src)}</span>${tags}<span class="rev-status ${st[0]}">${st[1]}</span></div><p class="stem">${formatQStem(q.q)}</p>${oh}<div class="expl"><b>Đáp án: ${esc(key)}</b> — ${esc(q.ex)||'<i>(không có giải thích)</i>'}</div></div>`}).join('');
+    return `<div class="card"><div class="qh"><span class="qnum">Câu ${i+1}</span><span class="badge">${esc(q.src)}</span>${tags}<span class="rev-status ${st[0]}">${st[1]}</span></div><p class="stem">${AB(formatQStem(q.q),1)}</p>${oh}${preNotesHTML(q)}${answerCard(q,keyRowsOf(q),vfBadge(q.vf),x=>AB(x,0))}</div>`}).join('');
   box.innerHTML=`<div class="row" style="margin:6px 0"><button class="btn sec" onclick="backToStart()">← Về lịch sử</button></div>
     <div class="card" style="text-align:center"><div class="ring" style="--v:${a.pct};--rc:${rc}"><div class="in"><div class="result-score" style="color:${rc}">${a.score}/${a.total}</div><div style="color:${rc};font-weight:700">${a.pct}%</div></div></div>
     <div class="sub">${esc(new Date(a.ts).toLocaleString('vi-VN'))} · ${MODELABEL[a.mode]||a.mode} · ${a.pass?'✅ ĐẠT':'❌ CHƯA ĐẠT'}</div><div class="modbars" style="margin-top:10px">${bars}</div></div>
@@ -987,7 +1260,7 @@ function showMatching(){const exs=examsFor(curSubject());const ms=[];exs.forEach
   ms.forEach((q,i)=>{h+=`<div class="card"><div class="qh"><span class="qnum">${i+1}</span><span class="badge">${esc(q.src)}</span></div><p class="stem">${formatQStem(q.q)}</p>`;
     const ci=correctIdxOf(q);
     q.o.forEach((o,i)=>{const right=ci.indexOf(i)>=0;h+=`<div class="opt${right?' correct':''}"><span class="olet">${String.fromCharCode(65+i)}.</span><span class="otext">${esc(stripPrefix(o))}</span>${right?'<span class="mk">✔ đúng</span>':''}</div>`});
-    h+=`<div class="expl"><b>Đáp án: ${esc(ci.map(i=>String.fromCharCode(65+i)).join(', ')||'?')}</b> — ${esc(q.ex)||''}</div></div>`});
+    h+=preNotesHTML(q)+answerCard(q,keyRowsOf(q),vfBadge(q.vf))+'</div>'});
   box.innerHTML=h;window.scrollTo(0,0);}
 
 /* ---- keyboard shortcuts ---- */
@@ -1024,6 +1297,7 @@ addEventListener('keydown',function(e){
     return;}
 
   if(onTestScreen()){
+    if(e.code==='Space'&&e.target&&e.target.closest&&e.target.closest('summary'))return;   // a focused 📖 row toggles itself
     if(e.code==='ArrowRight'||e.code==='ArrowDown'){e.preventDefault();go(1);return}
     if(e.code==='ArrowLeft'||e.code==='ArrowUp'){e.preventDefault();go(-1);return}
     if(e.code==='Space'){e.preventDefault();
