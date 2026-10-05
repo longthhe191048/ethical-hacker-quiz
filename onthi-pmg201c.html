@@ -1023,7 +1023,14 @@ function updateOptsSum(){const o=el('optsSum');if(!o)return;const mins=Math.max(
     el('shufOpts').checked?'🔀 Trộn đáp án':'Giữ thứ tự đáp án',el('hideKnown').checked?'Ẩn câu ★':''].filter(Boolean).join(' · ');}
 let SESSION=[],IDX=0,submitted=false,timerInt=null,remaining=0,limited=false,REVEALED=new Set(),initSec=0,deadline=0;
 const LETTER_REF=/(^|[^A-Za-zÀ-ỹ.])([A-H]{2,6}|[A-H](\s*(,|và|&|hoặc)\s*[A-H])+)(?![A-Za-zÀ-ỹ])|(^|\s)([Cc]ả|[Pp]hương án|[Đđ]áp án)\s+[A-H](?![A-Za-zÀ-ỹ])/;
-function refsLetters(q){return (q.o||[]).some(o=>LETTER_REF.test(stripPrefix(o)))}
+// the same in lower case ("Cả a và b", "a, b và c") and English "Both A and B" / "A and C only"
+// (upper case only there, so the article "a" never counts)
+const LETTER_REF_LC=/(^|[^A-Za-zÀ-ỹĐđ])[a-h](\s*,\s*[a-h])*\s*(,|và|hoặc|&)\s*[a-h](?![A-Za-zÀ-ỹĐđ])/i,
+      LETTER_REF_EN=/(^|[^A-Za-z])[A-H]\s+(and|or)\s+[A-H](?![A-Za-z])/;
+// options that point by position: "Tất cả các phương án trên", "Cả ba ý trên", "All of the above"
+const POS_REF=/\b(all|none|both)\s+(of\s+)?(the\s+)?above\b|(tất cả|cả|các)\s+(\S+\s+){0,2}?(phương án|đáp án|ý|nhận định|trường hợp|câu hỏi|câu|lựa chọn)\s+(trả lời\s+)?trên(?![A-Za-zÀ-ỹĐđ])/i;
+function refsLetters(q){return (q.o||[]).some(o=>{const t=stripPrefix(o);
+  return LETTER_REF.test(t)||LETTER_REF_LC.test(t)||LETTER_REF_EN.test(t)||POS_REF.test(t)})}
 function buildSession(){const exs=examsFor(curSubject());let list=[];const t=today();
   const mk=(q,extra)=>({...q,...extra,sels:[],ci:correctIdxOf(q),oi:(q.o||[]).map((_,i)=>i)});
   const push=e=>e.questions.forEach((q,i)=>list.push(mk(q,{src:e.name,subject:e.subject,id:e.name+'#'+i,dk:e.subject+'|'+normStem(q.q)})));
@@ -1069,7 +1076,7 @@ function clearDraft(){try{localStorage.removeItem(draftKey())}catch(e){}}
 function loadDraft(){try{return JSON.parse(localStorage.getItem(draftKey())||'null')}catch(e){return null}}
 function resumeDraft(){const d=loadDraft();if(!d)return;const bi=bankIndex();
   SESSION=d.items.map(it=>{const q=bi[it.id];if(!q)return null;
-    return {...q,sels:it.sels||[],conf:it.conf||'',ci:correctIdxOf(q),oi:(it.oi&&it.oi.length===(q.o||[]).length)?it.oi:(q.o||[]).map((_,i)=>i)};
+    return {...q,sels:it.sels||[],conf:it.conf||'',ci:correctIdxOf(q),oi:(it.oi&&it.oi.length===(q.o||[]).length&&!refsLetters(q))?it.oi:(q.o||[]).map((_,i)=>i)};
   }).filter(Boolean);
   if(!SESSION.length){clearDraft();alert('Không khôi phục được bài làm (ngân hàng câu hỏi đã thay đổi).');renderResume();return;}
   MODE=d.mode;IDX=Math.min(d.idx||0,SESSION.length-1);submitted=false;REVEALED=new Set(d.revealed||[]);
