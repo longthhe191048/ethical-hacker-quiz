@@ -56,7 +56,7 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--border
 .badge.xr{color:var(--green);border-color:var(--green)}
 .opt .otext{flex:1;overflow-wrap:anywhere}.opt .mk{margin-left:auto;font-weight:700;white-space:nowrap}.opt.correct .mk{color:var(--green)}.opt.wrong .mk{color:var(--red)}
 .notes{background:var(--panel2);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:9px 12px;margin:8px 0;font-size:.9rem;white-space:pre-wrap}
-.expl{background:var(--panel2);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:10px 13px;margin:9px 0;font-size:.93rem;color:var(--text)}.expl b{color:var(--text)}
+.expl{background:var(--panel2);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:10px 13px;margin:9px 0;font-size:.93rem;color:var(--text);white-space:pre-line;overflow-wrap:anywhere}.expl b{color:var(--text)}
 .vbadge{font-size:.7rem;border-radius:6px;padding:1px 7px;border:1px solid var(--border)}
 .vbadge.ok{color:var(--green);border-color:var(--green)}.vbadge.warn{color:var(--amber);border-color:var(--amber);background:var(--amberbg)}.vbadge.src{color:var(--muted)}.vbadge.corr{color:var(--amber);border-color:var(--amber)}
 .rev-status{font-weight:700;font-size:.8rem;padding:2px 9px;border-radius:6px;margin-left:auto}
@@ -749,6 +749,8 @@ function updateOptsSum(){const o=el('optsSum');if(!o)return;const mins=Math.max(
   o.textContent=[MODE==='flash'?'':(mins?`⏱ ${mins} phút`:'⏱ Không giới hạn'),
     el('shufOpts').checked?'🔀 Trộn đáp án':'Giữ thứ tự đáp án',el('hideKnown').checked?'Ẩn câu ★':''].filter(Boolean).join(' · ');}
 let SESSION=[],IDX=0,submitted=false,timerInt=null,remaining=0,limited=false,REVEALED=new Set(),initSec=0,deadline=0;
+const LETTER_REF=/(^|[^A-Za-zÀ-ỹ.])([A-H]{2,6}|[A-H](\s*(,|và|&|hoặc)\s*[A-H])+)(?![A-Za-zÀ-ỹ])|(^|\s)([Cc]ả|[Pp]hương án|[Đđ]áp án)\s+[A-H](?![A-Za-zÀ-ỹ])/;
+function refsLetters(q){return (q.o||[]).some(o=>LETTER_REF.test(stripPrefix(o)))}
 function buildSession(){const exs=examsFor(curSubject());let list=[];const t=today();
   const mk=(q,extra)=>({...q,...extra,sels:[],ci:correctIdxOf(q),oi:(q.o||[]).map((_,i)=>i)});
   const push=e=>e.questions.forEach((q,i)=>list.push(mk(q,{src:e.name,subject:e.subject,id:e.name+'#'+i,dk:e.subject+'|'+normStem(q.q)})));
@@ -763,7 +765,9 @@ function buildSession(){const exs=examsFor(curSubject());let list=[];const t=tod
   if(el('hideKnown').checked)list=list.filter(x=>!KNOWN.has(x.id));
   // Shuffle only the DISPLAY order (`oi`); `o` and `ci` stay in bank order, so nothing about the
   // answer key moves and saved history (which stores original indices) stays replayable.
-  if(el('shufOpts')&&el('shufOpts').checked)list.forEach(x=>{x.oi=shuffle(x.oi)});
+  // ...except when an option names other options by letter ("ABC", "Cả A và C", "B và C đều đúng"):
+  // shuffled, those letters would point at the wrong choices, so such a question keeps its order.
+  if(el('shufOpts')&&el('shufOpts').checked)list.forEach(x=>{if(!refsLetters(x))x.oi=shuffle(x.oi)});
   const numQ=()=>{const inp=el('numQ');return inp?parseInt(inp.value):NaN};
   if(MODE==='review'){list=list.filter(x=>{const r=SRS[x.id];return r&&r.due<=t});
     list.sort((a,b)=>(((SRS[a.id]||{}).box||1)-((SRS[b.id]||{}).box||1))||(((SRS[a.id]||{}).due||0)-((SRS[b.id]||{}).due||0)));
