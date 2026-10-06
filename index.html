@@ -201,7 +201,7 @@ addEventListener('storage',e=>{if(e.key==='app_theme'&&(e.newValue==='dark'||e.n
 
 /* ---- an amber dot on subjects that have SRS questions due today (read straight from their storage) ---- */
 function markDue(){
-  const day=Math.floor(Date.now()/86400000);let any=false;
+  const n=Date.now(),day=Math.floor((n-new Date(n).getTimezoneOffset()*60000)/86400000);let any=false;
   document.querySelectorAll('.tab[data-scope]').forEach(b=>{
     let due=false;
     try{const raw=localStorage.getItem('fu_srs_fu_'+b.dataset.scope);

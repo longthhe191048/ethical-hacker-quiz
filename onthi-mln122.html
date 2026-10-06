@@ -141,6 +141,10 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--border
 .jump button.done{background:var(--selbg);color:var(--text);border-color:var(--accent)}
 .jump button.correct{background:var(--greenbg);color:var(--green);border-color:var(--green)}.jump button.wrong{background:var(--redbg);color:var(--red);border-color:var(--red)}
 .jump button.known{border-color:var(--amber)}
+.modbar .barwrap.seg{display:flex}.st-v{background:var(--green)}.st-n{background:var(--amber)}
+.stleg{display:flex;flex-wrap:wrap;gap:2px 12px;margin:2px 0 8px;font-size:.82rem;color:var(--muted)}.stleg b{color:var(--text)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}.dot.v{background:var(--green)}.dot.n{background:var(--amber)}
+.dot.h{box-shadow:inset 0 0 0 2px var(--red)}.dot.c{box-shadow:inset 0 0 0 1px var(--muted)}
 .modbar{display:flex;align-items:center;gap:10px;margin:6px 0;font-size:.85rem}.modbar .barwrap{flex:1;background:var(--panel2);border-radius:6px;overflow:hidden;height:15px}.modbar .bar{height:100%}.modbar .mlabel{width:220px;color:var(--muted);text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ring{--v:0;width:120px;height:120px;border-radius:50%;margin:6px auto;display:grid;place-items:center;background:conic-gradient(var(--rc) calc(var(--v)*1%),var(--border) 0)}
 .ring .in{width:94px;height:94px;border-radius:50%;background:var(--panel);display:grid;place-items:center;text-align:center}
@@ -390,7 +394,7 @@ try{var t=localStorage.getItem('app_theme');if(t==='dark'||t==='light')d.setAttr
               <button type="button" class="chip" data-v="45" onclick="setVal('mins',45)">45</button>
               <button type="button" class="chip" data-v="60" onclick="setVal('mins',60)">60</button>
             </div><input type="number" id="mins" value="0" min="0" inputmode="numeric" aria-label="Số phút (0 = không giới hạn)" oninput="syncChips();updateStartSub()"></div></div>
-          <label class="switch"><input type="checkbox" id="hideKnown" onchange="updateStartSub()"><span>Ẩn câu đã đánh dấu ★ thuộc <b id="knownN"></b></span></label>
+          <label class="switch"><input type="checkbox" id="hideKnown" onchange="renderStats()"><span>Ẩn câu đã đánh dấu ★ thuộc <b id="knownN"></b> <small style="color:var(--muted)">(câu ẩn không được ôn nên không lên Vững)</small></span></label>
           <label class="switch"><input type="checkbox" id="shufOpts" checked onchange="updateStartSub()"><span>🔀 Trộn thứ tự đáp án (tránh học vẹt vị trí)</span></label>
         </div>
       </details>
@@ -404,8 +408,9 @@ try{var t=localStorage.getItem('app_theme');if(t==='dark'||t==='light')d.setAttr
     <div class="card" id="masteryCard">
       <div class="row" style="justify-content:space-between"><b>🎯 Tiến độ thành thạo</b><span class="sub" id="dueLine"></span></div>
       <div class="sub" id="scopeLine"></div>
-      <div id="masteryBox" style="margin-top:10px"></div>
-      <div class="sub" style="margin-top:6px">Thành thạo = câu đã lên box ≥4 sau nhiều lần trả lời đúng (SRS).</div>
+      <div id="stageBox" style="margin-top:10px"></div>
+      <div id="masteryBox" style="margin-top:4px"></div>
+      <div class="sub" id="masteryNote" style="margin-top:6px"><b>Vững</b> = trả lời đúng ở <b>3 ngày khác nhau</b>, không sai lần nào xen giữa. Mỗi ngày đúng = ⅓ tiến độ của câu; làm lại trong cùng ngày không cộng thêm; 🎲 Đoán và 👁 Xem đáp án không tính. Câu trùng giữa các đề tính chung.<span id="knownNote"></span><span id="unvNote"></span></div>
     </div>
     <div class="card" id="historyCard">
       <div class="row" style="justify-content:space-between"><b>📊 Lịch sử làm bài</b>
@@ -684,6 +689,12 @@ function toggleTheme(){applyTheme((document.documentElement.dataset.theme||'dark
 (function(){let t;try{t=localStorage.getItem('app_theme')}catch(e){}
   if(!t)t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';applyTheme(t)})();
 addEventListener('storage',e=>{if(e.key==='app_theme'&&(e.newValue==='dark'||e.newValue==='light')&&e.newValue!==document.documentElement.dataset.theme)applyTheme(e.newValue)});
+/* another tab or dashboard frame saved progress for a subject shown here: show it on the start screen.
+   READ ONLY: no migration, no reconcile, no save from here, so two open pages can never feed each other
+   writes (a test in progress re-reads storage when it is submitted) */
+addEventListener('storage',e=>{if(!e.key||!/^fu_(srs|known|wrong|book|seen)_fu_/.test(e.key))return;
+  try{if(!storeSubs().some(s=>e.key.endsWith('_fu_'+s)))return;}catch(_){return}
+  const st=el('start');if(st&&st.style.display!=='none'){OA_CACHE=null;reloadStore(true);renderStats();}});
 addEventListener('message',e=>{const d=e.data;if(e.source===window.parent&&d&&d.type==='app_theme'&&(d.theme==='dark'||d.theme==='light'))applyTheme(d.theme)});
 
 /* ---- storage failures must be visible: a full quota silently stops persisting SRS/history ---- */
@@ -705,7 +716,22 @@ function importProgress(input){const f=input.files&&input.files[0];if(!f)return;
     if(!d||!d.data||typeof d.data!=='object'){alert('File không phải bản sao lưu tiến độ.');return;}
     const keys=Object.keys(d.data);
     if(!confirm(`Khôi phục ${keys.length} mục tiến độ từ file này? Dữ liệu hiện tại của các mục đó sẽ bị ghi đè.`))return;
-    let n=0;try{keys.forEach(k=>{if(/^(fu_|hod402|app_theme|dash_tab)/.test(k)){localStorage.setItem(k,d.data[k]);n++}})}catch(e){storageWarn(e);alert('Khôi phục chưa hoàn tất — bộ nhớ đầy.');return;}
+    // a file saved before the 2026-08 id remap gets it now
+    const preRemap=!('fu_remap_v2' in d.data);
+    let n=0;try{keys.forEach(k=>{if(/^(fu_|hod402|app_theme|dash_tab)/.test(k)){localStorage.setItem(k,preRemap?remapStored(k,d.data[k]):d.data[k]);n++}});
+      // a restored subject key is the truth now: drop this page's shadow of it (it would bring the newer,
+      // overwritten records back)
+      const own=[];keys.forEach(k=>{const m=/^fu_srs_fu_(.+)$/.exec(k);if(m&&m[1]!=='__all__'){own.push(m[1]);
+        if(!(('fu_srs3_fu_'+m[1]) in d.data))localStorage.removeItem('fu_srs3_fu_'+m[1])}});
+      // a file from the old bare page ("Tất cả môn") keeps its progress under '__all__': the next load of
+      // each subject's page applies it over that subject's records and lists (foldAllScope), except for
+      // the subjects the file restores directly
+      if(!('fu_fold3' in d.data)){const led=readObj('fu_fold3'),arrOf=x=>Array.isArray(x)?x:[];
+        if(keys.some(k=>/_fu___all__$/.test(k))){LISTS.forEach(p=>{delete led[p]});led.restore={at:Date.now(),skip:own,done:[]};
+          localStorage.setItem('fu_fold3',JSON.stringify(led));}
+        else if(own.length&&led.restore&&typeof led.restore==='object'){led.restore.skip=arrOf(led.restore.skip).concat(own);
+          localStorage.setItem('fu_fold3',JSON.stringify(led));}}
+    }catch(e){storageWarn(e);alert('Khôi phục chưa hoàn tất — bộ nhớ đầy.');return;}
     alert('Đã khôi phục '+n+' mục. Tải lại trang.');location.reload();};
   r.readAsText(f);}
 
@@ -716,53 +742,380 @@ const EX_TYPE={FE:'Thi cuối kỳ (FE)',FE2:'FE lần 2',RE:'Thi lại (RE)',PT
 const _EXM=new WeakMap();
 function examsFor(sub){return FU_BANK.exams.filter(e=>sub==='__all__'||e.subject===sub)}
 function scopeKey(){return 'fu_'+(FORCED||(el('subject')&&el('subject').value)||'all')}
-function bankIndex(){ if(!window._bi){window._bi={};FU_BANK.exams.forEach(e=>e.questions.forEach((q,i)=>{
-    const id=e.name+'#'+i;window._bi[id]={...q,src:e.name,subject:e.subject,id,dk:e.subject+'|'+normStem(q.q)}}))} return window._bi }
-/* ---- duplicate questions ----
-   The same question is reprinted across exam papers (about half the bank). Those copies are
-   ONE thing to learn, so progress is shared between them and study modes show a single copy.
-   Copies that repeat INSIDE one paper are left alone: a paper is shown exactly as it was sat. */
+function bankIndex(){ if(!window._bi){const bi={};FU_BANK.exams.forEach(e=>e.questions.forEach((q,i)=>{
+
+    const id=e.name+'#'+i;bi[id]={...q,src:e.name,subject:e.subject,id}}));window._bi=bi;assignGroups(bi);} return window._bi }
+
+/* ---- question identity ----
+
+   The same question is reprinted across papers (about half the bank), sometimes twice inside one paper.
+
+   Those copies are ONE thing to learn: progress is shared, study modes and progress figures count one
+
+   copy ("Ôn theo đề" still shows a paper exactly as printed). Two rows are the same question when their
+
+   stems match (ASCII key, or accent-folded key) AND their keyed answers match: the same text after
+
+   folding, or a near-identical reprint/OCR variant with mostly the same options. A generic stem
+
+   ("Hồ Chí Minh cho rằng:") with a different answer is a different question with its own progress, and
+
+   so is a reprint whose bank keys disagree (each key is among the other's options). */
+
 function normStem(s){return String(s==null?'':s).toLowerCase().replace(/[^a-z0-9]/g,'')}
-function dupIndex(){ if(!window._dup){const by={};const bi=bankIndex();
-    Object.values(bi).forEach(q=>{(by[q.dk]=by[q.dk]||[]).push(q.id)});
-    const exams={};Object.values(bi).forEach(q=>{(exams[q.dk]=exams[q.dk]||new Set()).add(q.src)});
+
+function foldTxt(s){return String(s==null?'':s).normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[đĐÐð]/g,'d').toLowerCase().replace(/[^a-z0-9]/g,'')}
+
+function _dice(a,b){if(a===b)return 1;if(a.length<2||b.length<2)return 0;const m=new Map();
+
+  for(let i=0;i<a.length-1;i++){const k=a.slice(i,i+2);m.set(k,(m.get(k)||0)+1)}
+
+  let n=0;for(let i=0;i<b.length-1;i++){const k=b.slice(i,i+2),c=m.get(k);if(c){n++;m.set(k,c-1)}}return 2*n/(a.length+b.length-2)}
+
+function _near(x,ys){return ys.some(y=>_dice(x,y)>=.85)}
+
+function sameQuestion(a,b){const A=a._k,B=b._k;if(!A.length||!B.length)return false;
+
+  if(A.join('|')===B.join('|'))return true;
+
+  if(A.every(x=>b._o.includes(x))&&B.every(x=>a._o.includes(x)))return false;
+
+  if(A.length!==B.length||!A.every(x=>_near(x,B))||!B.every(x=>_near(x,A)))return false;
+
+  let n=0;a._o.forEach(x=>{if(_near(x,b._o))n++});return n/Math.min(a._o.length,b._o.length)>=.75;}
+
+/* reprints with reworded keys, confirmed by reading them. Applied only while the two rows still share a
+
+   stem, so a later bank edit that shifts positions can never merge unrelated rows. */
+
+const SAME_Q=[["IAP301_FA24_RE#17","IAP301_SP25_FE#42"],["IAP301_FA24_RE#17","IAP301_SP25_FE_HCM#42"],["IAP301_FA24_RE#17","IAP301_SU25_RE#32"],["IAP301_FA24_RE#49","IAP301_FE_SU2024#19"],["IAP301_FA24_RE#49","IAP301_FE_SU2025#32"],["IAP301_FE_SU2024#19","IAP301_SP26_FE#14"],["IAP301_FE_SU2025#32","IAP301_SP26_FE#14"],["IAP301_SP25_FE#47","IAP301_SU25_RE#33"],["IAP301_SP25_FE_HCM#47","IAP301_SU25_RE#33"],["VNR - Final Exam - Chu Be Dan#79","VNR - Final Exam - Nhung Hoang#10"],["VNR - Final Exam - Chu Be Dan#98","VNR - Final Exam - Nhung Hoang#289"],["VNR - Final Exam - Chu Be Dan#113","VNR - Final Exam - Nhung Hoang#161"],["VNR - Final Exam - Chu Be Dan#323","VNR - Final Exam - Nhung Hoang#82"],["VNR - Final Exam - Chu Be Dan#104","VNR - Final Exam - Nhung Hoang#31"],["HCM202 - Final Exam - Nhung Hoang#76","HCM202 - Progress Test#50"],["HCM202 - Final Exam - Chu Be Dan#202","HCM202 - Progress Test#50"],["HCM202 - Final Exam - Chu Be Dan#278","HCM202 - Final Exam - Nhung Hoang#110"],["HCM202 - Final Exam - Chu Be Dan#284","HCM202 - Final Exam - Nhung Hoang#263"],["HCM202 - Final Exam - Chu Be Dan#133","HCM202 - Progress Test#37"],["HCM202 - Final Exam - Chu Be Dan#122","HCM202 - Final Exam - Nhung Hoang#333"],["SWD392 - Final Exam#160","SWD392 - Ngân hàng câu hỏi#237"],["SWD392 - Final Exam#254","SWD392 - Ngân hàng câu hỏi#34"],["SWD392 - Ngân hàng câu hỏi#33","SWD392 - Ngân hàng câu hỏi#34"],["HCM202 - Final Exam - Chu Be Dan#250","HCM202 - Final Exam - Nhung Hoang#26"],["HCM202 - Final Exam - Chu Be Dan#199","HCM202 - Final Exam - Nhung Hoang#228"]];
+
+function assignGroups(bi){const L=Object.values(bi),ord=new Map(L.map((x,i)=>[x.id,i])),par=new Map(L.map(x=>[x.id,x.id]));
+
+  const f=id=>{while(par.get(id)!==id){par.set(id,par.get(par.get(id)));id=par.get(id)}return id};
+
+  const u=(a,b)=>{a=f(a);b=f(b);if(a!==b){if(ord.get(a)<ord.get(b))par.set(b,a);else par.set(a,b)}};
+
+  L.forEach(x=>{x._ns=normStem(x.q);x._st=foldTxt(x.q);
+
+    x._o=[...new Set((x.o||[]).map(o=>foldTxt(stripPrefix(o))))].sort();
+
+    x._k=[...new Set(correctIdxOf(x).map(i=>foldTxt(stripPrefix((x.o||[])[i]))))].sort();});
+
+  const cand={},add=(k,x)=>(cand[k]=cand[k]||[]).push(x);
+
+  L.forEach(x=>{add(x.subject+'|n'+x._ns,x);add(x.subject+'|f'+x._st,x)});
+
+  Object.values(cand).forEach(g=>{for(let i=0;i<g.length;i++)for(let j=i+1;j<g.length;j++)
+
+    if(f(g[i].id)!==f(g[j].id)&&sameQuestion(g[i],g[j]))u(g[i].id,g[j].id)});
+
+  SAME_Q.forEach(([a,b])=>{const A=bi[a],B=bi[b];if(A&&B&&A.subject===B.subject&&(A._ns===B._ns||A._st===B._st))u(a,b)});
+
+  L.forEach(x=>{x.dk=x.subject+'|'+f(x.id)});}
+
+function dkOf(id){const q=bankIndex()[id];return q?q.dk:String(id)}
+
+function dupIndex(){ if(!window._dup){const by={},exams={};Object.values(bankIndex()).forEach(q=>{
+
+    (by[q.dk]=by[q.dk]||[]).push(q.id);(exams[q.dk]=exams[q.dk]||new Set()).add(q.src)});
+
     window._dup={by,exams};} return window._dup }
-function siblings(id){const bi=bankIndex(),q=bi[id];if(!q)return [id];return dupIndex().by[q.dk]||[id]}
+
+function siblings(id){const q=bankIndex()[id];return q?(dupIndex().by[q.dk]||[id]):[id]}
+
 function examSpan(dk){const s=dupIndex().exams[dk];return s?s.size:1}
-/* keep one copy per stem, but only for stems that span MORE THAN ONE exam */
-function dedupeCross(list){const seen={};return list.filter(x=>{const dk=x.dk||(x.subject+'|'+normStem(x.q));
-  if(examSpan(dk)<2)return true;              // repeats within a single paper: keep every copy
-  if(seen[dk])return false;seen[dk]=1;return true;});}
-/* per-scope localStorage sets */
-function loadSet(pfx){try{return new Set(JSON.parse(localStorage.getItem(pfx+'_'+scopeKey())||'[]'))}catch(e){return new Set()}}
-function saveSet(pfx,s){try{localStorage.setItem(pfx+'_'+scopeKey(),JSON.stringify([...s]))}catch(e){storageWarn(e)}}
+
+/* one row per question: study sessions and every progress figure (only "Ôn theo đề" keeps printed copies) */
+
+function dedupeGroups(list){const seen=new Set();return list.filter(x=>{const k=x.dk||dkOf(x.id);if(seen.has(k))return false;seen.add(k);return true})}
+
+/* ---- per-subject localStorage ----
+
+   Progress is stored under the QUESTION's subject ('fu_srs_fu_HCM202'), whatever the subject picker
+
+   shows, so "Tất cả môn", a single subject and the dashboard tab all read and write the same records.
+
+   Saves are read-modify-write of only the ids this tab changed: a second tab, or a dashboard frame left
+
+   open across a restore, can no longer overwrite newer progress with its stale copy. */
+
+function storeSubs(){const s=curSubject();return s==='__all__'?pageSubs():[s]}
+
+function pageSubs(){return [...new Set(FU_BANK.exams.map(e=>e.subject))]}
+
+function subOf(id){const q=bankIndex()[id];return q?q.subject:null}
+
+function readJSON(k,d){try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}}
+
+/* a stored list / map that is not one (hand-edited, or written by something else) reads as empty */
+
+function readArr(k){const a=readJSON(k,[]);return Array.isArray(a)?a:[]}
+
+function readObj(k){const o=readJSON(k,{});return o&&typeof o==='object'&&!Array.isArray(o)?o:{}}
+
+function writeJSON(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){storageWarn(e);return false}}
+
+function loadSet(pfx){const s=new Set();storeSubs().forEach(sub=>readArr(pfx+'_fu_'+sub).forEach(id=>s.add(id)));return s}
+
+function saveSet(pfx,s,ids){const by={};(ids||[...s]).forEach(id=>{const sub=subOf(id);if(sub)(by[sub]=by[sub]||[]).push(id)});
+
+  let ok=true;Object.entries(by).forEach(([sub,l])=>{const k=pfx+'_fu_'+sub,cur=new Set(readArr(k));
+
+    l.forEach(id=>{if(s.has(id))cur.add(id);else cur.delete(id)});ok=writeJSON(k,[...cur])&&ok});return ok}
+
 let KNOWN=new Set(), WRONG=new Set();
+
 /* 🔖 = "câu khó, ôn lại" (deliberately separate from ★ đã thuộc, which HIDES a question)
+
    👁 = every question whose answer was revealed, kept across sessions */
+
 let BOOK=new Set(), SEEN=new Set();
+
 let lastNumQ=null, startedAt=0;
 
-/* ---- SRS (Leitner) + mastery + streak ---- */
+
+
+/* ---- SRS (Leitner) + progress + streak ---- */
+
 let SRS={};
-const SRS_IV=[0,1,2,4,7,14];            // days until due, indexed by box 1..5
-function today(){return Math.floor(Date.now()/86400000)}
-function srsKey(){return 'fu_srs_'+scopeKey()}
-function loadSRS(){try{return JSON.parse(localStorage.getItem(srsKey())||'{}')}catch(e){return {}}}
-function saveSRS(){try{localStorage.setItem(srsKey(),JSON.stringify(SRS))}catch(e){storageWarn(e)}}
-function srsUpdate(id,correct,conf){const t=today();const r=SRS[id]||{box:1,due:t,seen:0,correct:0};
-  r.seen++;
-  if(correct){r.correct++;if(conf!=='guess')r.box=Math.min(5,(r.box||1)+1);r.due=t+SRS_IV[r.box||1];}
-  else{r.box=1;r.due=t;}
-  r.last=t;SRS[id]=r;
-  // the same question reprinted in other papers is the same thing to learn — keep them in step
-  siblings(id).forEach(sid=>{if(sid!==id)SRS[sid]={...r}});}
-/* distinct questions in scope — duplicates reprinted across papers count once, so
-   "thành thạo %" measures what you know, not how often a paper reprinted it */
-function scopeQuestions(){const out=[];examsFor(curSubject()).forEach(e=>e.questions.forEach((q,i)=>
-  out.push({id:e.name+'#'+i,src:e.name,subject:e.subject,q:q.q,dk:e.subject+'|'+normStem(q.q)})));
-  return dedupeCross(out);}
-function dueCount(){const t=today();return scopeQuestions().filter(x=>{const r=SRS[x.id];return r&&r.due<=t}).length;}
-function masteryPct(items){if(!items.length)return 0;let m=0;items.forEach(x=>{const r=SRS[x.id];if(r&&(r.box||1)>=4)m++});return Math.round(m/items.length*100);}
+
+const SRS_IV=[0,1,2,4,7,14];            // days until the next review, by box 1..5
+
+/* the student's own calendar day: a UTC day rolled over at 07:00 in Vietnam */
+
+function localDay(ms){return Math.floor((ms-new Date(ms).getTimezoneOffset()*60000)/86400000)}
+
+function today(){return localDay(Date.now())}
+
+/* Every record this code writes is stamped: v:3, the 'seen' it had then (vs) and when (at, ms). The old
+
+   page steps a record it loaded in place, which keeps v but always moves seen, so isV3 still tells a
+
+   record the old page changed since. */
+
+function stamp(r){r.v=3;r.vs=r.seen||0;r.at=Date.now();return r}
+
+function isV3(r){return !!r&&typeof r==='object'&&r.v===3&&r.vs===(r.seen||0)}
+
+/* the fields that make a record what it is (not when or by which code it was written) */
+
+function recSig(r){return JSON.stringify([r.box||1,r.due,r.seen||0,r.correct||0,r.last,!!r.unv])}
+
+/* Each record is saved twice: in the subject's key and in a shadow key 'fu_srs3_fu_<subject>' that a page
+
+   still running the OLD code never touches. Such a page saves its whole map as it holds it in memory, so
+
+   it can drop a record saved here after it read the key, write back a stale copy it read, or write a copy
+
+   of ANOTHER question's answer over it (it copied answers across a shared stem). Reading a subject puts
+
+   this page's own record (the shadow one) back when the main key
+
+   - has no record for that id, or
+
+   - holds a record of this code that is older than the shadow's (at): a stale copy written back, or
+
+   - holds a record the old code wrote, unless an old page saved an answer to THIS question after the
+
+     shadow record was written (oldEvidence 'own'): that is the old page's genuinely newer answer, and it
+
+     stays. When the history proves there was none ('not'), the record there is a stale map or someone
+
+     else's answer. When the history has rotated past the shadow record (null), the later 'last' wins.
+
+   What the shadow replaces in the main key is kept in fu_bak3 first (no backup, no write-back).
+
+   ro = read only, no write-back (the storage listener). */
+
+function srsOf(sub,ro){const k='fu_srs_fu_'+sub,m=readObj(k),sh=readObj('fu_srs3_fu_'+sub),took=[],ctx={};
+
+  Object.keys(sh).forEach(id=>{const s=sh[id],r=m[id];if(!s||typeof s!=='object')return;let take;
+
+    if(!r||typeof r!=='object')take=true;
+
+    else if(isV3(r))take=typeof s.at==='number'&&s.at>(r.at||0);
+
+    else{const ev=typeof s.at==='number'?oldEvidence(id,s.at,r,ctx):null;take=ev==='not'||(ev===null&&(s.last||0)>=(r.last||0))}
+
+    if(take){m[id]=s;took.push(id)}});
+
+  if(took.length&&!ro){const cur=readObj(k),same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+
+    if(bakPut(sub,took.filter(id=>cur[id]&&typeof cur[id]==='object'&&!same(cur[id],m[id])).map(id=>[id,cur[id]]))){
+
+      took.forEach(id=>{cur[id]=m[id]});writeJSON(k,cur)}}
+
+  return m}
+
+function loadSRS(ro){const o={};storeSubs().forEach(sub=>Object.assign(o,srsOf(sub,ro)));return o}
+
+/* write the named records of ONE subject: read-modify-write of only those ids, in the main key and the
+
+   shadow. Nothing is ever deleted here. */
+
+function putSRS(sub,recs){let ok=true;['fu_srs_fu_','fu_srs3_fu_'].forEach(p=>{const k=p+sub,cur=readObj(k);
+
+    Object.keys(recs).forEach(id=>{if(recs[id])cur[id]=recs[id]});ok=writeJSON(k,cur)&&ok});return ok}
+
+function saveSRS(ids){const by={};(ids||Object.keys(SRS)).forEach(id=>{const sub=subOf(id);if(sub&&SRS[id])(by[sub]=by[sub]||{})[id]=SRS[id]});
+
+  let ok=true;Object.keys(by).forEach(sub=>{ok=putSRS(sub,by[sub])&&ok});return ok}
+
+/* One answer -> the question's new record. box = 1 + the number of DIFFERENT days it was answered right
+
+   since the last mistake (max 5): it climbs at most one step per calendar day, so re-sitting a paper the
+
+   same evening adds nothing. A wrong answer starts the count again (box 1, due today).
+
+   🎲 a correct guess proves nothing: no step, asked again tomorrow. 🤔 steps up but comes back sooner.
+
+   unv = progress the old page may have copied from a different question (see identityPass): the next
+
+   right answer confirms it at its box (no step), a wrong one resets it, a guess leaves it as it is.
+
+   lw = this answer was wrong (1) or right (0): what Câu sai holds for the question (see wrongRepair). */
+
+function srsStep(r,ok,conf,t){r=r?{...r}:{box:1,due:t,seen:0,correct:0};
+
+  // an old page stepped this record in place after this code wrote it: its 'up' no longer says anything (RV3-P1)
+
+  if(!isV3(r))delete r.up;
+
+  // a record the old page saved today (its 'last' was a UTC day) has already been stepped up today
+
+  if(r.up===undefined&&(r.box||1)>1&&r.last===t)r.up=t;
+
+  r.seen=(r.seen||0)+1;
+
+  if(!ok){r.box=1;r.due=t;delete r.up;delete r.unv;}
+
+  else{r.correct=(r.correct||0)+1;
+
+    if(conf==='guess')r.due=t+1;
+
+    else if(r.unv&&(r.box||1)>1){delete r.unv;r.up=t;r.due=t+SRS_IV[Math.min(5,r.box)];}
+
+    else{delete r.unv;
+
+      if(r.up!==t){r.box=Math.min(5,(r.box||1)+1);r.up=t;r.due=t+SRS_IV[conf==='unsure'?Math.max(1,r.box-1):r.box];}}}
+
+  // 0 = no step recorded yet, so the first line only ever reads an OLD page's 'last' as "stepped today"
+
+  if(r.up===undefined&&(r.box||1)>1)r.up=0;
+
+  r.last=t;r.lw=ok?0:1;return stamp(r);}
+
+/* one question = one record, written to every printed copy of it */
+
+function srsSet(id,r){siblings(id).forEach(sid=>{SRS[sid]={...r}})}
+
+/* ...and the record that stands for the question. Copies the old page kept apart (a hoá/hóa reprint, a
+
+   SAME_Q pair) can still hold different records until the next answer. Every figure, the review list and
+
+   that next answer use the same choice: the newest record with a miss, and every record newer than it,
+
+   are the candidates (all of them when none has a miss); the most progress among them counts (higher
+
+   box, then a confirmed one, then the newer). A newer, weaker copy with no miss never hides an earned
+
+   Vững, and an older streak never hides a newer miss. */
+
+function groupRec(ids){const L=[];let m=null;
+
+  ids.forEach(id=>{const r=SRS[id];if(!r||typeof r!=='object')return;L.push(r);
+
+    if((r.seen||0)>(r.correct||0)&&(!m||(r.last||0)>(m.last||0)||((r.last||0)===(m.last||0)&&(r.box||1)<(m.box||1))))m=r});
+
+  let best=null;
+
+  L.forEach(r=>{if(m&&r!==m&&!((r.last||0)>(m.last||0)))return;
+
+    const b=r.box||1,bb=best?best.box||1:0;
+
+    if(!best||b>bb||(b===bb&&(!!best.unv&&!r.unv||(!!best.unv===!!r.unv&&(r.last||0)>(best.last||0)))))best=r});
+
+  return best}
+
+function qrec(id){return groupRec(siblings(id))}
+
+/* ★ belongs to the question too: a ★ on any printed copy marks every copy (the hide switch reads it so) */
+
+function knownQ(id){return siblings(id).some(s=>KNOWN.has(s))}
+
+/* stage of a question: 0 chưa làm · 1 đang học (sai gần nhất, hoặc mới chỉ đoán) · 2 đã nhớ (đúng 1-2 ngày)
+
+   · 3 vững (đúng ≥3 ngày khác nhau, không sai xen giữa). Progress gives each question ⅓ per day it
+
+   was answered right, so one good sitting shows at once, and only spaced days complete it. A record
+
+   still waiting to be confirmed (unv) counts at most as "đã nhớ", with ⅓. */
+
+function stageOf(r){if(!r)return 0;const b=r.box||1;if(r.unv)return b>=2?2:1;return b>=4?3:b>=2?2:1}
+
+function stepsOf(r){if(!r)return 0;return Math.max(0,Math.min(r.unv?1:3,(r.box||1)-1))}
+
+/* distinct questions in scope: copies count once, so progress measures what you know,
+
+   not how often a paper reprinted it */
+
+function scopeQuestions(){const out=[];examsFor(curSubject()).forEach(e=>e.questions.forEach((q,i)=>{const id=e.name+'#'+i;
+
+  out.push({id,src:e.name,subject:e.subject,q:q.q,dk:dkOf(id)})}));return dedupeGroups(out);}
+
+function paperItems(e){return dedupeGroups(e.questions.map((q,i)=>{const id=e.name+'#'+i;return {id,dk:dkOf(id)}}))}
+
+function examByName(n){return FU_BANK.exams.find(e=>e.name===n)}
+
+/* "Ẩn câu ★" hides a question as a whole: a ★ on any printed copy hides every copy of it */
+
+function hiddenDk(){const h=el('hideKnown');return h&&h.checked?new Set([...KNOWN].map(dkOf)):null}
+
+function hideStar(list,kd){if(kd===undefined)kd=hiddenDk();return kd?list.filter(x=>!kd.has(x.dk||dkOf(x.id))):list}
+
+/* The rows a mode serves, before shuffling and the "số câu" cut: one row per question outside "Ôn theo đề",
+
+   ★ questions left out while the switch is on, only due ones for "Đến hạn". buildSession starts from this
+
+   list and every count on the start screen is its length, so a tile always equals the session it starts. */
+
+function poolRows(mode,paper){const sub=curSubject(),bi=bankIndex(),t=today();let L=[];
+
+  const mine=id=>bi[id]&&(sub==='__all__'||bi[id].subject===sub);
+
+  if(mode==='wrong'||mode==='book'||mode==='seen')[...(mode==='wrong'?WRONG:mode==='book'?BOOK:SEEN)].forEach(id=>{if(mine(id))L.push(bi[id])});
+
+  else if(mode==='search')L=searchMatches(((el('globalSearch')||{}).value||'').trim().toLowerCase());
+
+  else if(mode==='exam'){if(paper)paper.questions.forEach((q,i)=>L.push(bi[paper.name+'#'+i]));}
+
+  else examsFor(sub).forEach(e=>e.questions.forEach((q,i)=>L.push(bi[e.name+'#'+i])));
+
+  if(mode!=='exam')L=dedupeGroups(L);
+
+  L=hideStar(L);
+
+  if(mode==='review')L=L.filter(x=>{const r=qrec(x.id);return r&&r.due<=t});
+
+  return L;}
+
+function dueCount(){return poolRows('review').length}
+
+/* a % that never reads 0 once something counts, nor 100 while something is missing */
+
+function pctOf(a,n){if(!n||a<=0)return 0;if(a>=n)return 100;return Math.min(99,Math.max(1,Math.round(a/n*100)))}
+
+function progressOf(items){const p={n:items.length,v:0,m:0,l:0,u:0,steps:0};
+
+  items.forEach(x=>{const r=qrec(x.id),s=stageOf(r);if(s===3)p.v++;else if(s===2)p.m++;else if(s===1)p.l++;else p.u++;p.steps+=stepsOf(r)});
+
+  p.pct=pctOf(p.steps,3*p.n);return p}
+
+/* the old name of the headline figure, kept for callers outside this page (the test harness) */
+
+function masteryPct(items){return progressOf(items).pct}
+
 /* streak — global across subjects */
 const DAILY_GOAL=20;
 function loadStreak(){try{return JSON.parse(localStorage.getItem('fu_streak')||'{}')}catch(e){return {}}}
@@ -781,34 +1134,420 @@ function streakInfo(){const t=today();const s=loadStreak();let st=s.streak||0;
    Nine rows were duplicate SCREENSHOTS of the same printed question (same question number,
    same stem) and have been removed from the bank. Question ids are positional (exam#index),
    so every index after a removed row shifts. Remap whatever the student has already stored,
-   once, before refreshScope() prunes anything it no longer recognises. */
+   once, before anything else reads it (every load path below works on the remapped ids). */
 const ID_REMAP={"FRS401c - 2ndFE - SU 2023": [0, -1, 1, -1, 2, -1, 3, -1, 4, -1, 5, -1, 6, -1, 7, -1, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51], "FRS401c - FA 2024 - FE": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, -1, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58]};
+function remapId(id){const i=String(id).lastIndexOf('#');if(i<0)return id;
+
+  const ex=String(id).slice(0,i),n=parseInt(String(id).slice(i+1),10);
+
+  const m=ID_REMAP[ex];if(!m||!(n>=0)||n>=m.length)return id;
+
+  return m[n]<0?null:ex+'#'+m[n];}
+
+/* the ID_REMAP step for ONE stored value (a JSON string); also used on a restored backup file that predates it */
+
+function remapStored(k,raw){let v;try{v=JSON.parse(raw)}catch(e){return raw}
+
+  const mapArr=a=>a.map(remapId).filter(x=>x!==null);
+
+  if(/^fu_(known|wrong|book|seen)_/.test(k)&&Array.isArray(v))return JSON.stringify([...new Set(mapArr(v))]);
+
+  if(/^fu_srs_/.test(k)&&v&&typeof v==='object'){const o={};Object.keys(v).forEach(id=>{const n=remapId(id);if(n)o[n]=v[id]});return JSON.stringify(o);}
+
+  if(/^fu_history_/.test(k)&&Array.isArray(v)){v.forEach(a=>{if(Array.isArray(a.details))a.details=a.details.map(d=>{const n=remapId(d.id);return n?{...d,id:n}:null}).filter(Boolean)});return JSON.stringify(v);}
+
+  if(/^fu_draft_/.test(k)&&v&&Array.isArray(v.items)){v.items=v.items.map(it=>{const n=remapId(it.id);return n?{...it,id:n}:null}).filter(Boolean);return JSON.stringify(v);}
+
+  return raw;}
+
 function migrateIds(){
+
   try{ if(localStorage.getItem('fu_remap_v2'))return; }catch(e){ return; }
-  const mapId=id=>{const i=String(id).lastIndexOf('#');if(i<0)return id;
-    const ex=String(id).slice(0,i),n=parseInt(String(id).slice(i+1),10);
-    const m=ID_REMAP[ex];if(!m||!(n>=0)||n>=m.length)return id;
-    return m[n]<0?null:ex+'#'+m[n];};
-  const mapArr=a=>a.map(mapId).filter(x=>x!==null);
+
   try{
+
     const keys=[];for(let i=0;i<localStorage.length;i++)keys.push(localStorage.key(i));
-    keys.forEach(k=>{
-      let v;try{v=JSON.parse(localStorage.getItem(k))}catch(e){return}
-      if(/^fu_(known|wrong|book|seen)_/.test(k)&&Array.isArray(v))
-        localStorage.setItem(k,JSON.stringify([...new Set(mapArr(v))]));
-      else if(/^fu_srs_/.test(k)&&v&&typeof v==='object'){const o={};
-        Object.keys(v).forEach(id=>{const n=mapId(id);if(n)o[n]=v[id]});
-        localStorage.setItem(k,JSON.stringify(o));}
-      else if(/^fu_history_/.test(k)&&Array.isArray(v)){
-        v.forEach(a=>{if(Array.isArray(a.details))a.details=a.details.map(d=>{const n=mapId(d.id);return n?{...d,id:n}:null}).filter(Boolean)});
-        localStorage.setItem(k,JSON.stringify(v));}
-      else if(/^fu_draft_/.test(k)&&v&&Array.isArray(v.items)){
-        v.items=v.items.map(it=>{const n=mapId(it.id);return n?{...it,id:n}:null}).filter(Boolean);
-        localStorage.setItem(k,JSON.stringify(v));}
-    });
+
+    keys.forEach(k=>{if(!/^fu_(known|wrong|book|seen|srs|history|draft)_/.test(k))return;
+
+      const raw=localStorage.getItem(k),n=remapStored(k,raw);if(n!==raw)localStorage.setItem(k,n);});
+
     localStorage.setItem('fu_remap_v2','1');
+
   }catch(e){storageWarn(e)}
+
 }
+
+/* ---- carrying older progress over, losslessly ----
+
+   Nothing below deletes a record or lowers a box on its own. A record is replaced only by the same
+
+   question's own record (an answer an old page made later, the new page's own copy of it, a backup the
+
+   student restored), and whatever is replaced is first kept in 'fu_bak3_fu_<subject>'. Each step runs on
+
+   every load and derives the same result from what is stored (no one-time markers), so a tab still
+
+   running the old page, a restored backup or a write that failed for lack of space is picked up on the
+
+   next load. */
+
+const LISTS=['fu_known','fu_wrong','fu_book','fu_seen'];
+
+/* 'fu_bak3_fu_<subject>': the records this page replaced, as they were. Merge only: an entry is never
+
+   overwritten, and a different record for an id already kept goes under 'id@2', 'id@3', ... */
+
+function bakPut(sub,pairs){if(!pairs.length)return true;const k='fu_bak3_fu_'+sub,bak=readObj(k),has=x=>Object.prototype.hasOwnProperty.call(bak,x);let ch=false;
+
+  pairs.forEach(p=>{const id=p[0],r=p[1];if(!r||typeof r!=='object')return;const s=JSON.stringify(r);let key=id,n=1;
+
+    while(has(key)){if(JSON.stringify(bak[key])===s)return;n++;key=id+'@'+n}
+
+    bak[key]=r;ch=true});
+
+  return !ch||writeJSON(k,bak)}
+
+/* The answers the OLD page saved in fu_history_* (its attempts carry no v), latest time per question copy.
+
+   The key is the question (dk) AND its old stem group (_ns): the answers the old page wrote into that
+
+   copy's record that really are answers to this question. bare = the old "Tất cả môn" page's history
+
+   (it wrote '__all__'), sub = every other history key (a subject page writes 'fu_history_fu_<subject>'
+
+   and that subject's own key). cov = per history key, the time from which it still holds every attempt
+
+   with its answers (0 = all of them): it keeps the newest 60, drops the detail of older ones when storage
+
+   is full, and "Xóa lịch sử" empties it (this page notes when, in 'fu_hclr_<key>'), so an answer older
+
+   than cov may be gone. grp = per old stem group of a subject, the latest old subject-page answer in it
+
+   ({dk, ts}): the old page copied that answer onto every question of the group. */
+
+function oldKey(id){const q=bankIndex()[id];return q?q.dk+'~'+q._ns:null}
+
+/* oldAnswerTimes() re-reads every history key; compute it once per load / storage event / submit (UI-R3-2) */
+
+var OA_CACHE=null;
+
+function oaCached(){return OA_CACHE||(OA_CACHE=oldAnswerTimes())}
+
+function oldAnswerTimes(){const bi=bankIndex(),o={bare:new Map(),sub:new Map(),cov:new Map(),grp:new Map()},clr={};
+
+  try{for(let i=0;i<localStorage.length;i++){const ck=localStorage.key(i);if(/^fu_hclr_/.test(ck))clr[ck.slice(8)]=+readJSON(ck,0)||0}}catch(e){}
+
+  Object.keys(clr).forEach(hk=>o.cov.set(hk,clr[hk]));
+
+  try{for(let i=0;i<localStorage.length;i++){const hk=localStorage.key(i);if(!/^fu_history_/.test(hk))continue;
+
+    const m=hk==='fu_history_fu___all__'?o.bare:o.sub,h=readArr(hk);
+
+    const j=h.findIndex(a=>!a||!Array.isArray(a.details)||typeof a.ts!=='number');
+
+    o.cov.set(hk,Math.max(clr[hk]||0,j===0?Infinity:j>0?h[j-1].ts:h.length>=60?h[h.length-1].ts:0));
+
+    h.forEach(a=>{if(!a||a.v!==undefined||!Array.isArray(a.details)||typeof a.ts!=='number')return;
+
+      a.details.forEach(d=>{const q=d&&bi[d.id];if(!q)return;const s=Array.isArray(d.sels)?d.sels:(d.sel>=0?[d.sel]:[]);if(!s.length)return;
+
+        const k=q.dk+'~'+q._ns;if((m.get(k)||0)<a.ts)m.set(k,a.ts);
+
+        if(m===o.sub){const gk=q.subject+'|'+q._ns,g=o.grp.get(gk);if(!g||g.ts<a.ts)o.grp.set(gk,{dk:q.dk,ts:a.ts})}})})}}catch(e){}
+
+  return o}
+
+/* What the old pages' history says about the record the old code left in the subject key for id, set
+
+   against a record of this page written at ms (r = that subject-key record; ctx caches the scans per pass):
+
+   'own'  an old page answered THIS question (id's question, in id's old stem group) after ms, so the record
+
+          is that answer. A subject page wrote it there itself; the old "Tất cả môn" page wrote '__all__',
+
+          so its answer counts only where the subject key holds exactly that '__all__' record (the fold
+
+          forwarded it);
+
+   'not'  no such answer, and the subject's history still holds everything since ms: the record is a stale
+
+          map written back, or a copy of another question's answer (the old page copied across a stem).
+
+          Also when the history is no longer complete but its latest old answer in id's old stem group is
+
+          to ANOTHER question, after ms, on the record's 'last' day: the record is that answer's copy;
+
+   null   no such answer found, but the history no longer holds everything since ms, or there is no
+
+          history for the subject at all (an old page's "Xóa lịch sử" leaves no note): nothing is proven. */
+
+function oldEvidence(id,ms,r,ctx){const q=bankIndex()[id];if(!q)return null;
+
+  const oa=ctx.oa||(ctx.oa=oaCached()),ok=q.dk+'~'+q._ns;if((oa.sub.get(ok)||0)>ms)return 'own';
+
+  if(r&&(oa.bare.get(ok)||0)>ms){const all=ctx.all||(ctx.all=readObj('fu_srs_fu___all__'));if(all[id]&&JSON.stringify(all[id])===JSON.stringify(r))return 'own'}
+
+  const c=oa.cov.get('fu_history_fu_'+q.subject);if(c!==undefined&&c<=ms)return 'not';
+
+  const g=oa.grp.get(q.subject+'|'+q._ns);
+
+  return g&&g.dk!==q.dk&&g.ts>ms&&!!r&&r.last===Math.floor(g.ts/86400000)?'not':null}
+
+
+
+/* A bare page on "Tất cả môn" stored progress under '<pfx>_fu___all__' before progress was kept per
+
+   subject. Per subject of THIS bank, on every load:
+
+   - an id with no record in the subject key gets the '__all__' one (a lossless move);
+
+   - an old bare page left open keeps answering into '__all__'. Its record replaces the subject's when its
+
+     history shows it answered that question after this page first ran ('fu_fold3'.at) and after the
+
+     subject's record was written; the shadow copy of that id is dropped (it is older now, and srsOf would
+
+     otherwise take it back the same day), and its Câu sai entry for that question follows;
+
+   - after a backup with '__all__' keys was restored (importProgress sets 'fu_fold3'.restore), the file
+
+     is the truth for each subject it has no key of its own for: its records replace the subject's, the
+
+     shadow copies of those are dropped, and ★ / Câu sai / 🔖 / 👁 of every id it speaks about follow its
+
+     lists. Once per subject. A question this code recorded an answer for AFTER the restore (a page of that
+
+     subject already open) is newer than the file: its record and its lists stay as they are.
+
+   Every replaced record, shadow copy included, is kept in fu_bak3 first. The '__all__' keys are never
+
+   rewritten (other pages read them too). Otherwise a Câu sai entry is copied only for a question whose
+
+   subject key had no record of its own (that record's latest answer already decided it), and 'fu_fold3'
+
+   lists the list entries already copied, so a ★ or 🔖 the student removes afterwards does not come back. */
+
+function foldAllScope(){const bi=bankIndex(),led=readObj('fu_fold3');let ledCh=false;
+
+  if(typeof led.at!=='number'){led.at=Date.now();ledCh=true}          // the first load of this code
+
+  const all=readObj('fu_srs_fu___all__'),L={},arrOf=x=>Array.isArray(x)?x:[],same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+
+  LISTS.forEach(p=>{L[p]=readArr(p+'_fu___all__')});
+
+  const rs=led.restore&&typeof led.restore==='object'?led.restore:null;
+
+  let oa=null;const ota=()=>oa||(oa=oaCached());
+
+  pageSubs().forEach(sub=>{const k='fu_srs_fu_'+sub,cur=readObj(k),pre=Object.assign({},cur),bak=[],fwd=[],drop=[];
+
+    const rest=!!rs&&arrOf(rs.skip).indexOf(sub)<0&&arrOf(rs.done).indexOf(sub)<0;let ch=false;
+
+    const newer=id=>{const o=pre[id];return rest&&isV3(o)&&(o.at||0)>(+rs.at||0)};   // answered here after the restore
+
+    Object.keys(all).forEach(id=>{const q=bi[id],a=all[id];if(!q||q.subject!==sub||!a||typeof a!=='object')return;const o=cur[id];
+
+      if(!o||typeof o!=='object'){cur[id]=a;ch=true;return}
+
+      if(same(o,a))return;
+
+      if(rest){if(newer(id))return;bak.push([id,o]);cur[id]=a;drop.push(id);ch=true;return}
+
+      // (an answer saved after led.at carries a 'last' on or after that UTC day: older records skip the history scan)
+
+      if((a.last||0)<Math.floor(led.at/86400000))return;
+
+      const ok=oldKey(id),tb=ota().bare.get(ok)||0;
+
+      if(tb>led.at&&tb>(isV3(o)?(o.at||0):(ota().sub.get(ok)||0))){bak.push([id,o]);cur[id]=a;fwd.push(id);drop.push(id);ch=true}});
+
+    let sh=null;
+
+    if(drop.length){sh=readObj('fu_srs3_fu_'+sub);drop.forEach(id=>{if(sh[id]&&!same(sh[id],pre[id]))bak.push([id,sh[id]])})}
+
+    if(ch&&!(bakPut(sub,bak)&&writeJSON(k,cur)))return;           // no backup, no change: the next load tries again
+
+    let shOk=true;if(sh){drop.forEach(id=>{delete sh[id]});shOk=writeJSON('fu_srs3_fu_'+sub,sh)}
+
+    const about=new Set();
+
+    if(rest){Object.keys(all).forEach(id=>{if(bi[id]&&bi[id].subject===sub)about.add(id)});
+
+      LISTS.forEach(p=>L[p].forEach(id=>{if(bi[id]&&bi[id].subject===sub)about.add(id)}))}
+
+    let listsOk=true;
+
+    LISTS.forEach(pfx=>{const done=new Set(arrOf(led[pfx])),inAll=new Set(L[pfx]),lk=pfx+'_fu_'+sub,l0=readArr(lk),lst=new Set(l0),mark=[];
+
+      const set=(id,want)=>{if(want)lst.add(id);else lst.delete(id);if(inAll.has(id))mark.push(id)};
+
+      // (a question answered here after the restore keeps its lists; it is still entered as handled, so a
+
+      //  later ordinary pass does not copy the file's entries for it either)
+
+      if(rest)about.forEach(id=>{if(!newer(id))set(id,inAll.has(id));else if(inAll.has(id))mark.push(id)});
+
+      else{L[pfx].forEach(id=>{const q=bi[id];if(!q||q.subject!==sub||done.has(id))return;const o=pre[id];
+
+          if(pfx!=='fu_wrong'||!o||same(o,all[id]))lst.add(id);mark.push(id)});
+
+        if(pfx==='fu_wrong')fwd.forEach(id=>set(id,inAll.has(id)))}
+
+      const changed=lst.size!==l0.length||l0.some(id=>!lst.has(id));
+
+      if(!changed||writeJSON(lk,[...lst])){if(mark.some(id=>!done.has(id))){mark.forEach(id=>done.add(id));led[pfx]=[...done];ledCh=true}}
+
+      else listsOk=false});
+
+    if(rest&&listsOk&&shOk){rs.done=arrOf(rs.done).concat([sub]);ledCh=true}});
+
+  if(ledCh)writeJSON('fu_fold3',led);}
+
+/* ---- progress the old page copied onto a DIFFERENT question ----
+
+   Until v3 every row with the same normStem shared one record, including different questions that only
+
+   share a generic stem ("Hồ Chí Minh cho rằng:"). Where two or more of the questions such an old group
+
+   now splits into hold the same record (box, due, seen, correct, last) and at least one copy was saved by
+
+   the old page, those copies are suspect. When the kept history shows exactly one of those questions
+
+   answered on that record's last day, and no other question of the old group answered that day, the
+
+   record is that question's own and stays as it is. A copy of a question the history shows was NOT
+
+   answered that day (while another one was) holds someone else's answer: when this page has its own
+
+   record of that question in the shadow (an old tab overwrote it) and no old page answered the question
+
+   after that record was written, that record comes back. Every other copy is KEPT, box and all, but
+
+   marked unverified (unv) and due today: it shows at most as "Đã nhớ" (⅓), the next right answer
+
+   confirms it at its box, a wrong one resets it. A record srsStep wrote (v3 with a verdict, lw) is never
+
+   a copy: it is only ever written to the copies of its own question, so it is left alone. Every record
+
+   replaced here (and a shadow record an unv copy replaces) is kept in fu_bak3 first. Câu sai and ★ are
+
+   not touched. A group already settled (at most one question still holds the record without this code's
+
+   unv mark) is left alone, so history that rotates out later cannot change an earlier verdict; an unv an
+
+   old page carried along on a copy it wrote is not this code's mark and does not settle anything. */
+
+function splitGroups(sub){const c=window._split||(window._split={});if(c[sub])return c[sub];const by={};
+
+  Object.values(bankIndex()).forEach(q=>{if(q.subject===sub)(by[q._ns]=by[q._ns]||[]).push(q)});
+
+  return c[sub]=Object.values(by).filter(g=>new Set(g.map(q=>q.dk)).size>1).map(g=>g.map(q=>q.id))}
+
+/* id -> the days (UTC day and local day of the attempt, as old and new pages stored 'last') it was answered */
+
+function answeredDays(sub){const bi=bankIndex(),m=new Map();
+
+  try{for(let i=0;i<localStorage.length;i++){const hk=localStorage.key(i);if(!/^fu_history_/.test(hk))continue;
+
+    readArr(hk).forEach(a=>{if(!a||!Array.isArray(a.details)||typeof a.ts!=='number')return;const d1=Math.floor(a.ts/86400000),d2=localDay(a.ts);
+
+      a.details.forEach(d=>{const q=d&&bi[d.id];if(!q||q.subject!==sub)return;
+
+        const s=Array.isArray(d.sels)?d.sels:(d.sel>=0?[d.sel]:[]);if(!s.length)return;
+
+        let x=m.get(d.id);if(!x)m.set(d.id,x=new Set());x.add(d1);x.add(d2)})})}}catch(e){}
+
+  return m}
+
+function identityPass(sub){const groups=splitGroups(sub);if(!groups.length)return;
+
+  const bi=bankIndex(),srs=srsOf(sub,true),sh=readObj('fu_srs3_fu_'+sub),t=today(),out={},bak=[],ctx={};let days=null;
+
+  const sig=r=>JSON.stringify([r.box,r.due,r.seen,r.correct,r.last]),dk=id=>bi[id].dk,
+
+        body=r=>{const c=Object.assign({},r);delete c.at;return JSON.stringify(c)},
+
+        marked=r=>!!r.unv&&isV3(r),own=r=>isV3(r)&&(r.lw===0||r.lw===1);
+
+  groups.forEach(g=>{const cl={};
+
+    g.forEach(id=>{const r=srs[id];if(r&&typeof r==='object'){const s=sig(r);(cl[s]=cl[s]||[]).push(id)}});
+
+    Object.keys(cl).forEach(s=>{const h=cl[s],qs=new Set(h.map(dk));
+
+      if(qs.size<2||h.every(id=>isV3(srs[id])))return;
+
+      if(new Set(h.filter(id=>!marked(srs[id])).map(dk)).size<2)return;      // settled on an earlier load
+
+      if(!days)days=answeredDays(sub);const day=srs[h[0]].last;
+
+      const on=new Set(g.filter(id=>{const x=days.get(id);return !!x&&x.has(day)}).map(dk));
+
+      const src=on.size===1&&qs.has([...on][0])?[...on][0]:null;
+
+      h.forEach(id=>{const q=dk(id);if(q===src)return;const r=srs[id],o=sh[id],mine=o&&typeof o==='object'&&o.v===3?o:null;
+
+        if(own(r))return;                           // srsStep's record for this question: never someone else's
+
+        if(on.size&&!on.has(q)&&mine&&body(mine)!==body(r)&&oldEvidence(id,mine.at||0,r,ctx)==='not'){
+
+          out[id]=Object.assign({},mine,{at:Date.now()});bak.push([id,r]);return}
+
+        const n=Object.assign({},r,{unv:1,due:typeof r.due==='number'?Math.min(r.due,t):t});
+
+        if(!isV3(r))delete n.lw;                    // a verdict the old page may have carried over: not this question's
+
+        stamp(n);if(body(n)===body(r))return;
+
+        out[id]=n;bak.push([id,r]);if(mine&&body(mine)!==body(n))bak.push([id,mine])})})});
+
+  if(!Object.keys(out).length)return;
+
+  if(!bakPut(sub,bak))return;      // no backup, no change: the next load tries again
+
+  putSRS(sub,out);}
+
+/* every printed copy of one question holds one record: a copy with none yet (a newly added reprint paper,
+
+   or a hoá/hóa reprint the old page kept apart) gets the question's record (groupRec). A record that
+
+   exists is never replaced, and Câu sai is left as it is (the copy carries no lw). */
+
+function reconcileGroups(){const changed=[];
+
+  Object.values(dupIndex().by).forEach(ids=>{if(ids.length<2)return;const best=groupRec(ids);if(!best)return;
+
+    ids.forEach(id=>{if(!SRS[id]){const r=stamp(Object.assign({},best));delete r.lw;SRS[id]=r;changed.push(id)}})});
+
+  if(changed.length)saveSRS(changed);}
+
+/* Câu sai follows the latest answer this page recorded for a question (lw: 1 = wrong, 0 = right) for as
+
+   long as the old page has not changed that record since (isV3). A tab still running the old page saves
+
+   its whole, older list: that can drop entries added here, or bring back ones answered right since. This
+
+   puts back what such a record says. Every other entry (everything from before the upgrade included) is
+
+   left exactly as it is. */
+
+function wrongRepair(sub){const srs=srsOf(sub,true),bi=bankIndex(),k='fu_wrong_fu_'+sub,l0=readArr(k),cur=new Set(l0);
+
+  Object.keys(srs).forEach(id=>{const r=srs[id];if(!bi[id]||!isV3(r)||(r.lw!==0&&r.lw!==1))return;if(r.lw)cur.add(id);else cur.delete(id)});
+
+  if(cur.size!==l0.length||l0.some(id=>!cur.has(id)))writeJSON(k,[...cur]);}
+
+/* on every load, before anything is read: records an old page overwrote come back from the shadow, then
+
+   the '__all__' fold, the identity check and the Câu sai repair (each step is safe to repeat) */
+
+function migrateStore(){const subs=pageSubs(),run=f=>{try{f()}catch(e){try{console.warn(e)}catch(_){}}};
+
+  subs.forEach(s=>run(()=>srsOf(s,false)));run(foldAllScope);
+
+  subs.forEach(s=>run(()=>identityPass(s)));subs.forEach(s=>run(()=>wrongRepair(s)));}
+
 
 function applyOrigin(){
   // a bank may describe its own provenance (e.g. a file the user supplied)
@@ -839,33 +1578,33 @@ function applyOrigin(){
   pickMode(REC_MODE);   // a mode is always picked, so the start button is live on arrival
 })();
 function curSubject(){return FORCED||el('subject').value}
-function refreshScope(){const bi=bankIndex();
-  KNOWN=new Set([...loadSet('fu_known')].filter(id=>bi[id]));
-  WRONG=new Set([...loadSet('fu_wrong')].filter(id=>bi[id]));
-  saveSet('fu_known',KNOWN);saveSet('fu_wrong',WRONG);
-  BOOK=new Set([...loadSet('fu_book')].filter(id=>bi[id]));
-  SEEN=new Set([...loadSet('fu_seen')].filter(id=>bi[id]));
-  saveSet('fu_book',BOOK);saveSet('fu_seen',SEEN);
-  SRS=loadSRS();let ch=false;Object.keys(SRS).forEach(id=>{if(!bi[id]){delete SRS[id];ch=true}});if(ch)saveSRS();}
+/* every load and subject change: carry older progress over (lossless, see migrateStore), read this page's
+   subjects, give copies without a record their question's record. Ids another page owns stay in storage
+   untouched; every lookup goes through this page's own ids anyway. */
+function refreshScope(){OA_CACHE=null;migrateStore();reloadStore(false);reconcileGroups();}
+/* read-only reload: also what the storage listener runs, so it never writes */
+function reloadStore(ro){KNOWN=loadSet('fu_known');WRONG=loadSet('fu_wrong');BOOK=loadSet('fu_book');SEEN=loadSet('fu_seen');SRS=loadSRS(ro);}
 function renderStats(){const exs=examsFor(curSubject()),raw=exs.reduce((a,e)=>a+e.count,0);
-  const sq=scopeQuestions(),mp=masteryPct(sq),dedup=raw-sq.length;
-  const kn=new Set();sq.forEach(x=>{if(KNOWN.has(x.id))kn.add(x.dk)});
-  el('stats').innerHTML=`<span class="kpi"><span aria-hidden="true">🎯</span> Thành thạo <b>${mp}%</b></span>`;
+  const sq=scopeQuestions(),P=progressOf(sq),dedup=raw-sq.length;
+  el('stats').innerHTML=`<span class="kpi" title="Vững ${P.v} · Đã nhớ ${P.m} · Đang học ${P.l} · Chưa làm ${P.u}"><span aria-hidden="true">🎯</span> Tiến độ <b>${P.pct}%</b><span class="m-hide"> · ${P.v} vững</span></span>`;
   const xr=exs.reduce((a,e)=>a+e.questions.filter(q=>q.xr&&!q.xrn).length,0);
   const xn=exs.reduce((a,e)=>a+e.questions.filter(q=>q.xrn).length,0);
   const sl=el('scopeLine');if(sl)sl.textContent=`${exs.length} đề · ${sq.length} câu`+(dedup?` (${raw} lượt, ${dedup} câu trùng đã gộp)`:'')
     +(xr?` · ${xr} câu đã có ở MLN111`:'')+(xn?` · ${xn} câu gần giống`:'');
-  const kN=el('knownN');if(kN)kN.textContent=kn.size?`(${kn.size} câu)`:'';
-  renderStreak();renderMastery();renderModeCounts(exs,sq);
+  const kN=el('knownN');if(kN){const n=scopeCount(KNOWN);kN.textContent=n?`(${n} câu)`:'';}
+  renderStreak();renderMastery(P);renderModeCounts(exs,sq);
   // back from a test / subject switch: the picked mode's counts and start state may have changed
   if(MODE==='search')onSearchInput();else if(MODE)pickMode(MODE);}
 /* distinct questions of a saved set (WRONG/BOOK/SEEN) that belong to the current subject */
 function scopeCount(set){const bi=bankIndex(),s=curSubject(),ks=new Set();
   set.forEach(id=>{const q=bi[id];if(q&&(s==='__all__'||q.subject===s))ks.add(q.dk)});return ks.size;}
-/* live counts on the tiles + the "Gợi ý" pick: due reviews > wrong answers > adaptive learning */
+/* live counts on the tiles + the "Gợi ý" pick: due reviews > wrong answers > adaptive learning.
+   Each count is the length of the list the tile's session starts from (poolRows), with "Ẩn câu ★" on or
+   off, so a tile always equals its session and "Gợi ý" never points at an empty one. */
 function renderModeCounts(exs,sq){
-  const c={exam:exs.length,all:sq.length,wrong:scopeCount(WRONG),learn:sq.filter(x=>!SRS[x.id]).length,
-           review:dueCount(),book:scopeCount(BOOK),seen:scopeCount(SEEN)};
+  const all=poolRows('all'),t=today();
+  const c={exam:exs.length,all:all.length,wrong:poolRows('wrong').length,learn:all.filter(x=>!qrec(x.id)).length,
+           review:all.filter(x=>{const r=qrec(x.id);return r&&r.due<=t}).length,book:poolRows('book').length,seen:poolRows('seen').length};
   // the unit is a separate span: a 97px phone tile only has room for the number
   const sfx={exam:'đề',all:'câu',learn:'mới'};
   document.querySelectorAll('.mode .mc').forEach(b=>{const k=b.dataset.c,n=c[k];
@@ -880,21 +1619,30 @@ function renderStreak(){const box=el('streak');if(!box)return;const s=streakInfo
   box.innerHTML=`<div class="streakbar"><span class="flame" aria-hidden="true">🔥</span><span><b>${s.streak}</b> ngày<span class="m-hide"> liên tục</span></span>`+
     `<div class="gbar" role="progressbar" aria-label="Mục tiêu hôm nay" aria-valuemin="0" aria-valuemax="${s.goal}" aria-valuenow="${Math.min(s.todayCount,s.goal)}"><div style="width:${pct}%"></div></div>`+
     `<span class="sub" style="margin:0">${s.todayCount}/${s.goal} câu<span class="m-hide"> hôm nay</span>${s.todayCount>=s.goal?' ✅':''}</span></div>`;}
-function renderMastery(){const box=el('masteryBox');if(!box)return;const dl=el('dueLine');const t=today();const exs=examsFor(curSubject());
+/* progress bar: green = vững, amber = the partial credit of "đã nhớ" questions; its length IS the % shown */
+function stageBar(p){const w=x=>(p.n?100*x/(3*p.n):0).toFixed(2)+'%';
+  return `<div class="barwrap seg" role="img" aria-label="Tiến độ ${p.pct}%: ${p.v} vững, ${p.m} đã nhớ, ${p.l} đang học, ${p.u} chưa làm"><div class="bar st-v" style="width:${w(3*p.v)}"></div><div class="bar st-n" style="width:${w(p.steps-3*p.v)}"></div></div>`}
+function renderMastery(P){const box=el('masteryBox');if(!box)return;const dl=el('dueLine');const t=today();const exs=examsFor(curSubject()),kd=hiddenDk();
+  P=P||progressOf(scopeQuestions());
+  const sb=el('stageBox');if(sb)sb.innerHTML=`<div class="modbar"><span class="mlabel"><b>Cả môn</b> · ${P.n} câu</span>${stageBar(P)}<span><b>${P.pct}%</b></span></div>`+
+    `<div class="stleg"><span><i class="dot v"></i>Vững <b>${P.v}</b></span><span><i class="dot n"></i>Đã nhớ <b>${P.m}</b></span><span><i class="dot h"></i>Đang học <b>${P.l}</b></span><span><i class="dot c"></i>Chưa làm <b>${P.u}</b></span></div>`;
   const rows=exs.map((e,i)=>({e,i,m:examMeta(e)})).sort(examCmp).map(({e,m})=>{
-    const items=e.questions.map((q,i)=>({id:e.name+'#'+i}));const mp=masteryPct(items);
-    const due=items.filter(x=>{const r=SRS[x.id];return r&&r.due<=t}).length;
+    const items=paperItems(e),p=progressOf(items);
+    const due=hideStar(items,kd).filter(x=>{const r=qrec(x.id);return r&&r.due<=t}).length;
     const lbl=[m.code,m.title].filter(Boolean).join(' · ')||e.name;
-    return `<div class="modbar" title="${esc(e.name)}"><span class="mlabel">${esc(lbl)}</span><div class="barwrap"><div class="bar" style="width:${mp}%;background:${mp>=70?'var(--green)':mp>=40?'var(--amber)':'var(--accent)'}"></div></div><span>${mp}%${due?' · ⏰'+due:''}</span></div>`}).join('');
+    return `<div class="modbar" title="${esc(e.name)}"><span class="mlabel">${esc(lbl)}</span>${stageBar(p)}<span>${p.pct}%${due?' · ⏰'+due:''}</span></div>`}).join('');
   box.innerHTML=rows||'<div class="hist-empty">Chưa có dữ liệu.</div>';
-  if(dl){const due=dueCount();dl.textContent=due?('⏰ '+due+' câu cần ôn hôm nay'):'Không có câu đến hạn';}}
+  if(dl){const due=dueCount();dl.textContent=due?('⏰ '+due+' câu cần ôn hôm nay'):'Không có câu đến hạn';}
+  const kn=el('knownNote');if(kn)kn.textContent=scopeCount(KNOWN)?' ★ là ghi chú của bạn, không tính là Vững.':'';
+  const un=el('unvNote');if(un){const n=scopeQuestions().filter(x=>{const r=qrec(x.id);return r&&r.unv&&(r.box||1)>1}).length;
+    un.textContent=n?` ${n} câu mang tiến độ từ bản cũ đang chờ xác nhận (tính tối đa Đã nhớ): trả lời đúng 1 lần là giữ lại bậc cũ.`:'';}}
 function clearSearch(){const g=el('globalSearch');if(!g)return;g.value='';onSearchInput();g.focus();}
 function onSearchInput(){const raw=(el('globalSearch').value||'').trim();const k=raw.toLowerCase();
   const w=el('searchWrap');if(w)w.classList.toggle('has-text',raw.length>0);
   const sc=el('searchCount');if(sc&&k.length<2)sc.innerHTML='';
   if(k.length>=2){if(MODE!=='search')PREV_MODE=MODE;MODE='search';
     document.querySelectorAll('.mode').forEach(m=>{m.classList.remove('active');m.setAttribute('aria-pressed','false')});
-    const n=SEARCH_N=searchMatches(k).length;
+    const n=SEARCH_N=hideStar(searchMatches(k)).length;   // what the session will serve (★ hidden)
     el('startBtn').disabled=n===0;
     if(sc)sc.innerHTML=n?`🔍 <b>${n}</b> câu khớp — bấm <b>▶ Bắt đầu</b> hoặc Enter`:'🔍 Không có câu nào khớp';
     el('modeCfg').innerHTML=n?cfgDesc(`🔍 Làm riêng <b>${n}</b> câu khớp “<b>${esc(raw)}</b>”.`)
@@ -905,8 +1653,8 @@ function onSearchInput(){const raw=(el('globalSearch').value||'').trim();const k
   } else if(MODE==='search'){pickMode(PREV_MODE||REC_MODE);}}
 function searchMatches(k){const out=[];examsFor(curSubject()).forEach(e=>e.questions.forEach((q,i)=>{
     if((q.q||'').toLowerCase().includes(k)||(q.o||[]).some(o=>(o||'').toLowerCase().includes(k)))
-      out.push({...q,src:e.name,subject:e.subject,id:e.name+'#'+i,dk:e.subject+'|'+normStem(q.q)});}));
-  return dedupeCross(out);}
+      out.push({...q,src:e.name,subject:e.subject,id:e.name+'#'+i,dk:dkOf(e.name+'#'+i)});}));
+  return dedupeGroups(out);}
 function onSubjectChange(){EXAM_SEL=null;refreshScope();renderStats();renderHistory();renderResume();}
 function cfgDesc(h){return '<div class="cfg-desc">'+h+'</div>'}
 /* count chips + the exact number; #numQ is still what buildSession reads */
@@ -960,15 +1708,15 @@ function examList(exs){
   rows.forEach(({e,i,m})=>{
     if(multi&&e.subject!==sub){sub=e.subject;k=0;h+=`<div class="exam-grp">${esc(sub)}</div>`;}
     k++;
-    const mp=masteryPct(e.questions.map((q,j)=>({id:e.name+'#'+j}))),hs=hist[e.name],on=i===EXAM_SEL;
-    const done=hs?`đã làm ${hs.n} lần · gần nhất <b>${Math.round(+hs.last.pct)||0}%</b>`:'chưa làm';
+    const mp=progressOf(paperItems(e)).pct,hs=hist[e.name],on=i===EXAM_SEL,nq=poolRows('exam',e).length;
+    const done=hs?`làm ${hs.n} lần · gần nhất đúng <b>${hs.last.score!=null?hs.last.score+'/'+hs.last.total:(Math.round(+hs.last.pct)||0)+'%'}</b>`:'chưa làm';
     h+=`<label class="exam-row${on?' sel':''}"><input type="radio" name="examR" value="${i}"${on?' checked':''} onchange="pickExam(${i})">`+
        `<span class="ex-badge">${esc(m.code||('Đề '+k))}</span>`+
        `<span class="ex-main"><span class="ex-title">${esc(m.title)}</span>`+
-       `<span class="ex-sub">${e.count} câu · ${done}</span>`+
+       `<span class="ex-sub">${nq} câu${nq<e.count?' (ẩn '+(e.count-nq)+' ★)':''} · ${done}</span>`+
        // the raw file name only helps when it differs from the title we show
        (m.title!==e.name?`<span class="ex-raw">${esc(e.name)}</span>`:'')+`</span>`+
-       `<span class="ex-mp"><b>${mp}%</b><small>thành thạo</small></span></label>`;});
+       `<span class="ex-mp"><b>${mp}%</b><small>tiến độ</small></span></label>`;});
   return h+'</div>';}
 function pickExam(i){EXAM_SEL=i;const p=el('examPick');if(p)p.value=String(i);
   document.querySelectorAll('.exam-row').forEach(r=>{const inp=r.querySelector('input');r.classList.toggle('sel',!!(inp&&inp.checked))});
@@ -980,26 +1728,29 @@ function pickMode(m,user){
   MODE=m;
   document.querySelectorAll('.mode').forEach(x=>{const on=x.dataset.mode===m;x.classList.toggle('active',on);x.setAttribute('aria-pressed',on?'true':'false')});
   const cfg=el('modeCfg'),sub=curSubject(),exs=examsFor(sub),where=sub==='__all__'?'tất cả môn':esc(sub);let disabled=false;
-  if(m==='random'||m==='learn'){const mx=Math.max(1,scopeQuestions().length);   // sessions are de-duplicated, so the max is too
-    cfg.innerHTML=cfgDesc(m==='learn'?'🧠 Thích ứng: câu chưa làm → câu hay sai → câu chưa thuộc lên trước. Chọn số câu:'
+  // every number here is the size of the session the mode starts (poolRows): de-duplicated, ★ left out while hidden
+  const allHid=cfgDesc('★ Mọi câu của '+where+' đang bị ẩn — tắt “Ẩn câu ★” trong ⚙️ Tùy chọn để ôn.');
+  if(m==='random'||m==='learn'){const n=poolRows('all').length,mx=Math.max(1,n);
+    cfg.innerHTML=!n?allHid:cfgDesc(m==='learn'?'🧠 Thích ứng: câu chưa làm → câu hay sai → câu chưa thuộc lên trước. Chọn số câu:'
         :'🎲 Trộn ngẫu nhiên các câu của '+where+'. Chọn số câu:')+
-      numField('Số câu',Math.min(lastNumQ||30,mx),mx,[20,30,50]);}
+      numField('Số câu',Math.min(lastNumQ||30,mx),mx,[20,30,50]);disabled=!n;}
   else if(m==='exam'){cfg.innerHTML=cfgDesc('📄 Làm nguyên 1 đề như đề gốc (đề mới nhất ở trên). Chọn đề:')+examList(exs);disabled=!exs.length;}
-  else if(m==='wrong'){const n=scopeCount(WRONG);
-    cfg.innerHTML=cfgDesc(n?`🔁 Ôn lại <b>${n}</b> câu bạn làm sai. Làm đúng sẽ tự bỏ khỏi danh sách.`:'🔁 Chưa có câu sai nào — hãy làm bài ở chế độ khác trước.');disabled=!n;}
+  else if(m==='wrong'){const n=poolRows('wrong').length;
+    cfg.innerHTML=cfgDesc(n?`🔁 Ôn lại <b>${n}</b> câu bạn làm sai. Làm đúng sẽ tự bỏ khỏi danh sách.`
+      :scopeCount(WRONG)?'🔁 Các câu sai đều đang bị ẩn (★) — tắt “Ẩn câu ★” trong ⚙️ Tùy chọn để ôn.':'🔁 Chưa có câu sai nào — hãy làm bài ở chế độ khác trước.');disabled=!n;}
   else if(m==='review'){const due=dueCount();
     cfg.innerHTML=due?cfgDesc(`⏰ <b>${due}</b> câu đã tới hạn ôn (lặp lại ngắt quãng) — câu yếu hiện trước. Chọn số câu:`)+numField('Số câu',Math.min(lastNumQ||30,due),due,[10,20,30])
-      :cfgDesc('⏰ Chưa có câu nào đến hạn — hãy làm bài ở chế độ khác để nạp vào lịch ôn.');disabled=!due;}
-  else if(m==='book'||m==='seen'){const n=scopeCount(m==='book'?BOOK:SEEN),label=m==='book'?'câu bạn đã đánh dấu 🔖':'câu bạn đã xem đáp án 👁';
-    cfg.innerHTML=cfgDesc(n?`Sẽ ôn <b>${n}</b> ${label}.`:`Chưa có ${label}.`+(m==='book'?' Trong bài làm, bấm 🔖 để đánh dấu câu khó.':''));disabled=!n;}
-  else if(m==='flash'){const mx=Math.max(1,scopeQuestions().length);
-    cfg.innerHTML=cfgDesc('🎴 Lật thẻ xem đáp án — không tính giờ, không chấm điểm. Chọn số thẻ:')+numField('Số thẻ',Math.min(lastNumQ||20,mx),mx,[10,20,30]);}
-  else {const sq=scopeQuestions().length,raw=exs.reduce((a,e)=>a+e.count,0);   // 'all' — the real, de-duplicated size
-    cfg.innerHTML=cfgDesc(`📚 Toàn bộ <b>${sq}</b> câu của ${where}`+(raw>sq?` (đã gộp ${raw-sq} câu trùng giữa các đề)`:'')+'.');}
+      :cfgDesc('⏰ Chưa có câu nào đến hạn'+(hiddenDk()?' (ngoài các câu ★ đang ẩn)':'')+' — hãy làm bài ở chế độ khác để nạp vào lịch ôn.');disabled=!due;}
+  else if(m==='book'||m==='seen'){const n=poolRows(m).length,label=m==='book'?'câu bạn đã đánh dấu 🔖':'câu bạn đã xem đáp án 👁';
+    cfg.innerHTML=cfgDesc(n?`Sẽ ôn <b>${n}</b> ${label}.`:`Chưa có ${label}`+(scopeCount(m==='book'?BOOK:SEEN)?' (ngoài các câu ★ đang ẩn).':'.')+(m==='book'?' Trong bài làm, bấm 🔖 để đánh dấu câu khó.':''));disabled=!n;}
+  else if(m==='flash'){const n=poolRows('all').length,mx=Math.max(1,n);
+    cfg.innerHTML=!n?allHid:cfgDesc('🎴 Lật thẻ xem đáp án — không tính giờ, không chấm điểm. Chọn số thẻ:')+numField('Số thẻ',Math.min(lastNumQ||20,mx),mx,[10,20,30]);disabled=!n;}
+  else {const nq=scopeQuestions().length,n=poolRows('all').length,raw=exs.reduce((a,e)=>a+e.count,0);   // 'all' — the real, de-duplicated size
+    cfg.innerHTML=!n?allHid:cfgDesc(`📚 Toàn bộ <b>${n}</b> câu của ${where}`+(raw>nq?` (đã gộp ${raw-nq} lượt in trùng)`:'')+(n<nq?` · ẩn ${nq-n} câu ★`:'')+'.');disabled=!n;}
   el('startBtn').disabled=disabled;
   const mf=el('minsField');if(mf)mf.style.display=m==='flash'?'none':'';   // flashcards ignore the timer
   syncChips();updateStartSub();}
-/* the one-line summary next to the start button, and the folded options row */
+/* the one-line summary next to the start button, and the folded options row (counts as in pickMode) */
 function updateStartSub(){const s=el('startSub');if(!s)return;
   const nq=()=>{const i=el('numQ');return i?Math.max(1,parseInt(i.value)||0):0};
   const cnt=(n,w)=>`<b>${n}</b> ${w}`;let t;
@@ -1008,11 +1759,12 @@ function updateStartSub(){const s=el('startSub');if(!s)return;
     case 'learn':t=`🧠 Học thông minh · ${cnt(nq(),'câu')}`;break;
     case 'flash':t=`🎴 Flashcard · ${cnt(nq(),'thẻ')}`;break;
     case 'review':t=el('numQ')?`⏰ Đến hạn · ${cnt(nq(),'câu')}`:'⏰ Chưa có câu đến hạn';break;
-    case 'exam':{const e=examsFor(curSubject())[EXAM_SEL];t=e?`📄 ${esc(examMeta(e).short)} · ${cnt(e.count,'câu')}`:'📄 Chưa có đề';break;}
-    case 'all':t=`📚 Ôn tổng · ${cnt(scopeQuestions().length,'câu')}`;break;
-    case 'wrong':{const n=scopeCount(WRONG);t=n?`🔁 Câu sai · ${cnt(n,'câu')}`:'🔁 Chưa có câu sai';break;}
-    case 'book':{const n=scopeCount(BOOK);t=n?`🔖 Đã đánh dấu · ${cnt(n,'câu')}`:'🔖 Chưa đánh dấu câu nào';break;}
-    case 'seen':{const n=scopeCount(SEEN);t=n?`👁 Đã xem đáp án · ${cnt(n,'câu')}`:'👁 Chưa xem đáp án câu nào';break;}
+    case 'exam':{const e=examsFor(curSubject())[EXAM_SEL],n=e?poolRows('exam',e).length:0;t=e?`📄 ${esc(examMeta(e).short)} · ${cnt(n,'câu')}`:'📄 Chưa có đề';
+      const b=el('startBtn');if(b)b.disabled=!n;break;}
+    case 'all':t=`📚 Ôn tổng · ${cnt(poolRows('all').length,'câu')}`;break;
+    case 'wrong':{const n=poolRows('wrong').length;t=n?`🔁 Câu sai · ${cnt(n,'câu')}`:'🔁 Chưa có câu sai';break;}
+    case 'book':{const n=poolRows('book').length;t=n?`🔖 Đã đánh dấu · ${cnt(n,'câu')}`:'🔖 Chưa đánh dấu câu nào';break;}
+    case 'seen':{const n=poolRows('seen').length;t=n?`👁 Đã xem đáp án · ${cnt(n,'câu')}`:'👁 Chưa xem đáp án câu nào';break;}
     case 'search':t=SEARCH_N?`🔍 ${cnt(SEARCH_N,'câu')} khớp từ khóa`:'🔍 Không có câu nào khớp';break;
     default:t='Chọn một chế độ ở trên';}
   const mins=Math.max(0,parseInt(el('mins').value)||0);
@@ -1082,28 +1834,21 @@ function exLetters(s,q){s=String(s==null?'':s);if(!q||!Array.isArray(q.oi))retur
   (q.o||[]).forEach((o,i)=>{const t=stripPrefix(o).trim(),u=optText(q,i).trim();if(t===u||t.length<3)return;
     s=s.split(t).join(u);const t2=t.replace(/[.!]$/,''),u2=u.replace(/[.!]$/,'');if(t2!==t&&t2.length>=3)s=s.split(t2).join(u2);});
   return s;}
-function buildSession(){const exs=examsFor(curSubject());let list=[];const t=today();
-  const mk=(q,extra)=>({...q,...extra,sels:[],ci:correctIdxOf(q),oi:(q.o||[]).map((_,i)=>i)});
-  const push=e=>e.questions.forEach((q,i)=>list.push(mk(q,{src:e.name,subject:e.subject,id:e.name+'#'+i,dk:e.subject+'|'+normStem(q.q)})));
-  if(MODE==='wrong'){const bi=bankIndex();[...WRONG].forEach(id=>{if(bi[id]&&(curSubject()==='__all__'||bi[id].subject===curSubject()))list.push(mk(bi[id],{}))})}
-  else if(MODE==='book'||MODE==='seen'){const bi=bankIndex(),set=MODE==='book'?BOOK:SEEN;
-    [...set].forEach(id=>{if(bi[id]&&(curSubject()==='__all__'||bi[id].subject===curSubject()))list.push(mk(bi[id],{}))})}
-  else if(MODE==='search'){const k=((el('globalSearch')||{}).value||'').trim().toLowerCase();
-    searchMatches(k).forEach(q=>list.push(mk(q,{})))}
-  else if(MODE==='exam')push(exs[parseInt(el('examPick').value)]); else exs.forEach(push);
+function buildSession(){const exs=examsFor(curSubject());const t=today();
+  const mk=q=>({...q,sels:[],ci:correctIdxOf(q),oi:(q.o||[]).map((_,i)=>i)});
+  // the rows this mode serves — the same list every start-screen count is taken from (poolRows).
   // "Ôn theo đề" reproduces the paper as printed; every other mode studies each question once
-  if(MODE!=='exam')list=dedupeCross(list);
-  if(el('hideKnown').checked)list=list.filter(x=>!KNOWN.has(x.id));
+  let list=poolRows(MODE,MODE==='exam'?exs[parseInt(el('examPick').value)]:null).map(mk);
   // Shuffle only the DISPLAY order (`oi`); `o` and `ci` stay in bank order, so nothing about the
   // answer key moves and saved history (which stores original indices) stays replayable.
   // Options that name other options ("Cả a và b", "ABC") are shuffled too and show the new letters
   // (optText); "Tất cả các phương án trên" stays last. See optPlan().
   if(el('shufOpts')&&el('shufOpts').checked)list.forEach(shuffleOpts);
   const numQ=()=>{const inp=el('numQ');return inp?parseInt(inp.value):NaN};
-  if(MODE==='review'){list=list.filter(x=>{const r=SRS[x.id];return r&&r.due<=t});
-    list.sort((a,b)=>(((SRS[a.id]||{}).box||1)-((SRS[b.id]||{}).box||1))||(((SRS[a.id]||{}).due||0)-((SRS[b.id]||{}).due||0)));
+  if(MODE==='review'){   // poolRows already kept only the due questions; weakest first, by the question's record
+    const R=x=>qrec(x.id)||{};list.sort((a,b)=>((R(a).box||1)-(R(b).box||1))||((R(a).due||0)-(R(b).due||0)));
     const n=Math.max(1,Math.min(numQ()||list.length,list.length));list=list.slice(0,n);}
-  else if(MODE==='learn'){const wt=x=>{const r=SRS[x.id];if(!r)return 0;if(WRONG.has(x.id))return 1;return 2+(r.box||1);};
+  else if(MODE==='learn'){const wt=x=>{const r=qrec(x.id);if(!r)return 0;if(siblings(x.id).some(s=>WRONG.has(s)))return 1;return 2+(r.box||1)+(r.up===t?10:0);};
     list=shuffle(list);list.sort((a,b)=>wt(a)-wt(b));
     const n=Math.max(1,Math.min(numQ()||30,list.length));list=list.slice(0,n);}
   else if(MODE==='random'){list=shuffle(list);const n=Math.max(1,Math.min(numQ()||30,list.length));list=list.slice(0,n);}
@@ -1122,12 +1867,12 @@ function enterTestUI(){el('start').style.display='none';el('matching').style.dis
 function draftKey(){return 'fu_draft_'+scopeKey()}
 function saveDraft(){if(submitted)return;try{localStorage.setItem(draftKey(),JSON.stringify({
     v:1,ts:Date.now(),mode:MODE,idx:IDX,limited,deadline,initSec,startedAt,revealed:[...REVEALED],
-    items:SESSION.map(s=>({id:s.id,sels:s.sels,conf:s.conf||'',oi:s.oi}))}))}catch(e){storageWarn(e)}}
+    items:SESSION.map(s=>({id:s.id,sels:s.sels,conf:s.conf||'',oi:s.oi,fz:s.fz?1:0}))}))}catch(e){storageWarn(e)}}
 function clearDraft(){try{localStorage.removeItem(draftKey())}catch(e){}}
 function loadDraft(){try{return JSON.parse(localStorage.getItem(draftKey())||'null')}catch(e){return null}}
 function resumeDraft(){const d=loadDraft();if(!d)return;const bi=bankIndex();
   SESSION=d.items.map(it=>{const q=bi[it.id];if(!q)return null;
-    return {...q,sels:it.sels||[],conf:it.conf||'',ci:correctIdxOf(q),oi:fitOrder(q,it.oi)};
+    return {...q,sels:it.sels||[],conf:it.conf||'',ci:correctIdxOf(q),oi:fitOrder(q,it.oi),fz:it.fz?1:0};
   }).filter(Boolean);
   if(!SESSION.length){clearDraft();alert('Không khôi phục được bài làm (ngân hàng câu hỏi đã thay đổi).');renderResume();return;}
   MODE=d.mode;IDX=Math.min(d.idx||0,SESSION.length-1);submitted=false;REVEALED=new Set(d.revealed||[]);
@@ -1167,24 +1912,31 @@ function startReview(){REVIEWING=true;IDX=0;renderQ();
 function showResult(){REVIEWING=false;IDX=0;renderQ();window.scrollTo(0,0);}
 function isMulti(it){return (it.ci||[]).length>1}
 /* `i` is a DISPLAY index; we store the original index so history survives shuffling */
-function locked(){const q=SESSION[IDX];return submitted||(q&&REVEALED.has(q.id));}
+function locked(){const q=SESSION[IDX];return submitted||!!(q&&(REVEALED.has(q.id)||q.fz));}
 function pick(i){if(locked())return;const it=SESSION[IDX],oi=it.oi[i];
   if(isMulti(it)){const k=it.sels.indexOf(oi);if(k>=0)it.sels.splice(k,1);else it.sels.push(oi);}
   else it.sels=(it.sels[0]===oi)?[]:[oi];   // picking the current choice again clears it
   renderQ();saveDraft();}
-function setConf(v){if(submitted)return;SESSION[IDX].conf=v;renderQ();saveDraft();}
-function revealAns(){const id=SESSION[IDX].id;REVEALED.add(id);
-  siblings(id).forEach(sid=>SEEN.add(sid));saveSet('fu_seen',SEEN);
+function setConf(v){if(locked())return;SESSION[IDX].conf=v;renderQ();saveDraft();}
+/* 👁 shows this copy's answer. A copy of the same question later in this sitting can no longer be
+   answered (it would score an answer already seen); a copy answered BEFORE the reveal keeps its answer
+   and still counts, but is frozen (fz) so it cannot be changed after seeing the key. */
+function revealAns(){const cur=SESSION[IDX],sib=siblings(cur.id);REVEALED.add(cur.id);
+  SESSION.forEach(s=>{if(s!==cur&&sib.indexOf(s.id)>=0){if(isAnswered(s))s.fz=1;else REVEALED.add(s.id)}});
+  sib.forEach(sid=>SEEN.add(sid));saveSet('fu_seen',SEEN,sib);
   renderQ();saveDraft();}
 function toggleBook(){const id=SESSION[IDX].id,add=!BOOK.has(id);
-  siblings(id).forEach(sid=>{if(add)BOOK.add(sid);else BOOK.delete(sid)});
-  saveSet('fu_book',BOOK);renderQ();}
-function toggleKnown(){const id=SESSION[IDX].id,add=!KNOWN.has(id);
-  siblings(id).forEach(sid=>{if(add)KNOWN.add(sid);else KNOWN.delete(sid)});
-  saveSet('fu_known',KNOWN);renderQ();}
+  const sib=siblings(id);sib.forEach(sid=>{if(add)BOOK.add(sid);else BOOK.delete(sid)});
+  saveSet('fu_book',BOOK,sib);renderQ();}
+/* ★ belongs to the question: shown when any printed copy has it, and one tap sets or clears every copy */
+function toggleKnown(){const id=SESSION[IDX].id,add=!knownQ(id);
+  const sib=siblings(id);sib.forEach(sid=>{if(add)KNOWN.add(sid);else KNOWN.delete(sid)});
+  saveSet('fu_known',KNOWN,sib);renderQ();}
 function isAnswered(it){return (it.sels||[]).length>0}
 /* a peeked question can never count as correct — otherwise "Xem đáp án" launders into score + SRS */
 function graded(it){return isAnswered(it) && !REVEALED.has(it.id) && sameSet(it.sels,it.ci||[])}
+/* picked right, THEN revealed: not scored, and neutral for progress (no step up, no penalty) */
+function peeked(it){return isAnswered(it) && REVEALED.has(it.id) && sameSet(it.sels,it.ci||[])}
 
 let FLIPPED=false;
 function isFlash(){return MODE==='flash'}
@@ -1197,14 +1949,14 @@ function renderFlashcard(q){
     const cls='flash-opt'+(FLIPPED&&right?' correct':'');
     const mk=FLIPPED&&right?'<span class="mk" style="margin-left:auto;color:var(--green);font-weight:700">✔ đúng</span>':'';
     return `<div class="${cls}"><span class="olet">${String.fromCharCode(65+i)}.</span><span class="otext">${AB(esc(optText(q,oi)),1)}</span>${mk}</div>`}).join('');
-  const span=examSpan(q.dk||(q.subject+'|'+normStem(q.q)));
+  const span=examSpan(q.dk||dkOf(q.id));
   let h=`<div class="flash-card" onclick="toggleFlip()">
     <div class="qh"><span class="qnum">Thẻ ${IDX+1}</span><span class="badge">${esc(q.src)}${q.n?' · Câu '+q.n:''}</span>`;
   if(isMulti(q))h+=`<span class="badge multi">☑ Chọn ${q.ci.length} đáp án</span>`;
   if(span>1)h+=`<span class="badge hot">🔥 Hay ra ×${span}</span>`;
   h+=xrBadge(q);
   h+=`<span class="fc-acts" onclick="event.stopPropagation()">`+
-     `<span class="star" onclick="toggleKnown()">${KNOWN.has(q.id)?'★':'☆'}</span>`+
+     `<span class="star" onclick="toggleKnown()">${knownQ(q.id)?'★':'☆'}</span>`+
      `<span class="bmk" onclick="toggleBook()">${BOOK.has(q.id)?'🔖':'🏳'}</span></span></div>`+
      `<p class="stem">${AB(formatQStem(q.q),1)}</p>${opts}`;
   h+=preNotesHTML(q);
@@ -1217,14 +1969,14 @@ function xrBadge(q){
   if(!q.xr)return '';
   const t=q.xrc?'⚠ MLN111 ghi đáp án khác':q.xrn?'≈ gần giống câu ở MLN111':'📚 đã có ở MLN111';
   return `<span class="badge ${q.xrc?'multi':q.xrn?'':'xr'}" title="${esc(q.xr)}${q.xrn?' — đề hỏi khác chữ, đọc kỹ':''}">${t}</span>`;}
-function renderQ(){if(isFlash()){renderFlashcard(SESSION[IDX]);return}const q=SESSION[IDX];const AB=abbrFor(q);const showAns=submitted||REVEALED.has(q.id);const known=KNOWN.has(q.id);
+function renderQ(){if(isFlash()){renderFlashcard(SESSION[IDX]);return}const q=SESSION[IDX];const AB=abbrFor(q);const showAns=submitted||REVEALED.has(q.id);const known=knownQ(q.id);
   el('prog').textContent=(IDX+1)+'/'+SESSION.length;el('srcLabel').textContent=q.src+(q.n?' · Câu '+q.n:'');syncTopbar();
   let h=`<div class="card"><div class="qh"><span class="qnum">Câu ${IDX+1}</span><span class="badge">${esc(q.subject)}</span><span class="badge">${esc(q.src)}${q.n?' · Câu '+q.n:''}</span><span class="star" onclick="toggleKnown()">${known?'★':'☆'}</span><span class="bmk" onclick="toggleBook()" title="Đánh dấu câu khó (ôn riêng)">${BOOK.has(q.id)?'🔖':'🏳'}</span>`;
   if(isMulti(q))h+=`<span class="badge multi">☑ Chọn ${q.ci.length} đáp án</span>`;
-  const span=examSpan(q.dk||(q.subject+'|'+normStem(q.q)));
+  const span=examSpan(q.dk||dkOf(q.id));
   if(span>1)h+=`<span class="badge hot" title="Câu này xuất hiện trong ${span} đề khác nhau">🔥 Hay ra ×${span}</span>`;
   h+=xrBadge(q);
-  if(submitted){const ok=graded(q);const st=!isAnswered(q)?['skip','⊘ Chưa làm']:ok?['ok','✔ Đúng']:['no','✘ Sai'];h+=`<span class="rev-status ${st[0]}">${st[1]}</span>`;}
+  if(submitted){const ok=graded(q);const st=!isAnswered(q)?['skip','⊘ Chưa làm']:ok?['ok','✔ Đúng']:peeked(q)?['skip','👁 Đúng, đã xem đáp án']:['no','✘ Sai'];h+=`<span class="rev-status ${st[0]}">${st[1]}</span>`;}
   h+=`</div><p class="stem">${AB(formatQStem(q.q),1)}</p>`;
   const multi=isMulti(q);
   q.oi.forEach((oi,i)=>{const chosen=q.sels.indexOf(oi)>=0, right=(q.ci||[]).indexOf(oi)>=0;
@@ -1233,13 +1985,14 @@ function renderQ(){if(isFlash()){renderFlashcard(SESSION[IDX]);return}const q=SE
     const box=multi?`<span class="cbox">${chosen?'☑':'☐'}</span>`:'';
     h+=`<div class="${cls}" onclick="pick(${i})">${box}<span class="olet">${String.fromCharCode(65+i)}.</span><span class="otext">${AB(esc(optText(q,oi)),1)}</span>${mk}</div>`;});
   h+=preNotesHTML(q);
-  if(!showAns){const cf=q.conf||'';h+=`<div class="conf-row"><span class="sub">Mức độ tự tin:</span><span class="conf-chip${cf==='sure'?' sel':''}" onclick="setConf('sure')">✅ Chắc chắn</span><span class="conf-chip${cf==='unsure'?' sel':''}" onclick="setConf('unsure')">🤔 Không chắc</span><span class="conf-chip${cf==='guess'?' sel':''}" onclick="setConf('guess')">🎲 Đoán</span></div>`;}
-  if(!showAns)h+=`<div style="margin-top:8px"><button class="btn sec" onclick="revealAns()">👁 Xem đáp án</button></div>`;
+  if(!showAns&&!q.fz){const cf=q.conf||'';h+=`<div class="conf-row"><span class="sub">Mức độ tự tin:</span><span class="conf-chip${cf==='sure'?' sel':''}" onclick="setConf('sure')">✅ Chắc chắn</span><span class="conf-chip${cf==='unsure'?' sel':''}" onclick="setConf('unsure')">🤔 Không chắc</span><span class="conf-chip${cf==='guess'?' sel':''}" onclick="setConf('guess')">🎲 Đoán</span></div>`;}
+  if(!showAns)h+=q.fz?'<div class="sub" style="margin-top:8px">🔒 Đã khóa: bạn đã xem đáp án ở một bản in khác của câu này — lựa chọn ở đây vẫn được chấm.</div>'
+    :`<div style="margin-top:8px"><button class="btn sec" onclick="revealAns()">👁 Xem đáp án</button></div>`;
   if(showAns){
-    const peek=REVEALED.has(q.id)&&!submitted?'<span class="vbadge corr">👁 đã xem trước — không tính điểm, đã khóa chọn</span>':'';
+    const peek=REVEALED.has(q.id)&&!submitted?'<span class="vbadge corr">👁 đã xem trước — không tính điểm, không lên bậc, đã khóa chọn</span>':'';
     h+=answerCard(q,keyRowsOf(q),vfBadge(q.vf)+peek,x=>AB(x,0));}
   h+=`<div class="navbtns"><button class="btn sec" onclick="go(-1)" ${IDX===0?'disabled':''}>← Trước</button><button class="btn" onclick="go(1)" ${IDX===SESSION.length-1?'disabled':''}>Sau →</button></div>`;
-  h+=`<div class="jump">`+SESSION.map((s,i)=>{let c=i===IDX?'cur ':'';const ans=isAnswered(s);if(submitted)c+=(!ans?'':graded(s)?'correct':'wrong');else c+=(ans?'done':'');if(KNOWN.has(s.id))c+=' known';return `<button class="${c}" onclick="jumpTo(${i})">${i+1}</button>`}).join('')+`</div></div>`;
+  h+=`<div class="jump">`+SESSION.map((s,i)=>{let c=i===IDX?'cur ':'';const ans=isAnswered(s);if(submitted)c+=(!ans||peeked(s)?'':graded(s)?'correct':'wrong');else c+=(ans?'done':'');if(knownQ(s.id))c+=' known';return `<button class="${c}" onclick="jumpTo(${i})">${i+1}</button>`}).join('')+`</div></div>`;
   el('test').innerHTML=h;if(submitted&&window._hero)el('test').insertAdjacentHTML('afterbegin',REVIEWING&&window._heroMini?window._heroMini:window._hero);
   // the grid is rebuilt every render, so its scroll resets — bring the current question back into view
   const jw=el('test').querySelector('.jump'),cur=jw&&jw.querySelector('.cur');
@@ -1247,14 +2000,87 @@ function renderQ(){if(isFlash()){renderFlashcard(SESSION[IDX]);return}const q=SE
 
 function submitTest(auto){if(submitted)return;const done=SESSION.filter(isAnswered).length;
   if(!auto&&!confirm(`Đã trả lời ${done}/${SESSION.length} câu. Nộp bài?`))return;
-  submitted=true;if(timerInt)clearInterval(timerInt);clearDraft();el('topbar').style.display='none';document.body.classList.remove('testing');syncTopbar();
-  const score=SESSION.filter(graded).length,total=SESSION.length,pct=Math.round(score/total*100),pass=pct>=50,rc=pass?'var(--green)':'var(--red)';
-  const wrongN=SESSION.filter(s=>isAnswered(s)&&!graded(s)).length,blank=SESSION.filter(s=>!isAnswered(s)).length;
-  // update WRONG set: add wrong, remove now-correct
-  SESSION.forEach(s=>{if(isAnswered(s)){const ok=graded(s);siblings(s.id).forEach(sid=>{if(ok)WRONG.delete(sid);else WRONG.add(sid)});}});saveSet('fu_wrong',WRONG);
-  // spaced-repetition + streak. A revealed answer counts as a guess so it can never promote a box.
-  SESSION.forEach(s=>{if(isAnswered(s))srsUpdate(s.id,graded(s),REVEALED.has(s.id)?'guess':(s.conf||'sure'))});saveSRS();
-  bumpStreak(SESSION.filter(isAnswered).length);
+  submitted=true;if(timerInt)clearInterval(timerInt);el('topbar').style.display='none';document.body.classList.remove('testing');syncTopbar();
+  OA_CACHE=null;   // another tab may have written history since this page loaded
+
+  const score=SESSION.filter(graded).length,total=SESSION.length,pct=pctOf(score,total),pass=pct>=50,rc=pass?'var(--green)':'var(--red)';
+
+  const peekN=SESSION.filter(peeked).length,wrongN=SESSION.filter(s=>isAnswered(s)&&!graded(s)&&!peeked(s)).length,blank=SESSION.filter(s=>!isAnswered(s)).length;
+
+  const t=today(),paper=MODE==='exam'&&SESSION[0]?examByName(SESSION[0].src):null;
+
+  const ch={up:0,vung:0,down:0,today:0,free:0,conf:0},touched=[];let scope=[],before=0,srsOk=true,progOk=false;
+
+  // progress bookkeeping must never cost the student this result: a storage failure is reported and the
+
+  // score, the history entry and the result screen still follow
+
+  try{
+
+    // another tab may have saved since this one loaded: start from what is stored now
+
+    SRS=loadSRS();WRONG=loadSet('fu_wrong');
+
+    scope=paper?paperItems(paper):scopeQuestions();before=progressOf(scope).pct;
+
+    // ONE verdict per question: printed copies of it in this sitting are one piece of evidence, whatever
+
+    // their order. Any answered copy wrong = wrong. A copy answered and THEN revealed (👁) makes a right
+
+    // answer neutral (no step, no penalty). A copy revealed before it was answered cannot be answered, and
+
+    // a copy answered before its reprint was revealed is frozen but still counts (see revealAns).
+
+    const G=new Map(),RANK={guess:0,unsure:1,sure:2},own=Object.prototype.hasOwnProperty;
+
+    SESSION.forEach(s=>{const k=dkOf(s.id);let g=G.get(k);if(!g){g={id:s.id,ans:false,wrong:false,peek:false,conf:'sure'};G.set(k,g)}
+
+      if(!isAnswered(s))return;g.ans=true;if(REVEALED.has(s.id))g.peek=true;
+
+      if(!sameSet(s.sels,s.ci||[]))g.wrong=true;
+
+      const c=s.conf||'sure',rk=own.call(RANK,c)?RANK[c]:2;if(rk<RANK[g.conf])g.conf=c;});
+
+    // The step starts from the question's record (groupRec), whichever printed copy was served. Whatever
+
+    // this answer overwrites that is NOT that record is kept in fu_bak3 first: a copy the old page kept
+
+    // apart, and this page's own shadow record when an old page's genuinely newer answer was the start.
+
+    const bk={},SH={},shOf=s=>SH[s]||(SH[s]=readObj('fu_srs3_fu_'+s));
+
+    G.forEach(g=>{if(!g.ans)return;const sib=siblings(g.id),r0=groupRec(sib);
+
+      if(!g.wrong&&g.peek){ch.free++;return;}
+
+      sib.forEach(sid=>{if(g.wrong)WRONG.add(sid);else WRONG.delete(sid)});
+
+      sib.forEach(sid=>{const s=subOf(sid);if(!r0||!s)return;
+
+        [SRS[sid],shOf(s)[sid]].forEach(x=>{if(x&&typeof x==='object'&&recSig(x)!==recSig(r0))(bk[s]=bk[s]||[]).push([sid,x])})});
+
+      const r=srsStep(r0,!g.wrong,g.conf,t);srsSet(g.id,r);touched.push(...sib);
+
+      const b0=r0?(r0.box||1):0,doneToday=!!r0&&(r0.up===t||(r0.up===undefined&&b0>1&&r0.last===t));
+
+      if(g.wrong){if(b0>=2)ch.down++;}
+
+      else if(g.conf==='guess')ch.free++;
+
+      else if(r0&&r0.unv&&b0>=2)ch.conf++;
+
+      else if((r.box||1)>Math.max(1,b0)){ch.up++;if(stageOf(r)===3&&stageOf(r0)<3)ch.vung++;}
+
+      else if(doneToday)ch.today++;});
+
+    Object.keys(bk).forEach(s=>bakPut(s,bk[s]));
+
+    saveSet('fu_wrong',WRONG,touched);srsOk=saveSRS(touched);progOk=true;
+
+  }catch(e){storageWarn(e)}
+
+  try{bumpStreak(SESSION.filter(isAnswered).length)}catch(e){storageWarn(e)}
+
   // by-exam breakdown
   const byMod={};SESSION.forEach(s=>{const k=s.src;byMod[k]=byMod[k]||{c:0,t:0};byMod[k].t++;if(graded(s))byMod[k].c++;});
   const bars=Object.entries(byMod).sort().map(([m,v])=>{const p=Math.round(v.c/v.t*100);return `<div class="modbar"><span class="mlabel">${esc(m)}</span><div class="barwrap"><div class="bar" style="width:${p}%;background:${p>=70?'var(--green)':p>=40?'var(--amber)':'var(--red)'}"></div></div><span>${v.c}/${v.t}</span></div>`}).join('');
@@ -1262,11 +2088,21 @@ function submitTest(auto){if(submitted)return;const done=SESSION.filter(isAnswer
   // save history
   // `sels` are ORIGINAL option indices, so this replays correctly even for a shuffled session.
   // `cf`/`rv` keep the confidence + peek signal that used to be collected and thrown away.
-  saveAttempt({ts:Date.now(),scope:curSubject(),mode:MODE,total,score,pct,pass,usedSec,
+  saveAttempt({ts:Date.now(),v:3,scope:curSubject(),mode:MODE,total,score,pct,pass,usedSec,
     details:SESSION.map(s=>{const d={id:s.id,sels:s.sels};if(s.conf)d.cf=s.conf;if(REVEALED.has(s.id))d.rv=1;return d})});
+  clearDraft();
+  if(progOk&&!srsOk){try{saveSRS(touched)}catch(e){}}   // saveAttempt trims old history when storage is full: try once more
+  let prog='';
+  if(progOk)try{prog=`📈 Tiến độ ${paper?'đề này':'môn'}: <b>${before}% → ${progressOf(scope).pct}%</b>`+
+    (ch.up?` · ${ch.up} câu lên bậc`+(ch.vung?` (${ch.vung} câu mới Vững)`:'')+(ch.vung<ch.up?' — đúng lại vào ngày khác để lên tiếp (3 ngày = Vững)':''):'')+
+    (ch.conf?` · ${ch.conf} câu xác nhận lại bậc cũ`:'')+
+    (ch.down?` · ${ch.down} câu phải học lại`:'')+
+    (ch.today?` · ${ch.today} câu đã tính hôm nay, mai làm lại để lên tiếp`:'')+
+    (ch.free?` · ${ch.free} câu 🎲/👁 không tính`:'');}catch(e){prog=''}
   window._hero=`<div class="card" style="text-align:center" id="hero">
     <div class="ring" style="--v:${pct};--rc:${rc}"><div class="in"><div class="result-score" style="color:${rc}">${score}/${total}</div><div style="color:${rc};font-weight:700">${pct}%</div></div></div>
-    <div class="sub">✔ Đúng ${score} · ✘ Sai ${wrongN} · ⊘ Chưa làm ${blank}${limited?' · còn '+Math.floor(remaining/60)+'m'+(remaining%60)+'s':''}</div>
+    <div class="sub">✔ Đúng ${score} · ✘ Sai ${wrongN}${peekN?' · 👁 Xem trước '+peekN:''} · ⊘ Chưa làm ${blank}${limited?' · còn '+Math.floor(remaining/60)+'m'+(remaining%60)+'s':''}</div>
+    ${prog?`<div class="sub" style="margin-top:6px">${prog}</div>`:''}
     <div class="modbars" style="margin-top:10px">${bars}</div>
     <div class="row" style="justify-content:center;margin-top:12px">
       <button class="btn" onclick="location.reload()">🔄 Làm đề mới</button>
@@ -1287,7 +2123,7 @@ function saveAttempt(a){try{const h=loadHistory();h.unshift(a);if(h.length>60)h.
     while(h.length>5){h.pop();try{localStorage.setItem(hkey(),JSON.stringify(h));return}catch(_){}}
     throw e;}
 }catch(e){storageWarn(e)}}
-function clearHistory(){if(!confirm('Xóa toàn bộ lịch sử làm bài (phạm vi này)?'))return;try{localStorage.removeItem(hkey())}catch(e){}renderHistory()}
+function clearHistory(){if(!confirm('Xóa toàn bộ lịch sử làm bài (phạm vi này)?'))return;try{localStorage.removeItem(hkey());localStorage.setItem('fu_hclr_'+hkey(),JSON.stringify(Date.now()))}catch(e){}renderHistory()}
 function renderHistory(){const box=el('historyBox');if(!box)return;const h=loadHistory();
   if(!h.length){box.innerHTML='<div class="hist-empty">Chưa có lịch sử. Hãy làm một bài để lưu lại!</div>';return;}
   box.innerHTML=h.map((a,i)=>{const d=new Date(a.ts);const ds=d.toLocaleDateString('vi-VN')+' '+d.toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'});const mm=Math.floor(a.usedSec/60),ss=a.usedSec%60;
@@ -1305,7 +2141,7 @@ function openHistoryDetail(idx){const a=loadHistory()[idx];if(!a)return;const bi
   const cards=(a.details||[]).map((rec,i)=>{const q=bi[rec.id];if(!q)return `<div class="card"><i>Câu ${i+1} không còn trong ngân hàng</i></div>`;
     const AB=abbrFor(q);
     const sels=selsOf(rec),ci=correctIdxOf(q),ok=okOf(rec,q);
-    const st=!sels.length?['skip','⊘ Chưa làm']:ok?['ok','✔ Đúng']:['no','✘ Sai'];
+    const st=!sels.length?['skip','⊘ Chưa làm']:ok?['ok','✔ Đúng']:(rec.rv&&sameSet(sels,ci))?['skip','👁 Đúng, đã xem đáp án']:['no','✘ Sai'];
     let oh=q.o.map((o,j)=>{const right=ci.indexOf(j)>=0,chosen=sels.indexOf(j)>=0;let cls='opt';if(right)cls+=' correct';else if(chosen)cls+=' wrong';
       let mk=right?'<span class="mk">✔ đáp án đúng</span>':(chosen?'<span class="mk">✗ bạn chọn</span>':'');
       return `<div class="${cls}"><span class="olet">${String.fromCharCode(65+j)}.</span><span class="otext">${AB(esc(stripPrefix(o)),1)}</span>${mk}</div>`}).join('');
@@ -1368,7 +2204,7 @@ addEventListener('keydown',function(e){
     if(e.code==='ArrowLeft'||e.code==='ArrowUp'){e.preventDefault();go(-1);return}
     if(e.code==='Space'){e.preventDefault();
       if(isFlash())toggleFlip();
-      else if(!submitted&&!REVEALED.has(SESSION[IDX].id))revealAns();
+      else if(!submitted&&!REVEALED.has(SESSION[IDX].id)&&!SESSION[IDX].fz)revealAns();
       return}
     if(e.code==='KeyB'&&isFlash()){e.preventDefault();toggleBook();return}
     if(e.code==='Backspace'||e.code==='Delete'){e.preventDefault();clearAnswer();return}
