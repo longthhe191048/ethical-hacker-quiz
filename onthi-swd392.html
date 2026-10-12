@@ -1163,9 +1163,10 @@ function migrateStore(){const subs=pageSubs(),run=f=>{try{f()}catch(e){try{conso
 function applyOrigin(){
   // a bank may describe its own provenance (e.g. a file the user supplied)
   const m=FU_BANK.meta;
-  // the MLN111 pages link to the one-page answer cross-check (doi-chieu-mln111.html, scratchpad webcheck/report.py)
-  if(/^MLN111/.test(curSubject())){const s0=el('srcNote');if(s0&&!el('reportLink'))s0.insertAdjacentHTML('afterend',
-    '<a class="sub" id="reportLink" href="doi-chieu-mln111.html" target="_blank" rel="noopener" style="display:block;margin-top:2px">📋 Bản đối chiếu đáp án: giáo trình + nguồn web</a>');}
+  // these subjects link to their one-page answer cross-check (doi-chieu-<subj>.html, scratchpad webcheck/report.py)
+  const rp=(curSubject().match(/^(MLN111|MLN122|MLN131|HCM202|VNR)/)||[])[1];
+  if(rp){const s0=el('srcNote');if(s0&&!el('reportLink'))s0.insertAdjacentHTML('afterend',
+    '<a class="sub" id="reportLink" href="doi-chieu-'+rp.toLowerCase()+'.html" target="_blank" rel="noopener" style="display:block;margin-top:2px">📋 Bản đối chiếu đáp án: '+(/^(HCM202|VNR)$/.test(rp)?'':'giáo trình + ')+'nguồn web</a>');}
   if(m){const sn=el('srcNote'),fn=el('footNote');
     if(sn&&m.srcNote)sn.textContent=m.srcNote;
     if(fn&&m.footNote)fn.textContent=m.footNote;
