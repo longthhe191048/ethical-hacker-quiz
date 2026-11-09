@@ -125,6 +125,8 @@ header{position:relative;z-index:20;flex:0 0 auto;display:flex;align-items:cente
       <button type="button" class="tab" data-tab="ces202"  data-scope="CES202"  data-label="CES202 · Đề FU"  onclick="selectTab('ces202')"><b>CES202</b><small>Đề thi FU</small></button>
       <button type="button" class="tab" data-tab="iap301"  data-scope="IAP301"  data-label="IAP301 · Đề FU"  onclick="selectTab('iap301')"><b>IAP301</b><small>Đề thi FU</small></button>
       <button type="button" class="tab" data-tab="frs401c" data-scope="FRS401C" data-label="FRS401C · Đề FU" onclick="selectTab('frs401c')"><b>FRS401C</b><small>Đề thi FU</small></button>
+      <button type="button" class="tab" data-tab="spm401"  data-scope="SPM401"  data-label="SPM401 · Đề FU"  onclick="selectTab('spm401')"><b>SPM401</b><small>Đề thi FU</small></button>
+      <a class="tab" href="doi-chieu-spm401.html" target="_blank" rel="noopener" style="text-decoration:none;color:inherit"><b>SPM401</b><small>📋 Đối chiếu đáp án</small></a>
     </div></div>
 
     <div class="grp"><div class="grp-h">Lý luận chính trị</div><div class="grp-list">
@@ -164,12 +166,13 @@ header{position:relative;z-index:20;flex:0 0 auto;display:flex;align-items:cente
     <div class="panel" id="panel-pmg201c"><iframe title="PMG201c" data-src="onthi-pmg201c.html?subject=PMG201c"></iframe><div class="loading">Đang tải…</div></div>
     <div class="panel" id="panel-swd392"><iframe title="SWD392" data-src="onthi-swd392.html?subject=SWD392"></iframe><div class="loading">Đang tải…</div></div>
     <div class="panel" id="panel-mma301"><iframe title="MMA301" data-src="onthi-mma301.html?subject=MMA301"></iframe><div class="loading">Đang tải…</div></div>
+    <div class="panel" id="panel-spm401"><iframe title="SPM401" data-src="onthi-spm401.html?subject=SPM401"></iframe><div class="loading">Đang tải…</div></div>
   </div>
 </div>
 
 <script>
 function el(id){return document.getElementById(id)}
-const TABS=['hod402','hodfu','hod401','ces202','iap301','frs401c','vnr','hcm202','mln111','mln111pt','mln131','mln122','pmg201c','swd392','mma301'];
+const TABS=['hod402','hodfu','hod401','ces202','iap301','frs401c','spm401','vnr','hcm202','mln111','mln111pt','mln131','mln122','pmg201c','swd392','mma301'];
 const DESK=window.matchMedia?matchMedia('(min-width:900px)'):null;
 
 /* ---- theme: the switch in this header is the only one; every loaded page follows it live ---- */
