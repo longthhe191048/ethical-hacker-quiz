@@ -44,6 +44,14 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--border
 .qnum{background:var(--accent);color:#fff;border-radius:6px;font-weight:700;font-size:.78rem;padding:2px 9px}
 .badge{background:var(--chip);color:var(--muted);border:1px solid var(--border);border-radius:6px;font-size:.72rem;padding:1px 8px}
 .stem{font-weight:600;margin:0 0 12px;font-size:1.05rem;overflow-wrap:anywhere}
+/* abbreviations: marked in the text, spelled out in the box beside the question */
+abbr.ab{text-decoration:underline dotted;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--muted);cursor:help}
+.abx{margin:12px 0 4px;padding:10px 12px 11px;background:var(--panel2);border:1px solid var(--border);border-radius:10px;font-size:.86rem;line-height:1.45}
+.abx-h{margin:0 0 6px;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.abx dl{margin:0}.abx-i{margin:0;overflow-wrap:anywhere}.abx-i+.abx-i{margin-top:5px}
+.abx dt,.abx dd{display:inline;margin:0}.abx dt{font-weight:700;color:var(--accent);margin-right:6px}.abx dd{color:var(--text)}
+@media (min-width:880px){.qgrid.has-abx{display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:0 18px;align-items:start}
+  .qgrid.has-abx .abx{margin:0;position:sticky;top:72px}}
 .opt{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border:1px solid var(--border);border-radius:9px;margin:7px 0;background:var(--panel2);cursor:pointer}
 .opt.locked{cursor:default}.opt.locked:hover{border-color:var(--border)}
 .opt:hover{border-color:var(--accent)}.opt.sel{border-color:var(--accent);background:var(--selbg)}
@@ -641,37 +649,47 @@ function answerCard(q,keyRows,badgesHTML,fmt){
   if(bd)body.push('<div class="ac-meta">'+bd+'</div>');
   if(body.length)h+='<div class="ac-body">'+body.join('')+'</div>';
   return h+'</section>';}
-/* abbreviations of the political-theory subjects -> their meaning, shown once per question in brackets.
+/* abbreviations of the political-theory subjects -> their meaning, listed in the "Viết tắt" box beside the question.
    Built from the banks by scratchpad mln_ex/_abbr_result.json (proposed, then adversarially verified);
    tokens that are option letters, names, formulas or the very answer of a "gọi tắt là gì" question are
    deliberately absent. */
 const ABBR_SUBJ=new Set(["MLN111", "MLN111PT", "MLN122", "MLN131", "HCM202", "VNR"]);
 const ABBR={"QHSX":"quan hệ sản xuất","LLSX":"lực lượng sản xuất","CNXH":"chủ nghĩa xã hội","HCM":"Hồ Chí Minh","XHCN":"xã hội chủ nghĩa","USD":"đô la Mỹ","TW":"Trung ương","NQ":"Nghị quyết","TTHCM":"tư tưởng Hồ Chí Minh","VN":"Việt Nam","CNDV":"chủ nghĩa duy vật","CNDT":"chủ nghĩa duy tâm","ASEAN":"Hiệp hội các quốc gia Đông Nam Á","WTO":"Tổ chức Thương mại Thế giới","CNDVBC":"chủ nghĩa duy vật biện chứng","PTSX":"phương thức sản xuất","APEC":"Diễn đàn Hợp tác Kinh tế châu Á – Thái Bình Dương","ASEM":"Diễn đàn Hợp tác Á – Âu","XH":"xã hội","CNTB":"chủ nghĩa tư bản","TBCN":"tư bản chủ nghĩa","KTCT":"kinh tế chính trị","KVI":"khu vực I","KVII":"khu vực II","VNDCCH":"Việt Nam Dân chủ Cộng hòa","NSLĐ":"năng suất lao động","TLSX":"tư liệu sản xuất","GDP":"tổng sản phẩm quốc nội","CSHT":"cơ sở hạ tầng","KT":"kinh tế","CHXHCNVN":"Cộng hòa xã hội chủ nghĩa Việt Nam","UNESCO":"Tổ chức Giáo dục, Khoa học và Văn hóa Liên Hợp Quốc","AFTA":"Khu vực Mậu dịch Tự do ASEAN","GNP":"tổng sản phẩm quốc dân","CN":"Công nguyên","SH":"siêu hình","CNH":"công nghiệp hóa","HĐH":"hiện đại hóa","THDQ":"Trung Hoa Dân Quốc","TQ":"Trung Quốc","CT":"Chỉ thị","ĐN":"Đà Nẵng","ĐCS":"Đảng Cộng sản","ĐA":"đáp án","ĐCSVN":"Đảng Cộng sản Việt Nam","CMT8":"Cách mạng Tháng Tám","CM":"cách mạng","G20":"Nhóm 20 nền kinh tế lớn","EU":"Liên minh châu Âu","ECOWAS":"Cộng đồng Kinh tế các quốc gia Tây Phi","AI":"trí tuệ nhân tạo","CLĐ":"công lao động","FDI":"đầu tư trực tiếp nước ngoài"};
 const ABBR_BY_SUBJ={"MLN111PT":{"KTTT":"kiến trúc thượng tầng"},"VNR":{"KTTT":"kinh tế thị trường"}};
-/* add "(meaning)" after the first abbreviation of each kind in one question card. s is escaped
-   text (abbreviations contain no & < >); "NQ/TW" -> "NQ/TW (Nghị quyết Trung ương)". Skipped when
-   the meaning is already written next to it, e.g. "Hiệp hội các quốc gia Đông Nam Á (ASEAN)". */
+/* mark each abbreviation in one question card (dotted underline, meaning on hover) and collect it for the
+   "Viết tắt" box. s is escaped text or the formatted stem (abbreviations contain no & < >); a token inside a
+   tag or an <abbr> is left alone, so running the filter twice changes nothing. */
 const ABBR_TOK=/(^|[^A-Za-zÀ-ỹĐđ0-9])([A-ZĐ][A-ZĐ0-9]{1,9}(?:[\/\-][A-ZĐ][A-ZĐ0-9]{1,9})*)(?![A-Za-zÀ-ỹĐđ0-9])/g;
 function abbrOf(k,subj){const by=ABBR_BY_SUBJ[subj];return (by&&by[k])||ABBR[k]||''}
-function abbrify(s,subj,seen){
+function abbrify(s,subj,found){
   if(!s||!ABBR_SUBJ.has(subj))return s;
   return String(s).replace(ABBR_TOK,(m,pre,tok,off,str)=>{
     const parts=tok.split(/([\/\-])/),words=parts.filter((_,i)=>i%2===0),seps=parts.filter((_,i)=>i%2===1);
     const exps=words.map(w=>abbrOf(w,subj));
     if(!exps.every(Boolean))return m;
+    const before=str.slice(0,off+pre.length);
+    if(before.lastIndexOf('<')>before.lastIndexOf('>')||before.lastIndexOf('<abbr')>before.lastIndexOf('</abbr>'))return m;
     const full=exps.reduce((a,e,i)=>i?a+(seps[i-1]==='-'?' - ':' ')+e:e,'');
-    if(seen.has(tok))return m;
-    seen.add(tok);
-    const start=off+pre.length,end=start+tok.length;
-    if(str.charAt(start-1)==='('&&str.charAt(end)===')')return m;            // "(ASEAN)" after its full name
-    if(/^\s*\(/.test(str.slice(end,end+4)))return m;                         // already followed by a bracket
+    const start=off+pre.length,end=start+tok.length;                         // meaning already written next to it:
+    if(str.charAt(start-1)==='('&&str.charAt(end)===')')return m;            //   "Hiệp hội … Đông Nam Á (ASEAN)"
+    if(/^\s*\(/.test(str.slice(end,end+4)))return m;                         //   "ASEAN (Hiệp hội …)"
     if(str.slice(Math.max(0,start-160),end+160).toLowerCase().indexOf(full.toLowerCase())>=0)return m;
-    return pre+tok+' ('+full+')';});}
+    if(!found.has(tok))found.set(tok,full);
+    return pre+'<abbr class="ab" title="'+esc(full)+'">'+tok+'</abbr>';});}
 /* one filter per question card; part=1 marks the stem/options, left alone when the question asks
-   for the abbreviation itself */
+   for the abbreviation itself. F.found keeps what the card used, for the box */
 function abbrFor(q){
-  const subj=(q&&q.subject)||curSubject(),seen=new Set(),asks=/gọi tắt|viết tắt/i.test((q&&q.q)||'');
-  return (s,part)=>asks&&part?s:abbrify(s,subj,seen);}
+  const subj=(q&&q.subject)||curSubject(),found=new Map(),asks=/gọi tắt|viết tắt/i.test((q&&q.q)||'');
+  const F=(s,part)=>asks&&part?s:abbrify(s,subj,found);F.found=found;return F;}
+function abbrBox(found){
+  if(!found||!found.size)return '';
+  return '<aside class="abx" aria-label="Chú thích viết tắt"><div class="abx-h">Viết tắt</div><dl>'+
+    [...found].map(([k,v])=>'<div class="abx-i"><dt>'+esc(k)+'</dt><dd>'+esc(v)+'</dd></div>').join('')+'</dl></aside>';}
+/* fill the box into a rendered card ('<!--ABX-->' marks its place beside the stem and options) */
+function withAbx(h,AB){const f=AB&&AB.found;
+  if(f&&f.size>1){const at=k=>{const i=h.indexOf('>'+k+'</abbr>');return i<0?1e9:i};AB.found=new Map([...f].sort((a,b)=>at(a[0])-at(b[0])))}  // reading order
+  const bx=abbrBox(AB&&AB.found);
+  return bx?h.replace('<div class="qgrid">','<div class="qgrid has-abx">').replace('<!--ABX-->',bx):h.replace('<!--ABX-->','');}
 function isMatch(q){return /^\s*match\b/i.test(q.q||'')}
 /* Structured stems (matching questions especially) arrive as one long run of text —
    break them onto lines and bold the labels so they can be read. */
@@ -1573,12 +1591,12 @@ function renderFlashcard(q){
   h+=`<span class="fc-acts" onclick="event.stopPropagation()">`+
      `<span class="star" onclick="toggleKnown()">${knownQ(q.id)?'★':'☆'}</span>`+
      `<span class="bmk" onclick="toggleBook()">${BOOK.has(q.id)?'🔖':'🏳'}</span></span></div>`+
-     `<p class="stem">${AB(formatQStem(q.q),1)}</p>${opts}`;
+     `<div class="qgrid"><div class="qmain"><p class="stem">${AB(formatQStem(q.q),1)}</p>${opts}</div><!--ABX--></div>`;
   h+=preNotesHTML(q);
   if(FLIPPED)h+=answerCard(q,keyRowsOf(q),vfBadge(q.vf),x=>AB(x,0));
   h+=`<div class="flip-hint">${FLIPPED?'👆 Nhấn để úp thẻ lại':'👆 Nhấn vào thẻ hoặc phím Space để xem đáp án'}</div></div>`;
   h+=`<div class="navbtns"><button class="btn sec" onclick="go(-1)" ${IDX===0?'disabled':''}>← Trước</button><button class="btn" onclick="go(1)" ${IDX===SESSION.length-1?'disabled':''}>Sau →</button></div>`;
-  el('test').innerHTML=h;}
+  el('test').innerHTML=withAbx(h,AB);}
 /* a question the subject's other bank already covers (set by scratchpad pt_xref.py) */
 function xrBadge(q){
   if(!q.xr)return '';
@@ -1592,13 +1610,14 @@ function renderQ(){if(isFlash()){renderFlashcard(SESSION[IDX]);return}const q=SE
   if(span>1)h+=`<span class="badge hot" title="Câu này xuất hiện trong ${span} đề khác nhau">🔥 Hay ra ×${span}</span>`;
   h+=xrBadge(q);
   if(submitted){const ok=graded(q);const st=!isAnswered(q)?['skip','⊘ Chưa làm']:ok?['ok','✔ Đúng']:peeked(q)?['skip','👁 Đúng, đã xem đáp án']:['no','✘ Sai'];h+=`<span class="rev-status ${st[0]}">${st[1]}</span>`;}
-  h+=`</div><p class="stem">${AB(formatQStem(q.q),1)}</p>`;
+  h+=`</div><div class="qgrid"><div class="qmain"><p class="stem">${AB(formatQStem(q.q),1)}</p>`;
   const multi=isMulti(q);
   q.oi.forEach((oi,i)=>{const chosen=q.sels.indexOf(oi)>=0, right=(q.ci||[]).indexOf(oi)>=0;
     let cls='opt';if(showAns){cls+=' locked';if(right)cls+=' correct';else if(chosen)cls+=' wrong';}else if(chosen)cls+=' sel';
     let mk='';if(showAns){if(right)mk='<span class="mk">✔ đáp án đúng</span>';else if(chosen)mk='<span class="mk">✗ bạn chọn</span>';}
     const box=multi?`<span class="cbox">${chosen?'☑':'☐'}</span>`:'';
     h+=`<div class="${cls}" onclick="pick(${i})">${box}<span class="olet">${String.fromCharCode(65+i)}.</span><span class="otext">${AB(esc(optText(q,oi)),1)}</span>${mk}</div>`;});
+  h+='</div><!--ABX--></div>';
   h+=preNotesHTML(q);
   if(!showAns&&!q.fz){const cf=q.conf||'';h+=`<div class="conf-row"><span class="sub">Mức độ tự tin:</span><span class="conf-chip${cf==='sure'?' sel':''}" onclick="setConf('sure')">✅ Chắc chắn</span><span class="conf-chip${cf==='unsure'?' sel':''}" onclick="setConf('unsure')">🤔 Không chắc</span><span class="conf-chip${cf==='guess'?' sel':''}" onclick="setConf('guess')">🎲 Đoán</span></div>`;}
   if(!showAns)h+=q.fz?'<div class="sub" style="margin-top:8px">🔒 Đã khóa: bạn đã xem đáp án ở một bản in khác của câu này — lựa chọn ở đây vẫn được chấm.</div>'
@@ -1608,7 +1627,7 @@ function renderQ(){if(isFlash()){renderFlashcard(SESSION[IDX]);return}const q=SE
     h+=answerCard(q,keyRowsOf(q),vfBadge(q.vf)+peek,x=>AB(x,0));}
   h+=`<div class="navbtns"><button class="btn sec" onclick="go(-1)" ${IDX===0?'disabled':''}>← Trước</button><button class="btn" onclick="go(1)" ${IDX===SESSION.length-1?'disabled':''}>Sau →</button></div>`;
   h+=`<div class="jump">`+SESSION.map((s,i)=>{let c=i===IDX?'cur ':'';const ans=isAnswered(s);if(submitted)c+=(!ans||peeked(s)?'':graded(s)?'correct':'wrong');else c+=(ans?'done':'');if(knownQ(s.id))c+=' known';return `<button class="${c}" onclick="jumpTo(${i})">${i+1}</button>`}).join('')+`</div></div>`;
-  el('test').innerHTML=h;if(submitted&&window._hero)el('test').insertAdjacentHTML('afterbegin',REVIEWING&&window._heroMini?window._heroMini:window._hero);
+  el('test').innerHTML=withAbx(h,AB);if(submitted&&window._hero)el('test').insertAdjacentHTML('afterbegin',REVIEWING&&window._heroMini?window._heroMini:window._hero);
   // the grid is rebuilt every render, so its scroll resets — bring the current question back into view
   const jw=el('test').querySelector('.jump'),cur=jw&&jw.querySelector('.cur');
   if(jw&&cur)jw.scrollTop+=cur.getBoundingClientRect().top-jw.getBoundingClientRect().top-(jw.clientHeight-cur.offsetHeight)/2;}
@@ -1721,7 +1740,7 @@ function openHistoryDetail(idx){const a=loadHistory()[idx];if(!a)return;const bi
       let mk=right?'<span class="mk">✔ đáp án đúng</span>':(chosen?'<span class="mk">✗ bạn chọn</span>':'');
       return `<div class="${cls}"><span class="olet">${String.fromCharCode(65+j)}.</span><span class="otext">${AB(esc(stripPrefix(o)),1)}</span>${mk}</div>`}).join('');
     const tags=(rec.cf?`<span class="badge">${CFLABEL[rec.cf]||rec.cf}</span>`:'')+(rec.rv?'<span class="badge multi">👁 đã xem đáp án</span>':'')+(ci.length>1?`<span class="badge multi">☑ ${ci.length} đáp án</span>`:'');
-    return `<div class="card"><div class="qh"><span class="qnum">Câu ${i+1}</span><span class="badge">${esc(q.src)}</span>${tags}<span class="rev-status ${st[0]}">${st[1]}</span></div><p class="stem">${AB(formatQStem(q.q),1)}</p>${oh}${preNotesHTML(q)}${answerCard(q,keyRowsOf(q),vfBadge(q.vf),x=>AB(x,0))}</div>`}).join('');
+    const card=`<div class="card"><div class="qh"><span class="qnum">Câu ${i+1}</span><span class="badge">${esc(q.src)}</span>${tags}<span class="rev-status ${st[0]}">${st[1]}</span></div><div class="qgrid"><div class="qmain"><p class="stem">${AB(formatQStem(q.q),1)}</p>${oh}</div><!--ABX--></div>${preNotesHTML(q)}${answerCard(q,keyRowsOf(q),vfBadge(q.vf),x=>AB(x,0))}</div>`;return withAbx(card,AB)}).join('');
   box.innerHTML=`<div class="row" style="margin:6px 0"><button class="btn sec" onclick="backToStart()">← Về lịch sử</button></div>
     <div class="card" style="text-align:center"><div class="ring" style="--v:${a.pct};--rc:${rc}"><div class="in"><div class="result-score" style="color:${rc}">${a.score}/${a.total}</div><div style="color:${rc};font-weight:700">${a.pct}%</div></div></div>
     <div class="sub">${esc(new Date(a.ts).toLocaleString('vi-VN'))} · ${MODELABEL[a.mode]||a.mode} · ${a.pass?'✅ ĐẠT':'❌ CHƯA ĐẠT'}</div><div class="modbars" style="margin-top:10px">${bars}</div></div>
