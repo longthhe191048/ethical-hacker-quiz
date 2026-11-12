@@ -66,6 +66,17 @@ input[type=number],select{background:var(--panel2);border:1px solid var(--border
 .qmulti,.mhint{background:var(--amberbg);color:var(--amber);border:1px solid var(--amber);border-radius:6px;font-size:.72rem;padding:1px 8px;margin-left:auto;flex-shrink:0}
 .badge{background:var(--chip);color:var(--muted);border:1px solid var(--border);border-radius:6px;font-size:.7rem;padding:1px 8px}
 .stem{font-weight:600;margin:0 0 12px;white-space:pre-wrap}
+/* abbreviations: marked in the text, spelled out in the "Viết tắt" box under the question; can be switched off */
+abbr.ab{text-decoration:underline dotted;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--muted);cursor:help}
+.abx{margin:12px 0 10px;padding:10px 12px 11px;background:var(--panel2);border:1px solid var(--border);border-radius:10px;font-size:.86rem;line-height:1.45}
+.abx-h{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 6px;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.abx dl{margin:0}.abx-i{margin:0;overflow-wrap:anywhere}.abx-i+.abx-i{margin-top:5px}
+.abx dt,.abx dd{display:inline;margin:0}.abx dt{font-weight:700;color:var(--accent);margin-right:6px}.abx dd{color:var(--text)}
+.abx-t{font:inherit;font-weight:600;letter-spacing:0;text-transform:none;color:var(--accent);background:none;border:0;padding:5px 8px;margin:-5px -8px -5px 0;border-radius:6px;cursor:pointer}
+.abx-t:hover{text-decoration:underline}.abx-t:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.abx-t .off,html.abx-off .abx-t .on,html.abx-off .abx dl{display:none}html.abx-off .abx-t .off{display:inline}
+html.abx-off .abx{display:inline-block;padding:4px 10px}html.abx-off .abx-h{margin:0}
+html.abx-off abbr.ab{text-decoration:none;cursor:inherit}
 .exhibit{max-width:100%;border:1px solid var(--border);border-radius:8px;margin:6px 0 14px;background:#fff}
 .opt{display:flex;gap:11px;align-items:flex-start;padding:11px 13px;border:1px solid var(--border);border-radius:9px;margin:8px 0;cursor:pointer;transition:.12s;background:var(--panel2)}
 .opt:hover{border-color:var(--accent)}
@@ -228,6 +239,7 @@ try{var t=localStorage.getItem('app_theme');if(t==='dark'||t==='light')d.setAttr
               <button type="button" class="chip" data-v="90" onclick="setVal('numMin',90)">90</button>
             </div><input type="number" id="numMin" value="60" min="1" inputmode="numeric" aria-label="Số phút" oninput="syncChips();updateStartSub()"></div></div>
           <label class="switch"><input type="checkbox" id="shuf" checked onchange="updateStartSub()"><span>🔀 Trộn thứ tự đáp án trong mỗi câu</span></label>
+          <label class="switch"><input type="checkbox" id="abxOn" checked onchange="setAbx(this.checked)"><span>🔤 Hộp "Viết tắt" dưới câu hỏi <small style="color:var(--muted)">(tắt thì chỉ còn nút "Hiện" nhỏ)</small></span></label>
         </div>
       </details>
 
@@ -278,6 +290,43 @@ const EH_IMAGES = {"2023-10-09_172138.jpg": "data:image/jpeg;base64,/9j/4AAQSkZJ
 
 function el(id){return document.getElementById(id)}
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+/* abbreviations of this course -> their expansion (English). Built 13/11 from the bank; tokens with two
+   meanings, plain words, tool names and typos left out. */
+const ABBR_EH={"AAA":"Authentication, Authorization, and Accounting","AP":"Access Point","API":"Application Programming Interface","APK":"Android Package Kit","ARP":"Address Resolution Protocol","ASCII":"American Standard Code for Information Interchange","ASP":"Active Server Pages","AWS":"Amazon Web Services","BIND":"Berkeley Internet Name Domain","BLE":"Bluetooth Low Energy","C2":"Command and Control","CAINE":"Computer Aided Investigative Environment","CAPEC":"Common Attack Pattern Enumeration and Classification","CAV2":"Card Authentication Value 2","CEO":"Chief Executive Officer","CFTC":"Commodity Futures Trading Commission","CID":"Card Identification Number","CIFS":"Common Internet File System","CMD":"Command Prompt","CPU":"Central Processing Unit","CSS":"Cascading Style Sheets","CSV":"Comma-Separated Values","CVC2":"Card Validation Code 2","CVE":"Common Vulnerabilities and Exposures","CVSS":"Common Vulnerability Scoring System","CVV2":"Card Verification Value 2","CWE":"Common Weakness Enumeration","DAI":"Dynamic ARP Inspection","DDOS":"Distributed Denial of Service","DGM":"Datagram Service","DHCP":"Dynamic Host Configuration Protocol","DLL":"Dynamic-Link Library","DNS":"Domain Name System","DNSSEC":"Domain Name System Security Extensions","DOS":"Denial of Service","DSS":"Data Security Standard","EAP":"Extensible Authentication Protocol","ESAPI":"Enterprise Security API","FDIC":"Federal Deposit Insurance Corporation","FERPA":"Family Educational Rights and Privacy Act","FFIEC":"Federal Financial Institutions Examination Council","FIN":"Finish","FIPS":"Federal Information Processing Standards","FOCA":"Fingerprinting Organizations with Collected Archives","FQDN":"Fully Qualified Domain Name","FTC":"Federal Trade Commission","FTP":"File Transfer Protocol","FTPS":"File Transfer Protocol Secure","GDPR":"General Data Protection Regulation","GLB":"Gramm-Leach-Bliley","GLBA":"Gramm-Leach-Bliley Act","GUI":"Graphical User Interface","HHS":"Health and Human Services","HIPAA":"Health Insurance Portability and Accountability Act","HPP":"HTTP Parameter Pollution","HR":"Human Resources","HTML":"HyperText Markup Language","HTTP":"Hypertext Transfer Protocol","HTTPS":"Hypertext Transfer Protocol Secure","IAM":"Identity and Access Management","IANA":"Internet Assigned Numbers Authority","ICMP":"Internet Control Message Protocol","ICS":"Industrial Control System","ID":"Identifier","IDS":"Intrusion Detection System","IEEE":"Institute of Electrical and Electronics Engineers","IETF":"Internet Engineering Task Force","IMAP":"Internet Message Access Protocol","IMEI":"International Mobile Equipment Identity","IP":"Internet Protocol","IPMI":"Intelligent Platform Management Interface","IPS":"Intrusion Prevention System","ISECOM":"Institute for Security and Open Methodologies","ISSAF":"Information Systems Security Assessment Framework","IT":"Information Technology","J2EE":"Java 2 Platform, Enterprise Edition","JSON":"JavaScript Object Notation","LDAP":"Lightweight Directory Access Protocol","LLMNR":"Link-Local Multicast Name Resolution","MAC":"Media Access Control","MD5":"Message-Digest Algorithm 5","MFP":"Management Frame Protection","MIME":"Multipurpose Internet Mail Extensions","MITM":"Man-in-the-Middle","MS":"Microsoft","MSA":"Master Service Agreement","NDA":"Non-Disclosure Agreement","NIST":"National Institute of Standards and Technology","NS":"Name Service","NSE":"Nmap Scripting Engine","OBEX":"Object Exchange","OS":"Operating System","OSINT":"Open-Source Intelligence","OSSTMM":"Open Source Security Testing Methodology Manual","OWASP":"Open Web Application Security Project","PAN":"Primary Account Number","PC":"Personal Computer","PCI":"Payment Card Industry","PDF":"Portable Document Format","PGP":"Pretty Good Privacy","PHI":"Protected Health Information","PIN":"Personal Identification Number","PNL":"Preferred Network List","POODLE":"Padding Oracle On Downgraded Legacy Encryption","POP3":"Post Office Protocol version 3","PSK":"Pre-Shared Key","PTES":"Penetration Testing Execution Standard","RBAC":"Role-Based Access Control","RDP":"Remote Desktop Protocol","RFC":"Request for Comments","RFI":"Remote File Inclusion","RFP":"Request for Proposal","RPC":"Remote Procedure Call","RST":"Reset","S3":"Simple Storage Service","SAM":"Security Account Manager","SANS":"SysAdmin, Audit, Network, and Security","SCADA":"Supervisory Control and Data Acquisition","SCP":"Secure Copy Protocol","SDK":"Software Development Kit","SEC":"Securities and Exchange Commission","SET":"Social-Engineer Toolkit","SFTP":"SSH File Transfer Protocol","SID":"Security Identifier","SLA":"Service-Level Agreement","SMB":"Server Message Block","SMS":"Short Message Service","SMTP":"Simple Mail Transfer Protocol","SMTPS":"Simple Mail Transfer Protocol Secure","SNMP":"Simple Network Management Protocol","SOW":"Statement of Work","SP":"Special Publication","SQL":"Structured Query Language","SSH":"Secure Shell","SSL":"Secure Sockets Layer","SSMTP":"Secure Simple Mail Transfer Protocol","SSN":"Session Service","STAR":"Security Test Audit Report","SYN":"Synchronize","TCP":"Transmission Control Protocol","TKIP":"Temporal Key Integrity Protocol","TLS":"Transport Layer Security","UDP":"User Datagram Protocol","URL":"Uniform Resource Locator","US":"United States","USB":"Universal Serial Bus","VM":"Virtual Machine","VNC":"Virtual Network Computing","VOIP":"Voice over Internet Protocol","VPN":"Virtual Private Network","WADL":"Web Application Description Language","WAF":"Web Application Firewall","WBS":"Work Breakdown Structure","WINS":"Windows Internet Name Service","WMI":"Windows Management Instrumentation","WPA2":"Wi-Fi Protected Access 2","WPA3":"Wi-Fi Protected Access 3","WPS":"Wi-Fi Protected Setup","WSDL":"Web Services Description Language","WSTG":"Web Security Testing Guide","XML":"Extensible Markup Language","XSS":"Cross-Site Scripting","ZAP":"Zed Attack Proxy"};const ABBR_HIDE_EH=new Set(["A000", "A004", "A013", "G015", "G016", "G024", "G045", "G089", "G093", "G098", "G108", "G116", "G130", "G190", "G191", "G236"]);
+const ABBR_TOK=/(^|[^A-Za-zÀ-ỹĐđ0-9])([A-ZĐ][A-ZĐ0-9]{1,9}(?:[\/\-][A-ZĐ][A-ZĐ0-9]{1,9})*)(?![A-Za-zÀ-ỹĐđ0-9])/g;
+/* the box can be switched off: ⚙️ Tùy chọn or the button in the box; fu_abx is shared with the other subjects */
+let ABX_ON=(()=>{try{return localStorage.getItem('fu_abx')!=='0'}catch(e){return true}})();
+function setAbx(on,init){ABX_ON=!!on;if(!init)try{localStorage.setItem('fu_abx',on?'1':'0')}catch(e){}
+  document.documentElement.classList.toggle('abx-off',!on);
+  document.querySelectorAll('abbr.ab').forEach(a=>{if(on&&a.dataset.t){a.title=a.dataset.t;delete a.dataset.t}
+    else if(!on&&a.title){a.dataset.t=a.title;a.removeAttribute('title')}});
+  document.querySelectorAll('.abx-t').forEach(b=>b.setAttribute('aria-expanded',String(on)));
+  const c=document.getElementById('abxOn');if(c)c.checked=on;}
+setAbx(ABX_ON,1);
+function abxFull(tok){const parts=tok.split(/([\/\-])/),w=parts.filter((_,i)=>i%2===0),sep=parts.filter((_,i)=>i%2===1),
+  e=w.map(x=>ABBR_EH[x]||'');return e.every(Boolean)?e.reduce((a,x,i)=>i?a+(sep[i-1]==='-'?' - ':' / ')+x:x,''):''}
+/* wrap the known abbreviations of one text node in <abbr>, unless the meaning is already written next to it */
+function abxText(node){const str=node.nodeValue;let m,last=0,frag=null;ABBR_TOK.lastIndex=0;
+  while((m=ABBR_TOK.exec(str))){const tok=m[2],start=m.index+m[1].length,end=start+tok.length,full=abxFull(tok);
+    if(!full||(str.charAt(start-1)==='('&&str.charAt(end)===')')||/^\s*\(/.test(str.slice(end,end+4))||
+       str.slice(Math.max(0,start-160),end+160).toLowerCase().includes(full.toLowerCase()))continue;
+    frag=frag||document.createDocumentFragment();frag.append(str.slice(last,start));
+    const a=document.createElement('abbr');a.className='ab';a.setAttribute(ABX_ON?'title':'data-t',full);a.textContent=tok;
+    frag.append(a);last=end;}
+  if(frag){frag.append(str.slice(last));node.replaceWith(frag)}}
+/* mark one card and (re)build its box; a question that asks what an acronym stands for keeps stem/options unmarked */
+function abxCard(card){const stem=card.querySelector('.stem'),asks=ABBR_HIDE_EH.has(card.dataset.qid)||/gọi tắt|viết tắt|stands? for|acronym|abbreviat/i.test(stem?stem.textContent:'');
+  card.querySelectorAll(asks?'.expl':'.stem,.otext,.mleft,.mans,.expl').forEach(n=>{
+    const w=document.createTreeWalker(n,NodeFilter.SHOW_TEXT),ts=[];while(w.nextNode())ts.push(w.currentNode);
+    ts.forEach(t=>{if(!t.parentElement.closest('abbr,.badge'))abxText(t)})});
+  const seen=new Map();card.querySelectorAll('abbr.ab').forEach(a=>{if(!seen.has(a.textContent))seen.set(a.textContent,a.title||a.dataset.t)});
+  const old=card.querySelector(':scope>.abx');if(old)old.remove();if(!seen.size)return;
+  const box=document.createElement('aside');box.className='abx';box.setAttribute('aria-label','Chú thích viết tắt');
+  box.innerHTML='<div class="abx-h"><span>Viết tắt</span><button type="button" class="abx-t" onclick="setAbx(!ABX_ON)" aria-expanded="'+ABX_ON+
+    '" title="Bật/tắt hộp Viết tắt (cũng có trong ⚙️ Tùy chọn)"><span class="on">Ẩn</span><span class="off">Hiện</span></button></div><dl>'+
+    [...seen].map(([k,v])=>'<div class="abx-i"><dt>'+esc(k)+'</dt><dd>'+esc(v)+'</dd></div>').join('')+'</dl>';
+  card.insertBefore(box,card.querySelector(':scope>.expl'));}
+function abxAll(root){if(root)root.querySelectorAll('.q').forEach(abxCard)}
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function imgSrc(bn){ if(EH_IMAGES[bn])return EH_IMAGES[bn]; return 'https://itexamanswers.net/wp-content/uploads/2023/10/'+bn; }
 function fullPool(){ return EH_BANK.graded.concat(EH_BANK.matching); }
@@ -392,7 +441,7 @@ function openHistoryDetail(idx){
       <div class="modbars">${mods}</div>
     </div>${note}${cards}
     <div class="row" style="margin:10px 0"><button class="btn sec" onclick="backToStart()">← Về lịch sử</button></div>`;
-  window.scrollTo(0,0);
+  box.querySelectorAll('.q').forEach((c,i)=>{const r=(a.details||[])[i];if(r)c.dataset.qid=r.id});abxAll(box); window.scrollTo(0,0);
 }
 function backToStart(){ el('histDetail').classList.add('hidden'); el('start').classList.remove('hidden');
   el('nav').classList.add('hidden');            // the floating question grid belongs to a running test
@@ -584,6 +633,7 @@ function updateTimer(){
 function renderTest(){
   const box=el('test'); box.innerHTML='';
   RUN.items.forEach((it,qi)=>box.appendChild(it.kind==='matching'?renderMatch(it,qi):renderMCQ(it,qi)));
+  RUN.items.forEach((it,qi)=>{const c=el('q'+qi);if(c)c.dataset.qid=it.q.id});abxAll(box);
   renderNav(); updateAnswered();
 }
 function renderMCQ(it,qi){
@@ -705,6 +755,7 @@ function showResults(){
 
 function revealAnswers(){
   RUN.items.forEach((it,qi)=>{ it.kind==='matching' ? revealMatch(it,qi) : revealMCQ(it,qi); });
+  abxAll(el('test'));
 }
 function revealMCQ(it,qi){
   const q=it.q, card=el('q'+qi), chosen=new Set(it.sel);
