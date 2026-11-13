@@ -1500,15 +1500,19 @@ function optLetterRef(t,n,self){
   return {idx,put:sh=>{let out='',last=0;toks.forEach((x,k)=>{const L=sh[k];out+=t.slice(last,x.at)+(x.c===x.c.toLowerCase()?L.toLowerCase():L);last=x.at+1});return out+t.slice(last)}};}
 /* how a question's options may move: {fixed} = keep printed order; refs = letter lists; pos = trailing "above" options */
 function optPlan(q){
-  const o=q.o||[],n=o.length,refs={},pos=[];let fixed=false;
+  const o=q.o||[],n=o.length,refs={},pos=[];let fixed=false,loose=false;
   o.forEach((x,i)=>{const t=stripPrefix(x).trim();const r=optLetterRef(t,n,i);
     if(r){refs[i]=r;return}
     if(REF_POS.test(t)){pos.push(i);return}
-    if(REF_LOOSE.test(t))fixed=true;});
+    if(REF_LOOSE.test(t)){fixed=true;loose=true}});
   if(pos.some((p,k)=>p!==n-pos.length+k))fixed=true;                         // an "above" option that is not last
   Object.keys(refs).forEach(i=>refs[i].idx.forEach(j=>{if(refs[j]||pos.indexOf(j)>=0)fixed=true}));
-  return {fixed,refs,pos};}
-function shuffleOpts(x){const P=optPlan(x);if(P.fixed)return;
+  return {fixed,refs,pos,loose};}
+function shuffleOpts(x){const P=optPlan(x);
+  if(P.fixed){  // an "above" option in the middle: shuffle only the options above it, it and the rest stay put
+    const p=P.pos.length?Math.min(...P.pos):-1;
+    if(p>1&&!P.loose&&!Object.keys(P.refs).length)x.oi=shuffle(x.oi.slice(0,p)).concat(x.oi.slice(p));
+    return;}
   x.oi=shuffle(x.oi.filter(i=>P.pos.indexOf(i)<0)).concat(P.pos);}
 /* the text shown for source option `orig`, with letter lists rewritten to the shuffled letters */
 function optText(q,orig){const t=stripPrefix((q.o||[])[orig]);const oi=q.oi;
