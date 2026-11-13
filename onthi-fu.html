@@ -648,6 +648,7 @@ function answerCard(q,keyRows,badgesHTML,fmt){
   const post=splitNotes(q.nt).post;
   if(post.length)body.push('<ul class="ac-notes">'+post.map(n=>{const k=noteKind(n);
     return '<li class="'+k[0]+'"><span class="ac-ni" aria-hidden="true">'+k[1]+'</span><span class="ac-nt">'+F(esc(exLetters(ntLetters(n,q),q)))+'</span></li>'}).join('')+'</ul>');
+  body.push('<!--ABX2-->');                         // withAbx: the answer's own abbreviations
   if(exq.length)body.push(evidenceHTML(exq,!ex));      // no ex: the quotes ARE the explanation -> always open
   // the same question found on the web with its marked answer (scratchpad webcheck/); plain https links only
   const ws=(Array.isArray(q.ws)?q.ws:[]).filter(w=>w&&/^https:\/\/[^\s"'<>]+$/.test(w.u||''));
@@ -708,10 +709,10 @@ function abbrMixed(subj){
   return ABBR_MX[subj];}
 /* one filter per question card; part=1 marks the stem/options, left alone when the question asks
    for the abbreviation itself. F.found keeps what the stem and options used, for the box: the answer card
-   (part=0) is marked too but never adds to the box, so revealing the answer does not make the box appear or grow */
+   (part=0) is collected in F.ans and listed in a second box inside the answer card, so the question never moves */
 function abbrFor(q){
   const subj=(q&&q.subject)||curSubject(),found=new Map(),asks=ABBR_HIDE.has(q&&q.id)||/gọi tắt|viết tắt|stands? for|acronym|abbreviat/i.test((q&&q.q)||'');
-  const F=(s,part)=>asks&&part?s:abbrify(s,subj,part?found:new Map());F.found=found;return F;}
+  const ans=new Map(),F=(s,part)=>asks&&part?s:abbrify(s,subj,part?found:ans);F.found=found;F.ans=ans;return F;}
 function abbrBox(found){
   if(!found||!found.size)return '';
   return '<aside class="abx" aria-label="Chú thích viết tắt"><div class="abx-h"><span>Viết tắt</span>'+
@@ -722,6 +723,11 @@ function abbrBox(found){
 function withAbx(h,AB){const f=AB&&AB.found;
   if(f&&f.size>1){const at=k=>{const i=h.indexOf('>'+k+'</abbr>');return i<0?1e9:i};AB.found=new Map([...f].sort((a,b)=>at(a[0])-at(b[0])))}  // reading order
   const bx=abbrBox(AB&&AB.found);
+  // answer-card abbreviations not already beside the question: their own box, inside the answer card
+  const an=AB&&AB.ans?[...AB.ans].filter(([k])=>!(AB.found&&AB.found.has(k))):[];
+  if(an.length>1){const at=k=>{const i=h.indexOf('>'+k+'</abbr>');return i<0?1e9:i};an.sort((a,b)=>at(a[0])-at(b[0]))}
+  h=h.replace('<!--ABX2-->',an.length?abbrBox(new Map(an)).replace('<aside class="abx"','<aside class="abx abx-ans"')
+    .replace('<span>Viết tắt</span>','<span>Viết tắt trong đáp án</span>'):'');
   return bx?h.replace('<div class="qgrid">','<div class="qgrid has-abx">').replace('<!--ABX-->',bx):h.replace('<!--ABX-->','');}
 function isMatch(q){return /^\s*match\b/i.test(q.q||'')}
 /* Structured stems (matching questions especially) arrive as one long run of text —
