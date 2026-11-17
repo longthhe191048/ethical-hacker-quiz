@@ -304,6 +304,69 @@ label.theme-btn{display:inline-flex;align-items:center}
 .start-sum b{color:var(--text)}
 .start-btn{flex:0 0 auto;min-height:48px;padding:10px 26px;font-size:1.05rem;border-radius:10px}
 
+/* MODES-CSS-BEGIN */
+/* ---- study modes: the "Học kiểu thẻ" group, Học từng bước / Gõ đáp án, Ghép thẻ, Kiểm tra tổng hợp, flashcard rating ---- */
+.mgroup.wide{grid-column:1/-1}
+.mgroup.wide .mlist{grid-template-rows:none;grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:720px){.mgroup.wide .mlist{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* A− / A+ (fu_ui.fs): question text in every mode; 16px = the sizes the page always had */
+#test{font-size:var(--qfs,1rem)}
+#test .stem{font-size:1.05em}
+#test .ac{font-size:.95em}
+.resume-note{padding:8px 12px;border-left:3px solid var(--accent);background:var(--panel2);border-radius:0 8px 8px 0}
+.fb{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0 4px;padding:10px 14px;border-radius:var(--r-md);font-weight:700}
+.fb.ok{background:var(--greenbg);color:var(--green)}.fb.no{background:var(--redbg);color:var(--red)}
+.fb.warn{background:var(--amberbg);color:var(--text);font-weight:600}
+.lsnav{flex-wrap:wrap;align-items:center}
+.tin{width:100%;margin:8px 0 4px;padding:12px 14px;background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:var(--r-md);font:inherit}
+.tin:focus{border-color:var(--accent)}
+.thint{margin:4px 0;font-size:.9rem;color:var(--muted)}.thint code{font:1rem/1.4 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.08em;color:var(--text)}
+.tcmp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0 4px}
+.tbox{padding:8px 12px;border:1px solid var(--border);border-radius:var(--r-md);background:var(--panel2);overflow-wrap:anywhere}
+.tbox.ok{border-color:var(--green)}.tbox.no{border-color:var(--red);background:var(--redbg)}
+.tbox mark{background:var(--amberbg);color:var(--text);border-bottom:2px solid var(--amber);padding:0 1px}
+.cp-q{flex:1;min-width:0;overflow-wrap:anywhere}
+/* Ghép thẻ: two columns on every screen; a tile shows 4 lines, a long press (or the tooltip) shows the rest */
+.mt-board{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.mt-col{display:flex;flex-direction:column;gap:8px}
+.mt-tile{display:block;width:100%;min-height:64px;padding:10px 12px;border:1px solid var(--border);border-radius:var(--r-md);background:var(--panel2);color:var(--text);
+  font:inherit;font-size:calc(var(--qfs,16px)*.875);line-height:1.4;text-align:left;cursor:pointer;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:opacity .3s}
+.mt-tile:hover{border-color:var(--accent)}
+.mt-tile .tx{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.mt-tile.exp .tx{display:block}
+.mt-tile.sel{border-color:var(--accent);background:var(--selbg);box-shadow:inset 0 0 0 1px var(--accent)}
+.mt-tile.bad{border-color:var(--red);background:var(--redbg)}
+.mt-tile.ok{border-color:var(--green);background:var(--greenbg);opacity:.45;cursor:default}
+/* Kiểm tra tổng hợp */
+.tf-st{margin:4px 0 6px;padding:10px 14px;border-left:3px solid var(--accent);background:var(--panel2);border-radius:0 8px 8px 0;font-weight:600;overflow-wrap:anywhere}
+.tf-ask{margin:8px 0 2px;color:var(--muted);font-size:.92em}
+.tf-row{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+.gh-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:8px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--border)}
+.gh-row .qnum{justify-self:start}
+.gh-row.ok .gh-st{color:var(--green)}.gh-row.no select{border-color:var(--red)}
+.gh-st{overflow-wrap:anywhere}
+.gh-row select{min-width:64px;min-height:40px}
+.gh-key{color:var(--green);font-weight:700;white-space:nowrap}
+.gh-ans{list-style:none;margin:10px 0 0;padding:10px 12px;background:var(--panel2);border:1px solid var(--border);border-radius:var(--r-md);display:flex;flex-direction:column;gap:6px}
+.gh-ans li{overflow-wrap:anywhere}
+/* Flashcard: sort / rate */
+.fc-count{margin-top:12px;text-align:center;font-size:.9rem;color:var(--muted)}.fc-count b{color:var(--text)}
+.fc-sort{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.fc-rate{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}
+.fc-sort .btn,.fc-rate .btn{min-height:48px;padding:10px 8px}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:1100;display:none;max-width:calc(100% - 32px);
+  padding:10px 16px;background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:var(--r-md);box-shadow:0 6px 18px var(--shadow);font-weight:600}
+@media(max-width:560px){
+  .tcmp{grid-template-columns:1fr}
+  .mt-board{gap:6px}.mt-col{gap:6px}.mt-tile{padding:8px 9px;min-height:56px}
+  .fc-rate{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .gh-row{grid-template-columns:auto minmax(0,1fr) auto}.gh-row .gh-key{grid-column:2/-1}
+}
+/* 🖨 In: always on the light palette (a dark page would print light text on white paper) */
+@media print{:root[data-theme]{--bg:#fff;--panel:#fff;--panel2:#f6f8fa;--border:#d0d7de;--text:#1f2328;--muted:#59636e;--green:#116329;--greenbg:#d8f6e0;
+    --red:#b62324;--redbg:#ffe4e2;--amber:#7d4e00;--amberbg:#fff3bf;--chip:#eaeef2;--selbg:#dbe8ff;color-scheme:light}
+  #topbar,#toast,.no-print,.navbtns,.jump{display:none!important}body,body:not(.testing){background:#fff}.card{break-inside:avoid}}
+/* MODES-CSS-END */
 /* narrow tablets: groups stack, tiles go 3-across with the icon/count on top */
 @media(max-width:720px){
   .mgroups{grid-template-columns:1fr;gap:12px}
@@ -412,6 +475,12 @@ try{var t=localStorage.getItem('app_theme');if(t==='dark'||t==='light')d.setAttr
           <button type="button" class="mode" data-mode="flash" aria-pressed="false" onclick="pickMode('flash',1)"><span class="mtop"><span class="ic" aria-hidden="true">🎴</span><span class="mrec">Gợi ý</span></span><span class="mt"><b><span class="mkey">7</span>Flashcard</b><small>Lật thẻ, không tính giờ, không chấm điểm</small></span></button>
           <button type="button" class="mode" data-mode="book" aria-pressed="false" onclick="pickMode('book',1)"><span class="mtop"><span class="ic" aria-hidden="true">🔖</span><span class="mrec">Gợi ý</span><span class="mc" data-c="book"></span></span><span class="mt"><b><span class="mkey">8</span>Đã đánh dấu</b><small>Câu khó bạn đã bấm 🔖 trong bài</small></span></button>
           <button type="button" class="mode" data-mode="seen" aria-pressed="false" onclick="pickMode('seen',1)"><span class="mtop"><span class="ic" aria-hidden="true">👁</span><span class="mrec">Gợi ý</span><span class="mc" data-c="seen"></span></span><span class="mt"><b><span class="mkey">9</span>Đã xem đáp án</b><small>Câu bạn từng bấm “Xem đáp án”</small></span></button>
+        </div></section>
+        <section class="mgroup wide" aria-label="Học kiểu thẻ"><h2 class="mg-h">Học kiểu thẻ</h2><div class="mlist">
+          <button type="button" class="mode" data-mode="step" aria-pressed="false" onclick="pickMode('step',1)"><span class="mtop"><span class="ic" aria-hidden="true">👣</span><span class="mrec">Gợi ý</span><span class="mc" data-c="step"></span></span><span class="mt"><b>Học từng bước</b><small>Biết đúng sai ngay, câu sai được hỏi lại</small></span></button>
+          <button type="button" class="mode" data-mode="match" aria-pressed="false" onclick="pickMode('match',1)"><span class="mtop"><span class="ic" aria-hidden="true">🧩</span><span class="mrec">Gợi ý</span><span class="mc" data-c="match"></span></span><span class="mt"><b>Ghép thẻ</b><small>Ghép câu hỏi với đáp án, tính giờ</small></span></button>
+          <button type="button" class="mode" data-mode="write" aria-pressed="false" onclick="pickMode('write',1)"><span class="mtop"><span class="ic" aria-hidden="true">✍️</span><span class="mrec">Gợi ý</span><span class="mc" data-c="write"></span></span><span class="mt"><b>Gõ đáp án</b><small>Tự gõ nội dung đáp án, chấm gần đúng</small></span></button>
+          <button type="button" class="mode" data-mode="mix" aria-pressed="false" onclick="pickMode('mix',1)"><span class="mtop"><span class="ic" aria-hidden="true">📝</span><span class="mrec">Gợi ý</span></span><span class="mt"><b>Kiểm tra tổng hợp</b><small>Trắc nghiệm, Đúng/Sai, ghép, gõ trong một đề</small></span></button>
         </div></section>
       </div>
       <button type="button" class="btn sec match-btn" id="matchBtn" onclick="showMatching()" style="display:none"><span aria-hidden="true">📎</span> Xem câu Matching <span id="matchN"></span></button>
@@ -763,7 +832,8 @@ function formatQStem(x){
   t=t.replace(/(^|<br>)\s*([a-f])\.\s+/g,'$1&nbsp;&nbsp;<b>$2.</b> ');
   return t;}
 const MODELABEL={random:'Random',exam:'Theo đề',all:'Ôn tổng',wrong:'Ôn câu sai',learn:'Học thông minh',review:'Ôn đến hạn',
-  flash:'Flashcard',book:'Câu đánh dấu',seen:'Câu đã xem đáp án',search:'Tìm kiếm'};
+  flash:'Flashcard',book:'Câu đánh dấu',seen:'Câu đã xem đáp án',search:'Tìm kiếm',
+  step:'Học từng bước',write:'Gõ đáp án',mix:'Kiểm tra tổng hợp',match:'Ghép thẻ'};
 /* theme */
 function applyTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem('app_theme',t)}catch(e){}
   const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=t==='light'?'#f6f8fa':'#0d1117';
@@ -1299,6 +1369,8 @@ function renderModeCounts(exs,sq){
   const all=poolRows('all'),t=today();
   const c={exam:exs.length,all:all.length,wrong:poolRows('wrong').length,learn:all.filter(x=>!qrec(x.id)).length,
            review:all.filter(x=>{const r=qrec(x.id);return r&&r.due<=t}).length,book:poolRows('book').length,seen:poolRows('seen').length};
+  // the new tiles' counts: the study-mode code runs after init() (NM_ON is a var: undefined until then, not a TDZ error)
+  if(window.NM_ON)Object.assign(c,{step:srcRows(UI.src).length,match:matchPool().length,write:writePool().length});
   // the unit is a separate span: a 97px phone tile only has room for the number
   const sfx={exam:'đề',all:'câu',learn:'mới'};
   document.querySelectorAll('.mode .mc').forEach(b=>{const k=b.dataset.c,n=c[k];
@@ -1329,7 +1401,7 @@ function renderMastery(P){const box=el('masteryBox');if(!box)return;const dl=el(
   if(dl){const due=dueCount();dl.textContent=due?('⏰ '+due+' câu cần ôn hôm nay'):'Không có câu đến hạn';}
   const kn=el('knownNote');if(kn)kn.textContent=scopeCount(KNOWN)?' ★ là ghi chú của bạn, không tính là Vững.':'';
   const un=el('unvNote');if(un){const n=scopeQuestions().filter(x=>{const r=qrec(x.id);return r&&r.unv&&(r.box||1)>1}).length;
-    un.textContent=n?` ${n} câu mang tiến độ từ bản cũ đang chờ xác nhận (tính tối đa Đã nhớ): trả lời đúng 1 lần là giữ lại bậc cũ.`:'';}
+    un.textContent=n?` ${n} câu đang chờ xác nhận (tiến độ từ bản cũ hoặc tự chấm ở Flashcard, tính tối đa Đã nhớ): trả lời đúng 1 lần là giữ lại bậc cũ.`:'';}
   if(P.n&&P.u===P.n){   // nothing answered yet: one line and a way in instead of rows of 0% bars
     if(sb)sb.innerHTML='<div class="hist-empty">Chưa có tiến độ. Chọn <b>🧠 Học thông minh</b> rồi bấm <b>Bắt đầu</b>.</div>'+
       '<button type="button" class="btn sec" style="margin-top:10px" onclick="pickMode(\'learn\',1);el(\'startBtn\').focus()"><span aria-hidden="true">🧠</span> Chọn Học thông minh</button>';
@@ -1341,7 +1413,7 @@ function onSearchInput(){const raw=(el('globalSearch').value||'').trim();const k
   if(k.length>=2){if(MODE!=='search')PREV_MODE=MODE;MODE='search';
     document.querySelectorAll('.mode').forEach(m=>{m.classList.remove('active');m.setAttribute('aria-pressed','false')});
     const n=SEARCH_N=hideStar(searchMatches(k)).length;   // what the session will serve (★ hidden)
-    el('startBtn').disabled=n===0;
+    el('startBtn').disabled=n===0;el('startBtn').innerHTML=startLabel('search');
     if(sc)sc.innerHTML=n?`🔍 <b>${n}</b> câu khớp — bấm <b>▶ Bắt đầu</b> hoặc Enter`:'🔍 Không có câu nào khớp';
     el('modeCfg').innerHTML=n?cfgDesc(`🔍 Làm riêng <b>${n}</b> câu khớp “<b>${esc(raw)}</b>”.`)
       :`<div class="hist-empty">🔍 Không có câu nào khớp “<b>${esc(raw)}</b>”.</div>`;
@@ -1428,10 +1500,10 @@ function pickMode(m,user){
   const cfg=el('modeCfg'),sub=curSubject(),exs=examsFor(sub),where=sub==='__all__'?'tất cả môn':esc(sub);let disabled=false;
   // every number here is the size of the session the mode starts (poolRows): de-duplicated, ★ left out while hidden
   const allHid=cfgDesc('★ Mọi câu của '+where+' đang bị ẩn — tắt “Ẩn câu ★” trong ⚙️ Tùy chọn để ôn.');
-  if(m==='random'||m==='learn'){const n=poolRows('all').length,mx=Math.max(1,n);
-    cfg.innerHTML=!n?allHid:cfgDesc(m==='learn'?'🧠 Thích ứng: câu chưa làm → câu hay sai → câu chưa thuộc lên trước. Chọn số câu:'
-        :'🎲 Trộn ngẫu nhiên các câu của '+where+'. Chọn số câu:')+
-      numField('Số câu',Math.min(lastNumQ||30,mx),mx,[20,30,50]);disabled=!n;}
+  if(m==='random'||m==='learn'){const ru=m==='random'&&UI.rsrc==='unk',n=(ru?srcRows('unk'):poolRows('all')).length,mx=Math.max(1,n);
+    cfg.innerHTML=(m==='random'?rsrcChips():'')+(!n?(ru?cfgDesc('🎉 Không còn câu chưa thuộc — chọn “Tất cả câu”.'):allHid):cfgDesc(m==='learn'?'🧠 Thích ứng: câu chưa làm → câu hay sai → câu chưa thuộc lên trước. Chọn số câu:'
+        :'🎲 Trộn ngẫu nhiên các câu '+(ru?'chưa thuộc ':'')+'của '+where+'. Chọn số câu:')+
+      numField('Số câu',Math.min(lastNumQ||30,mx),mx,[20,30,50]));disabled=!n;}
   else if(m==='exam'){cfg.innerHTML=cfgDesc('📄 Làm nguyên 1 đề như đề gốc (đề mới nhất ở trên). Chọn đề:')+examList(exs);disabled=!exs.length;}
   else if(m==='wrong'){const n=poolRows('wrong').length;
     cfg.innerHTML=cfgDesc(n?`🔁 Ôn lại <b>${n}</b> câu bạn làm sai. Làm đúng sẽ tự bỏ khỏi danh sách.`
@@ -1441,12 +1513,13 @@ function pickMode(m,user){
       :cfgDesc('⏰ Chưa có câu nào đến hạn'+(hiddenDk()?' (ngoài các câu ★ đang ẩn)':'')+' — hãy làm bài ở chế độ khác để nạp vào lịch ôn.');disabled=!due;}
   else if(m==='book'||m==='seen'){const n=poolRows(m).length,label=m==='book'?'câu bạn đã đánh dấu 🔖':'câu bạn đã xem đáp án 👁';
     cfg.innerHTML=cfgDesc(n?`Sẽ ôn <b>${n}</b> ${label}.`:`Chưa có ${label}`+(scopeCount(m==='book'?BOOK:SEEN)?' (ngoài các câu ★ đang ẩn).':'.')+(m==='book'?' Trong bài làm, bấm 🔖 để đánh dấu câu khó.':''));disabled=!n;}
+  else if(NEWMODES.indexOf(m)>=0)disabled=newCfg(m,cfg);
   else if(m==='flash'){const n=poolRows('all').length,mx=Math.max(1,n);
-    cfg.innerHTML=!n?allHid:cfgDesc('🎴 Lật thẻ xem đáp án — không tính giờ, không chấm điểm. Chọn số thẻ:')+numField('Số thẻ',Math.min(lastNumQ||20,mx),mx,[10,20,30]);disabled=!n;}
+    cfg.innerHTML=!n?allHid:fcCfg(mx);disabled=!n||(UI.fcHow==='rate'&&!fcDeckN());}
   else {const nq=scopeQuestions().length,n=poolRows('all').length,raw=exs.reduce((a,e)=>a+e.count,0);   // 'all' — the real, de-duplicated size
     cfg.innerHTML=!n?allHid:cfgDesc(`📚 Toàn bộ <b>${n}</b> câu của ${where}`+(raw>nq?` (đã gộp ${raw-nq} lượt in trùng)`:'')+(n<nq?` · ẩn ${nq-n} câu ★`:'')+'.');disabled=!n;}
-  el('startBtn').disabled=disabled;
-  const mf=el('minsField');if(mf)mf.style.display=m==='flash'?'none':'';   // flashcards ignore the timer
+  el('startBtn').disabled=disabled;el('startBtn').innerHTML=startLabel(m);
+  const mf=el('minsField');if(mf)mf.style.display=noTimer(m)?'none':'';   // flashcards and the study loops ignore the timer
   syncChips();updateStartSub();}
 /* the one-line summary next to the start button, and the folded options row (counts as in pickMode) */
 function updateStartSub(){const s=el('startSub');if(!s)return;
@@ -1455,7 +1528,7 @@ function updateStartSub(){const s=el('startSub');if(!s)return;
   switch(MODE){
     case 'random':t=`🎲 Ngẫu nhiên · ${cnt(nq(),'câu')}`;break;
     case 'learn':t=`🧠 Học thông minh · ${cnt(nq(),'câu')}`;break;
-    case 'flash':t=`🎴 Flashcard · ${cnt(nq(),'thẻ')}`;break;
+    case 'flash':t=UI.fcHow==='rate'?`🎴 Flashcard · ⏰ chấm mức nhớ · ${cnt(fcDeckN(),'thẻ')}`:`🎴 Flashcard${UI.fcHow==='sort'?' · 🗂 phân loại':''} · ${cnt(nq(),'thẻ')}`;break;
     case 'review':t=el('numQ')?`⏰ Đến hạn · ${cnt(nq(),'câu')}`:'⏰ Chưa có câu đến hạn';break;
     case 'exam':{const e=examsFor(curSubject())[EXAM_SEL],n=e?poolRows('exam',e).length:0;t=e?`📄 ${esc(examMeta(e).short)} · ${cnt(n,'câu')}`:'📄 Chưa có đề';
       const b=el('startBtn');if(b)b.disabled=!n;break;}
@@ -1464,13 +1537,14 @@ function updateStartSub(){const s=el('startSub');if(!s)return;
     case 'book':{const n=poolRows('book').length;t=n?`🔖 Đã đánh dấu · ${cnt(n,'câu')}`:'🔖 Chưa đánh dấu câu nào';break;}
     case 'seen':{const n=poolRows('seen').length;t=n?`👁 Đã xem đáp án · ${cnt(n,'câu')}`:'👁 Chưa xem đáp án câu nào';break;}
     case 'search':t=SEARCH_N?`🔍 ${cnt(SEARCH_N,'câu')} khớp từ khóa`:'🔍 Không có câu nào khớp';break;
+    case 'step':case 'write':case 'match':case 'mix':t=nmSub();break;
     default:t='Chọn một chế độ ở trên';}
   const mins=Math.max(0,parseInt(el('mins').value)||0);
-  if(MODE&&MODE!=='flash'&&mins>0)t+=` · ⏱ ${mins} phút`;
+  if(MODE&&!noTimer(MODE)&&mins>0)t+=` · ⏱ ${mins} phút`;
   if(MODE&&el('hideKnown').checked)t+=' · ẩn ★';
   s.innerHTML=t;updateOptsSum();}
 function updateOptsSum(){const o=el('optsSum');if(!o)return;const mins=Math.max(0,parseInt(el('mins').value)||0);
-  o.textContent=[MODE==='flash'?'':(mins?`⏱ ${mins} phút`:'⏱ Không giới hạn'),
+  o.textContent=[noTimer(MODE)?'':(mins?`⏱ ${mins} phút`:'⏱ Không giới hạn'),
     el('shufQs')&&el('shufQs').checked?'🔀 Trộn câu':'',el('shufOpts').checked?'🔀 Trộn đáp án':'Giữ thứ tự đáp án',el('hideKnown').checked?'Ẩn câu ★':''].filter(Boolean).join(' · ');}
 let SESSION=[],IDX=0,submitted=false,timerInt=null,remaining=0,limited=false,REVEALED=new Set(),initSec=0,deadline=0;
 /* ---- options that point at other options ----
@@ -1536,11 +1610,15 @@ function exLetters(s,q){s=String(s==null?'':s);if(!q||!Array.isArray(q.oi))retur
   (q.o||[]).forEach((o,i)=>{const t=stripPrefix(o).trim(),u=optText(q,i).trim();if(t===u||t.length<3)return;
     s=s.split(t).join(u);const t2=t.replace(/[.!]$/,''),u2=u.replace(/[.!]$/,'');if(t2!==t&&t2.length>=3)s=s.split(t2).join(u2);});
   return s;}
-function buildSession(){const exs=examsFor(curSubject());const t=today();
+function buildSession(){if(MODE==='mix')return buildMix();const exs=examsFor(curSubject());const t=today();
   const mk=q=>({...q,sels:[],ci:correctIdxOf(q),oi:(q.o||[]).map((_,i)=>i)});
+  // 🔁 Làm lại cùng câu hỏi: the same questions, a new option order
+  if(RETAKE){const bi=bankIndex();let l=RETAKE.map(id=>bi[id]).filter(Boolean).map(mk);RETAKE=null;
+    if(el('shufOpts')&&el('shufOpts').checked)l.forEach(shuffleOpts);return el('shufQs')&&el('shufQs').checked?shuffle(l):l;}
   // the rows this mode serves — the same list every start-screen count is taken from (poolRows).
   // "Ôn theo đề" reproduces the paper as printed; every other mode studies each question once
   let list=poolRows(MODE,MODE==='exam'?exs[parseInt(el('examPick').value)]:null).map(mk);
+  if(MODE==='random'&&UI.rsrc==='unk')list=list.filter(x=>stageOf(qrec(x.id))<3);
   // Shuffle only the DISPLAY order (`oi`); `o` and `ci` stay in bank order, so nothing about the
   // answer key moves and saved history (which stores original indices) stays replayable.
   // Options that name other options ("Cả a và b", "ABC") are shuffled too and show the new letters
@@ -1554,12 +1632,13 @@ function buildSession(){const exs=examsFor(curSubject());const t=today();
     list=shuffle(list);list.sort((a,b)=>wt(a)-wt(b));
     const n=Math.max(1,Math.min(numQ()||30,list.length));list=list.slice(0,n);}
   else if(MODE==='random'){list=shuffle(list);const n=Math.max(1,Math.min(numQ()||30,list.length));list=list.slice(0,n);}
-  else if(MODE==='flash'){list=shuffle(list);const n=Math.max(1,Math.min(numQ()||20,list.length));list=list.slice(0,n);}
+  else if(MODE==='flash'){FC=fcBlank();if(FC.how==='rate')list=fcRateDeck(list);
+    else{list=shuffle(list);const n=Math.max(1,Math.min(numQ()||20,list.length));list=list.slice(0,n);}FC.all=list.map(x=>x.id);}
   // the other modes served bank order; the switch shuffles them too (review keeps its weakest-first order)
   else if(el('shufQs')&&el('shufQs').checked)list=shuffle(list);
   return list;}
-function startTest(){SESSION=buildSession();if(!SESSION.length){alert('Không có câu hỏi cho lựa chọn này.');return;}
-  IDX=0;submitted=false;REVIEWING=false;REVEALED=new Set();
+function startTest(){if(MODE==='step'||MODE==='write'){lsStart();return}if(MODE==='match'){mtStart();return}clearTimeout(FC_T);SESSION=buildSession();if(!SESSION.length){alert('Không có câu hỏi cho lựa chọn này.');return;}
+  IDX=0;submitted=false;REVIEWING=false;REV_WRONG=false;REVEALED=new Set();
   const mins=isFlash()?0:Math.max(0,parseInt(el('mins').value)||0);limited=mins>0;FLIPPED=false;remaining=mins*60;initSec=mins*60;startedAt=Date.now();deadline=startedAt+mins*60000;
   enterTestUI();
   document.querySelector('#topbar .btn.danger').style.display=isFlash()?'none':'';
@@ -1571,15 +1650,16 @@ function enterTestUI(){el('start').style.display='none';el('matching').style.dis
 function draftKey(){return 'fu_draft_'+scopeKey()}
 function saveDraft(){if(submitted)return;try{localStorage.setItem(draftKey(),JSON.stringify({
     v:1,ts:Date.now(),mode:MODE,idx:IDX,limited,deadline,initSec,startedAt,revealed:[...REVEALED],
-    items:SESSION.map(s=>({id:s.id,sels:s.sels,conf:s.conf||'',oi:s.oi,fz:s.fz?1:0}))}))}catch(e){storageWarn(e)}}
+    items:SESSION.map(s=>Object.assign({id:s.id,sels:s.sels,conf:s.conf||'',oi:s.oi,fz:s.fz?1:0},nmItem(s))),fc:isFlash()?FC:undefined}))}catch(e){storageWarn(e)}}
 function clearDraft(){try{localStorage.removeItem(draftKey())}catch(e){}}
 function loadDraft(){try{return JSON.parse(localStorage.getItem(draftKey())||'null')}catch(e){return null}}
 function resumeDraft(){const d=loadDraft();if(!d)return;const bi=bankIndex();
   SESSION=d.items.map(it=>{const q=bi[it.id];if(!q)return null;
-    return {...q,sels:it.sels||[],conf:it.conf||'',ci:correctIdxOf(q),oi:fitOrder(q,it.oi),fz:it.fz?1:0};
+    if(Array.isArray(it.ids)&&!it.ids.every(x=>bi[x]))return null;
+    return {...q,sels:it.sels||[],conf:it.conf||'',ci:correctIdxOf(q),oi:fitOrder(q,it.oi),fz:it.fz?1:0,...nmItem(it)};
   }).filter(Boolean);
   if(!SESSION.length){clearDraft();alert('Không khôi phục được bài làm (ngân hàng câu hỏi đã thay đổi).');renderResume();return;}
-  MODE=d.mode;IDX=Math.min(d.idx||0,SESSION.length-1);submitted=false;REVEALED=new Set(d.revealed||[]);
+  MODE=d.mode;FC=Object.assign(fcBlank(),{how:'flip',front:'full'},d.fc||{},{auto:0});MXS={streak:0,best:0};IDX=Math.min(d.idx||0,SESSION.length-1);submitted=false;REVEALED=new Set(d.revealed||[]);
   limited=!!d.limited;deadline=d.deadline||0;initSec=d.initSec||0;startedAt=d.startedAt||Date.now();
   remaining=limited?Math.max(0,Math.round((deadline-Date.now())/1000)):0;
   enterTestUI();
@@ -1605,9 +1685,12 @@ function startTimer(){updateTimer();timerInt=setInterval(()=>{
   if(remaining<=0){clearInterval(timerInt);submitTest(true);}},1000);}
 function updateTimer(){const m=Math.floor(remaining/60),s=remaining%60;const t=el('timer');t.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;t.className='';if(remaining<=30)t.classList.add('crit');else if(remaining<=120)t.classList.add('warn');}
 function exitTest(){
-  if(!submitted&&SESSION.length){if(!confirm('Thoát bài? Bài làm dở sẽ được lưu lại để bạn tiếp tục sau.'))return;saveDraft();}
+  if(MODE==='step'||MODE==='write'||MODE==='match'){nmExit();return}
+  clearTimeout(FC_T);FC.auto=0;
+  if(!submitted&&SESSION.length&&!(isFlash()&&FC.end)){if(!confirm('Thoát bài? Bài làm dở sẽ được lưu lại để bạn tiếp tục sau.'))return;saveDraft();}
   if(timerInt)clearInterval(timerInt);el('test').style.display='none';el('topbar').style.display='none';el('start').style.display='block';document.body.classList.remove('testing');syncTopbar();renderStats();renderHistory();renderResume();window.scrollTo(0,0);}
-function go(d){IDX=Math.max(0,Math.min(SESSION.length-1,IDX+d));FLIPPED=false;renderQ();saveDraft();window.scrollTo(0,0);}
+function go(d){const w=submitted&&REV_WRONG?revList():null,nx=w?(d>0?w.find(i=>i>IDX):w.filter(i=>i<IDX).pop()):undefined;
+  IDX=w?(nx===undefined?IDX:nx):Math.max(0,Math.min(SESSION.length-1,IDX+d));FLIPPED=false;renderQ();saveDraft();window.scrollTo(0,0);}
 function jumpTo(i){IDX=i;renderQ();saveDraft();window.scrollTo(0,0);}
 /* "📋 Xem lại" after submitting: fold the result card into one line and start the review at câu 1 */
 let REVIEWING=false;
@@ -1646,15 +1729,16 @@ let FLIPPED=false;
 function isFlash(){return MODE==='flash'}
 function toggleFlip(){FLIPPED=!FLIPPED;renderQ();}
 function renderFlashcard(q){
+  if(FC.end){fcEnd();return}
   const AB=abbrFor(q);
   el('prog').textContent=(IDX+1)+'/'+SESSION.length;
   el('srcLabel').textContent=q.src+(q.n?' · Câu '+q.n:'');syncTopbar();
-  const opts=q.oi.map((oi,i)=>{const right=(q.ci||[]).indexOf(oi)>=0;
+  const opts=!FLIPPED&&FC.front==='stem'?'':q.oi.map((oi,i)=>{const right=(q.ci||[]).indexOf(oi)>=0;
     const cls='flash-opt'+(FLIPPED&&right?' correct':'');
     const mk=FLIPPED&&right?'<span class="mk" style="margin-left:auto;color:var(--green);font-weight:700">✔ đúng</span>':'';
     return `<div class="${cls}"><span class="olet">${String.fromCharCode(65+i)}.</span><span class="otext">${AB(esc(optText(q,oi)),1)}</span>${mk}</div>`}).join('');
   const span=examSpan(q.dk||dkOf(q.id));
-  let h=`<div class="flash-card" onclick="toggleFlip()">
+  let h=`<div class="flash-card" onclick="toggleFlip()" ontouchstart="fcTouch(event)" ontouchend="fcSwipe(event)">
     <div class="qh"><span class="qnum">Thẻ ${IDX+1}</span><span class="badge">${esc(q.src)}${q.n?' · Câu '+q.n:''}</span>`;
   if(isMulti(q))h+=`<span class="badge multi">☑ Chọn ${q.ci.length} đáp án</span>`;
   if(span>1)h+=`<span class="badge hot">🔥 Hay ra ×${span}</span>`;
@@ -1666,7 +1750,7 @@ function renderFlashcard(q){
   h+=preNotesHTML(q);
   if(FLIPPED)h+=answerCard(q,keyRowsOf(q),vfBadge(q.vf),x=>AB(x,0));
   h+=`<div class="flip-hint">${FLIPPED?'👆 Nhấn để úp thẻ lại':'👆 Nhấn vào thẻ hoặc phím Space để xem đáp án'}</div></div>`;
-  h+=`<div class="navbtns"><button class="btn sec" onclick="go(-1)" ${IDX===0?'disabled':''}>← Trước</button><button class="btn" onclick="go(1)" ${IDX===SESSION.length-1?'disabled':''}>Sau →</button></div>`;
+  h+=fcControls();
   setTest(withAbx(h,AB));}
 /* a question the subject's other bank already covers (set by scratchpad pt_xref.py) */
 function xrBadge(q){
@@ -1676,7 +1760,8 @@ function xrBadge(q){
 /* the card is rebuilt on every change: a Tab user keeps focus on the same control (option, ★, 🔖, chip) */
 function setTest(html){const a=document.activeElement,fk=a&&a.dataset&&a.dataset.fk,t=el('test');t.innerHTML=html;
   const b=KB&&fk&&t.querySelector('[data-fk="'+fk+'"]');if(b)b.focus({preventScroll:true});}
-function renderQ(){if(isFlash()){renderFlashcard(SESSION[IDX]);return}const q=SESSION[IDX];const AB=abbrFor(q);const showAns=submitted||REVEALED.has(q.id);const known=knownQ(q.id);
+function renderQ(){if(MODE==='mix'){mxRender();return}if(MODE==='step'||MODE==='write'){lsRender();return}if(MODE==='match'){mtRender();return}
+  if(isFlash()){renderFlashcard(SESSION[IDX]);return}const q=SESSION[IDX];const AB=abbrFor(q);const showAns=submitted||REVEALED.has(q.id);const known=knownQ(q.id);
   el('prog').textContent=(IDX+1)+'/'+SESSION.length;el('srcLabel').textContent=q.src+(q.n?' · Câu '+q.n:'');syncTopbar();
   // the subject pill only helps when the page mixes subjects; FORCED (?subject=, the dashboard) = one subject
   let h=`<div class="card"><div class="qh"><span class="qnum">Câu ${IDX+1}</span>${FORCED?'':`<span class="badge">${esc(q.subject)}</span>`}<span class="badge qsrc">${esc(q.src)}${q.n?' · Câu '+q.n:''}</span>`;
@@ -1707,12 +1792,12 @@ function renderQ(){if(isFlash()){renderFlashcard(SESSION[IDX]);return}const q=SE
   h+=`<div class="jump">`+SESSION.map((s,i)=>{let c=i===IDX?'cur ':'';const ans=isAnswered(s);if(submitted)c+=(!ans||peeked(s)?'':graded(s)?'correct':'wrong');else c+=(ans?'done':'');const kn=knownQ(s.id);if(kn)c+=' known';
     const st=submitted?(!ans?'chưa làm':peeked(s)?'đã xem đáp án':graded(s)?'đúng':'sai'):(ans?'đã trả lời':'chưa làm');
     return `<button type="button" class="${c}" aria-label="Câu ${i+1}: ${st}${kn?', đã thuộc':''}"${i===IDX?' aria-current="step"':''} onclick="jumpTo(${i})">${i+1}</button>`}).join('')+`</div></div>`;
-  setTest(withAbx(h,AB));if(submitted&&window._hero)el('test').insertAdjacentHTML('afterbegin',REVIEWING&&window._heroMini?window._heroMini:window._hero);
+  setTest(withAbx(h,AB));if(submitted&&window._hero)el('test').insertAdjacentHTML('afterbegin',REVIEWING&&window._heroMini?window._heroMini.replace('<!--RW-->',revWBtn()):window._hero);
   // the grid is rebuilt every render, so its scroll resets — bring the current question back into view
   const jw=el('test').querySelector('.jump'),cur=jw&&jw.querySelector('.cur');
   if(jw&&cur)jw.scrollTop+=cur.getBoundingClientRect().top-jw.getBoundingClientRect().top-(jw.clientHeight-cur.offsetHeight)/2;}
 
-function submitTest(auto){if(submitted)return;const done=SESSION.filter(isAnswered).length;
+function submitTest(auto){if(MODE==='mix'){mxSubmit(auto);return}if(submitted)return;const done=SESSION.filter(isAnswered).length;
   if(!auto&&!confirm(`Đã trả lời ${done}/${SESSION.length} câu. Nộp bài?`))return;
   submitted=true;if(timerInt)clearInterval(timerInt);el('topbar').style.display='none';document.body.classList.remove('testing');syncTopbar();
   OA_CACHE=null;   // another tab may have written history since this page loaded
@@ -1780,11 +1865,12 @@ function submitTest(auto){if(submitted)return;const done=SESSION.filter(isAnswer
     <div class="modbars" style="margin-top:10px">${bars}</div>
     <div class="row" style="justify-content:center;margin-top:12px">
       <button class="btn" onclick="location.reload()">🔄 Làm đề mới</button>
+      <button class="btn sec" onclick="retakeSame()">🔁 Làm lại cùng câu hỏi</button>
       <button class="btn sec" onclick="startReview()">📋 Xem lại</button>
       <button class="btn sec" onclick="exitTest()">← Về menu</button></div></div>`;
   // while reviewing, this one-line bar stands in for the big result card above every question
   window._heroMini=`<div class="card hero-mini" id="heroMini"><span class="hm-score" style="color:${rc}">${score}/${total} · ${pct}%</span>`+
-    `<span class="hm-acts"><button class="btn sec" onclick="showResult()">📊 Kết quả</button><button class="btn sec" onclick="exitTest()">← Về menu</button></span></div>`;
+    `<span class="hm-acts"><!--RW--><button class="btn sec" onclick="showResult()">📊 Kết quả</button><button class="btn sec" onclick="exitTest()">← Về menu</button></span></div>`;
   REVIEWING=false;IDX=0;renderQ();window.scrollTo(0,0);}
 
 /* ---- history (localStorage) ---- */
@@ -1840,6 +1926,616 @@ function showMatching(){const exs=examsFor(curSubject());const ms=[];exs.forEach
   box.innerHTML=h;window.scrollTo(0,0);}
 
 /* ---- keyboard shortcuts ---- */
+/* MODES-JS-BEGIN */
+/* ===== study modes (owner 17/11; spec study-modes-spec.md): 👣 Học từng bước, 🧩 Ghép thẻ, ✍️ Gõ đáp án,
+   📝 Kiểm tra tổng hợp, and sorting / recall rating inside 🎴 Flashcard.
+   Progress: only a real first answer writes, through srsStep on the question's group (recordOne), as a
+   submitted test does. Ghép, Đúng/Sai and flashcard sorting never write; a flashcard self-rating that raises
+   a box marks it unv (stays at most "Đã nhớ" until a quiz answer confirms it). This block runs after init()
+   and after every const it uses (REF_*, FLIPPED, KB...); the only thing init() reaches here is the tile counts,
+   guarded by NM_ON (a var: undefined, not a TDZ error, until the end of this block). ===== */
+const NEWMODES=['step','match','write','mix'];
+function noTimer(m){return m==='flash'||m==='step'||m==='write'||m==='match'}
+const UI=Object.assign({fs:16,snd:1,auto:1,typ:1,long:0,retype:1,inst:0,src:'all',rsrc:'all',tps:{mc:1,tf:1,gh:1,go:1},
+  fcHow:'flip',fcFront:'full',fcNew:20},readObj('fu_ui'));
+UI.fs=Math.max(14,Math.min(24,+UI.fs||16));if(!UI.tps||typeof UI.tps!=='object')UI.tps={mc:1,tf:1,gh:1,go:1};
+function uiSet(k,v){UI[k]=v;writeJSON('fu_ui',UI)}
+function applyFs(){document.documentElement.style.setProperty('--qfs',UI.fs+'px')}
+applyFs();
+function uiFont(d){uiSet('fs',Math.max(14,Math.min(24,UI.fs+d)));applyFs()}
+let AUDIO=null;
+function beep(ok){if(!UI.snd)return;try{AUDIO=AUDIO||new (window.AudioContext||window.webkitAudioContext)();
+  const o=AUDIO.createOscillator(),g=AUDIO.createGain(),t=AUDIO.currentTime;o.frequency.setValueAtTime(ok?660:196,t);if(ok)o.frequency.setValueAtTime(990,t+.09);
+  g.gain.setValueAtTime(.07,t);g.gain.exponentialRampToValueAtTime(.001,t+.28);o.connect(g);g.connect(AUDIO.destination);o.start(t);o.stop(t+.3)}catch(e){}}
+function toast(msg){let t=el('toast');if(!t){t=document.createElement('div');t.id='toast';t.setAttribute('role','status');document.body.appendChild(t)}
+  t.textContent=msg;t.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>{t.style.display='none'},3000)}
+function copyText(s){const fb=()=>{const t=document.createElement('textarea');t.value=s;t.setAttribute('readonly','');t.style.position='fixed';t.style.opacity='0';
+    document.body.appendChild(t);t.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}document.body.removeChild(t);toast(ok?'Đã copy':'Không copy được')};
+  if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(s).then(()=>toast('Đã copy'),fb);else fb()}
+
+/* ---- sources: the same rows the old modes start from (poolRows: one row per question, ★ hidden while the switch is on) ---- */
+const SRC_LBL={all:'Tất cả',unk:'Chưa thuộc',wrong:'Câu sai',book:'Đã đánh dấu',due:'Đến hạn'};
+function srcRows(src){if(src==='wrong'||src==='book')return poolRows(src);if(src==='due')return poolRows('review');
+  const L=poolRows('all');return src==='unk'?L.filter(x=>stageOf(qrec(x.id))<3):L}
+
+/* ---- which question can be asked in which form ----
+   sc (self-contained): one key that is not an option pointing at other options, not a native true/false,
+   not "Match…", no figure; only those can be typed or matched (the options are not shown there).
+   truth: per option, is it a right answer of the question, for the Đúng/Sai form; null = cannot be told
+   (an unparsed reference key). plain = the options that are not references (the only ones ever shown alone). */
+const REF_MORE=/^(?:(?:none|neither|all|both)(?:\s+of)?(?:\s+the)?\s+(?:other|above|mentioned|them)\b|(?:none|neither|both|all)\s*[.!]?$|(?:tất cả|cả)\s+(?:các\s+|những\s+)?(?:phương án|đáp án|lựa chọn)(?:\s+trả lời)?(?:\s+đều\s+(?:đúng|sai))?\s*[.!]?$|(?:tất cả|cả)\s+(?:các\s+|những\s+)?(?:\S+\s+){0,2}?trên(?:\s|[.!]|$)|(?:các|những)\s+(?:phương án|đáp án|ý)(?:\s+trả lời)?\s+(?:ở\s+trên\s+)?đều\s+(?:đúng|sai)|tất cả\s*[.!]?$|không có\s+(?:phương án|đáp án|ý|câu|lựa chọn)\b|không\s+(?:phương án|đáp án|ý|câu)\s+nào)/i;
+const NTF=/^(?:true|false|đúng|sai|yes|no)\s*\.?$/i;
+const FIG=/\b(?:the|this|following)\s+(?:image|figure|picture|exhibit|screenshot|chart)\b|\b(?:shown|see|refer to the)\s+(?:below|exhibit|figure)\b|hình\s+(?:vẽ|bên|dưới|sau)|sơ đồ\s+(?:sau|dưới|bên)/i;
+const QI={};
+function refKind(o,i){const t=stripPrefix(o[i]).trim(),r=optLetterRef(t,o.length,i);
+  if(r)return {k:'list',idx:r.idx};
+  if(REF_POS.test(t)||REF_MORE.test(t))return {k:/^(?:none|neither)\b|không|đều\s+sai/i.test(t)?'none':'all'};
+  return REF_LOOSE.test(t)?{k:'loose'}:null}
+function qinfo(q){const key=q.id||(q.src+'#'+q.n);if(QI[key])return QI[key];
+  const o=q.o||[],ci=correctIdxOf(q),kinds=o.map((_,i)=>refKind(o,i)),plain=o.map((_,i)=>i).filter(i=>!kinds[i]);
+  const ntf=o.length>0&&o.every(x=>NTF.test(stripPrefix(x).trim())),at=ci.length===1?clean(stripPrefix(o[ci[0]])):'';
+  const sc=ci.length===1&&!kinds[ci[0]]&&!ntf&&!isMatch(q)&&!FIG.test(q.q||'')&&!/not visible|truncated|cut off/i.test(q.nt||'')&&at.length>=2;
+  let truth=null;const kk=ci.length===1?kinds[ci[0]]:null;
+  if(!ntf&&!isMatch(q)&&ci.length&&plain.length&&!(ci.length>1&&ci.some(i=>kinds[i]))){
+    if(!kk)truth=o.map((_,i)=>ci.indexOf(i)>=0);
+    else if(kk.k==='list')truth=o.map((_,i)=>kk.idx.indexOf(i)>=0);
+    // "Both"/"Neither" only says which options when exactly two plain ones are left
+    else if(kk.k!=='loose'&&!(/^(?:both|neither|cả hai)\b/i.test(stripPrefix(o[ci[0]]).trim())&&plain.length!==2))truth=o.map(()=>kk.k==='all');}
+  return QI[key]={sc,at,truth,plain}}
+function goOk(q){const I=qinfo(q);return I.sc&&(!!UI.long||I.at.length<=120)}
+function matchPool(src){return srcRows(src||UI.src).filter(x=>qinfo(x).sc)}
+function writePool(src){return srcRows(src||UI.src).filter(goOk)}
+
+/* ---- one graded answer -> the question's record (the per-question body of submitTest) ----
+   o.base: step from this record instead (re-scoring a miss the student overrode: the record it replaced);
+   o.keepWrong: Câu sai keeps its membership (a flashcard self-rating); o.fix(r,r0,t) adjusts the new record.
+   Returns the record the step started from. */
+function recordOne(id,ok,conf,o){o=o||{};let r0=null;
+  try{SRS=loadSRS();WRONG=loadSet('fu_wrong');const t=today(),sib=siblings(id),hasBase=Object.prototype.hasOwnProperty.call(o,'base');
+    r0=hasBase?o.base:groupRec(sib);
+    if(!hasBase){const bk={};sib.forEach(sid=>{const s=subOf(sid);if(!r0||!s)return;
+        [SRS[sid],readObj('fu_srs3_fu_'+s)[sid]].forEach(x=>{if(x&&typeof x==='object'&&recSig(x)!==recSig(r0))(bk[s]=bk[s]||[]).push([sid,x])})});
+      Object.keys(bk).forEach(s=>bakPut(s,bk[s]));}
+    const w=o.keepWrong?sib.some(s=>WRONG.has(s)):!ok;
+    sib.forEach(sid=>{if(w)WRONG.add(sid);else WRONG.delete(sid)});
+    let r=srsStep(r0,ok,conf||'sure',t);if(o.fix)r=o.fix(r,r0,t)||r;r.lw=w?1:0;
+    srsSet(id,r);saveSet('fu_wrong',WRONG,sib);saveSRS(sib);}catch(e){storageWarn(e)}
+  return r0}
+
+/* ---- typed answers ---- norm: NFC, lower case, one space, no leading "A." or trailing punctuation; fold: also no accents, đ -> d */
+const STOPW=new Set('va cua la cac nhung mot nay thi ma trong voi cho the an of to in and or for on is are be by with as at from that this which it its'.split(' '));
+function tNorm(s){return String(s==null?'':s).normalize('NFC').toLowerCase().replace(/^\s*[a-z][.)]\s+/,'').replace(/\s+/g,' ').trim().replace(/[\s.,;:!?…]+$/,'')}
+function tFold(s){return tNorm(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d')}
+function lev(a,b){let p=Array.from({length:b.length+1},(_,j)=>j);
+  for(let i=1;i<=a.length;i++){const c=[i];for(let j=1;j<=b.length;j++)c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1));p=c}
+  return p[b.length]}
+function gradeOne(inp,key){const a=tNorm(inp),b=tNorm(key);if(!a)return 'wrong';if(a===b)return 'exact';
+  const fa=tFold(inp),fb=tFold(key);if(fa===fb)return 'nodiac';
+  const dg=s=>(s.match(/\d+/g)||[]).join(' ');if(dg(fa)!==dg(fb))return 'wrong';          // "5 chức năng" is never "Năm chức năng"
+  if(fb.length<=25)return lev(fa,fb)<=Math.max(1,Math.floor(.15*fb.length))?'near':'wrong';
+  const tk=s=>tFold(s).split(/[^a-z0-9]+/).filter(w=>w.length>=2&&!STOPW.has(w)),A=tk(inp),B=tk(key);if(!B.length||!A.length)return 'wrong';
+  const sa=new Set(A),sb=new Set(B),rec=B.filter(w=>sa.has(w)).length/B.length,prec=A.filter(w=>sb.has(w)).length/A.length;
+  return rec>=.8&&prec>=.5?'tokens':'wrong'}
+const GRANK={exact:4,nodiac:3,near:2,tokens:1,wrong:0};
+const GNOTE={exact:'',nodiac:' — đúng, chỉ thiếu dấu',near:' — gần đúng (sai chính tả nhỏ)',tokens:' — đúng ý chính'};
+function gradeTyped(v,q){const keys=[qinfo(q).at],a=clean(stripPrefix(q.at||''));if(a&&tNorm(a)!==tNorm(keys[0]))keys.push(a);
+  let best={v:'wrong',key:keys[0]};keys.forEach(k=>{const r=gradeOne(v,k);if(GRANK[r]>GRANK[best.v])best={v:r,key:k}});
+  best.ok=best.v!=='wrong';return best}
+function isLetterOnly(v){return /^\s*[a-f]\s*[.)]?\s*$/i.test(v)}
+function hintMask(k){return k.charAt(0)+k.slice(1).replace(/[0-9A-Za-zÀ-ỹĐđ]/g,'•')}
+/* the key with the words the answer lacks marked */
+function diffHTML(inp,key){const have=new Set(tFold(inp).split(/\s+/));
+  return String(key).split(/(\s+)/).map(w=>!w.trim()?w:have.has(tFold(w))?esc(w):'<mark>'+esc(w)+'</mark>').join('')}
+/* notes that name options by letter, dropped where the options are not on screen */
+function noLetters(q){return Object.assign({},q,{nt:String(q.nt||'').split(' · ').filter(n=>n.search(NT_LETTER)<0).join(' · ')})}
+function typedCmp(res,key){return `<div class="tcmp"><div><div class="ac-lbl">Bạn gõ</div><div class="tbox${res.ok?' ok':' no'}">${res.dk||!res.tx?'<i>(không trả lời)</i>':esc(res.tx)}</div></div>`+
+  `<div><div class="ac-lbl">Đáp án</div><div class="tbox ok">${diffHTML(res.tx||'',key)}</div></div></div>`}
+
+/* ---- start screen ---- */
+function srcChips(filt){return '<div class="field"><span class="sub" style="margin:0">Nguồn câu</span><div class="chips" role="group" aria-label="Nguồn câu">'+
+  Object.keys(SRC_LBL).map(s=>{const n=(filt?srcRows(s).filter(filt):srcRows(s)).length,on=UI.src===s;
+    return `<button type="button" class="chip${on?' on':''}" id="src-${s}" aria-pressed="${on}" onclick="uiSet('src','${s}');pickMode(MODE);el('src-${s}').focus()">${SRC_LBL[s]} (${n})</button>`}).join('')+'</div></div>'}
+function uiSwitch(k,label,re){return `<label class="switch"><input type="checkbox" id="ui-${k}"${UI[k]?' checked':''} onchange="uiSet('${k}',this.checked?1:0)${re?`;pickMode(MODE);el('ui-${k}').focus()`:''}"><span>${label}</span></label>`}
+function rsrcChips(){return '<div class="chips" role="group" aria-label="Nguồn câu" style="margin-bottom:8px">'+[['all','Tất cả câu'],['unk','Chỉ câu chưa thuộc']].map(([k,l])=>
+  `<button type="button" class="chip${UI.rsrc===k?' on':''}" id="rs-${k}" aria-pressed="${UI.rsrc===k}" onclick="uiSet('rsrc','${k}');pickMode(MODE);el('rs-${k}').focus()">${l}</button>`).join('')+'</div>'}
+function mxType(t){const tp=Object.assign({},UI.tps);tp[t]=tp[t]?0:1;if(!Object.keys(tp).some(k=>tp[k]))return;uiSet('tps',tp);pickMode(MODE);el('tp-'+t).focus()}
+function newCfg(m,cfg){let h='',dis=false;const nf=mx=>numField('Số câu',Math.min(lastNumQ||20,mx),mx,[10,20,40]);
+  if(m==='step'||m==='write'){const s=lsLoad(m),filt=m==='write'?goOk:null,all=srcRows(UI.src).length,n=filt?srcRows(UI.src).filter(filt).length:all;
+    h=cfgDesc(m==='step'?'👣 Trả lời từng câu, biết đúng/sai ngay. Câu sai được hỏi lại sau vài câu, mỗi 10 câu có một chặng tổng kết. Chỉ lần trả lời đầu tiên của mỗi câu được tính vào tiến độ.'
+      :'✍️ Tự gõ nội dung đáp án (thiếu dấu, sai chính tả nhỏ vẫn tính đúng). Vòng sau chỉ hỏi lại câu sai cho tới khi đúng hết. Chỉ hỏi câu có đáp án tự đứng được (không “Tất cả…”, không Đúng/Sai).');
+    if(s){const d=s.q.filter(x=>x.r==='i'&&x.done).length,N=s.q.filter(x=>x.r==='i').length;
+      h+=`<div class="cfg-desc resume-note">⚡ Có phiên đang học dở: <b>${d}/${N}</b> câu. Bấm <b>Tiếp tục phiên</b> hoặc <button type="button" class="theme-btn" onclick="lsNew()">🆕 Phiên mới</button></div>`}
+    h+=srcChips(filt)+(n?nf(n):cfgDesc(m==='write'?'Không có câu nào gõ được trong nguồn này.':'Nguồn này chưa có câu nào.'))+
+      (m==='step'?uiSwitch('auto','Tự chuyển câu khi trả lời đúng (sau 1 giây)')+uiSwitch('typ','Câu đã nhớ hỏi dạng gõ đáp án')
+                 :uiSwitch('long','Cho phép đáp án dài (trên 120 ký tự)',1)+uiSwitch('retype','Sai thì gõ lại đáp án đúng rồi mới qua câu'))+uiSwitch('snd','Âm thanh khi đúng / sai');
+    if(m==='write')h+=`<div class="sub">${n} câu đủ điều kiện / ${all} câu trong nguồn</div>`;
+    dis=!s&&!n}
+  else if(m==='match'){const all=srcRows(UI.src).length,n=matchPool().length,b=readObj(mtKey()).best||{};
+    h=cfgDesc('🧩 Ghép mỗi câu hỏi với đáp án của nó, 6 cặp một ván, tính giờ — ghép sai cộng 1 giây. Không ảnh hưởng tiến độ.')+srcChips(x=>qinfo(x).sc)+
+      cfgDesc(n>=3?`${n} câu đủ điều kiện / ${all} câu trong nguồn`+(b['6']?` · kỷ lục 6 cặp: <b>${(b['6']/1000).toFixed(1)} s</b>`:'')
+                  :`Cần ≥3 câu có đáp án độc lập — ${n} câu đủ điều kiện / ${all} câu trong nguồn.`)+uiSwitch('snd','Âm thanh khi đúng / sai');
+    dis=n<3}
+  else{const n=srcRows(UI.src).length;
+    h=cfgDesc('📝 Đề trộn nhiều dạng: trắc nghiệm, Đúng/Sai, ghép (khối 4 ý) và tự gõ đáp án. Chấm khi nộp bài. Chỉ trắc nghiệm và tự gõ được tính vào tiến độ.')+srcChips()+(n?nf(n):cfgDesc('Nguồn này chưa có câu nào.'))+
+      '<div class="field"><span class="sub" style="margin:0">Dạng câu</span><div class="chips" role="group" aria-label="Dạng câu">'+['mc','tf','gh','go'].map(t=>
+        `<button type="button" class="chip${UI.tps[t]?' on':''}" id="tp-${t}" aria-pressed="${!!UI.tps[t]}" onclick="mxType('${t}')">${MX_T[t]}</button>`).join('')+'</div></div>'+
+      uiSwitch('inst','Hiện kết quả từng câu (nút Kiểm tra)');
+    dis=!n}
+  cfg.innerHTML=h;return dis}
+function startLabel(m){const s=(m==='step'||m==='write')?lsLoad(m):null;
+  return '<span aria-hidden="true">▶</span> '+(s?`Tiếp tục phiên (${s.q.filter(x=>x.r==='i'&&x.done).length}/${s.q.filter(x=>x.r==='i').length})`:'Bắt đầu')}
+function nmSub(){const i=el('numQ'),n=i?Math.max(1,parseInt(i.value)||0):0,src=' · '+SRC_LBL[UI.src];
+  if(MODE==='step'||MODE==='write'){const lb=MODE==='step'?'👣 Học từng bước':'✍️ Gõ đáp án';return lsLoad(MODE)?lb+' · tiếp tục phiên đang dở':`${lb}${src} · <b>${n}</b> câu`}
+  if(MODE==='match'){const p=matchPool().length;return p>=3?`🧩 Ghép thẻ${src} · ván <b>${Math.min(6,p)}</b> cặp`:'🧩 Chưa đủ câu để ghép'}
+  return `📝 Kiểm tra tổng hợp${src} · <b>${n}</b> câu · ${['mc','tf','gh','go'].filter(t=>UI.tps[t]).map(t=>MX_T[t]).join(', ')}`}
+function nmExit(){clearTimeout(LS_T);clearInterval(MT_T);if(LS&&!LS.fin&&(MODE==='step'||MODE==='write'))lsSave();
+  el('test').style.display='none';el('topbar').style.display='none';el('start').style.display='block';document.body.classList.remove('testing');
+  syncTopbar();renderStats();renderHistory();renderResume();window.scrollTo(0,0)}
+function nmEnter(label){enterTestUI();document.querySelector('#topbar .btn.danger').style.display='none';el('timer').textContent=label;syncTopbar();window.scrollTo(0,0)}
+
+/* ---- 👣 Học từng bước + ✍️ Gõ đáp án: one queue, answered one item at a time with instant feedback ----
+   item {id, r:'i' first ask | 'r' retry, o: ordinal of the first ask, t:'mc'|'type', oi, done, res}.
+   Học từng bước re-asks a miss after the current block of 5; Gõ đáp án asks it again in the next round
+   (at the end). Only the first ask of each question writes progress: a retry cannot inflate the SRS. */
+let LS=null,LS_T=null,LS_SEL=[];
+function lsKey(kind){return (kind==='write'?'fu_write_':'fu_learn_')+scopeKey()}
+function lsLoad(kind){const s=readJSON(lsKey(kind),null);if(!s||typeof s!=='object'||!Array.isArray(s.q))return null;
+  const bi=bankIndex();s.q=s.q.map(x=>{const id=x&&remapId(x.id);return id&&bi[id]?Object.assign(x,{id,oi:fitOrder(bi[id],x.oi)}):null}).filter(Boolean);
+  if(!s.q.some(x=>x.r==='i')){lsClear(kind);toast('Phiên học cũ không còn câu nào trong ngân hàng — đã bỏ.');return null}
+  s.kind=kind;s.log=Array.isArray(s.log)?s.log:[];s.i=Math.max(0,Math.min(s.i|0,s.q.length-1));return s}
+function lsSave(){if(!LS||LS.fin)return;const n=Date.now();LS.used=(LS.used||0)+Math.max(0,n-(LS.tick||n));LS.tick=n;writeJSON(lsKey(LS.kind),LS)}
+function lsClear(kind){try{localStorage.removeItem(lsKey(kind))}catch(e){}}
+function lsItem(id,r,o,t){const q=bankIndex()[id],x={o:q.o,oi:(q.o||[]).map((_,i)=>i)};if(el('shufOpts').checked)shuffleOpts(x);
+  return {id,r,o,t,oi:x.oi,done:0,res:null}}
+function lsType(kind,id){if(kind==='write')return 'type';const q=bankIndex()[id],I=qinfo(q);
+  return UI.typ&&I.sc&&I.at.length<=120&&stageOf(qrec(id))>=2?'type':'mc'}
+function lsBegin(kind,ids){clearTimeout(LS_T);clearInterval(MT_T);LS_SEL=[];OA_CACHE=null;
+  LS={v:1,kind,at:Date.now(),tick:Date.now(),used:0,i:0,streak:0,best:0,cp:0,log:[],q:ids.map((id,k)=>lsItem(id,'i',k,lsType(kind,id)))};
+  lsSave();lsEnter()}
+function lsEnter(){MODE=LS.kind;nmEnter(LS.kind==='write'?'✍️ Gõ đáp án':'👣 Học từng bước');lsRender()}
+function lsStart(){const kind=MODE,s=lsLoad(kind);if(s){LS=s;LS.tick=Date.now();LS_SEL=[];lsEnter();return}
+  let rows=kind==='write'?writePool():srcRows(UI.src);if(!rows.length){alert('Không có câu hỏi cho lựa chọn này.');return}
+  if(el('shufQs')&&el('shufQs').checked)rows=shuffle(rows);
+  const i=el('numQ'),n=Math.max(1,Math.min((i&&parseInt(i.value))||rows.length,rows.length));
+  lsBegin(kind,rows.slice(0,n).map(x=>x.id))}
+function lsNew(){if(!confirm('Bỏ phiên đang học dở và bắt đầu phiên mới?'))return;lsClear(MODE);startTest()}
+function lsStartIds(kind,ids){ids=[...new Set(ids)];if(!ids.length)return;
+  if(lsLoad(kind)&&!confirm('Bỏ phiên '+MODELABEL[kind]+' đang học dở để học '+ids.length+' câu này?'))return;
+  lsClear(kind);lsBegin(kind,ids)}
+function lsQ(it){const b=bankIndex()[it.id];return Object.assign({},b,{oi:it.oi,ci:correctIdxOf(b)})}
+function lsBlocked(it){return !!it&&it.done&&it.t==='type'&&!it.res.ok&&!!UI.retype&&!it.res.rt}
+function lsPick(d){const it=LS&&LS.q[LS.i];if(!it||it.done||it.t!=='mc')return;const q=lsQ(it),oi=q.oi[d];if(oi==null)return;
+  if(q.ci.length>1){const k=LS_SEL.indexOf(oi);if(k>=0)LS_SEL.splice(k,1);else LS_SEL.push(oi);lsRender();return}
+  lsGrade({sels:[oi],ok:q.ci.length===1&&q.ci[0]===oi})}
+function lsSubmitMulti(){const it=LS&&LS.q[LS.i];if(!it||it.done||!LS_SEL.length)return;lsGrade({sels:LS_SEL.slice(),ok:sameSet(LS_SEL,lsQ(it).ci)})}
+function lsDontKnow(){const it=LS&&LS.q[LS.i];if(!it||it.done)return;lsGrade({dk:1,ok:false,key:qinfo(lsQ(it)).at})}
+function lsHint(){const it=LS&&LS.q[LS.i];if(!it||it.done||it.t!=='type')return;const i=el('lsIn');if(i)it.dr=i.value;it.h=1;lsSave();lsRender()}
+function lsCheck(){const it=LS&&LS.q[LS.i];if(!it||it.done||it.t!=='type')return;const inp=el('lsIn'),v=inp?inp.value:'';
+  if(!v.trim()){if(inp)inp.focus();return}
+  if(isLetterOnly(v)){const m=el('lsMsg');if(m)m.textContent='Gõ nội dung đáp án, không gõ chữ cái.';return}
+  const g=gradeTyped(v,lsQ(it));lsGrade({tx:v,v:g.v,ok:g.ok,key:g.key,hint:it.h?1:0})}
+function lsGrade(res){const it=LS.q[LS.i];if(!it||it.done)return;clearTimeout(LS_T);LS_T=null;LS_SEL=[];
+  it.done=1;it.res=res;delete it.dr;const first=it.r==='i';
+  if(first){LS.log.push(it.o);res.s0=LS.streak;
+    // a hint is a peek: a right answer after it is not scored and never raises the record; a miss still counts
+    if(!(res.hint&&res.ok))res.r0=recordOne(it.id,res.ok,'sure');
+    try{bumpStreak(1)}catch(e){}}
+  if(res.ok&&!res.hint&&first){LS.streak++;LS.best=Math.max(LS.best,LS.streak)}else if(!res.ok||res.hint)LS.streak=0;
+  if(!res.ok)lsRetry(it);
+  beep(res.ok);lsSave();
+  if(res.ok&&UI.auto)LS_T=setTimeout(lsNext,1000);
+  lsRender()}
+/* "Tôi đúng" after a typed miss: the answer counts as right, from the record the miss replaced */
+function lsOverride(){const it=LS&&LS.q[LS.i];if(!it||!it.done||it.res.ok||!it.res.tx)return;const res=it.res;res.ok=true;res.ov=1;
+  // after a 💡 hint it is a peek: right, but no step (as 🎲: due tomorrow) and no streak
+  if(it.r==='i'){if(Object.prototype.hasOwnProperty.call(res,'r0'))recordOne(it.id,true,res.hint?'guess':'sure',{base:res.r0});
+    if(!res.hint){LS.streak=(res.s0||0)+1;LS.best=Math.max(LS.best,LS.streak)}}
+  const k=LS.q.findIndex((x,j)=>j>LS.i&&x.id===it.id&&!x.done);if(k>=0)LS.q.splice(k,1);      // its retry is no longer needed
+  lsSave();lsRender()}
+function lsRetype(){const it=LS&&LS.q[LS.i],i=el('lsRe');if(!it||!i||!it.done)return;
+  if(tFold(i.value)===tFold(it.res.key||qinfo(lsQ(it)).at)){it.res.rt=1;lsSave();lsNext()}
+  else{const m=el('lsMsg');if(m)m.textContent='Chưa khớp — gõ lại đúng đáp án.'}}
+/* a miss queues ONE retry: before the first question of the next block of 5 (Học từng bước), or at the end (Gõ đáp án) */
+function lsRetry(it){const Q=LS.q;if(Q.some(x=>x.id===it.id&&!x.done))return;
+  const n=lsItem(it.id,'r',it.o,it.t);n.rd=(it.rd||1)+1;
+  if(LS.kind==='write'){Q.push(n);return}
+  let c=it.o;if(it.r!=='i'){const nx=Q.find((x,j)=>j>LS.i&&x.r==='i');c=nx?nx.o:Infinity}
+  const lim=Math.floor(c/5)*5+5,at=Q.findIndex(x=>x.r==='i'&&x.o>=lim);
+  Q.splice(at<0?Q.length:at,0,n)}
+function lsNext(){clearTimeout(LS_T);LS_T=null;if(!LS||LS.fin)return;const Q=LS.q;
+  if(lsBlocked(Q[LS.i]))return;
+  if(LS.kind==='step'&&LS.log.length>=LS.cp+10&&Q.some(x=>!x.done)){LS.cpShow=1;lsSave();lsRender();window.scrollTo(0,0);return}
+  let k=Q.findIndex((x,j)=>j>LS.i&&!x.done);if(k<0)k=Q.findIndex(x=>!x.done);
+  if(k<0){lsFinish();return}
+  LS.i=k;LS_SEL=[];lsSave();lsRender();window.scrollTo(0,0)}
+function lsCpDone(){LS.cp+=10;LS.cpShow=0;lsNext()}
+function lsPrev(){clearTimeout(LS_T);LS_T=null;if(!LS||LS.i<=0)return;LS.i--;LS_SEL=[];lsSave();lsRender()}
+function lsJump(o){clearTimeout(LS_T);LS_T=null;const k=LS.q.findIndex(x=>x.r==='i'&&x.o===o);if(k<0)return;LS.i=k;LS_SEL=[];lsSave();lsRender();window.scrollTo(0,0)}
+function lsCopy(){const it=LS.q[LS.i],q=lsQ(it);let s='Câu '+(it.o+1)+'\n'+clean(q.q)+'\n'+q.oi.map((oi,i)=>(i+1)+'. '+clean(optText(q,oi))).join('\n');
+  if(it.done)s+='\nĐáp án: '+keyRowsOf(q).map(r=>(r.L.charCodeAt(0)-64)+'. '+clean(r.text)).join('; ');
+  copyText(s)}
+function lsFinish(){const Q=LS.q,ini=Q.filter(x=>x.r==='i'),N=ini.length,okF=x=>!!x.res&&x.res.ok&&!x.res.hint,score=ini.filter(okF).length;
+  const miss={};Q.forEach(x=>{if(x.res&&!x.res.ok)miss[x.id]=(miss[x.id]||0)+1});
+  const hard=Object.keys(miss).filter(id=>miss[id]>=2),sec=Math.round(((LS.used||0)+Date.now()-(LS.tick||Date.now()))/1000),pct=pctOf(score,N);
+  saveAttempt({ts:Date.now(),v:3,scope:curSubject(),mode:LS.kind,total:N,score,pct,pass:pct>=50,usedSec:sec,
+    details:ini.map(x=>{const ci=lsQ(x).ci;if(okF(x))return {id:x.id,sels:ci};if(x.res&&x.res.ok)return {id:x.id,sels:ci,rv:1};
+      return {id:x.id,sels:x.res&&x.res.sels&&x.res.sels.length?x.res.sels:[-1]}})});
+  lsClear(LS.kind);LS.fin=1;LS.sum={N,score,pct,sec,retries:Q.length-N,best:LS.best,hard,again:hard.length?hard:Object.keys(miss)};
+  lsRender();window.scrollTo(0,0)}
+function lsAgain(){lsStartIds(LS.kind,LS.sum.again)}
+function lsMore(){const kind=LS.kind;uiSet('src','unk');let rows=kind==='write'?writePool('unk'):srcRows('unk');
+  if(!rows.length){toast('Không còn câu chưa thuộc trong nguồn này.');return}
+  if(el('shufQs')&&el('shufQs').checked)rows=shuffle(rows);lsClear(kind);lsBegin(kind,rows.slice(0,(LS.sum&&LS.sum.N)||20).map(x=>x.id))}
+function lsTools(it){return '<span class="qacts">'+
+  `<button type="button" class="bmk" data-fk="snd" aria-pressed="${!!UI.snd}" aria-label="Âm thanh" title="Âm thanh" onclick="uiSet('snd',UI.snd?0:1);lsRender()">${UI.snd?'🔊':'🔇'}</button>`+
+  `<button type="button" class="bmk" data-fk="fs-" aria-label="Chữ nhỏ hơn" title="Chữ nhỏ hơn" onclick="uiFont(-2)" ${UI.fs<=14?'disabled':''}>A−</button>`+
+  `<button type="button" class="bmk" data-fk="fs+" aria-label="Chữ lớn hơn" title="Chữ lớn hơn" onclick="uiFont(2)" ${UI.fs>=24?'disabled':''}>A+</button>`+
+  `<button type="button" class="bmk" data-fk="cp" aria-label="Copy câu hỏi${it.done?' và đáp án':''}" title="Copy câu hỏi${it.done?' và đáp án':''}" onclick="lsCopy()">📋</button></span>`}
+function lsRender(){if(!LS)return;if(LS.fin){lsEndView();return}if(LS.cpShow){lsCpView();return}
+  const Q=LS.q,it=Q[LS.i],q=lsQ(it),AB=abbrFor(q),ini=Q.filter(x=>x.r==='i'),N=ini.length,passed=ini.filter(x=>x.done).length,
+        pend=Q.filter(x=>x.r==='r'&&!x.done).length,multi=q.ci.length>1,res=it.res||{},typed=it.t==='type',key=qinfo(q).at;
+  el('prog').textContent=passed+'/'+N;el('srcLabel').textContent=q.src+(q.n?' · Câu '+q.n:'');syncTopbar();
+  let h=`<div class="card"><div class="qh"><span class="qnum">Câu ${it.o+1}</span>`+
+    (it.r==='r'?`<span class="badge multi">${LS.kind==='write'?'Vòng '+(it.rd||2):'↻ Hỏi lại'}</span>`:'')+
+    `<span class="badge">Đã qua ${passed}/${N}${pend?' · chờ hỏi lại '+pend:''}</span>`+
+    (typed&&LS.kind==='step'?'<span class="badge xr">✍️ Gõ đáp án</span>':'')+(multi&&!typed?`<span class="badge multi">☑ Chọn ${q.ci.length} đáp án</span>`:'')+
+    (LS.streak>=5?`<span class="badge hot" title="Chuỗi câu đúng ngay lần đầu">🔥 ${LS.streak}</span>`:'')+lsTools(it)+'</div>';
+  h+=`<div class="qgrid"><div class="qmain"><p class="stem">${AB(formatQStem(q.q),1)}</p>`;
+  if(!typed){const ch=it.done?(res.sels||[]):LS_SEL;
+    h+=q.oi.map((oi,i)=>{const chosen=ch.indexOf(oi)>=0,right=q.ci.indexOf(oi)>=0;let cls='opt',mk='';
+      if(it.done){cls+=' locked';if(right){cls+=' correct';mk='<span class="mk">✔ đáp án đúng</span>'}else if(chosen){cls+=' wrong';mk='<span class="mk">✗ bạn chọn</span>'}}
+      else if(chosen)cls+=' sel';
+      return `<button type="button" class="${cls}" data-fk="o${i}" aria-pressed="${chosen}"${it.done?' aria-disabled="true"':''} onclick="lsPick(${i})">`+
+        `${multi?`<span class="cbox">${chosen?'☑':'☐'}</span>`:''}<span class="olet">${String.fromCharCode(65+i)}.</span><span class="otext">${AB(esc(optText(q,oi)),1)}</span>${mk}</button>`}).join('');}
+  else if(!it.done)h+=`<input type="text" class="tin" id="lsIn" value="${esc(it.dr||'')}" aria-label="Đáp án của bạn" placeholder="Gõ nội dung đáp án rồi Enter" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" oninput="LS.q[LS.i].dr=this.value" onkeydown="if(event.key==='Enter'){event.preventDefault();lsCheck()}">`+
+    (it.h?`<div class="thint">💡 Gợi ý: <code>${esc(hintMask(key))}</code> · ${key.length} ký tự</div>`:'')+'<div class="sub" id="lsMsg" aria-live="polite"></div>';
+  else if(!res.ok||res.v!=='exact')h+=typedCmp(res,res.key||key);
+  h+='</div><!--ABX--></div>'+preNotesHTML(q);
+  if(it.done){
+    h+=res.ok?`<div class="fb ok" role="status">✔ Chính xác${typed?GNOTE[res.v]||'':''}${res.ov?' — bạn tự chấm đúng':''}${res.hint?' · đã xem gợi ý, không tính điểm':''}</div>`
+             :`<div class="fb no" role="status">✘ ${res.dk?'Không biết':'Chưa đúng'} — hãy nhớ đáp án đúng</div>`;
+    if(typed&&!res.ok){if(res.tx)h+=`<div class="row" style="gap:8px;margin:6px 0"><button type="button" class="btn sec" data-fk="ov" onclick="lsOverride()">✓ Tôi đúng</button></div>`;
+      if(lsBlocked(it))h+=`<div class="field"><label for="lsRe">Gõ lại đáp án đúng để qua câu</label><input type="text" class="tin" id="lsRe" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" onkeydown="if(event.key==='Enter'){event.preventDefault();lsRetype()}"></div><div class="sub" id="lsMsg" aria-live="polite"></div>`}
+    if(!LS_T)h+=typed?answerCard(noLetters(q),[{L:'✓',text:key}],vfBadge(q.vf),x=>AB(x,0)):answerCard(q,keyRowsOf(q),vfBadge(q.vf),x=>AB(x,0));
+    h+=`<div class="navbtns lsnav"><button type="button" class="btn sec" onclick="lsPrev()" ${LS.i?'':'disabled'}>← Trước</button>`+
+       `<button type="button" class="btn" data-fk="next" onclick="lsNext()" ${lsBlocked(it)?'disabled':''}>Tiếp tục →</button></div>`;}
+  else h+=`<div class="navbtns lsnav"><button type="button" class="btn sec" onclick="lsPrev()" ${LS.i?'':'disabled'}>← Trước</button><span class="row" style="gap:8px">`+
+       `<button type="button" class="btn sec" data-fk="dk" onclick="lsDontKnow()">🤷 Không biết</button>`+
+       (typed?`<button type="button" class="btn sec" data-fk="hint" onclick="lsHint()" ${it.h?'disabled':''}>💡 Gợi ý</button><button type="button" class="btn" data-fk="chk" onclick="lsCheck()">Kiểm tra</button>`
+             :multi?`<button type="button" class="btn" data-fk="sub" onclick="lsSubmitMulti()" ${LS_SEL.length?'':'disabled'}>Nộp đáp án</button>`:'')+'</span></div>';
+  const cur=it.o;
+  h+='<div class="jump">'+ini.map(x=>{const r=x.res,c=(x.o===cur?'cur ':'')+(!x.done?'':r.ok&&!r.hint?'correct':r.ok?'done':'wrong'),
+      st=!x.done?'chưa làm':r.ok&&!r.hint?'đúng ngay':r.ok?'đúng sau gợi ý':'sai';
+    return `<button type="button" class="${c}" aria-label="Câu ${x.o+1}: ${st}"${x.o===cur?' aria-current="step"':''} onclick="lsJump(${x.o})">${x.o+1}</button>`}).join('')+'</div></div>';
+  setTest(withAbx(h,AB));
+  const jw=el('test').querySelector('.jump'),cj=jw&&jw.querySelector('.cur');
+  if(jw&&cj)jw.scrollTop+=cj.getBoundingClientRect().top-jw.getBoundingClientRect().top-(jw.clientHeight-cj.offsetHeight)/2;
+  const fi=el('lsRe')||(!it.done&&el('lsIn'));if(fi)fi.focus({preventScroll:true});}
+function lsCpView(){const ords=LS.log.slice(LS.cp,LS.cp+10),Q=LS.q,bi=bankIndex();let k=0;
+  const rows=ords.map(o=>{const x=Q.find(y=>y.r==='i'&&y.o===o),n=Q.filter(y=>y.id===x.id&&y.done).length,ok=!!x.res&&x.res.ok&&!x.res.hint;if(ok)k++;
+    const s=clean(bi[x.id].q);return `<div class="hist-item"><span class="hbadge ${ok?'p':'f'}">${ok?'✓ đúng ngay':'✗ sai'}</span><span class="cp-q">Câu ${o+1}. ${esc(s.length>120?s.slice(0,118)+'…':s)}</span><span class="sub" style="margin:0">${n} lần trả lời</span></div>`}).join('');
+  setTest(`<div class="card"><h2 class="mg-h">🏁 Chặng ${LS.cp/10+1}</h2><div class="result-score">${k}/${ords.length} câu đúng ngay lần đầu</div>${rows}`+
+    `<div class="navbtns"><span></span><button type="button" class="btn" data-fk="cp" onclick="lsCpDone()">Tiếp tục →</button></div></div>`)}
+function lsEndView(){const S=LS.sum,rc=S.pct>=50?'var(--green)':'var(--red)',bi=bankIndex();el('prog').textContent=S.N+'/'+S.N;
+  setTest(`<div class="card" style="text-align:center"><div class="ring" style="--v:${S.pct};--rc:${rc}"><div class="in"><div class="result-score" style="color:${rc}">${S.score}/${S.N}</div><div style="color:${rc};font-weight:700">${S.pct}%</div></div></div>`+
+    `<div class="sub">${MODELABEL[LS.kind]} xong · đúng ngay lần đầu ${S.score}/${S.N} · ${S.retries} lượt hỏi lại · ⏱ ${Math.floor(S.sec/60)}m${S.sec%60}s · 🔥 chuỗi dài nhất ${S.best}</div>`+
+    (S.hard.length?'<div class="cfg-desc" style="text-align:left;margin-top:12px"><b>Câu khó nhất</b> (sai từ 2 lần)</div>'+S.hard.map(id=>{const s=clean(bi[id]?bi[id].q:'');
+      return `<div class="hist-item" style="text-align:left">${esc(s.length>140?s.slice(0,138)+'…':s)}</div>`}).join(''):'')+
+    `<div class="row" style="justify-content:center;margin-top:12px">${S.again.length?`<button type="button" class="btn" onclick="lsAgain()">🔁 Học lại các câu khó (${S.again.length})</button>`:''}`+
+    `<button type="button" class="btn sec" onclick="lsMore()">📚 Học tiếp phần chưa thuộc</button><button type="button" class="btn sec" onclick="exitTest()">← Về menu</button></div></div>`)}
+
+/* ---- 🧩 Ghép thẻ: up to 6 questions, stems left and their answers right, each column shuffled. No progress writes ---- */
+let MT=null,MT_T=null;
+function mtKey(){return 'fu_match_'+scopeKey()}
+/* a round: no two stems and no two answers alike; questions not drawn this cycle first */
+function mtDraw(pool,seen,size){const sn=new Set(seen),used=new Set(),stems=new Set(),out=[];
+  for(const x of shuffle(pool.filter(x=>!sn.has(x.id))).concat(shuffle(pool.filter(x=>sn.has(x.id))))){if(out.length>=size)break;
+    const a=tFold(qinfo(x).at),s=tFold(x.q);if(used.has(a)||stems.has(s))continue;used.add(a);stems.add(s);out.push(x.id)}
+  return out}
+function mtStart(){const pool=matchPool();if(pool.length<3){alert('Cần ≥3 câu có đáp án độc lập.');return}
+  clearInterval(MT_T);clearTimeout(LS_T);const st=readObj(mtKey()),ids=new Set(pool.map(x=>x.id));
+  let seen=(Array.isArray(st.seen)?st.seen:[]).filter(id=>ids.has(id));if(seen.length>=pool.length)seen=[];      // the pool is used up: a new cycle
+  const d=mtDraw(pool,seen,6);if(d.length<3){alert('Cần ≥3 câu có đáp án khác nhau.');return}
+  st.seen=[...new Set(seen.concat(d))];writeJSON(mtKey(),st);
+  const ix=d.map((_,k)=>k);MT={ids:d,L:shuffle(ix),R:shuffle(ix),sel:null,ok:[],bad:null,miss:0,wrong:[],t0:0,pen:0,end:0,exp:[]};
+  MODE='match';nmEnter('⏱ 0.0 s');mtRender()}
+function mtClock(){if(!MT||!MT.t0)return;const t=(MT.end||Date.now())-MT.t0+MT.pen;el('timer').textContent='⏱ '+(t/1000).toFixed(1)+' s'}
+function mtHold(b,side,k){if(!MT)return;MT.lp=0;clearTimeout(MT.ht);
+  MT.ht=setTimeout(()=>{const key=side+k,i=MT.exp.indexOf(key);if(i>=0)MT.exp.splice(i,1);else MT.exp.push(key);b.classList.toggle('exp');MT.lp=1},500)}
+function mtHoldEnd(){if(MT)clearTimeout(MT.ht)}
+function mtTap(side,k){if(!MT||MT.end)return;if(MT.lp){MT.lp=0;return}const id=MT.ids[k];if(MT.ok.indexOf(id)>=0)return;
+  if(!MT.t0){MT.t0=Date.now();clearInterval(MT_T);MT_T=setInterval(mtClock,100)}
+  const s=MT.sel;
+  if(!s||s.side===side){MT.sel=s&&s.side===side&&s.k===k?null:{side,k};mtRender();return}
+  MT.sel=null;const L=side==='L'?k:s.k,R=side==='R'?k:s.k;
+  if(L===R){MT.ok.push(id);beep(true);if(MT.ok.length===MT.ids.length){mtEnd();return}}
+  else{MT.miss++;MT.pen+=1000;const sid=MT.ids[L];if(MT.wrong.indexOf(sid)<0)MT.wrong.push(sid);MT.bad=[L,R];beep(false);mtClock();
+    clearTimeout(MT.bt);MT.bt=setTimeout(()=>{if(MT&&!MT.end){MT.bad=null;mtRender()}},500)}
+  mtRender()}
+function mtEnd(){MT.end=Date.now();clearInterval(MT_T);const total=MT.end-MT.t0+MT.pen,k=String(MT.ids.length),st=readObj(mtKey());
+  st.best=st.best&&typeof st.best==='object'?st.best:{};MT.rec=!(st.best[k]>0)||total<st.best[k];if(MT.rec)st.best[k]=total;
+  MT.best=st.best[k];MT.total=total;writeJSON(mtKey(),st);mtClock();mtRender();window.scrollTo(0,0)}
+function mtRender(){if(!MT)return;const n=MT.ids.length,bi=bankIndex();el('prog').textContent=MT.ok.length+'/'+n;el('srcLabel').textContent='Sai '+MT.miss+' lần';syncTopbar();
+  if(MT.end){const f=ms=>(ms/1000).toFixed(1)+' s';
+    setTest(`<div class="card" style="text-align:center"><div class="sub">🧩 Ghép xong ${n} cặp</div><div class="result-score">⏱ ${f(MT.total)}</div>`+
+      `<div class="sub">Sai ${MT.miss} lần (đã cộng ${MT.miss} s) · Kỷ lục ${n} cặp: ${f(MT.best)}${MT.rec?' · 🎉 Kỷ lục mới!':''}</div>`+
+      `<div class="row" style="justify-content:center;margin-top:12px"><button type="button" class="btn" data-fk="new" onclick="mtStart()">🧩 Ván mới</button>`+
+      (MT.wrong.length?`<button type="button" class="btn sec" onclick="lsStartIds('step',MT.wrong)">👣 Ôn câu ghép sai (${MT.wrong.length})</button>`:'')+
+      `<button type="button" class="btn sec" onclick="exitTest()">← Về menu</button></div></div>`);return}
+  const tile=(side,k)=>{const x=bi[MT.ids[k]],txt=side==='L'?clean(x.q):qinfo(x).at,done=MT.ok.indexOf(MT.ids[k])>=0,
+      sel=!!MT.sel&&MT.sel.side===side&&MT.sel.k===k,bad=!!MT.bad&&MT.bad[side==='L'?0:1]===k,exp=MT.exp.indexOf(side+k)>=0;
+    return `<button type="button" class="mt-tile${done?' ok':''}${sel?' sel':''}${bad?' bad':''}${exp?' exp':''}" data-fk="${side}${k}" aria-pressed="${sel}"${done?' aria-disabled="true"':''} `+
+      `title="${esc(txt)}" onclick="mtTap('${side}',${k})" onpointerdown="mtHold(this,'${side}',${k})" onpointerup="mtHoldEnd()" onpointerleave="mtHoldEnd()" oncontextmenu="return false">`+
+      `<span class="tx">${esc(txt)}</span></button>`};
+  setTest(`<div class="card"><div class="qh"><span class="qnum">🧩 Ghép thẻ</span><span class="badge">${MT.ok.length}/${n} cặp</span>`+
+    (MT.miss?`<span class="badge hot">✗ ${MT.miss} lần sai (+${MT.miss} s)</span>`:'')+'</div>'+
+    '<p class="sub" style="margin-top:0">Chọn một câu hỏi rồi chọn đáp án của nó (hoặc ngược lại). Giữ lâu hoặc rê chuột lên ô để đọc đủ chữ.</p>'+
+    `<div class="mt-board"><div class="mt-col" role="group" aria-label="Câu hỏi">${MT.L.map(k=>tile('L',k)).join('')}</div>`+
+    `<div class="mt-col" role="group" aria-label="Đáp án">${MT.R.map(k=>tile('R',k)).join('')}</div></div></div>`)}
+
+/* ---- 📝 Kiểm tra tổng hợp: MC, Đúng/Sai, Ghép (blocks of 4) and Gõ items in one paper (SESSION, MODE 'mix').
+   Saved as a draft like any test. Item: the bank row of its (first) question + t, ids, oi, sels (answered marker
+   for every type), sh (Đúng/Sai: the option shown), ro (Ghép: the answers in letter order), pk (Ghép picks), tx (Gõ). */
+const MX_T={mc:'Trắc nghiệm',tf:'Đúng/Sai',gh:'Ghép',go:'Tự luận gõ'};
+let MX_NEXT=null,MXS={streak:0,best:0},MXF='all',MX_SUM=null;
+function mxMake(t,ids,sh){const q=bankIndex()[ids[0]],it={...q,t,ids:ids.slice(),sels:[],ci:correctIdxOf(q),oi:(q.o||[]).map((_,i)=>i),tx:'',pk:ids.map(()=>-1)};
+  if(el('shufOpts').checked)shuffleOpts(it);
+  if(t==='tf'){const I=qinfo(q);if(sh!=null)it.sh=sh;else{const want=Math.random()<.5,c=I.plain.filter(i=>I.truth[i]===want),L=c.length?c:I.plain;it.sh=L[Math.floor(Math.random()*L.length)]}}
+  if(t==='gh')it.ro=shuffle(ids);
+  return it}
+function buildMix(){MXS={streak:0,best:0};if(MX_NEXT){const s=MX_NEXT;MX_NEXT=null;return s}
+  let rows=srcRows(UI.src);if(el('shufQs')&&el('shufQs').checked)rows=shuffle(rows);
+  const ni=el('numQ');rows=rows.slice(0,Math.max(1,Math.min((ni&&parseInt(ni.value))||20,rows.length)));
+  const on=['mc','tf','gh','go'].filter(t=>UI.tps[t]);if(!on.length)on.push('mc');
+  const can={mc:()=>true,tf:x=>!!qinfo(x).truth,gh:x=>qinfo(x).sc,go:goOk};
+  const items=rows.map((x,k)=>{const t=on[k%on.length];return {x,t:can[t](x)?t:'mc'}});
+  // round-robin gives Ghép 2-3 rows of a short paper: borrow eligible MC rows so a block of 3+ can form
+  if(UI.tps.gh){const g=items.filter(y=>y.t==='gh').length,r=g%4;let need=g&&r&&r<3?3-r:!g?3:0;
+    items.forEach(y=>{if(need>0&&y.t==='mc'&&can.gh(y.x)){y.t='gh';need--}})}
+  // Ghép: blocks of 4, no two answers or stems alike in a block; a block left with fewer than 3 becomes MC
+  const blocks=[];items.filter(y=>y.t==='gh').forEach(y=>{const a=tFold(qinfo(y.x).at),s=tFold(y.x.q);
+    let b=blocks.find(b=>b.length<4&&!b.some(z=>z.a===a||z.s===s));if(!b)blocks.push(b=[]);b.push({y,a,s})});
+  blocks.forEach(b=>{if(b.length<3)b.forEach(z=>{z.y.t='mc'});else b.forEach((z,k)=>{z.y.blk=b;z.y.lead=k===0})});
+  return items.filter(y=>y.t!=='gh'||y.lead).map(y=>mxMake(y.t,y.t==='gh'?y.blk.map(z=>z.y.x.id):[y.x.id]))}
+function mxRetake(){MX_NEXT=SESSION.map(it=>mxMake(it.t,it.ids,it.sh));startTest()}
+function mxGrade(it){
+  if(it.t==='gh'){let p=0;it.ids.forEach((id,j)=>{if(it.pk[j]>=0&&it.ro[it.pk[j]]===id)p++});return {pts:p,max:it.ids.length,ans:it.pk.some(x=>x>=0)}}
+  if(!isAnswered(it))return {pts:0,max:1,ans:false};
+  let ok;if(it.t==='mc')ok=sameSet(it.sels,it.ci);
+  else if(it.t==='tf')ok=(it.sels[0]===1)===!!qinfo(it).truth[it.sh];
+  else ok=!isLetterOnly(it.tx)&&gradeTyped(it.tx,it).ok||!!it.ov;
+  return {pts:ok?1:0,max:1,ans:true}}
+function mxScore(){const by={};let s=0,t=0;SESSION.forEach(it=>{const g=it.g||mxGrade(it),b=by[it.t]||(by[it.t]=[0,0]);s+=g.pts;t+=g.max;b[0]+=g.pts;b[1]+=g.max});return {s,t,by}}
+function mxStatus(it){const g=it.g||mxGrade(it),st=!g.ans?['skip','⊘ Chưa làm']:g.pts===g.max?['ok','✔ Đúng']:g.max>1?['no','✘ Đúng '+g.pts+'/'+g.max]:['no','✘ Sai'];
+  return `<span class="rev-status ${st[0]}">${st[1]}</span>`}
+function mxWrongIds(){const out=[];SESSION.forEach(it=>{const g=it.g||mxGrade(it);if(g.pts>=g.max)return;
+  if(it.t==='gh')it.ids.forEach((id,j)=>{if(!(it.pk[j]>=0&&it.ro[it.pk[j]]===id))out.push(id)});else out.push(it.id)});return [...new Set(out)]}
+function mxCur(){return !submitted&&MODE==='mix'?SESSION[IDX]:null}
+function mxPick(i){const it=mxCur();if(!it||it.chk||it.t!=='mc')return;const oi=it.oi[i];if(oi==null)return;
+  if(isMulti(it)){const k=it.sels.indexOf(oi);if(k>=0)it.sels.splice(k,1);else it.sels.push(oi)}else it.sels=it.sels[0]===oi?[]:[oi];
+  saveDraft();mxRender()}
+function mxTF(v){const it=mxCur();if(!it||it.chk||it.t!=='tf')return;it.sels=it.sels[0]===v?[]:[v];saveDraft();mxRender()}
+function mxTx(v){const it=mxCur();if(!it||it.chk||it.t!=='go')return;it.tx=v;it.sels=v.trim()?[0]:[];saveDraft();
+  const s=el('srcLabel');if(s)s.textContent='Chưa trả lời: '+SESSION.filter(x=>!isAnswered(x)).length}
+function mxGh(j,v){const it=mxCur();if(!it||it.chk||it.t!=='gh')return;const p=parseInt(v,10);it.pk[j]=p>=0?p:-1;it.sels=it.pk.filter(x=>x>=0);saveDraft();mxRender()}
+function mxClear(){const it=mxCur();if(!it||it.chk)return;it.sels=[];it.tx='';it.pk=it.ids.map(()=>-1);saveDraft();mxRender()}
+function mxCheck(){const it=mxCur();if(!it||it.chk||!isAnswered(it))return;it.chk=1;const g=mxGrade(it),ok=g.pts===g.max;
+  if(ok){MXS.streak++;MXS.best=Math.max(MXS.best,MXS.streak)}else MXS.streak=0;beep(ok);saveDraft();mxRender()}
+function mxBody(it,AB,show){const bi=bankIndex(),L=k=>String.fromCharCode(65+k);let h='';
+  if(it.t==='gh'){const dup=it.pk.filter(p=>p>=0).length!==new Set(it.pk.filter(p=>p>=0)).size;
+    h+='<div class="qgrid"><div class="qmain"><p class="sub" style="margin-top:0">Ghép mỗi ý với đáp án đúng (mỗi chữ cái dùng một lần):</p>'+
+      it.ids.map((id,j)=>{const p=it.pk[j],ok=p>=0&&it.ro[p]===id;
+        return `<div class="gh-row${show?(ok?' ok':' no'):''}"><span class="qnum">${j+1}</span><span class="gh-st">${AB(formatQStem(bi[id].q),1)}</span>`+
+          `<select data-fk="g${j}" aria-label="Đáp án cho ý ${j+1}" onchange="mxGh(${j},this.value)"${show?' disabled':''}><option value="-1">—</option>`+
+          it.ro.map((_,k)=>`<option value="${k}"${p===k?' selected':''}>${L(k)}</option>`).join('')+'</select>'+
+          (show&&!ok?`<span class="gh-key">✔ ${L(it.ro.indexOf(id))}</span>`:'')+'</div>'}).join('')+
+      '<ol class="gh-ans">'+it.ro.map((id,k)=>`<li><b>${L(k)}.</b> ${AB(esc(qinfo(bi[id]).at),1)}</li>`).join('')+'</ol>'+
+      (dup&&!show?'<div class="fb warn" role="status">⚠ Có chữ cái được chọn cho 2 ý</div>':'')+'</div><!--ABX--></div>';
+    if(show)it.ids.forEach((id,j)=>{const p=it.pk[j];if(!(p>=0&&it.ro[p]===id)){const q=bi[id];h+=`<div class="sub" style="margin-top:10px"><b>Ý ${j+1}</b></div>`+answerCard(noLetters(q),[{L:'✓',text:qinfo(q).at}],vfBadge(q.vf),x=>AB(x,0))}});
+    return h}
+  const q=it,multi=isMulti(it);
+  h+=`<div class="qgrid"><div class="qmain"><p class="stem">${AB(formatQStem(q.q),1)}</p>`;
+  const optBtns=(fn,isSel)=>q.oi.map((oi,i)=>{const chosen=isSel(oi),right=q.ci.indexOf(oi)>=0;let cls='opt',mk='';
+    if(show){cls+=' locked';if(right){cls+=' correct';mk='<span class="mk">✔ đáp án đúng</span>'}else if(chosen){cls+=' wrong';mk='<span class="mk">✗ bạn chọn</span>'}}else if(chosen)cls+=' sel';
+    return `<button type="button" class="${cls}" data-fk="o${i}" aria-pressed="${chosen}"${show?' aria-disabled="true"':''}${fn?` onclick="${fn}(${i})"`:''}>`+
+      `${multi&&fn?`<span class="cbox">${chosen?'☑':'☐'}</span>`:''}<span class="olet">${L(i)}.</span><span class="otext">${AB(esc(optText(q,oi)),1)}</span>${mk}</button>`}).join('');
+  if(it.t==='mc')h+=optBtns('mxPick',oi=>it.sels.indexOf(oi)>=0);
+  else if(it.t==='tf'){const truth=!!qinfo(q).truth[it.sh];
+    h+=`<div class="tf-st">Phương án: «${AB(esc(optText(q,it.sh)),1)}»</div><p class="tf-ask">Đây có phải đáp án đúng của câu hỏi không?</p><div class="tf-row">`+
+      [[1,'Đúng'],[0,'Sai']].map(([v,l])=>{const chosen=it.sels[0]===v,right=(v===1)===truth;let cls='opt';
+        if(show){cls+=' locked';if(right)cls+=' correct';else if(chosen)cls+=' wrong'}else if(chosen)cls+=' sel';
+        return `<button type="button" class="${cls}" data-fk="tf${v}" aria-pressed="${chosen}"${show?' aria-disabled="true"':''} onclick="mxTF(${v})"><span class="olet">${v?'A':'B'}.</span><span class="otext">${l}</span>${show&&right?'<span class="mk">✔ đáp án</span>':show&&chosen?'<span class="mk">✗ bạn chọn</span>':''}</button>`}).join('')+'</div>';}
+  else if(!show)h+=`<input type="text" class="tin" id="mxIn" value="${esc(it.tx||'')}" aria-label="Đáp án của bạn" placeholder="Gõ nội dung đáp án (không gõ chữ cái)" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="next" `+
+      `oninput="mxTx(this.value)" onkeydown="if(event.key==='Enter'){event.preventDefault();UI.inst?mxCheck():go(1)}">`;
+  else{const g=gradeTyped(it.tx||'',q),ok=!isLetterOnly(it.tx||'')&&g.ok||!!it.ov;h+=typedCmp({tx:it.tx,ok},g.key)+(ok&&!it.ov&&g.v!=='exact'?`<div class="sub">${GNOTE[g.v].replace(/^ — /,'')}</div>`:'')+(it.ov?'<div class="sub">Bạn tự chấm đúng.</div>':'')}
+  h+='</div><!--ABX--></div>'+preNotesHTML(q);
+  if(show){if(it.t==='tf')h+='<div class="sub" style="margin-top:10px">Các phương án của câu:</div>'+optBtns('',()=>false);
+    h+=it.t==='go'?answerCard(noLetters(q),[{L:'✓',text:qinfo(q).at}],vfBadge(q.vf),x=>AB(x,0)):answerCard(q,keyRowsOf(q),vfBadge(q.vf),x=>AB(x,0))}
+  return h}
+function mxRender(){if(submitted){mxResult();return}const it=SESSION[IDX],N=SESSION.length,AB=abbrFor(it);
+  el('prog').textContent=(IDX+1)+'/'+N;el('srcLabel').textContent='Chưa trả lời: '+SESSION.filter(s=>!isAnswered(s)).length;syncTopbar();
+  let h=`<div class="card"><div class="qh"><span class="qnum">Câu ${IDX+1}</span><span class="badge">${MX_T[it.t]}</span>`+
+    (it.t==='gh'?`<span class="badge">${it.ids.length} điểm</span>`:'')+(it.t==='mc'&&isMulti(it)?`<span class="badge multi">☑ Chọn ${it.ci.length} đáp án</span>`:'')+
+    (UI.inst&&MXS.streak>=5?`<span class="badge hot">🔥 ${MXS.streak}</span>`:'')+(it.chk?'<span class="qacts">'+mxStatus(it)+'</span>':'')+'</div>'+mxBody(it,AB,!!it.chk);
+  if(UI.inst&&!it.chk)h+='<div style="margin-top:10px"><button type="button" class="btn sec" data-fk="chk" onclick="mxCheck()">Kiểm tra</button></div>';
+  h+=`<div class="navbtns"><button type="button" class="btn sec" onclick="go(-1)" ${IDX===0?'disabled':''}>← Trước</button>`+
+    (IDX===N-1?'<button type="button" class="btn danger" onclick="submitTest()">✔ Nộp bài</button>':'<button type="button" class="btn" onclick="go(1)">Sau →</button>')+'</div>';
+  h+='<div class="jump">'+SESSION.map((s,i)=>{const a=isAnswered(s),g=s.chk?mxGrade(s):null;
+    const c=(i===IDX?'cur ':'')+(g?(g.pts===g.max?'correct':'wrong'):a?'done':''),st=g?(g.pts===g.max?'đúng':'sai'):a?'đã trả lời':'chưa làm';
+    return `<button type="button" class="${c}" aria-label="Câu ${i+1}: ${st}"${i===IDX?' aria-current="step"':''} onclick="jumpTo(${i})">${i+1}</button>`}).join('')+'</div></div>';
+  setTest(withAbx(h,AB));
+  const jw=el('test').querySelector('.jump'),cj=jw&&jw.querySelector('.cur');
+  if(jw&&cj)jw.scrollTop+=cj.getBoundingClientRect().top-jw.getBoundingClientRect().top-(jw.clientHeight-cj.offsetHeight)/2;
+  if(it.t==='go'&&!it.chk&&el('mxIn')&&!KB)el('mxIn').focus({preventScroll:true})}
+function mxSubmit(auto){if(submitted)return;const left=SESSION.filter(s=>!isAnswered(s)).length;
+  if(!auto&&!confirm(left?`Bạn còn ${left} câu chưa trả lời. Nộp bài ngay?`:'Nộp bài?'))return;
+  submitted=true;if(timerInt)clearInterval(timerInt);el('topbar').style.display='none';document.body.classList.remove('testing');syncTopbar();
+  OA_CACHE=null;
+  // only MC and typed answers are evidence: Đúng/Sai is a coin flip, Ghép can be solved by elimination
+  SESSION.forEach(it=>{it.g=mxGrade(it);if(it.g.ans&&(it.t==='mc'||it.t==='go'))it.r0=recordOne(it.id,it.g.pts===1,'sure')});
+  try{bumpStreak(SESSION.filter(isAnswered).length)}catch(e){storageWarn(e)}
+  const S=mxScore(),pct=pctOf(S.s,S.t),sec=limited?Math.max(0,initSec-remaining):Math.max(0,Math.round((Date.now()-startedAt)/1000));
+  MX_SUM={sec,ts:Date.now()};
+  saveAttempt({ts:MX_SUM.ts,v:3,scope:curSubject(),mode:'mix',total:S.t,score:S.s,pct,pass:pct>=50,usedSec:sec,types:S.by});
+  clearDraft();MXF='all';mxRender();window.scrollTo(0,0)}
+/* "Tôi đúng" on the result: the typed answer counts, the test is re-scored, the record steps from the one the miss replaced */
+function mxOverride(k){const it=SESSION[k];if(!submitted||!it||it.t!=='go'||it.ov)return;it.ov=1;it.g=mxGrade(it);
+  if(Object.prototype.hasOwnProperty.call(it,'r0'))recordOne(it.id,true,'sure',{base:it.r0});
+  const S=mxScore(),pct=pctOf(S.s,S.t),h=loadHistory(),a=MX_SUM&&h.find(x=>x.ts===MX_SUM.ts&&x.mode==='mix');
+  if(a){Object.assign(a,{score:S.s,pct,pass:pct>=50,types:S.by});try{localStorage.setItem(hkey(),JSON.stringify(h))}catch(e){storageWarn(e)}}
+  mxRender()}
+function mxResult(){const S=mxScore(),pct=pctOf(S.s,S.t),rc=pct>=50?'var(--green)':'var(--red)',sec=MX_SUM?MX_SUM.sec:0,wr=mxWrongIds();
+  const bars=Object.keys(MX_T).filter(t=>S.by[t]).map(t=>{const v=S.by[t],p=Math.round(v[0]/v[1]*100);
+    return `<div class="modbar"><span class="mlabel">${MX_T[t]}</span><div class="barwrap"><div class="bar" style="width:${p}%;background:${p>=70?'var(--green)':p>=40?'var(--amber)':'var(--red)'}"></div></div><span>${v[0]}/${v[1]}</span></div>`}).join('');
+  const G=SESSION.map(it=>it.g||mxGrade(it)),cnt={all:G.length,wrong:G.filter(g=>g.ans&&g.pts<g.max).length,blank:G.filter(g=>!g.ans).length};
+  let h=`<div class="card" style="text-align:center"><div class="ring" style="--v:${pct};--rc:${rc}"><div class="in"><div class="result-score" style="color:${rc}">${S.s}/${S.t}</div><div style="color:${rc};font-weight:700">${pct}%</div></div></div>`+
+    `<div class="sub">📝 Kiểm tra tổng hợp · ⏱ ${Math.floor(sec/60)}m${sec%60}s${MXS.best>=5?' · 🔥 chuỗi dài nhất '+MXS.best:''} · chỉ trắc nghiệm và tự gõ được tính vào tiến độ</div>`+
+    `<div class="modbars" style="margin-top:10px">${bars}</div>`+
+    '<div class="row no-print" style="justify-content:center;margin-top:12px"><button type="button" class="btn" onclick="mxRetake()">🔁 Làm lại cùng đề</button>'+
+    '<button type="button" class="btn sec" onclick="startTest()">🆕 Tạo đề mới</button>'+
+    (wr.length?`<button type="button" class="btn sec" onclick="lsStartIds('step',mxWrongIds())">👣 Học các câu sai (${wr.length})</button>`:'')+
+    '<button type="button" class="btn sec" onclick="window.print()">🖨 In</button><button type="button" class="btn sec" onclick="exitTest()">← Về menu</button></div></div>'+
+    '<div class="chips no-print" role="group" aria-label="Lọc câu" style="margin:8px 0">'+[['all','Tất cả'],['wrong','Chỉ sai'],['blank','Chưa làm']].map(([k,l])=>
+      `<button type="button" class="chip${MXF===k?' on':''}" data-fk="f-${k}" aria-pressed="${MXF===k}" onclick="MXF='${k}';mxRender()">${l} (${cnt[k]})</button>`).join('')+'</div>';
+  let shown=0;
+  SESSION.forEach((it,k)=>{const g=G[k];if(MXF==='wrong'&&!(g.ans&&g.pts<g.max))return;if(MXF==='blank'&&g.ans)return;shown++;const AB=abbrFor(it);
+    h+=withAbx(`<div class="card"><div class="qh"><span class="qnum">Câu ${k+1}</span><span class="badge">${MX_T[it.t]}</span><span class="qacts">${mxStatus(it)}</span></div>`+mxBody(it,AB,true)+
+      (it.t==='go'&&g.ans&&!g.pts?`<div class="no-print" style="margin-top:8px"><button type="button" class="btn sec" onclick="mxOverride(${k})">✓ Tôi đúng</button></div>`:'')+'</div>',AB)});
+  if(!shown)h+='<div class="hist-empty">Không có câu nào trong mục này.</div>';
+  setTest(h)}
+
+/* ---- 🎴 Flashcard: Lật xem (as before, plus ▶ Tự chạy) / Phân loại (Đã thuộc · Chưa thuộc, session only)
+   / Chấm mức nhớ (due cards + a daily quota of new ones; Lại / Khó / Được / Dễ step the record) ---- */
+function fcBlank(){return {how:UI.fcHow,front:UI.fcFront,know:[],learn:[],undo:[],end:0,cnt:[0,0,0,0,0],round:1,auto:0,all:[]}}
+let FC=fcBlank(),FC_T=null,FCX=null;
+function fcNewKey(){return 'fu_fcnew_'+scopeKey()}
+function fcNewLeft(){const s=readObj(fcNewKey());return Math.max(0,(UI.fcNew|0)-(s.day===today()?(s.n|0):0))}
+function fcNewUse(){const s=readObj(fcNewKey()),t=today();writeJSON(fcNewKey(),{day:t,n:(s.day===t?(s.n|0):0)+1})}
+function fcDeckN(){const t=today();let d=0,nw=0;poolRows('all').forEach(x=>{const r=qrec(x.id);if(!r)nw++;else if(r.due<=t)d++});return d+Math.min(nw,fcNewLeft())}
+function fcRateDeck(list){const t=today(),R=x=>qrec(x.id)||{},due=list.filter(x=>{const r=qrec(x.id);return r&&r.due<=t});
+  due.sort((a,b)=>((R(a).box||1)-(R(b).box||1))||((R(a).due||0)-(R(b).due||0)));
+  return due.concat(shuffle(list.filter(x=>!qrec(x.id))).slice(0,fcNewLeft()))}
+function fcCfg(mx){const ch=(k,v,l)=>`<button type="button" class="chip${UI[k]===v?' on':''}" id="fc-${k}-${v}" aria-pressed="${UI[k]===v}" onclick="uiSet('${k}','${v}');pickMode(MODE);el('fc-${k}-${v}').focus()">${l}</button>`;
+  let h=`<div class="field"><span class="sub" style="margin:0">Cách học</span><div class="chips" role="group" aria-label="Cách học">${ch('fcHow','flip','👆 Lật xem')}${ch('fcHow','sort','🗂 Phân loại')}${ch('fcHow','rate','⏰ Chấm mức nhớ')}</div></div>`+
+    `<div class="field"><span class="sub" style="margin:0">Mặt trước</span><div class="chips" role="group" aria-label="Mặt trước">${ch('fcFront','full','Đề + phương án')}${ch('fcFront','stem','Chỉ đề (khó hơn)')}</div></div>`;
+  if(UI.fcHow==='rate'){const n=fcDeckN();
+    h+=cfgDesc(n?`⏰ <b>${n}</b> thẻ: câu đến hạn + tối đa ${UI.fcNew|0} thẻ mới mỗi ngày (hôm nay còn ${fcNewLeft()}). Lật thẻ rồi tự chấm <b>Lại · Khó · Được · Dễ</b> (phím 1-4). Tự chấm không đưa câu lên Vững cho tới khi trả lời đúng trong bài.`
+                :'⏰ Hôm nay không còn thẻ đến hạn hay thẻ mới.')+
+      `<div class="field"><label for="fcNew">Thẻ mới mỗi ngày</label><input type="number" id="fcNew" min="0" max="500" value="${UI.fcNew|0}" inputmode="numeric" style="width:96px" `+
+      `oninput="uiSet('fcNew',Math.max(0,Math.min(500,parseInt(this.value)||0)));el('startBtn').disabled=!fcDeckN();updateStartSub()"></div>`}
+  else h+=cfgDesc(UI.fcHow==='sort'?'🗂 Lật thẻ rồi tự xếp vào <b>Đã thuộc</b> (→) hoặc <b>Chưa thuộc</b> (←), vuốt cũng được. Hết vòng thì học lại phần chưa thuộc. Không ảnh hưởng tiến độ. Chọn số thẻ:'
+                                  :'🎴 Lật thẻ xem đáp án — không tính giờ, không chấm điểm, có ▶ Tự chạy. Chọn số thẻ:')+numField('Số thẻ',Math.min(lastNumQ||20,mx),mx,[10,20,30]);
+  return h}
+function fcAdvance(){FLIPPED=false;if(IDX>=SESSION.length-1)FC.end=1;else IDX++;renderQ();if(FC.end)clearDraft();else saveDraft();window.scrollTo(0,0)}
+function fcSort(know){if(!isFlash()||FC.how!=='sort'||!FLIPPED||FC.end)return;(know?FC.know:FC.learn).push(SESSION[IDX].id);FC.undo.push({i:IDX,k:know?1:0});fcAdvance()}
+function fcUndo(){const u=FC.undo.pop();if(!u)return;(u.k?FC.know:FC.learn).pop();IDX=u.i;FC.end=0;FLIPPED=false;renderQ();saveDraft()}
+function fcAgain(only){const bi=bankIndex(),ids=only?FC.learn.slice():(FC.all&&FC.all.length?FC.all:SESSION.map(s=>s.id));if(!ids.length)return;
+  let L=ids.map(id=>bi[id]).filter(Boolean).map(q=>{const x={...q,sels:[],ci:correctIdxOf(q),oi:(q.o||[]).map((_,i)=>i)};if(el('shufOpts').checked)shuffleOpts(x);return x});
+  if(el('shufQs')&&el('shufQs').checked)L=shuffle(L);
+  SESSION=L;Object.assign(FC,{know:[],learn:[],undo:[],end:0,round:FC.round+1});IDX=0;FLIPPED=false;renderQ();saveDraft();window.scrollTo(0,0)}
+function fcRate(n){if(!isFlash()||FC.how!=='rate'||!FLIPPED||FC.end)return;const q=SESSION[IDX];
+  if(!qrec(q.id)&&!q.rq)fcNewUse();
+  if(n===1){recordOne(q.id,false,'sure');SESSION.splice(Math.min(SESSION.length,IDX+4),0,Object.assign({},q,{rq:1}))}   // back 3 cards later
+  else recordOne(q.id,true,n===2?'guess':'sure',{keepWrong:true,fix:(r,r0,t)=>{
+    // a self-rating is not a graded answer: a raise waits for a real one (unv), as a peek never launders
+    if(n>2&&((r.box||1)>((r0&&r0.box)||1)||(r0&&r0.unv)))r.unv=1;
+    if(n===4)r.due=t+SRS_IV[Math.min(5,(r.box||1)+1)];return r}});
+  FC.cnt[n]++;fcAdvance()}
+function fcAuto(on){clearTimeout(FC_T);FC.auto=on===undefined?!FC.auto:!!on;if(FC.auto)fcTick();renderQ()}
+function fcTick(){clearTimeout(FC_T);if(!FC.auto)return;
+  FC_T=setTimeout(()=>{if(!FC.auto||!isFlash()||!onTestScreen()){FC.auto=0;return}
+    if(!FLIPPED){FLIPPED=true;renderQ();fcTick()}else if(IDX<SESSION.length-1){go(1);fcTick()}else fcAuto(false)},FLIPPED?3000:4000)}
+function fcTouch(e){FCX=e.touches&&e.touches[0]?e.touches[0].clientX:null}
+function fcSwipe(e){if(FCX==null||FC.how!=='sort'||!FLIPPED||!e.changedTouches)return;const dx=e.changedTouches[0].clientX-FCX;FCX=null;
+  if(Math.abs(dx)>60){e.preventDefault();fcSort(dx>0)}}
+function fcControls(){
+  if(FC.how==='sort')return `<div class="fc-count" aria-live="polite">✓ Đã thuộc <b>${FC.know.length}</b> · ✗ Chưa thuộc <b>${FC.learn.length}</b> · Thẻ ${IDX+1}/${SESSION.length}</div>`+
+    (FLIPPED?'<div class="fc-sort"><button type="button" class="btn sec" data-fk="fl" onclick="fcSort(false)">✗ Chưa thuộc (←)</button><button type="button" class="btn" data-fk="fk" onclick="fcSort(true)">✓ Đã thuộc (→)</button></div>'
+            :'<div class="sub" style="text-align:center;margin-top:10px">Lật thẻ rồi tự xếp: ← chưa thuộc · → đã thuộc</div>')+
+    `<div class="navbtns"><button type="button" class="btn sec" onclick="fcUndo()" ${FC.undo.length?'':'disabled'}>↶ Hoàn tác</button></div>`;
+  if(FC.how==='rate')return `<div class="fc-count">Thẻ ${IDX+1}/${SESSION.length}</div>`+(FLIPPED?'<div class="fc-rate">'+[[1,'Lại','danger'],[2,'Khó','sec'],[3,'Được',''],[4,'Dễ','']].map(([n,l,c])=>
+      `<button type="button" class="btn${c?' '+c:''}" data-fk="r${n}" onclick="fcRate(${n})">${l} (${n})</button>`).join('')+'</div><div class="sub" style="text-align:center;margin-top:6px">Lại: hỏi lại sau 3 thẻ · Khó: mai · Được: theo lịch · Dễ: giãn thêm 1 bậc</div>'
+    :'<div class="sub" style="text-align:center;margin-top:10px">Lật thẻ (Space) rồi tự chấm mức nhớ</div>');
+  return `<div class="navbtns"><button type="button" class="btn sec" onclick="go(-1)" ${IDX===0?'disabled':''}>← Trước</button>`+
+    `<button type="button" class="btn sec" data-fk="auto" aria-pressed="${!!FC.auto}" onclick="fcAuto()">${FC.auto?'⏸ Dừng':'▶ Tự chạy'}</button>`+
+    `<button type="button" class="btn" onclick="go(1)" ${IDX===SESSION.length-1?'disabled':''}>Sau →</button></div>`}
+function fcEnd(){el('prog').textContent=SESSION.length+'/'+SESSION.length;
+  if(FC.how==='sort'){const y=FC.learn.length;
+    setTest(`<div class="card" style="text-align:center"><div class="sub">🗂 Hết vòng ${FC.round}</div><div class="result-score">✓ Đã thuộc ${FC.know.length} · ✗ Chưa thuộc ${y}</div>`+
+      `<div class="row" style="justify-content:center;margin-top:12px">${y?`<button type="button" class="btn" onclick="fcAgain(1)">🔁 Học lại ${y} thẻ chưa thuộc</button>`:''}`+
+      '<button type="button" class="btn sec" onclick="fcAgain(0)">↺ Bắt đầu lại</button><button type="button" class="btn sec" onclick="fcUndo()">↶ Hoàn tác</button><button type="button" class="btn sec" onclick="exitTest()">← Về menu</button></div></div>');return}
+  const c=FC.cnt;
+  setTest(`<div class="card" style="text-align:center"><div class="sub">⏰ Đã chấm hết bộ thẻ</div><div class="result-score">${c[1]+c[2]+c[3]+c[4]} lượt chấm</div>`+
+    `<div class="sub">Lại ${c[1]} · Khó ${c[2]} · Được ${c[3]} · Dễ ${c[4]}</div><div class="row" style="justify-content:center;margin-top:12px">`+
+    '<button type="button" class="btn" onclick="startTest()">⏰ Bộ thẻ tiếp theo</button><button type="button" class="btn sec" onclick="exitTest()">← Về menu</button></div></div>')}
+
+/* ---- the old result screen: retake the same questions; review only the wrong ones ---- */
+let RETAKE=null,REV_WRONG=false;
+function retakeSame(){RETAKE=SESSION.map(s=>s.id);startTest()}
+function revList(){return SESSION.map((s,i)=>i).filter(i=>!graded(SESSION[i])&&!peeked(SESSION[i]))}
+function revWBtn(){return `<button type="button" class="btn sec" aria-pressed="${REV_WRONG}" onclick="revWrong()">${REV_WRONG?'☑':'☐'} Chỉ câu sai (${revList().length})</button>`}
+function revWrong(){REV_WRONG=!REV_WRONG;const w=revList();if(REV_WRONG&&w.length&&w.indexOf(IDX)<0){const n=w.find(i=>i>IDX);IDX=n!==undefined?n:w[0]}renderQ()}
+/* draft fields of the new modes (Kiểm tra tổng hợp items, a flashcard re-ask) */
+function nmItem(s){const o={};['t','ids','sh','ro','tx','pk','chk','rq','ov'].forEach(k=>{if(s[k]!==undefined)o[k]=s[k]});return o}
+
+/* ---- keys of the new modes; true = handled (the old handler must not also act) ---- */
+function newKey(e){const c=e.code;
+  if(MODE==='step'||MODE==='write'){if(!LS)return true;
+    if(LS.fin)return true;
+    if(LS.cpShow){if(c==='Space'||c==='Enter'||c==='ArrowRight'){e.preventDefault();lsCpDone()}return true}
+    const it=LS.q[LS.i];
+    if(c==='ArrowLeft'||c==='ArrowUp'){e.preventDefault();lsPrev();return true}
+    if(it.done){if(c==='Space'||c==='Enter'||c==='ArrowRight'||c==='ArrowDown'){e.preventDefault();lsNext()}return true}
+    if(c==='ArrowRight'||c==='ArrowDown'){e.preventDefault();lsNext();return true}
+    if(c==='Digit0'||c==='Numpad0'){e.preventDefault();lsDontKnow();return true}
+    if(it.t==='mc'){if(c==='Enter'){e.preventDefault();lsSubmitMulti();return true}
+      const i=keyIndex(e);if(i>=0&&i<(bankIndex()[it.id].o||[]).length){e.preventDefault();lsPick(i)}}
+    return true}
+  if(MODE==='match')return true;
+  if(MODE==='mix'){if(submitted)return true;const it=SESSION[IDX];
+    if(c==='ArrowRight'||c==='ArrowDown'){e.preventDefault();go(1);return true}
+    if(c==='ArrowLeft'||c==='ArrowUp'){e.preventDefault();go(-1);return true}
+    if(c==='Backspace'||c==='Delete'){e.preventDefault();mxClear();return true}
+    if(c==='Enter'&&UI.inst){e.preventDefault();mxCheck();return true}
+    const i=keyIndex(e);
+    if(it.t==='mc'&&i>=0&&i<(it.o||[]).length){e.preventDefault();mxPick(i)}
+    else if(it.t==='tf'&&(i===0||i===1)){e.preventDefault();mxTF(i===0?1:0)}
+    return true}
+  if(isFlash()){if(FC.auto)fcAuto(false);
+    if(FC.end)return true;
+    if(FC.how==='sort'){
+      if(FLIPPED&&(c==='ArrowLeft'||c==='Digit1'||c==='Numpad1')){e.preventDefault();fcSort(false);return true}
+      if(FLIPPED&&(c==='ArrowRight'||c==='Digit2'||c==='Numpad2')){e.preventDefault();fcSort(true);return true}
+      if(c==='Backspace'||c==='KeyZ'){e.preventDefault();fcUndo();return true}
+      if(/^Arrow/.test(c)){e.preventDefault();return true}}
+    if(FC.how==='rate'){const m=/^(?:Digit|Numpad)([1-4])$/.exec(c);
+      if(m){e.preventDefault();if(FLIPPED)fcRate(+m[1]);return true}
+      if(/^Arrow/.test(c)){e.preventDefault();return true}}}
+  return false}
+
+/* ---- ?selftest: the spec's asserts (console + a toast; window.__selftest for automation) ---- */
+function nmSelfTest(){const R=[],ok=(c,m)=>R.push((c?'PASS ':'FAIL ')+m),save=LS;
+  try{const ids=scopeQuestions().slice(0,7).map(x=>x.id);
+    if(ids.length>=7){LS={kind:'step',i:2,q:ids.map((id,o)=>({id,r:'i',o,t:'mc',oi:[],done:o<=2?1:0}))};
+      lsRetry(LS.q[2]);const p=LS.q.findIndex(x=>x.r==='r'),p5=LS.q.findIndex(x=>x.r==='i'&&x.o===5);
+      ok(p===p5-1&&LS.q[p].id===ids[2],'a miss at ordinal 2 is re-asked right before ordinal 5');
+      lsRetry(LS.q[2]);ok(LS.q.filter(x=>x.r==='r').length===1,'one pending retry per question');}
+    else ok(false,'retry insertion: the scope has fewer than 7 questions');
+  }finally{LS=save}
+  ok(gradeOne('Ba giai doan','Ba giai đoạn')==='nodiac','"Ba giai doan" vs "Ba giai đoạn" = đúng, thiếu dấu');
+  ok(gradeOne('5 chức năng','Năm chức năng')==='wrong','"5 chức năng" vs "Năm chức năng" = sai');
+  ok(gradeOne('Netwrk team','Network team')==='near','one-letter typo in a 12-character key = gần đúng');
+  const t1=qinfo({id:'__st1',q:'x',o:['A. alpha','B. beta','C. gamma','D. Tất cả các phương án trên'],a:'D',as:['D']});
+  ok(!!t1.truth&&t1.truth[0]===true&&t1.truth[2]===true,'key "Tất cả…" makes A true');
+  const t2=qinfo({id:'__st2',q:'x',o:['A. alpha','B. beta','C. gamma','D. Cả A và B'],a:'D',as:['D']});
+  ok(!!t2.truth&&t2.truth[0]===true&&t2.truth[2]===false,'key "Cả A và B" makes C false');
+  const pool=matchPool('all');if(pool.length>=3){let good=true;for(let k=0;k<20;k++){const r=mtDraw(pool,[],6),a=r.map(id=>tFold(qinfo(bankIndex()[id]).at));if(new Set(a).size!==a.length)good=false}
+    ok(good,'Ghép: no two tiles of a round share an answer (20 rounds)')}
+  window.__selftest=R;try{console.log('[selftest]\n'+R.join('\n'))}catch(e){}
+  toast((R.every(x=>x.indexOf('PASS')===0)?'✔ selftest: ':'✘ selftest: ')+R.filter(x=>x.indexOf('PASS')===0).length+'/'+R.length);return R}
+if(qsParam('selftest')!==null)setTimeout(nmSelfTest,0);
+var NM_ON=true;renderModeCounts(examsFor(curSubject()));
+/* MODES-JS-END */
 function openShortcutModal(){el('shortcutModal').style.display='flex'}
 function closeShortcutModal(e){if(!e||e.target.id==='shortcutModal'||e.target.tagName==='BUTTON')el('shortcutModal').style.display='none'}
 function modalOpen(){const m=el('shortcutModal');return m&&m.style.display==='flex'}
@@ -1858,7 +2554,7 @@ function keyIndex(e){
 let KB=false;addEventListener('pointerdown',()=>{KB=false},true);addEventListener('keydown',e=>{if(e.key==='Tab')KB=true},true);
 addEventListener('keydown',function(e){
   if(e.ctrlKey||e.altKey||e.metaKey)return;
-  if(e.code==='Escape'){closeShortcutModal();return}
+  if(e.code==='Escape'){closeShortcutModal();if(MODE==='match'&&MT&&MT.sel&&onTestScreen()){MT.sel=null;mtRender()}return}
   // Enter starts the test even from the "số câu"/"phút" inputs, so it is handled before the input guard
   if(e.code==='Enter'&&onStartScreen()&&!modalOpen()){
     const t=e.target;if(t&&t.matches&&t.matches('button,summary,a,label'))return;   // let a focused control keep its own Enter
@@ -1879,6 +2575,7 @@ addEventListener('keydown',function(e){
     // Space still reveals the answer as before
     if((e.code==='Space'||e.code==='Enter')&&KB&&e.target&&e.target.closest&&e.target.closest('button'))return;
     if(e.code==='Space'&&e.target&&e.target.closest&&e.target.closest('summary'))return;   // a focused 📖 row toggles itself
+    if(newKey(e))return;   // the study modes and flashcard sorting/rating own their keys
     if(e.code==='ArrowRight'||e.code==='ArrowDown'){e.preventDefault();go(1);return}
     if(e.code==='ArrowLeft'||e.code==='ArrowUp'){e.preventDefault();go(-1);return}
     if(e.code==='Space'){e.preventDefault();
@@ -1909,6 +2606,8 @@ addEventListener('keydown',function(e){
       <div class="sc-item"><div><kbd>⌫</kbd> Backspace</div><span>Xóa lựa chọn của câu hiện tại</span></div>
       <div class="sc-item"><div><kbd>Space</kbd></div><span>Xem đáp án / lật thẻ Flashcard</span></div>
       <div class="sc-item"><div><kbd>S</kbd></div><span>Đánh dấu ★ đã thuộc</span></div>
+      <div class="sc-item"><div><kbd>0</kbd> / <kbd>Space</kbd></div><span>Học từng bước, Gõ đáp án: Không biết / Tiếp tục</span></div>
+      <div class="sc-item"><div><kbd>←</kbd> <kbd>→</kbd> / <kbd>1</kbd> - <kbd>4</kbd></div><span>Flashcard: Chưa thuộc / Đã thuộc · chấm Lại, Khó, Được, Dễ</span></div>
       <div class="sc-item"><div><kbd>?</kbd> / <kbd>H</kbd></div><span>Bật / tắt bảng phím tắt</span></div>
       <div class="sc-item"><div><kbd>Esc</kbd></div><span>Đóng bảng phím tắt</span></div>
     </div>
