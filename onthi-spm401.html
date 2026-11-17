@@ -410,6 +410,7 @@ try{var t=localStorage.getItem('app_theme');if(t==='dark'||t==='light')d.setAttr
               <button type="button" class="chip" data-v="60" onclick="setVal('mins',60)">60</button>
             </div><input type="number" id="mins" value="0" min="0" inputmode="numeric" aria-label="Số phút (0 = không giới hạn)" oninput="syncChips();updateStartSub()"></div></div>
           <label class="switch"><input type="checkbox" id="hideKnown" onchange="renderStats()"><span>Ẩn câu đã đánh dấu ★ thuộc <b id="knownN"></b> <small style="color:var(--muted)">(câu ẩn không được ôn nên không lên Vững)</small></span></label>
+          <label class="switch"><input type="checkbox" id="shufQs" checked onchange="updateStartSub()"><span>🔀 Trộn thứ tự câu hỏi</span></label>
           <label class="switch"><input type="checkbox" id="shufOpts" checked onchange="updateStartSub()"><span>🔀 Trộn thứ tự đáp án (tránh học vẹt vị trí)</span></label>
           <label class="switch"><input type="checkbox" id="abxOn" checked onchange="setAbx(this.checked)"><span>🔤 Hộp "Viết tắt" cạnh câu hỏi <small style="color:var(--muted)">(tắt thì chỉ còn nút "Hiện" nhỏ)</small></span></label>
         </div>
@@ -1464,7 +1465,7 @@ function updateStartSub(){const s=el('startSub');if(!s)return;
   s.innerHTML=t;updateOptsSum();}
 function updateOptsSum(){const o=el('optsSum');if(!o)return;const mins=Math.max(0,parseInt(el('mins').value)||0);
   o.textContent=[MODE==='flash'?'':(mins?`⏱ ${mins} phút`:'⏱ Không giới hạn'),
-    el('shufOpts').checked?'🔀 Trộn đáp án':'Giữ thứ tự đáp án',el('hideKnown').checked?'Ẩn câu ★':''].filter(Boolean).join(' · ');}
+    el('shufQs')&&el('shufQs').checked?'🔀 Trộn câu':'',el('shufOpts').checked?'🔀 Trộn đáp án':'Giữ thứ tự đáp án',el('hideKnown').checked?'Ẩn câu ★':''].filter(Boolean).join(' · ');}
 let SESSION=[],IDX=0,submitted=false,timerInt=null,remaining=0,limited=false,REVEALED=new Set(),initSec=0,deadline=0;
 /* ---- options that point at other options ----
    "Cả a và b", "B và C đều đúng", "ABC", "A, B, C và D", "Both A and B": shuffled like any other option,
@@ -1548,6 +1549,8 @@ function buildSession(){const exs=examsFor(curSubject());const t=today();
     const n=Math.max(1,Math.min(numQ()||30,list.length));list=list.slice(0,n);}
   else if(MODE==='random'){list=shuffle(list);const n=Math.max(1,Math.min(numQ()||30,list.length));list=list.slice(0,n);}
   else if(MODE==='flash'){list=shuffle(list);const n=Math.max(1,Math.min(numQ()||20,list.length));list=list.slice(0,n);}
+  // the other modes served bank order; the switch shuffles them too (review keeps its weakest-first order)
+  else if(el('shufQs')&&el('shufQs').checked)list=shuffle(list);
   return list;}
 function startTest(){SESSION=buildSession();if(!SESSION.length){alert('Không có câu hỏi cho lựa chọn này.');return;}
   IDX=0;submitted=false;REVIEWING=false;REVEALED=new Set();
