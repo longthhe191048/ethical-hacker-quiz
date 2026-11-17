@@ -3,21 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dashboard ôn thi FU — 14 môn</title>
+<meta name="theme-color" content="#0d1117">
+<title>Dashboard ôn thi FU — 12 môn</title>
 <style>
 :root, :root[data-theme="dark"]{
   --bg:#0d1117;--panel:#161b22;--panel2:#1c232d;--border:#30363d;--text:#e6edf3;--muted:#9aa7b4;
   --accent:#3b82f6;--accent2:#2563eb;--chip:#21262d;--topbar:rgba(13,17,23,.96);--shadow:rgba(0,0,0,.45);
-  --amber:#d29922;
+  --amber:#d29922;--fill:#2563eb;color-scheme:dark;
 }
 :root[data-theme="light"]{
   --bg:#f6f8fa;--panel:#fff;--panel2:#eef1f4;--border:#d0d7de;--text:#1f2328;--muted:#59636e;
   --accent:#2563eb;--accent2:#1d4ed8;--chip:#eaeef2;--topbar:rgba(255,255,255,.94);--shadow:rgba(140,149,159,.28);
-  --amber:#9a6700;
+  --amber:#7d4e00;--fill:#2563eb;color-scheme:light;
 }
+:root{--fs-xs:.75rem;--ease:cubic-bezier(.16,1,.3,1)}
 *{box-sizing:border-box}html,body{margin:0;padding:0;height:100%}
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  display:flex;flex-direction:column;height:100vh;height:100dvh;transition:background .2s,color .2s}
+  display:flex;flex-direction:column;height:100vh;height:100dvh}
 button{font:inherit;color:inherit}
 header{position:relative;z-index:20;flex:0 0 auto;display:flex;align-items:center;gap:12px;min-height:56px;padding:6px 16px;
   background:var(--topbar);backdrop-filter:blur(6px);border-bottom:1px solid var(--border)}
@@ -30,7 +32,7 @@ header{position:relative;z-index:20;flex:0 0 auto;display:flex;align-items:cente
   background:var(--chip);border:1px solid var(--border);border-radius:12px}
 .subj-btn:hover{border-color:var(--accent)}
 .sb-txt{display:flex;flex-direction:column;min-width:0;line-height:1.2}
-.sb-grp{font-size:.7rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-grp{font-size:var(--fs-xs);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sb-cur{font-size:.98rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sb-caret{margin-left:auto;padding-left:4px;font-size:.8rem;color:var(--muted);transition:transform .15s}
 .subj-btn[aria-expanded="true"] .sb-caret{transform:rotate(180deg)}
@@ -42,7 +44,12 @@ header{position:relative;z-index:20;flex:0 0 auto;display:flex;align-items:cente
 #content{flex:1;min-width:0;min-height:0;position:relative;overflow:hidden}
 .panel{position:absolute;inset:0;display:none}.panel.active{display:block}
 .panel iframe{width:100%;height:100%;border:0;display:block;background:var(--bg)}
-.loading{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--muted)}
+.loading{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:16px;
+  overflow:hidden;background:var(--bg);color:var(--muted)}
+/* pages are 0.3-1 MB: a thin running bar says it is still loading; .err = gave up, a retry button shows */
+.loading::before{content:'';position:absolute;top:0;left:0;height:2px;width:30%;background:var(--accent);animation:ld 1s var(--ease) infinite}
+.loading.err::before{display:none}
+@keyframes ld{from{transform:translateX(-100%)}to{transform:translateX(340%)}}
 
 /* ---- subject picker: bottom sheet below 900px, sidebar from 900px (one <nav>, two layouts) ---- */
 #navScrim{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .2s}
@@ -58,14 +65,15 @@ header{position:relative;z-index:20;flex:0 0 auto;display:flex;align-items:cente
 .nav-close{min-width:44px;min-height:44px;border-radius:10px;cursor:pointer;background:transparent;border:1px solid transparent;color:var(--muted);font-size:1.1rem}
 .nav-close:hover{background:var(--chip)}
 .grp{margin:6px 0 12px}
-.grp-h{margin:0 2px 8px;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.grp-h{margin:0 2px 8px;font-size:var(--fs-xs);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .grp-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .tab{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;min-width:0;min-height:56px;padding:8px 10px;
   text-align:left;cursor:pointer;background:var(--panel2);border:1px solid var(--border);border-radius:12px;transition:border-color .15s,background .15s}
 .tab b{font-size:.95rem;white-space:nowrap}
-.tab small{font-size:.74rem;line-height:1.2;color:var(--muted)}
+.tab small{font-size:var(--fs-xs);line-height:1.2;color:var(--muted)}
+a.tab{text-decoration:none;color:inherit}
 .tab:hover{border-color:var(--accent)}
-.tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.tab.active{background:var(--fill);border-color:var(--fill);color:#fff}
 .tab.active small{color:rgba(255,255,255,.85)}
 /* amber dot = this subject has SRS questions due today */
 .tab.due::after{content:'';position:absolute;top:8px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--amber)}
@@ -81,11 +89,11 @@ header{position:relative;z-index:20;flex:0 0 auto;display:flex;align-items:cente
   .grp{margin:6px 0 16px}
   .grp-h{margin:0 10px 6px}
   .grp-list{grid-template-columns:1fr;gap:2px}
-  .tab{flex-direction:row;align-items:baseline;gap:8px;min-height:40px;padding:8px 10px;background:transparent;border-color:transparent;border-radius:9px}
+  .tab{flex-direction:row;align-items:baseline;justify-content:flex-start;gap:8px;min-height:40px;padding:8px 10px;background:transparent;border-color:transparent;border-radius:9px}
   .tab b{min-width:4.8em}
   .tab small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .tab:hover{background:var(--chip);border-color:transparent}
-  .tab.active{background:var(--accent);border-color:var(--accent)}
+  .tab.active{background:var(--fill);border-color:var(--fill)}
   .tab.due::after{top:50%;margin-top:-4px}
 }
 @media(max-width:560px){
@@ -96,7 +104,7 @@ header{position:relative;z-index:20;flex:0 0 auto;display:flex;align-items:cente
   .theme-btn .tl{display:none}
 }
 @media(max-width:340px){.grp-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(prefers-reduced-motion:reduce){#subjNav,#navScrim,.sb-caret{transition:none}}
+@media(prefers-reduced-motion:reduce){#subjNav,#navScrim,.sb-caret{transition:none}.loading::before{animation:none}}
 </style>
 </head>
 <body>
@@ -118,35 +126,34 @@ header{position:relative;z-index:20;flex:0 0 auto;display:flex;align-items:cente
     <div class="nav-handle" aria-hidden="true"></div>
     <div class="nav-head"><b>Chọn môn</b><button type="button" class="nav-close" onclick="closeNav()" aria-label="Đóng">✕</button></div>
 
+    <!-- groups (owner 17/11): political theory (MLN*, HCM*, VNR) · IT security · Coursera (a code ending in "c") -->
+    <div class="grp"><div class="grp-h">Lý luận chính trị</div><div class="grp-list">
+      <button type="button" class="tab" data-tab="mln111" data-scope="MLN111" data-label="MLN111 · Triết học"         onclick="selectTab('mln111')"><b>MLN111</b><small>Triết học Mác–Lênin</small></button>
+      <button type="button" class="tab" data-tab="mln111pt" data-scope="MLN111PT" data-label="MLN111 · Progress test" onclick="selectTab('mln111pt')"><b>MLN111</b><small>Ôn tập Progress test</small></button>
+      <a class="tab" href="doi-chieu-mln111.html" target="_blank" rel="noopener"><b>MLN111</b><small><span aria-hidden="true">📋</span> Đối chiếu đáp án</small></a>
+      <button type="button" class="tab" data-tab="mln122" data-scope="MLN122" data-label="MLN122 · Kinh tế chính trị" onclick="selectTab('mln122')"><b>MLN122</b><small>Kinh tế chính trị</small></button>
+      <a class="tab" href="doi-chieu-mln122.html" target="_blank" rel="noopener"><b>MLN122</b><small><span aria-hidden="true">📋</span> Đối chiếu đáp án</small></a>
+      <button type="button" class="tab" data-tab="mln131" data-scope="MLN131" data-label="MLN131 · CNXH khoa học"     onclick="selectTab('mln131')"><b>MLN131</b><small>CNXH khoa học</small></button>
+      <a class="tab" href="doi-chieu-mln131.html" target="_blank" rel="noopener"><b>MLN131</b><small><span aria-hidden="true">📋</span> Đối chiếu đáp án</small></a>
+      <button type="button" class="tab" data-tab="hcm202" data-scope="HCM202" data-label="HCM202 · Tư tưởng HCM"      onclick="selectTab('hcm202')"><b>HCM202</b><small>Tư tưởng Hồ Chí Minh</small></button>
+      <a class="tab" href="doi-chieu-hcm202.html" target="_blank" rel="noopener"><b>HCM202</b><small><span aria-hidden="true">📋</span> Đối chiếu đáp án</small></a>
+      <button type="button" class="tab" data-tab="vnr"    data-scope="VNR"    data-label="VNR · Lịch sử Đảng"        onclick="selectTab('vnr')"><b>VNR</b><small>Lịch sử Đảng CSVN</small></button>
+      <a class="tab" href="doi-chieu-vnr.html" target="_blank" rel="noopener"><b>VNR</b><small><span aria-hidden="true">📋</span> Đối chiếu đáp án</small></a>
+    </div></div>
+
     <div class="grp"><div class="grp-h">An toàn thông tin</div><div class="grp-list">
       <button type="button" class="tab" data-tab="hod402"  data-scope="ETHICAL_HACKER" data-label="HOD402 · ITexam" onclick="selectTab('hod402')"><b>HOD402</b><small>ITexam (Cisco)</small></button>
       <button type="button" class="tab" data-tab="hodfu"   data-scope="HOD402"  data-label="HOD402 · Đề FU"  onclick="selectTab('hodfu')"><b>HOD402</b><small>Đề thi FU</small></button>
       <button type="button" class="tab" data-tab="hod401"  data-scope="HOD401"  data-label="HOD401 · Đề FU"  onclick="selectTab('hod401')"><b>HOD401</b><small>Đề thi FU</small></button>
       <button type="button" class="tab" data-tab="ces202"  data-scope="CES202"  data-label="CES202 · Đề FU"  onclick="selectTab('ces202')"><b>CES202</b><small>Đề thi FU</small></button>
       <button type="button" class="tab" data-tab="iap301"  data-scope="IAP301"  data-label="IAP301 · Đề FU"  onclick="selectTab('iap301')"><b>IAP301</b><small>Đề thi FU</small></button>
-      <button type="button" class="tab" data-tab="frs401c" data-scope="FRS401C" data-label="FRS401C · Đề FU" onclick="selectTab('frs401c')"><b>FRS401C</b><small>Đề thi FU</small></button>
       <button type="button" class="tab" data-tab="spm401"  data-scope="SPM401"  data-label="SPM401 · Đề FU"  onclick="selectTab('spm401')"><b>SPM401</b><small>Đề thi FU</small></button>
-      <a class="tab" href="doi-chieu-spm401.html" target="_blank" rel="noopener" style="text-decoration:none;color:inherit"><b>SPM401</b><small>📋 Đối chiếu đáp án</small></a>
+      <a class="tab" href="doi-chieu-spm401.html" target="_blank" rel="noopener"><b>SPM401</b><small><span aria-hidden="true">📋</span> Đối chiếu đáp án</small></a>
     </div></div>
 
-    <div class="grp"><div class="grp-h">Lý luận chính trị</div><div class="grp-list">
-      <button type="button" class="tab" data-tab="mln111" data-scope="MLN111" data-label="MLN111 · Triết học"         onclick="selectTab('mln111')"><b>MLN111</b><small>Triết học Mác–Lênin</small></button>
-      <button type="button" class="tab" data-tab="mln111pt" data-scope="MLN111PT" data-label="MLN111 · Progress test" onclick="selectTab('mln111pt')"><b>MLN111</b><small>Ôn tập Progress test</small></button>
-      <a class="tab" href="doi-chieu-mln111.html" target="_blank" rel="noopener" style="text-decoration:none;color:inherit"><b>MLN111</b><small>📋 Đối chiếu đáp án</small></a>
-      <button type="button" class="tab" data-tab="mln122" data-scope="MLN122" data-label="MLN122 · Kinh tế chính trị" onclick="selectTab('mln122')"><b>MLN122</b><small>Kinh tế chính trị</small></button>
-      <a class="tab" href="doi-chieu-mln122.html" target="_blank" rel="noopener" style="text-decoration:none;color:inherit"><b>MLN122</b><small>📋 Đối chiếu đáp án</small></a>
-      <button type="button" class="tab" data-tab="mln131" data-scope="MLN131" data-label="MLN131 · CNXH khoa học"     onclick="selectTab('mln131')"><b>MLN131</b><small>CNXH khoa học</small></button>
-      <a class="tab" href="doi-chieu-mln131.html" target="_blank" rel="noopener" style="text-decoration:none;color:inherit"><b>MLN131</b><small>📋 Đối chiếu đáp án</small></a>
-      <button type="button" class="tab" data-tab="hcm202" data-scope="HCM202" data-label="HCM202 · Tư tưởng HCM"      onclick="selectTab('hcm202')"><b>HCM202</b><small>Tư tưởng Hồ Chí Minh</small></button>
-      <a class="tab" href="doi-chieu-hcm202.html" target="_blank" rel="noopener" style="text-decoration:none;color:inherit"><b>HCM202</b><small>📋 Đối chiếu đáp án</small></a>
-      <button type="button" class="tab" data-tab="vnr"    data-scope="VNR"    data-label="VNR · Lịch sử Đảng"        onclick="selectTab('vnr')"><b>VNR</b><small>Lịch sử Đảng CSVN</small></button>
-      <a class="tab" href="doi-chieu-vnr.html" target="_blank" rel="noopener" style="text-decoration:none;color:inherit"><b>VNR</b><small>📋 Đối chiếu đáp án</small></a>
-    </div></div>
-
-    <div class="grp"><div class="grp-h">Phần mềm</div><div class="grp-list">
-      <button type="button" class="tab" data-tab="pmg201c" data-scope="PMG201c" data-label="PMG201c · Quản lý dự án"     onclick="selectTab('pmg201c')"><b>PMG201c</b><small>Quản lý dự án</small></button>
-      <button type="button" class="tab" data-tab="swd392"  data-scope="SWD392"  data-label="SWD392 · Kiến trúc phần mềm" onclick="selectTab('swd392')"><b>SWD392</b><small>Kiến trúc phần mềm</small></button>
-      <button type="button" class="tab" data-tab="mma301"  data-scope="MMA301"  data-label="MMA301 · Lập trình mobile"   onclick="selectTab('mma301')"><b>MMA301</b><small>Lập trình mobile</small></button>
+    <div class="grp"><div class="grp-h">Coursera</div><div class="grp-list">
+      <button type="button" class="tab" data-tab="frs401c" data-scope="FRS401C" data-label="FRS401C · Đề FU" onclick="selectTab('frs401c')"><b>FRS401C</b><small>Đề thi FU</small></button>
+      <button type="button" class="tab" data-tab="pmg201c" data-scope="PMG201c" data-label="PMG201c · Quản lý dự án" onclick="selectTab('pmg201c')"><b>PMG201c</b><small>Quản lý dự án</small></button>
     </div></div>
   </nav>
 
@@ -164,15 +171,13 @@ header{position:relative;z-index:20;flex:0 0 auto;display:flex;align-items:cente
     <div class="panel" id="panel-mln131"><iframe title="MLN131" data-src="onthi-mln131.html?subject=MLN131"></iframe><div class="loading">Đang tải…</div></div>
     <div class="panel" id="panel-mln122"><iframe title="MLN122" data-src="onthi-mln122.html?subject=MLN122"></iframe><div class="loading">Đang tải…</div></div>
     <div class="panel" id="panel-pmg201c"><iframe title="PMG201c" data-src="onthi-pmg201c.html?subject=PMG201c"></iframe><div class="loading">Đang tải…</div></div>
-    <div class="panel" id="panel-swd392"><iframe title="SWD392" data-src="onthi-swd392.html?subject=SWD392"></iframe><div class="loading">Đang tải…</div></div>
-    <div class="panel" id="panel-mma301"><iframe title="MMA301" data-src="onthi-mma301.html?subject=MMA301"></iframe><div class="loading">Đang tải…</div></div>
     <div class="panel" id="panel-spm401"><iframe title="SPM401" data-src="onthi-spm401.html?subject=SPM401"></iframe><div class="loading">Đang tải…</div></div>
   </div>
 </div>
 
 <script>
 function el(id){return document.getElementById(id)}
-const TABS=['hod402','hodfu','hod401','ces202','iap301','frs401c','spm401','vnr','hcm202','mln111','mln111pt','mln131','mln122','pmg201c','swd392','mma301'];
+const TABS=['hod402','hodfu','hod401','ces202','iap301','frs401c','spm401','vnr','hcm202','mln111','mln111pt','mln131','mln122','pmg201c'];
 const DESK=window.matchMedia?matchMedia('(min-width:900px)'):null;
 
 /* ---- theme: the switch in this header is the only one; every loaded page follows it live ---- */
@@ -195,6 +200,7 @@ function syncFrame(f){
 function applyTheme(t){
   t=t==='light'?'light':'dark';
   document.documentElement.dataset.theme=t;try{localStorage.setItem('app_theme',t)}catch(e){}
+  const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=t==='light'?'#f6f8fa':'#0d1117';   // phone address bar
   const b=el('themeBtn');
   if(b){const toLight=t==='dark',lbl=toLight?'Chuyển sang giao diện sáng':'Chuyển sang giao diện tối';
     b.innerHTML=toLight?'<span aria-hidden="true">☀️</span><span class="tl"> Sáng</span>':'<span aria-hidden="true">🌙</span><span class="tl"> Tối</span>';
@@ -234,6 +240,14 @@ function toggleNav(){navOpen()?closeNav():openNav()}
 addEventListener('keydown',e=>{if(e.key==='Escape'&&navOpen()){e.preventDefault();closeNav();}});
 if(DESK){const f=()=>closeNav(true);DESK.addEventListener?DESK.addEventListener('change',f):DESK.addListener(f);}
 
+/* an iframe never fires 'error': no 'load' after 15s = show a retry that sets src again */
+function loadFrame(p,f){const l=p.querySelector('.loading');
+  if(l){l.classList.remove('err');l.textContent='Đang tải…';l.style.display='';}
+  clearTimeout(f._to);
+  f._to=setTimeout(()=>{if(!l||l.style.display==='none')return;l.classList.add('err');
+    l.innerHTML='Không tải được trang này. <button type="button" class="theme-btn">Thử lại</button>';
+    l.querySelector('button').onclick=()=>loadFrame(p,f);},15000);
+  f.setAttribute('src',f.getAttribute('data-src'));}
 function selectTab(name){
   if(!TABS.includes(name))name='hod402';
   TABS.forEach(t=>{
@@ -244,8 +258,8 @@ function selectTab(name){
     if(active){const f=p.querySelector('iframe[data-src]');
       if(f&&!f.getAttribute('src')){
         // not {once:true}: pages reload themselves ("Khôi phục" does) and must be re-synced each time
-        f.addEventListener('load',()=>{const l=p.querySelector('.loading');if(l)l.style.display='none';syncFrame(f);markDue();});
-        f.setAttribute('src',f.getAttribute('data-src'));}}
+        f.addEventListener('load',()=>{clearTimeout(f._to);const l=p.querySelector('.loading');if(l)l.style.display='none';syncFrame(f);markDue();});
+        loadFrame(p,f);}}
   });
   const b=document.querySelector('.tab[data-tab="'+name+'"]'),g=b.closest('.grp'),h=g&&g.querySelector('.grp-h');
   const label=b.dataset.label||b.textContent.trim();

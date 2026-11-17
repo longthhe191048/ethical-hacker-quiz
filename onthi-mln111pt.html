@@ -3,51 +3,56 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0d1117">
 <title>Ôn tập đề (FUoverflow)</title>
 <style>
 :root, :root[data-theme="dark"]{
   --bg:#0d1117;--panel:#161b22;--panel2:#1c232d;--border:#30363d;--text:#e6edf3;--muted:#9aa7b4;
-  --accent:#3b82f6;--accent2:#2563eb;--green:#2ea043;--greenbg:#12261a;--red:#f85149;--redbg:#2b1517;
+  --accent:#3b82f6;--accent2:#2563eb;--green:#3fb950;--greenbg:#12261a;--red:#f85149;--redbg:#2b1517;
   --amber:#d29922;--amberbg:#241c0e;--chip:#21262d;--selbg:#12203a;--topbar:rgba(13,17,23,.96);--shadow:rgba(0,0,0,.45);
+  --fill:#2563eb;--fill-h:#1d4ed8;--danger:#da3633;color-scheme:dark;   /* white on --fill 5.2:1, on --danger 4.6:1 */
 }
 :root[data-theme="light"]{
   --bg:#f6f8fa;--panel:#fff;--panel2:#eef1f4;--border:#d0d7de;--text:#1f2328;--muted:#59636e;
-  --accent:#2563eb;--accent2:#1d4ed8;--green:#1a7f37;--greenbg:#d8f6e0;--red:#cf222e;--redbg:#ffe4e2;
-  --amber:#9a6700;--amberbg:#fff3bf;--chip:#eaeef2;--selbg:#dbe8ff;--topbar:rgba(255,255,255,.94);--shadow:rgba(140,149,159,.28);
+  --accent:#2563eb;--accent2:#1d4ed8;--green:#116329;--greenbg:#d8f6e0;--red:#b62324;--redbg:#ffe4e2;
+  --amber:#7d4e00;--amberbg:#fff3bf;--chip:#eaeef2;--selbg:#dbe8ff;--topbar:rgba(255,255,255,.94);--shadow:rgba(140,149,159,.28);
+  --fill:#2563eb;--fill-h:#1d4ed8;--danger:#cf222e;color-scheme:light;   /* status text >= 5.3:1 on its tint */
 }
+:root{--fs-xs:.75rem;--fs-sm:.875rem;--fs-md:1rem;--fs-lg:1.125rem;--fs-xl:1.5rem;
+  --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--r-sm:6px;--r-md:10px;--r-lg:14px;--ease:cubic-bezier(.16,1,.3,1)}
 *{box-sizing:border-box}html,body{margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.55;font-size:16px;transition:background .2s,color .2s}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.55;font-size:16px}
 .wrap{max-width:860px;margin:0 auto;padding:18px 16px 90px}
 body.testing .wrap{padding-top:66px}
-h1{font-size:1.3rem;margin:0}.sub{color:var(--muted);font-size:.9rem;margin-top:3px}
-.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px;margin:14px 0}
+h1{font-size:var(--fs-xl);font-weight:800;letter-spacing:-.02em;line-height:1.2;margin:0;text-wrap:balance}.sub{color:var(--muted);font-size:.9rem;margin-top:3px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:var(--sp-5);margin:14px 0}
 .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:1rem;font-weight:600;cursor:pointer}
-.btn:hover{background:var(--accent2)}.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn{background:var(--fill);color:#fff;border:none;border-radius:var(--r-md);padding:10px 18px;font-size:1rem;font-weight:600;cursor:pointer}
+.btn:hover{background:var(--fill-h)}.btn:disabled{opacity:.45;cursor:not-allowed}
 .btn.sec{background:var(--chip);color:var(--text);border:1px solid var(--border)}.btn.sec:hover{background:var(--panel2)}
-.btn.danger{background:var(--red)}
+.btn.danger{background:var(--danger)}
 .theme-btn{background:var(--chip);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:6px 11px;cursor:pointer;font-size:.85rem}
 label{font-size:.85rem;color:var(--muted)}
 select,input[type=number]{background:var(--panel2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:9px 11px;font-size:1rem;max-width:100%}
 .field{display:flex;flex-direction:column;gap:6px;margin:8px 0}
 .hist-item{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:9px 12px;border:1px solid var(--border);border-radius:8px;margin:6px 0;background:var(--panel2);font-size:.9rem}
 .hist-item .hdate{color:var(--muted);font-size:.8rem;min-width:130px}.hist-item .hscore{font-weight:700}
-.hbadge{border-radius:6px;font-size:.72rem;padding:1px 8px;font-weight:700}.hbadge.p{background:var(--greenbg);color:var(--green)}.hbadge.f{background:var(--redbg);color:var(--red)}
+.hbadge{border-radius:6px;font-size:var(--fs-xs);padding:1px 8px;font-weight:700}.hbadge.p{background:var(--greenbg);color:var(--green)}.hbadge.f{background:var(--redbg);color:var(--red)}
 .hist-empty{color:var(--muted);font-size:.9rem}
 #topbar{position:fixed;top:0;left:0;right:0;z-index:40;background:var(--topbar);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);padding:8px 14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 #timer{font-weight:700;font-variant-numeric:tabular-nums;background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:3px 10px}
-#timer.warn{color:var(--amber);border-color:var(--amber)}#timer.crit{color:#fff;background:var(--red);border-color:var(--red)}
+#timer.warn{color:var(--amber);border-color:var(--amber)}#timer.crit{color:#fff;background:var(--danger);border-color:var(--danger)}
 #prog{font-weight:700;font-variant-numeric:tabular-nums}
 .src{color:var(--muted);font-size:.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
 .grow{flex:1}
 .qh{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;margin-bottom:8px}
-.qnum{background:var(--accent);color:#fff;border-radius:6px;font-weight:700;font-size:.78rem;padding:2px 9px}
-.badge{background:var(--chip);color:var(--muted);border:1px solid var(--border);border-radius:6px;font-size:.72rem;padding:1px 8px}
+.qnum{background:var(--fill);color:#fff;border-radius:6px;font-weight:700;font-size:.78rem;padding:2px 9px}
+.badge{background:var(--chip);color:var(--muted);border:1px solid var(--border);border-radius:6px;font-size:var(--fs-xs);padding:1px 8px}
 .stem{font-weight:600;margin:0 0 12px;font-size:1.05rem;overflow-wrap:anywhere}
 /* abbreviations: marked in the text, spelled out in the box beside the question */
 abbr.ab{text-decoration:underline dotted;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--muted);cursor:help}
 .abx{margin:12px 0 4px;padding:10px 12px 11px;background:var(--panel2);border:1px solid var(--border);border-radius:10px;font-size:.86rem;line-height:1.45}
-.abx-h{margin:0 0 6px;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.abx-h{margin:0 0 6px;font-size:var(--fs-xs);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .abx dl{margin:0}.abx-i{margin:0;overflow-wrap:anywhere}.abx-i+.abx-i{margin-top:5px}
 .abx dt,.abx dd{display:inline;margin:0}.abx dt{font-weight:700;color:var(--accent);margin-right:6px}.abx dd{color:var(--text)}
 @media (min-width:880px){.qgrid.has-abx{display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:0 18px;align-items:start}
@@ -55,13 +60,14 @@ abbr.ab{text-decoration:underline dotted;text-decoration-thickness:1px;text-unde
 /* the box can be switched off (⚙️ Tùy chọn or its own button): off = a small "Viết tắt · Hiện" chip, no underline */
 .abx-h{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .abx-t{font:inherit;font-weight:600;letter-spacing:0;text-transform:none;color:var(--accent);background:none;border:0;padding:5px 8px;margin:-5px -8px -5px 0;border-radius:6px;cursor:pointer;min-width:3.6em;text-align:center}
-.abx-t:hover{text-decoration:underline}.abx-t:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.abx-t:hover{text-decoration:underline}
 .abx-t .off,html.abx-off .abx-t .on,html.abx-off .abx dl{display:none}html.abx-off .abx-t .off{display:inline}
 html.abx-off .abx-h{margin:0}
 html.abx-off abbr.ab{text-decoration:none;cursor:inherit}
-.opt{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border:1px solid var(--border);border-radius:9px;margin:7px 0;background:var(--panel2);cursor:pointer}
+.opt{display:flex;gap:10px;align-items:flex-start;width:100%;padding:var(--sp-3) var(--sp-4);border:1px solid var(--border);border-radius:var(--r-md);margin:var(--sp-2) 0;
+  background:var(--panel2);color:inherit;font:inherit;text-align:left;cursor:pointer}
 .opt.locked{cursor:default}.opt.locked:hover{border-color:var(--border)}
-.opt:hover{border-color:var(--accent)}.opt.sel{border-color:var(--accent);background:var(--selbg)}
+.opt:hover{border-color:var(--accent)}.opt.sel{border-color:var(--accent);background:var(--selbg);box-shadow:inset 0 0 0 1px var(--accent)}
 .opt.correct{border-color:var(--green);background:var(--greenbg)}.opt.wrong{border-color:var(--red);background:var(--redbg)}
 .opt .cbox{font-size:1.05rem;line-height:1.4}
 .opt .olet{font-weight:700;color:var(--muted);min-width:1.5em}
@@ -71,7 +77,7 @@ html.abx-off abbr.ab{text-decoration:none;cursor:inherit}
 .badge.xr{color:var(--green);border-color:var(--green)}
 .opt .otext{flex:1;overflow-wrap:anywhere}.opt .mk{margin-left:auto;font-weight:700;white-space:nowrap}.opt.correct .mk{color:var(--green)}.opt.wrong .mk{color:var(--red)}
 .notes{background:var(--panel2);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:9px 12px;margin:8px 0;font-size:.9rem;white-space:pre-wrap}
-.vbadge{font-size:.7rem;border-radius:6px;padding:1px 7px;border:1px solid var(--border)}
+.vbadge{font-size:var(--fs-xs);border-radius:6px;padding:1px 7px;border:1px solid var(--border)}
 .vbadge.ok{color:var(--green);border-color:var(--green)}.vbadge.warn{color:var(--amber);border-color:var(--amber);background:var(--amberbg)}.vbadge.src{color:var(--muted)}.vbadge.corr{color:var(--amber);border-color:var(--amber)}
 /* ===== CHANGES TO EXISTING RULES (eh-site/onthi-fu-v2-tpl.html <style>) =====
    - DELETE line 59: .expl{…white-space:pre-line…}.expl b{…}
@@ -95,7 +101,7 @@ html.abx-off abbr.ab{text-decoration:none;cursor:inherit}
 .ac{margin:12px 0 4px;border:1px solid var(--border);border-radius:12px;background:var(--panel2);overflow:hidden;
   font-size:.95rem;line-height:1.6;color:var(--text);overflow-wrap:anywhere}
 .ac p{margin:0}
-.ac-lbl{margin:0 0 4px;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;line-height:1.4;color:var(--muted)}
+.ac-lbl{margin:0 0 4px;font-size:var(--fs-xs);font-weight:700;letter-spacing:.06em;text-transform:uppercase;line-height:1.4;color:var(--muted)}
 /* 1. the right answer: the only tinted band. Letter = the DISPLAYED letter, text = the option text */
 .ac-key{padding:10px 14px 12px;background:var(--greenbg)}
 .ac-key:not(:last-child){border-bottom:1px solid var(--border)}
@@ -122,7 +128,6 @@ html.abx-off abbr.ab{text-decoration:none;cursor:inherit}
 .ac-ev>summary::-webkit-details-marker{display:none}
 .ac-ev>summary::after{content:'▾';position:absolute;right:4px;top:50%;transform:translateY(-50%);color:var(--muted);transition:transform .15s}
 .ac-ev[open]>summary::after{transform:translateY(-50%) rotate(180deg)}
-.ac-ev>summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
 .ev-t{font-size:.9rem;font-weight:700}
 .ev-sum{min-width:0;font-size:.8rem;color:var(--muted)}
 .ev-body{padding-top:4px}
@@ -134,24 +139,25 @@ html.abx-off abbr.ab{text-decoration:none;cursor:inherit}
 .ev-bk{font-weight:700;color:var(--text)}
 .ev-loc{display:block;margin-top:2px}
 .ev-unv{display:inline-block;padding:0 6px;border:1px solid var(--amber);border-radius:5px;background:var(--amberbg);color:var(--text);
-  font-size:.74rem;font-weight:700;line-height:1.5;white-space:nowrap}   /* text in --text: amber text is ~4.2:1 in light */
-.ev-src{margin-top:12px;padding-top:8px;border-top:1px dashed var(--border);font-size:.74rem;line-height:1.45;color:var(--muted)}
+  font-size:var(--fs-xs);font-weight:700;line-height:1.5;white-space:nowrap}   /* text in --text: amber text is ~4.2:1 in light */
+.ev-src{margin-top:12px;padding-top:8px;border-top:1px dashed var(--border);font-size:var(--fs-xs);line-height:1.45;color:var(--muted)}
 .ev-src p+p{margin-top:3px}
 /* 5. status */
 .ac-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.ac-meta .vbadge{font-size:.74rem;padding:2px 8px;line-height:1.4;max-width:100%}   /* base .vbadge is .7rem, below the floor */
+.ac-meta .vbadge{font-size:var(--fs-xs);padding:2px 8px;line-height:1.4;max-width:100%}   /* base .vbadge is .7rem, below the floor */
 /* the flash card itself is --panel2 */
 .flash-card .ac,.flash-card .qaid{background:var(--panel)}
 .flash-card .qaid pre{background:var(--panel2)}
 .rev-status{font-weight:700;font-size:.8rem;padding:2px 9px;border-radius:6px;margin-left:auto}
 .rev-status.ok{background:var(--greenbg);color:var(--green)}.rev-status.no{background:var(--redbg);color:var(--red)}.rev-status.skip{background:var(--amberbg);color:var(--amber)}
-.star,.fc-acts{display:inline-flex;align-items:center;margin-left:auto}
-.bmk{cursor:pointer;font-size:1.1rem;user-select:none;line-height:1;
+.star,.fc-acts,.qacts{display:inline-flex;align-items:center;margin-left:auto}
+.qacts{gap:2px}
+.star,.bmk{font:inherit;color:inherit;background:none;border:0;cursor:pointer;font-size:1.1rem;user-select:none;line-height:1;
   padding:5px 7px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center}
 .star{margin-left:2px}.star:hover,.bmk:hover{background:var(--chip)}
 .navbtns{display:flex;gap:10px;justify-content:space-between;margin-top:14px}
 .jump{display:grid;grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:6px;margin-top:12px;max-height:160px;overflow-y:auto;padding:3px}
-.jump button{aspect-ratio:1;border:1px solid var(--border);background:var(--panel2);color:var(--muted);border-radius:7px;font-size:.72rem;font-weight:600;cursor:pointer;padding:0}
+.jump button{aspect-ratio:1;border:1px solid var(--border);background:var(--panel2);color:var(--muted);border-radius:7px;font-size:var(--fs-xs);font-weight:600;cursor:pointer;padding:0;position:relative}
 .jump button.cur{box-shadow:inset 0 0 0 2px var(--accent);border-color:var(--accent);color:var(--text)}
 .jump button.done{background:var(--selbg);color:var(--text);border-color:var(--accent)}
 .jump button.correct{background:var(--greenbg);color:var(--green);border-color:var(--green)}.jump button.wrong{background:var(--redbg);color:var(--red);border-color:var(--red)}
@@ -168,8 +174,22 @@ html.abx-off abbr.ab{text-decoration:none;cursor:inherit}
 .footer-note{color:var(--muted);font-size:.8rem;text-align:center;margin-top:22px}
 #topbar .btn{padding:7px 13px}#topbar .btn.sec{padding:6px 11px}
 .conf-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0 2px}
-.conf-chip{border:1px solid var(--border);background:var(--panel2);color:var(--muted);border-radius:999px;padding:4px 13px;font-size:.82rem;cursor:pointer;user-select:none}
+.conf-chip{font:inherit;border:1px solid var(--border);background:var(--panel2);color:var(--muted);border-radius:999px;padding:4px 13px;font-size:.82rem;cursor:pointer;user-select:none}
 .conf-chip:hover{border-color:var(--accent)}.conf-chip.sel{border-color:var(--accent);color:var(--text);background:var(--selbg)}
+:where(button,a,summary,input,select,[tabindex]):focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* the grid states are not colour alone: ✓ right, ✗ wrong, ★ known */
+.jump button.correct::after,.jump button.wrong::after,.jump button.known::before{position:absolute;top:1px;font-size:10px;line-height:1}
+.jump button.correct::after{content:'✓';right:3px}.jump button.wrong::after{content:'✗';right:3px}.jump button.known::before{content:'★';left:3px;color:var(--amber)}
+.mode .mc,.kpi,.ex-mp,.result-score,.jump button{font-variant-numeric:tabular-nums}
+.stem,.ac-why p{text-wrap:pretty}
+/* start screen: a faint tint behind it (cards stay solid) and one short entrance when it is shown */
+/* @supports: with var() an unsupported color-mix() would not fall back, it would leave the body transparent */
+@supports (background:color-mix(in srgb,red 10%,transparent)){
+  body:not(.testing){background:radial-gradient(1200px 500px at 15% -10%,color-mix(in srgb,var(--accent) 10%,transparent),transparent 60%) no-repeat,var(--bg)}}
+@keyframes up{from{opacity:0;transform:translateY(12px)}}@keyframes fade{from{opacity:0}}
+#start>*{animation:up .3s var(--ease) backwards;animation-delay:calc(var(--i,0)*50ms)}
+#start>.main-card{animation-name:fade}   /* a transform would re-anchor the fixed start bar on phones while it runs */
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
 /* ---- keyboard shortcuts ---- */
 .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.65);backdrop-filter:blur(5px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px}
 .modal-card{background:var(--panel);border:1px solid var(--border);border-radius:14px;width:100%;max-width:500px;padding:20px;box-shadow:0 10px 30px var(--shadow);max-height:86vh;overflow-y:auto}
@@ -209,7 +229,7 @@ label.theme-btn{display:inline-flex;align-items:center}
 /* mode groups: 3 columns (one per group) on desktop */
 .mgroups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:16px;align-items:stretch}
 .mgroup{display:flex;flex-direction:column;min-width:0}
-.mg-h{margin:0 0 10px;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.mg-h{margin:0 0 10px;font-size:var(--fs-xs);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 /* equal rows + stretched groups = the 9 tiles line up as a grid instead of a ragged stack */
 .mlist{flex:1;display:grid;grid-template-rows:repeat(3,1fr);gap:10px}
 .mode{display:flex;flex-direction:column;gap:5px;width:100%;min-height:96px;padding:10px 12px;
@@ -217,12 +237,11 @@ label.theme-btn{display:inline-flex;align-items:center}
   font:inherit;text-align:left;cursor:pointer}
 .mode:hover{border-color:var(--accent)}
 .mode.active{border-color:var(--accent);background:var(--selbg);box-shadow:inset 0 0 0 1px var(--accent)}
-.mode:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .mtop{display:flex;align-items:center;gap:6px;min-height:24px}
 .mode .ic{font-size:1.3rem;line-height:1}
 /* both sit on the right: the first one takes the free space, the second follows it */
 .mrec,.mode .mc{margin-left:auto}
-.mrec{display:none;padding:1px 8px;border-radius:999px;line-height:17px;font-size:.66rem;font-weight:700;
+.mrec{display:none;padding:1px 8px;border-radius:999px;line-height:17px;font-size:var(--fs-xs);font-weight:700;
   color:var(--green);background:var(--greenbg);border:1px solid var(--green);white-space:nowrap}
 .mode.rec .mrec{display:inline-block}
 .mode .mc{padding:1px 8px;border-radius:999px;background:var(--chip);border:1px solid var(--border);
@@ -236,8 +255,8 @@ label.theme-btn{display:inline-flex;align-items:center}
 .mode .mt small{margin-top:3px;font-size:.78rem;line-height:1.3;color:var(--muted);
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .mode .mkey{display:inline-grid;place-items:center;min-width:1.25rem;height:1.25rem;margin-right:6px;padding:0 3px;border-radius:5px;
-  background:var(--chip);border:1px solid var(--border);color:var(--muted);font-size:.68rem;font-weight:700;vertical-align:1px}
-.mode.active .mkey{background:var(--accent);border-color:var(--accent);color:#fff}
+  background:var(--chip);border:1px solid var(--border);color:var(--muted);font-size:var(--fs-xs);font-weight:700;vertical-align:1px}
+.mode.active .mkey{background:var(--fill);border-color:var(--fill);color:#fff}
 .match-btn{margin-top:12px;min-height:44px}
 /* per-mode config */
 .mode-cfg{margin-top:16px}.mode-cfg:empty{display:none}
@@ -245,13 +264,13 @@ label.theme-btn{display:inline-flex;align-items:center}
 .qty{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{min-width:44px;min-height:40px;padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:var(--panel2);color:var(--text);
-  font:inherit;font-size:.88rem;font-weight:600;cursor:pointer}
+  font:inherit;font-size:.88rem;font-weight:600;cursor:pointer;border-radius:var(--r-md)}
 .chip:hover{border-color:var(--accent)}
-.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.chip.on{background:var(--fill);border-color:var(--fill);color:#fff}
 .qty input[type=number]{width:84px;min-height:40px;text-align:center}
 /* exam picker (replaces the native <select>) */
 .exam-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.exam-grp{grid-column:1/-1;margin:8px 0 0;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.exam-grp{grid-column:1/-1;margin:8px 0 0;font-size:var(--fs-xs);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .exam-row{position:relative;display:flex;align-items:center;gap:10px;min-height:56px;padding:8px 10px;border:1px solid var(--border);border-radius:10px;
   background:var(--panel2);color:var(--text);font-size:.9rem;cursor:pointer}
 .exam-row:hover{border-color:var(--accent)}
@@ -260,13 +279,13 @@ label.theme-btn{display:inline-flex;align-items:center}
 .exam-row input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
 .ex-badge{flex:0 0 58px;padding:6px 0;border-radius:8px;text-align:center;font-weight:800;font-size:.88rem;font-variant-numeric:tabular-nums;
   background:var(--chip);border:1px solid var(--border)}
-.exam-row.sel .ex-badge{background:var(--accent);border-color:var(--accent);color:#fff}
+.exam-row.sel .ex-badge{background:var(--fill);border-color:var(--fill);color:#fff}
 .ex-main{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.3}
 .ex-title{font-weight:700}
 .ex-sub{font-size:.8rem;color:var(--muted)}.ex-sub b{color:var(--text)}
-.ex-raw{font-size:.72rem;color:var(--muted);opacity:.8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ex-raw{font-size:var(--fs-xs);color:var(--muted);opacity:.8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ex-mp{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;line-height:1.2}
-.ex-mp b{font-size:.95rem}.ex-mp small{font-size:.68rem;color:var(--muted)}
+.ex-mp b{font-size:.95rem}.ex-mp small{font-size:var(--fs-xs);color:var(--muted)}
 /* folded options */
 .opts{margin-top:16px;border:1px solid var(--border);border-radius:10px;background:var(--panel2)}
 .opts>summary{display:flex;align-items:center;gap:10px;min-height:44px;padding:8px 12px;cursor:pointer;list-style:none}
@@ -279,7 +298,7 @@ label.theme-btn{display:inline-flex;align-items:center}
 .switch{display:flex;align-items:center;gap:10px;min-height:44px;font-size:.9rem;color:var(--text);cursor:pointer}
 .switch input{flex:0 0 auto;width:20px;height:20px;margin:0;accent-color:var(--accent)}
 /* start band: sticky at the card bottom on wide screens (fixed bar on phones, see mobile block) */
-#startRow{position:sticky;bottom:0;z-index:5;display:flex;align-items:center;gap:12px;margin:16px -18px -18px;padding:12px 18px;
+#startRow{position:sticky;bottom:0;z-index:5;display:flex;align-items:center;gap:12px;margin:16px calc(-1*var(--sp-5)) calc(-1*var(--sp-5));padding:12px var(--sp-5);
   background:var(--panel);border-top:1px solid var(--border);border-radius:0 0 12px 12px}
 .start-sum{flex:1;min-width:0;font-size:.9rem;line-height:1.35;color:var(--muted)}
 .start-sum b{color:var(--text)}
@@ -303,12 +322,13 @@ label.theme-btn{display:inline-flex;align-items:center}
     min-height:44px;display:inline-flex;align-items:center;justify-content:center}
   /* the exam name + question number already appear as badges in the question card */
   .src{display:none}
+  .qh .qsrc{order:9;flex-basis:100%;padding:0;border:0;background:none}
   /* the theme switch is on the start screen (and in the dashboard): dropping it here keeps the
      in-test topbar on ONE row, which is 50px of question area back on a 360px screen */
   #topbar .theme-toggle{display:none}
   .conf-chip{padding:9px 15px;font-size:.85rem}
   .wrap{padding:12px 12px 112px}                  /* bottom room for the fixed start bar */
-  .card{padding:14px}
+  .card{padding:var(--sp-4)}
   .jump{max-height:132px}
   .star,.bmk{min-width:44px;min-height:44px;padding:0;margin:0 2px;font-size:1.25rem}
   .qh{align-items:center}
@@ -331,10 +351,10 @@ label.theme-btn{display:inline-flex;align-items:center}
   .mode .ic{font-size:1.15rem}
   .mode .mt b{font-size:.84rem;line-height:1.22}
   .mode .mt small{display:none}                   /* the picked mode's description shows in #modeCfg */
-  .mode .mkey{min-width:1.1rem;height:1.1rem;margin-right:4px;font-size:.64rem}
+  .mode .mkey{min-width:1.1rem;height:1.1rem;margin-right:4px;font-size:var(--fs-xs)}
   /* a 97px-wide tile cannot hold both "Gợi ý" and the count: the label becomes a green dot */
   .mrec{width:9px;height:9px;padding:0;border-radius:50%;font-size:0;line-height:0;flex:0 0 auto}
-  .mode .mc{padding:0 5px;font-size:.68rem;line-height:16px;min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .mode .mc{padding:0 5px;font-size:var(--fs-xs);line-height:16px;min-width:0;overflow:hidden;text-overflow:ellipsis}
   .mcx{display:none}                              /* "533 mới" -> "533" */
   .chip,.qty input[type=number]{min-height:44px}
   .exam-list{grid-template-columns:1fr;gap:6px}
@@ -362,15 +382,15 @@ try{var t=localStorage.getItem('app_theme');if(t==='dark'||t==='light')d.setAttr
         <div class="sub" id="srcNote" onclick="this.classList.toggle('open')">Nguồn: FUoverflow · OCR + đáp án (Opus/Sonnet) · verify độc lập nhiều lượt</div>
       </div>
       <div class="hero-acts">
-        <button type="button" class="theme-btn kbd-only" onclick="openShortcutModal()" title="Phím tắt (? hoặc H)">⌨️ Phím tắt</button>
+        <button type="button" class="theme-btn kbd-only" onclick="openShortcutModal()" title="Phím tắt (? hoặc H)"><span aria-hidden="true">⌨️</span> Phím tắt</button>
         <button type="button" class="theme-btn theme-toggle" id="themeBtn" onclick="toggleTheme()">☀️ Sáng</button>
       </div>
     </div>
     <div id="storeWarn" class="notes" style="display:none;border-left-color:var(--red)"></div>
     <div id="resume"></div>
-    <div class="sumbar"><div id="streak"></div><div id="stats"></div></div>
+    <div class="sumbar" style="--i:1"><div id="streak"></div><div id="stats"></div></div>
 
-    <div class="card main-card">
+    <div class="card main-card" style="--i:2">
       <div class="field" id="subjField"><label for="subject">Môn</label><select id="subject" onchange="onSubjectChange()"></select></div>
       <div class="search-wrap" id="searchWrap"><span class="search-ic" aria-hidden="true">🔍</span>
         <input type="text" id="globalSearch" placeholder="Tìm câu theo từ khóa rồi làm riêng…" aria-label="Tìm câu hỏi theo từ khóa" oninput="onSearchInput()" autocomplete="off" spellcheck="false" enterkeyhint="go">
@@ -394,14 +414,14 @@ try{var t=localStorage.getItem('app_theme');if(t==='dark'||t==='light')d.setAttr
           <button type="button" class="mode" data-mode="seen" aria-pressed="false" onclick="pickMode('seen',1)"><span class="mtop"><span class="ic" aria-hidden="true">👁</span><span class="mrec">Gợi ý</span><span class="mc" data-c="seen"></span></span><span class="mt"><b><span class="mkey">9</span>Đã xem đáp án</b><small>Câu bạn từng bấm “Xem đáp án”</small></span></button>
         </div></section>
       </div>
-      <button type="button" class="btn sec match-btn" id="matchBtn" onclick="showMatching()" style="display:none">📎 Xem câu Matching <span id="matchN"></span></button>
+      <button type="button" class="btn sec match-btn" id="matchBtn" onclick="showMatching()" style="display:none"><span aria-hidden="true">📎</span> Xem câu Matching <span id="matchN"></span></button>
 
       <div id="modeCfg" class="mode-cfg"></div>
 
       <details class="opts" id="optsBox">
-        <summary><span class="opts-t">⚙️ Tùy chọn</span><span class="opts-s" id="optsSum"></span></summary>
+        <summary><span class="opts-t"><span aria-hidden="true">⚙️</span> Tùy chọn</span><span class="opts-s" id="optsSum"></span></summary>
         <div class="opts-body">
-          <div class="field" id="minsField"><label for="mins">⏱ Thời gian làm bài (phút)</label>
+          <div class="field" id="minsField"><label for="mins"><span aria-hidden="true">⏱</span> Thời gian làm bài (phút)</label>
             <div class="qty"><div class="chips" data-for="mins">
               <button type="button" class="chip" data-v="0" onclick="setVal('mins',0)">Không giới hạn</button>
               <button type="button" class="chip" data-v="15" onclick="setVal('mins',15)">15</button>
@@ -410,35 +430,35 @@ try{var t=localStorage.getItem('app_theme');if(t==='dark'||t==='light')d.setAttr
               <button type="button" class="chip" data-v="60" onclick="setVal('mins',60)">60</button>
             </div><input type="number" id="mins" value="0" min="0" inputmode="numeric" aria-label="Số phút (0 = không giới hạn)" oninput="syncChips();updateStartSub()"></div></div>
           <label class="switch"><input type="checkbox" id="hideKnown" onchange="renderStats()"><span>Ẩn câu đã đánh dấu ★ thuộc <b id="knownN"></b> <small style="color:var(--muted)">(câu ẩn không được ôn nên không lên Vững)</small></span></label>
-          <label class="switch"><input type="checkbox" id="shufQs" checked onchange="updateStartSub()"><span>🔀 Trộn thứ tự câu hỏi</span></label>
-          <label class="switch"><input type="checkbox" id="shufOpts" checked onchange="updateStartSub()"><span>🔀 Trộn thứ tự đáp án (tránh học vẹt vị trí)</span></label>
-          <label class="switch"><input type="checkbox" id="abxOn" checked onchange="setAbx(this.checked)"><span>🔤 Hộp "Viết tắt" cạnh câu hỏi <small style="color:var(--muted)">(tắt thì chỉ còn nút "Hiện" nhỏ)</small></span></label>
+          <label class="switch"><input type="checkbox" id="shufQs" checked onchange="updateStartSub()"><span><span aria-hidden="true">🔀</span> Trộn thứ tự câu hỏi</span></label>
+          <label class="switch"><input type="checkbox" id="shufOpts" checked onchange="updateStartSub()"><span><span aria-hidden="true">🔀</span> Trộn thứ tự đáp án (tránh học vẹt vị trí)</span></label>
+          <label class="switch"><input type="checkbox" id="abxOn" checked onchange="setAbx(this.checked)"><span><span aria-hidden="true">🔤</span> Hộp "Viết tắt" cạnh câu hỏi <small style="color:var(--muted)">(tắt thì chỉ còn nút "Hiện" nhỏ)</small></span></label>
         </div>
       </details>
 
       <div id="startRow">
         <div class="start-sum" id="startSub" aria-live="polite">Chọn một chế độ ở trên</div>
-        <button type="button" class="btn start-btn" id="startBtn" onclick="startTest()" disabled>▶ Bắt đầu</button>
+        <button type="button" class="btn start-btn" id="startBtn" onclick="startTest()" disabled><span aria-hidden="true">▶</span> Bắt đầu</button>
       </div>
     </div>
 
-    <div class="card" id="masteryCard">
-      <div class="row" style="justify-content:space-between"><b>🎯 Tiến độ thành thạo</b><span class="sub" id="dueLine"></span></div>
+    <div class="card" id="masteryCard" style="--i:3">
+      <div class="row" style="justify-content:space-between"><b><span aria-hidden="true">🎯</span> Tiến độ thành thạo</b><span class="sub" id="dueLine"></span></div>
       <div class="sub" id="scopeLine"></div>
       <div id="stageBox" style="margin-top:10px"></div>
       <div id="masteryBox" style="margin-top:4px"></div>
       <div class="sub" id="masteryNote" style="margin-top:6px"><b>Vững</b> = trả lời đúng ở <b>3 ngày khác nhau</b>, không sai lần nào xen giữa. Mỗi ngày đúng = ⅓ tiến độ của câu; làm lại trong cùng ngày không cộng thêm; 🎲 Đoán và 👁 Xem đáp án không tính. Câu trùng giữa các đề tính chung.<span id="knownNote"></span><span id="unvNote"></span></div>
     </div>
-    <div class="card" id="historyCard">
-      <div class="row" style="justify-content:space-between"><b>📊 Lịch sử làm bài</b>
+    <div class="card" id="historyCard" style="--i:4">
+      <div class="row" style="justify-content:space-between"><b><span aria-hidden="true">📊</span> Lịch sử làm bài</b>
         <div class="row" style="gap:8px">
-          <button type="button" class="theme-btn" onclick="exportProgress()" title="Tải file sao lưu toàn bộ tiến độ">💾 Sao lưu</button>
-          <label class="theme-btn" style="cursor:pointer">📂 Khôi phục<input type="file" accept="application/json,.json" onchange="importProgress(this)" style="display:none"></label>
-          <button type="button" class="theme-btn" onclick="clearHistory()">🗑 Xóa lịch sử</button>
+          <button type="button" class="theme-btn" onclick="exportProgress()" title="Tải file sao lưu toàn bộ tiến độ"><span aria-hidden="true">💾</span> Sao lưu</button>
+          <label class="theme-btn" style="cursor:pointer"><span aria-hidden="true">📂</span> Khôi phục<input type="file" accept="application/json,.json" onchange="importProgress(this)" style="display:none"></label>
+          <button type="button" class="theme-btn" onclick="clearHistory()"><span aria-hidden="true">🗑</span> Xóa lịch sử</button>
         </div></div>
       <div id="historyBox" style="margin-top:10px"></div>
     </div>
-    <div class="footer-note" id="footNote">Đáp án do AI giải &amp; verify từ đề FUoverflow (không phải đáp án chính thức) — dùng để tham khảo/ôn tập. Lịch sử, câu đã thuộc &amp; câu sai lưu trên máy bạn.</div>
+    <div class="footer-note" id="footNote" style="--i:5">Đáp án do AI giải &amp; verify từ đề FUoverflow (không phải đáp án chính thức) — dùng để tham khảo/ôn tập. Lịch sử, câu đã thuộc &amp; câu sai lưu trên máy bạn.</div>
   </div>
   <div id="test" style="display:none"></div>
   <div id="matching" style="display:none"></div>
@@ -446,10 +466,10 @@ try{var t=localStorage.getItem('app_theme');if(t==='dark'||t==='light')d.setAttr
 </div>
 
 <div id="topbar" style="display:none">
-  <button class="btn sec" onclick="exitTest()">← Thoát</button>
+  <button class="btn sec" onclick="exitTest()"><span aria-hidden="true">←</span> Thoát</button>
   <div id="timer">∞</div><div id="prog">1/1</div><div class="src" id="srcLabel"></div><div class="grow"></div>
   <button class="theme-btn theme-toggle" onclick="toggleTheme()" aria-label="Đổi giao diện sáng/tối">🌓</button>
-  <button class="btn danger" onclick="submitTest()">✔ Nộp bài</button>
+  <button class="btn danger" onclick="submitTest()"><span aria-hidden="true">✔</span> Nộp bài</button>
 </div>
 
 <script>
@@ -669,7 +689,7 @@ const ABBR_BY_SUBJ={"MLN111PT":{"KTTT":"kiến trúc thượng tầng"},"VNR":{"
 /* abbreviations of the other subjects (IT, security, project management; English) -> their expansion, one
    dictionary per subject. Built 13/11 from the banks (proposed per subject from every occurrence; tokens
    with two meanings in one subject, plain words, codes and typos left out). */
-const ABBR_EN={"CES202":{"AD":"Active Directory","APIPA":"Automatic Private IP Addressing","CIA":"Confidentiality, Integrity, and Availability","CNAME":"Canonical Name","DHCP":"Dynamic Host Configuration Protocol","DNS":"Domain Name System","FSMO":"Flexible Single Master Operations","GPO":"Group Policy Object","GPT":"GUID Partition Table","GUI":"Graphical User Interface","GUID":"Globally Unique Identifier","HTTP":"Hypertext Transfer Protocol","IP":"Internet Protocol","IR":"Infrared","MAC":"Media Access Control","MBR":"Master Boot Record","MMC":"Microsoft Management Console","NFC":"Near Field Communication","NS":"Name Server","OS":"Operating System","OSI":"Open Systems Interconnection","OU":"Organizational Unit","PDC":"Primary Domain Controller","RAID":"Redundant Array of Independent Disks","RAM":"Random Access Memory","RID":"Relative Identifier","RODC":"Read-Only Domain Controller","SAM":"Security Account Manager","SPF":"Sender Policy Framework","SRP":"Software Restriction Policies","TCP":"Transmission Control Protocol","UDP":"User Datagram Protocol","VT":"Virtualization Technology","WDS":"Windows Deployment Services"},"FRS401C":{"ARP":"Address Resolution Protocol","AV":"Antivirus","BCP":"Business Continuity Plan","CER":"Crossover Error Rate","CM":"Configuration Management","CMDB":"Configuration Management Database","CSRF":"Cross-Site Request Forgery","DAC":"Discretionary Access Control","DHCP":"Dynamic Host Configuration Protocol","DIDS":"Distributed Intrusion Detection System","DMZ":"Demilitarized Zone","DNS":"Domain Name System","ESP":"Encapsulating Security Payload","FAR":"False Acceptance Rate","FAT":"File Allocation Table","FRR":"False Rejection Rate","FTK":"Forensic Toolkit","FTP":"File Transfer Protocol","HIDS":"Host-based Intrusion Detection System","HIV":"Human Immunodeficiency Virus","HTTP":"Hypertext Transfer Protocol","HTTPS":"Hypertext Transfer Protocol Secure","ICMP":"Internet Control Message Protocol","IDS":"Intrusion Detection System","IEEE":"Institute of Electrical and Electronics Engineers","IGMP":"Internet Group Management Protocol","IMAP":"Internet Message Access Protocol","IOPS":"Input/Output Operations Per Second","IP":"Internet Protocol","IRM":"Information Rights Management","ISO":"International Organization for Standardization","ITAM":"Information Technology Asset Management","L2F":"Layer 2 Forwarding","L2TP":"Layer 2 Tunneling Protocol","LAN":"Local Area Network","LPD":"Line Printer Daemon","MDM":"Mobile Device Management","NAT":"Network Address Translation","NDAC":"Non-Discretionary Access Control","NIDS":"Network-based Intrusion Detection System","NIST":"National Institute of Standards and Technology","NNTP":"Network News Transfer Protocol","OS":"Operating System","OSI":"Open Systems Interconnection","OUI":"Organizationally Unique Identifier","PAT":"Port Address Translation","PIN":"Personal Identification Number","POP3":"Post Office Protocol version 3","PPP":"Point-to-Point Protocol","PPTP":"Point-to-Point Tunneling Protocol","RAM":"Random Access Memory","RARP":"Reverse Address Resolution Protocol","RBAC":"Role-Based Access Control","RPC":"Remote Procedure Call","SATA":"Serial Advanced Technology Attachment","SDLC":"Software Development Life Cycle","SET":"Secure Electronic Transaction","SLIP":"Serial Line Internet Protocol","SMTP":"Simple Mail Transfer Protocol","SP":"Special Publication","SPX":"Sequenced Packet Exchange","SSCP":"Systems Security Certified Practitioner","SSD":"Solid-State Drive","SSH":"Secure Shell","SSL":"Secure Sockets Layer","SSO":"Single Sign-On","SYN":"Synchronize","TCP":"Transmission Control Protocol","TCSEC":"Trusted Computer System Evaluation Criteria","TFTP":"Trivial File Transfer Protocol","TLS":"Transport Layer Security","UDP":"User Datagram Protocol","VM":"Virtual Machine","VPN":"Virtual Private Network","XSS":"Cross-Site Scripting"},"HOD401":{"ACK":"Acknowledgment","AES":"Advanced Encryption Standard","AH":"Authentication Header","AP":"Access Point","ARIN":"American Registry for Internet Numbers","ARP":"Address Resolution Protocol","ASP":"Active Server Pages","ATM":"Automated Teller Machine","BSSID":"Basic Service Set Identifier","CEH":"Certified Ethical Hacker","CGI":"Common Gateway Interface","CIA":"Confidentiality, Integrity, Availability","CSRF":"Cross-Site Request Forgery","DES":"Data Encryption Standard","DNS":"Domain Name System","EAPOL":"Extensible Authentication Protocol over LAN","ESP":"Encapsulating Security Payload","ESSID":"Extended Service Set Identifier","FBI":"Federal Bureau of Investigation","FIN":"Finish","FTP":"File Transfer Protocol","HTTP":"Hypertext Transfer Protocol","HTTPS":"Hypertext Transfer Protocol Secure","IAS":"Internet Authentication Service","ICMP":"Internet Control Message Protocol","IDS":"Intrusion Detection System","IEEE":"Institute of Electrical and Electronics Engineers","IIS":"Internet Information Services","IP":"Internet Protocol","IPC":"Inter-Process Communication","ISA":"Internet Security and Acceleration","ISN":"Initial Sequence Number","ISSAF":"Information Systems Security Assessment Framework","IV":"Initialization Vector","MAC":"Media Access Control","MBSA":"Microsoft Baseline Security Analyzer","MD5":"Message-Digest Algorithm 5","MITM":"Man-in-the-Middle","NAT":"Network Address Translation","NDA":"Non-Disclosure Agreement","NIDS":"Network Intrusion Detection System","NIPS":"Network Intrusion Prevention System","NIST":"National Institute of Standards and Technology","NTFS":"New Technology File System","OS":"Operating System","OSI":"Open Systems Interconnection","OSINT":"Open-Source Intelligence","PKI":"Public Key Infrastructure","PSH":"Push","RC6":"Rivest Cipher 6","RID":"Relative Identifier","RSA":"Rivest–Shamir–Adleman","RST":"Reset","RTOS":"Real-Time Operating System","SCADA":"Supervisory Control and Data Acquisition","SHA1":"Secure Hash Algorithm 1","SID":"Security Identifier","SMB":"Server Message Block","SMTP":"Simple Mail Transfer Protocol","SNMP":"Simple Network Management Protocol","SQL":"Structured Query Language","SSH":"Secure Shell","SSID":"Service Set Identifier","SSL":"Secure Sockets Layer","SYN":"Synchronize","TCP":"Transmission Control Protocol","TLS":"Transport Layer Security","TOE":"Target of Evaluation","TOR":"The Onion Router","UDP":"User Datagram Protocol","URG":"Urgent","VLANS":"Virtual Local Area Networks","WEP":"Wired Equivalent Privacy","WLAN":"Wireless Local Area Network","WPA":"Wi-Fi Protected Access","WPA2":"Wi-Fi Protected Access 2","WPA3":"Wi-Fi Protected Access 3","WPS":"Wi-Fi Protected Setup","XOR":"Exclusive OR","XSS":"Cross-Site Scripting","ZAP":"Zed Attack Proxy"},"HOD402":{"AAA":"Authentication, Authorization, and Accounting","ACK":"Acknowledgment","AD":"Active Directory","AES":"Advanced Encryption Standard","AP":"Access Point","API":"Application Programming Interface","APK":"Android Package Kit","ARP":"Address Resolution Protocol","BLE":"Bluetooth Low Energy","C2":"Command and Control","CA":"Certificate Authority","CAV2":"Card Authentication Value 2","CFTC":"Commodity Futures Trading Commission","CIA":"Confidentiality, Integrity, Availability","CID":"Card Identification Number","CMD":"Command Prompt","CRL":"Certificate Revocation List","CSS":"Content Scrambling System","CSV":"Comma-Separated Values","CVC":"Card Validation Code","CVC2":"Card Validation Code 2","CVE":"Common Vulnerabilities and Exposures","CVSS":"Common Vulnerability Scoring System","CVV":"Card Verification Value","CVV2":"Card Verification Value 2","DDOS":"Distributed Denial of Service","DES":"Data Encryption Standard","DHCP":"Dynamic Host Configuration Protocol","DLL":"Dynamic-Link Library","DMZ":"Demilitarized Zone","DNS":"Domain Name System","DOS":"Denial of Service","DSS":"Data Security Standard","EAP":"Extensible Authentication Protocol","EMV":"Europay, Mastercard, and Visa","ESMTP":"Extended Simple Mail Transfer Protocol","FDIC":"Federal Deposit Insurance Corporation","FFIEC":"Federal Financial Institutions Examination Council","FIN":"Finish","FOCA":"Fingerprinting Organizations with Collected Archives","FQDN":"Fully Qualified Domain Name","FTC":"Federal Trade Commission","FTP":"File Transfer Protocol","GATT":"Generic Attribute Profile","GDPR":"General Data Protection Regulation","GLB":"Gramm-Leach-Bliley","GUI":"Graphical User Interface","HIDS":"Host-based Intrusion Detection System","HIPAA":"Health Insurance Portability and Accountability Act","HTML":"HyperText Markup Language","HTTP":"Hypertext Transfer Protocol","HTTPS":"Hypertext Transfer Protocol Secure","ICMP":"Internet Control Message Protocol","IDS":"Intrusion Detection System","IEEE":"Institute of Electrical and Electronics Engineers","IMAP":"Internet Message Access Protocol","IMAPS":"Internet Message Access Protocol Secure","IP":"Internet Protocol","IPMI":"Intelligent Platform Management Interface","IPS":"Intrusion Prevention System","IRS":"Internal Revenue Service","MAC":"Media Access Control","MD5":"Message-Digest Algorithm 5","MFA":"Multi-Factor Authentication","MFP":"Management Frame Protection","MIME":"Multipurpose Internet Mail Extensions","MITM":"Man-in-the-Middle","MSA":"Master Service Agreement","NAT":"Network Address Translation","NDA":"Non-Disclosure Agreement","NIDS":"Network Intrusion Detection System","NIPS":"Network Intrusion Prevention System","NIST":"National Institute of Standards and Technology","NSE":"Nmap Scripting Engine","NTLM":"NT LAN Manager","NVD":"National Vulnerability Database","OBEX":"Object Exchange","OS":"Operating System","OSINT":"Open-Source Intelligence","OSSTMM":"Open Source Security Testing Methodology Manual","OT":"Operational Technology","OWASP":"Open Web Application Security Project","PAN":"Primary Account Number","PBX":"Private Branch Exchange","PCI":"Payment Card Industry","PGP":"Pretty Good Privacy","PIN":"Personal Identification Number","PKI":"Public Key Infrastructure","PNL":"Preferred Network List","POODLE":"Padding Oracle On Downgraded Legacy Encryption","POP3":"Post Office Protocol version 3","PTES":"Penetration Testing Execution Standard","QR":"Quick Response","RBAC":"Role-Based Access Control","RC5":"Rivest Cipher 5","RFI":"Remote File Inclusion","RFID":"Radio-Frequency Identification","RFP":"Request for Proposal","RSA":"Rivest–Shamir–Adleman","RST":"Reset","SAM":"Security Account Manager","SANS":"SysAdmin, Audit, Network, and Security","SCADA":"Supervisory Control and Data Acquisition","SCP":"Secure Copy Protocol","SDK":"Software Development Kit","SDLC":"Software Development Life Cycle","SEC":"Securities and Exchange Commission","SET":"Social-Engineer Toolkit","SFTP":"SSH File Transfer Protocol","SHA":"Secure Hash Algorithm","SID":"Security Identifier","SLA":"Service-Level Agreement","SMS":"Short Message Service","SMTP":"Simple Mail Transfer Protocol","SOAP":"Simple Object Access Protocol","SOW":"Statement of Work","SP":"Special Publication","SPN":"Service Principal Name","SQL":"Structured Query Language","SYN":"Synchronize","TCP":"Transmission Control Protocol","TGS":"Ticket-Granting Service","TKIP":"Temporal Key Integrity Protocol","TLS":"Transport Layer Security","UDP":"User Datagram Protocol","UI":"User Interface","VM":"Virtual Machine","VNC":"Virtual Network Computing","VPN":"Virtual Private Network","WADL":"Web Application Description Language","WMI":"Windows Management Instrumentation","WPA2":"Wi-Fi Protected Access 2","WPA3":"Wi-Fi Protected Access 3","WPS":"Wi-Fi Protected Setup","WSDL":"Web Services Description Language","WSTG":"Web Security Testing Guide","XML":"Extensible Markup Language","XOR":"Exclusive OR","XSS":"Cross-Site Scripting"},"IAP301":{"ABAC":"Attribute-Based Access Control","AR":"Augmented Reality","AUP":"Acceptable Use Policy","BCP":"Business Continuity Plan","BIA":"Business Impact Analysis","CBT":"Computer-Based Training","CCE":"Common Configuration Enumeration","CFO":"Chief Financial Officer","CIA":"Confidentiality, Integrity, and Availability","CIO":"Chief Information Officer","CIPA":"Children's Internet Protection Act","CISO":"Chief Information Security Officer","CM":"Configuration Management","CMDB":"Configuration Management Database","COBIT":"Control Objectives for Information and Related Technologies","COSO":"Committee of Sponsoring Organizations of the Treadway Commission","CPE":"Common Platform Enumeration","CRO":"Chief Risk Officer","CVE":"Common Vulnerabilities and Exposures","CVSS":"Common Vulnerability Scoring System","DLP":"Data Loss Prevention","DMZ":"Demilitarized Zone","DNS":"Domain Name System","DRP":"Disaster Recovery Plan","DSS":"Data Security Standard","EHR":"Electronic Health Record","ERM":"Enterprise Risk Management","FCC":"Federal Communications Commission","FDCC":"Federal Desktop Core Configuration","FERPA":"Family Educational Rights and Privacy Act","FISMA":"Federal Information Security Management Act","FOUO":"For Official Use Only","FTP":"File Transfer Protocol","GLBA":"Gramm-Leach-Bliley Act","GRC":"Governance, Risk Management, and Compliance","HIPAA":"Health Insurance Portability and Accountability Act","HTTP":"Hypertext Transfer Protocol","IA":"Information Assurance","IDS":"Intrusion Detection System","IPS":"Intrusion Prevention System","IRT":"Incident Response Team","ISACA":"Information Systems Audit and Control Association","ISMS":"Information Security Management System","ISS":"Information Systems Security","ITIL":"Information Technology Infrastructure Library","LAN":"Local Area Network","MFA":"Multi-Factor Authentication","NIST":"National Institute of Standards and Technology","NTFS":"New Technology File System","OCTAVE":"Operationally Critical Threat, Asset, and Vulnerability Evaluation","OECD":"Organisation for Economic Co-operation and Development","OS":"Operating System","OVAL":"Open Vulnerability and Assessment Language","OWASP":"Open Web Application Security Project","PAA":"Privileged-Level Access Agreement","PCI":"Payment Card Industry","PII":"Personally Identifiable Information","PR":"Public Relations","QA":"Quality Assurance","QC":"Quality Control","RBAC":"Role-Based Access Control","RCSA":"Risk and Control Self-Assessment","RFID":"Radio-Frequency Identification","RTO":"Recovery Time Objective","SAN":"Storage Area Network","SBU":"Sensitive But Unclassified","SCADA":"Supervisory Control and Data Acquisition","SCAP":"Security Content Automation Protocol","SEC":"Securities and Exchange Commission","SNMP":"Simple Network Management Protocol","SOD":"Separation of Duties","SOX":"Sarbanes-Oxley Act","SP":"Special Publication","SQL":"Structured Query Language","TLS":"Transport Layer Security","VPN":"Virtual Private Network","WAN":"Wide Area Network","WBEM":"Web-Based Enterprise Management","WMI":"Windows Management Instrumentation","XCCDF":"Extensible Configuration Checklist Description Format"},"MMA301":{"API":"Application Programming Interface","CLI":"Command-Line Interface","CSS":"Cascading Style Sheets","HTML":"HyperText Markup Language","IDE":"Integrated Development Environment","OTA":"Over-the-Air","UI":"User Interface"},"PMG201c":{"AC":"Actual Cost","BAC":"Budget at Completion","CPI":"Cost Performance Index","CV":"Cost Variance","EAC":"Estimate at Completion","EF":"Early Finish","ES":"Early Start","ETC":"Estimate to Complete","EV":"Earned Value","EVM":"Earned Value Management","LF":"Late Finish","LS":"Late Start","PERT":"Program Evaluation and Review Technique","PMBOK":"Project Management Body of Knowledge","PMO":"Project Management Office","PV":"Planned Value","RACI":"Responsible, Accountable, Consulted, Informed","RAM":"Responsibility Assignment Matrix","RBS":"Risk Breakdown Structure","SPI":"Schedule Performance Index","SV":"Schedule Variance","SWOT":"Strengths, Weaknesses, Opportunities, Threats","USD":"United States dollar","WBS":"Work Breakdown Structure"},"SPM401":{"AAR":"After-Action Review","ACL":"Access Control List","ACS":"Access Control System","AES":"Advanced Encryption Standard","AH":"Authentication Header","AIO":"All-in-One","AIS":"Accounting Information Systems","ARP":"Address Resolution Protocol","AUP":"Acceptable Use Policy","AUPs":"Acceptable Use Policies","AV":"Antivirus","BC":"Business Continuity","BCP":"Business Continuity Plan","BIA":"Business Impact Analysis","BLP":"Bell-LaPadula","CBA":"Cost-Benefit Analysis","CC":"Common Criteria","CCE":"Certified Computer Examiner","CCMP":"Counter Mode with Cipher Block Chaining Message Authentication Code Protocol","CER":"Crossover Error Rate","CGTF":"Corporate Governance Task Force","CHAP":"Challenge-Handshake Authentication Protocol","CIS":"Center for Internet Security","CISO":"Chief Information Security Officer","CISSP":"Certified Information Systems Security Professional","CMM":"Capability Maturity Model","CMMI":"Capability Maturity Model Integration","CMU":"Carnegie Mellon University","CNSS":"Committee on National Security Systems","COBIT":"Control Objectives for Information and Related Technologies","COO":"Chief Operating Officer","COSO":"Committee of Sponsoring Organizations of the Treadway Commission","CP":"Contingency Planning","CSIRT":"Computer Security Incident Response Team","CSRC":"Computer Security Resource Center","CTO":"Chief Technology Officer","DES":"Data Encryption Standard","DLP":"Data Loss Prevention","DOM":"Document Object Model","DR":"Disaster Recovery","DRP":"Disaster Recovery Plan","DoS":"Denial of Service","EAL":"Evaluation Assurance Level","EAL1":"Evaluation Assurance Level 1","EAL7":"Evaluation Assurance Level 7","EAP":"Extensible Authentication Protocol","ECC":"Elliptic Curve Cryptography","EDLP":"Endpoint Data Loss Prevention","EISP":"Enterprise Information Security Policy","EM":"Evidentiary Material","EPL":"Evaluated Products List","ERM":"Enterprise Risk Management","ESP":"Encapsulating Security Payload","FAIR":"Factor Analysis of Information Risk","FAR":"False Acceptance Rate","FRR":"False Rejection Rate","HIPAA":"Health Insurance Portability and Accountability Act","HVAC":"Heating, Ventilation, and Air Conditioning","IC":"Internal Control","IDPS":"Intrusion Detection and Prevention System","IDPSs":"Intrusion Detection and Prevention Systems","IDS":"Intrusion Detection System","IEC":"International Electrotechnical Commission","IEEE":"Institute of Electrical and Electronics Engineers","IETF":"Internet Engineering Task Force","IKE":"Internet Key Exchange","IP":"Internet Protocol","IPSec":"Internet Protocol Security","IR":"Incident Response","IRP":"Incident Response Plan","ISACA":"Information Systems Audit and Control Association","ISAKMP":"Internet Security Association and Key Management Protocol","ISFCE":"International Society of Forensic Computer Examiners","ISMS":"Information Security Management System","ISO":"International Organization for Standardization","ISSP":"Issue-Specific Security Policy","ITGI":"IT Governance Institute","ITIL":"Information Technology Infrastructure Library","ITU":"International Telecommunication Union","IV":"Initialization Vector","InfoSec":"Information Security","IoT":"Internet of Things","KDC":"Key Distribution Center","LEAP":"Lightweight Extensible Authentication Protocol","LEF":"Loss Event Frequency","MAC":"Media Access Control","MAN":"Metropolitan Area Network","MIC":"Message Integrity Code","MIS":"Management of Information Security","MP":"Media Protection","MTD":"Maximum Tolerable Downtime","NIST":"National Institute of Standards and Technology","NISTIR":"NIST Interagency or Internal Report","NSRL":"National Software Reference Library","NZS":"New Zealand Standard","OCTAVE":"Operationally Critical Threat, Asset, and Vulnerability Evaluation","OFDM":"Orthogonal Frequency-Division Multiplexing","OLTP":"Online Transaction Processing","OWASP":"Open Web Application Security Project","PAP":"Password Authentication Protocol","PEAP":"Protected Extensible Authentication Protocol","PIS":"Principles of Information Security","PKI":"Public Key Infrastructure","PP":"Protection Profile","PPP":"Point-to-Point Protocol","PPTP":"Point-to-Point Tunneling Protocol","PSTN":"Public Switched Telephone Network","QA":"Quality Assurance","RADIUS":"Remote Authentication Dial-In User Service","RBAC":"Role-Based Access Control","RC4":"Rivest Cipher 4","RFC":"Request for Comments","RFP":"Request for Proposal","RICO":"Racketeer Influenced and Corrupt Organizations Act","RSA":"Rivest-Shamir-Adleman","RTP":"Real-time Transport Protocol","RW":"Rewritable","SANS":"SysAdmin, Audit, Network, and Security","SBU":"Sensitive But Unclassified","SC":"System and Communications Protection","SDLC":"Systems Development Life Cycle","SEI":"Software Engineering Institute","SETA":"Security Education, Training, and Awareness","SIP":"Session Initiation Protocol","SMTP":"Simple Mail Transfer Protocol","SP":"Special Publication","SPI":"Stateful Packet Inspection","SS7":"Signaling System No. 7","SSD":"Solid-State Drive","SSDs":"Solid-State Drives","SSL":"Secure Sockets Layer","SSO":"Single Sign-On","SW":"Software","SecSDLC":"Security Systems Development Life Cycle","TCB":"Trusted Computing Base","TCP":"Transmission Control Protocol","TCSEC":"Trusted Computer System Evaluation Criteria","TGS":"Ticket-Granting Service","TGT":"Ticket-Granting Ticket","TKIP":"Temporal Key Integrity Protocol","TLS":"Transport Layer Security","TR":"Technical Report","TTLS":"Tunneled Transport Layer Security","USDA":"United States Department of Agriculture","UTM":"Unified Threat Management","VM":"Virtual Machine","VPN":"Virtual Private Network","VoIP":"Voice over Internet Protocol","WBS":"Work Breakdown Structure","WEP":"Wired Equivalent Privacy","WLAN":"Wireless Local Area Network","WLANs":"Wireless Local Area Networks","WPA2":"Wi-Fi Protected Access 2","WiMAX":"Worldwide Interoperability for Microwave Access","XOR":"Exclusive OR","XSS":"Cross-Site Scripting"},"SWD392":{"CBSA":"Component-Based Software Architecture","OMG":"Object Management Group","PIM":"Platform-Independent Model","PSM":"Platform-Specific Model","RUP":"Rational Unified Process","SOA":"Service-Oriented Architecture","SPL":"Software Product Line","UML":"Unified Modeling Language","USDP":"Unified Software Development Process"}};const ABBR_HIDE=new Set(["CES202_SP26_RE#19", "CES202_SP26_RE#3", "CES202_SP26_RE#34", "CES202_SP26_RE#36", "CES202_SP26_RE#4", "CES202_SP26_RE#45", "FRS401c_FA24_RE#23", "FRS401c_FA24_RE#28", "FRS401c_SP25_RE#23", "FRS401c_SP25_RE#54", "HOD401 - FA 2023 - FE#39", "HOD401 - FE - SU 2023#19", "HOD401 - FE - SU 2023#36", "HOD401 - RE - SU23362111#22", "HOD401_SP25_RE#32", "HOD401_SP25_RE#34", "HOD401_SU24_RE#34", "HOD401_SU24_RE#35", "HOD401_SU24_RE#36", "HOD402 - SU25 - FE#16", "HOD402 - SU25 - FE#25", "HOD402 - SU25 - FE#47", "HOD402_SP25_FE_541794#0", "HOD402_SP25_FE_541794#12", "HOD402_SP25_FE_541794#43", "HOD402_SP25_FE_541794#49", "HOD402_SP25_RE_396441#29", "HOD402_SP26_RE#11", "HOD402_SP26_RE#13", "HOD402_SP26_RE#26", "IAP301_FA24_FE#29", "IAP301_FE_SU2023#28", "IAP301_FE_SU2023#41", "IAP301_FE_SU2024#6", "IAP301_FE_SU2025#14", "IAP301_SP25_FE#0", "IAP301_SP25_FE#20", "IAP301_SP25_FE_HCM#0", "IAP301_SP25_FE_HCM#20", "IAP301_SP26_FE#10", "IAP301_SU25_RE#13", "IAP301_SU25_RE#18", "IAP301_SU25_RE#28", "PMG201c - Project Management#128", "PMG201c - Project Management#28", "PMG201c - Project Management#325", "PMG201c - Project Management#8", "SPM401 · FA 2023 · RE (đề 1083)#18", "SPM401 · SU 2023 · FE (đề 408)#36", "SPM401 · SU 2023 · FE (đề 408)#39", "SPM401 · SU 2023 · FE (đề 408)#41", "SPM401 · SU 2023 · FE (đề 408)#44", "SPM401 · SU 2023 · RE (đề 550)#26", "SPM401 · SU 2023 · RE (đề 550)#27", "SPM401 · SU 2023 · RE (đề 550)#46", "SPM401 · SU 2026 · FE#36", "SWD392 - Final Exam#3", "SWD392 - Ngân hàng câu hỏi#51"]);
+const ABBR_EN={"CES202":{"AD":"Active Directory","APIPA":"Automatic Private IP Addressing","CIA":"Confidentiality, Integrity, and Availability","CNAME":"Canonical Name","DHCP":"Dynamic Host Configuration Protocol","DNS":"Domain Name System","FSMO":"Flexible Single Master Operations","GPO":"Group Policy Object","GPT":"GUID Partition Table","GUI":"Graphical User Interface","GUID":"Globally Unique Identifier","HTTP":"Hypertext Transfer Protocol","IP":"Internet Protocol","IR":"Infrared","MAC":"Media Access Control","MBR":"Master Boot Record","MMC":"Microsoft Management Console","NFC":"Near Field Communication","NS":"Name Server","OS":"Operating System","OSI":"Open Systems Interconnection","OU":"Organizational Unit","PDC":"Primary Domain Controller","RAID":"Redundant Array of Independent Disks","RAM":"Random Access Memory","RID":"Relative Identifier","RODC":"Read-Only Domain Controller","SAM":"Security Account Manager","SPF":"Sender Policy Framework","SRP":"Software Restriction Policies","TCP":"Transmission Control Protocol","UDP":"User Datagram Protocol","VT":"Virtualization Technology","WDS":"Windows Deployment Services"},"FRS401C":{"ARP":"Address Resolution Protocol","AV":"Antivirus","BCP":"Business Continuity Plan","CER":"Crossover Error Rate","CM":"Configuration Management","CMDB":"Configuration Management Database","CSRF":"Cross-Site Request Forgery","DAC":"Discretionary Access Control","DHCP":"Dynamic Host Configuration Protocol","DIDS":"Distributed Intrusion Detection System","DMZ":"Demilitarized Zone","DNS":"Domain Name System","ESP":"Encapsulating Security Payload","FAR":"False Acceptance Rate","FAT":"File Allocation Table","FRR":"False Rejection Rate","FTK":"Forensic Toolkit","FTP":"File Transfer Protocol","HIDS":"Host-based Intrusion Detection System","HIV":"Human Immunodeficiency Virus","HTTP":"Hypertext Transfer Protocol","HTTPS":"Hypertext Transfer Protocol Secure","ICMP":"Internet Control Message Protocol","IDS":"Intrusion Detection System","IEEE":"Institute of Electrical and Electronics Engineers","IGMP":"Internet Group Management Protocol","IMAP":"Internet Message Access Protocol","IOPS":"Input/Output Operations Per Second","IP":"Internet Protocol","IRM":"Information Rights Management","ISO":"International Organization for Standardization","ITAM":"Information Technology Asset Management","L2F":"Layer 2 Forwarding","L2TP":"Layer 2 Tunneling Protocol","LAN":"Local Area Network","LPD":"Line Printer Daemon","MDM":"Mobile Device Management","NAT":"Network Address Translation","NDAC":"Non-Discretionary Access Control","NIDS":"Network-based Intrusion Detection System","NIST":"National Institute of Standards and Technology","NNTP":"Network News Transfer Protocol","OS":"Operating System","OSI":"Open Systems Interconnection","OUI":"Organizationally Unique Identifier","PAT":"Port Address Translation","PIN":"Personal Identification Number","POP3":"Post Office Protocol version 3","PPP":"Point-to-Point Protocol","PPTP":"Point-to-Point Tunneling Protocol","RAM":"Random Access Memory","RARP":"Reverse Address Resolution Protocol","RBAC":"Role-Based Access Control","RPC":"Remote Procedure Call","SATA":"Serial Advanced Technology Attachment","SDLC":"Software Development Life Cycle","SET":"Secure Electronic Transaction","SLIP":"Serial Line Internet Protocol","SMTP":"Simple Mail Transfer Protocol","SP":"Special Publication","SPX":"Sequenced Packet Exchange","SSCP":"Systems Security Certified Practitioner","SSD":"Solid-State Drive","SSH":"Secure Shell","SSL":"Secure Sockets Layer","SSO":"Single Sign-On","SYN":"Synchronize","TCP":"Transmission Control Protocol","TCSEC":"Trusted Computer System Evaluation Criteria","TFTP":"Trivial File Transfer Protocol","TLS":"Transport Layer Security","UDP":"User Datagram Protocol","VM":"Virtual Machine","VPN":"Virtual Private Network","XSS":"Cross-Site Scripting"},"HOD401":{"ACK":"Acknowledgment","AES":"Advanced Encryption Standard","AH":"Authentication Header","AP":"Access Point","ARIN":"American Registry for Internet Numbers","ARP":"Address Resolution Protocol","ASP":"Active Server Pages","ATM":"Automated Teller Machine","BSSID":"Basic Service Set Identifier","CEH":"Certified Ethical Hacker","CGI":"Common Gateway Interface","CIA":"Confidentiality, Integrity, Availability","CSRF":"Cross-Site Request Forgery","DES":"Data Encryption Standard","DNS":"Domain Name System","EAPOL":"Extensible Authentication Protocol over LAN","ESP":"Encapsulating Security Payload","ESSID":"Extended Service Set Identifier","FBI":"Federal Bureau of Investigation","FIN":"Finish","FTP":"File Transfer Protocol","HTTP":"Hypertext Transfer Protocol","HTTPS":"Hypertext Transfer Protocol Secure","IAS":"Internet Authentication Service","ICMP":"Internet Control Message Protocol","IDS":"Intrusion Detection System","IEEE":"Institute of Electrical and Electronics Engineers","IIS":"Internet Information Services","IP":"Internet Protocol","IPC":"Inter-Process Communication","ISA":"Internet Security and Acceleration","ISN":"Initial Sequence Number","ISSAF":"Information Systems Security Assessment Framework","IV":"Initialization Vector","MAC":"Media Access Control","MBSA":"Microsoft Baseline Security Analyzer","MD5":"Message-Digest Algorithm 5","MITM":"Man-in-the-Middle","NAT":"Network Address Translation","NDA":"Non-Disclosure Agreement","NIDS":"Network Intrusion Detection System","NIPS":"Network Intrusion Prevention System","NIST":"National Institute of Standards and Technology","NTFS":"New Technology File System","OS":"Operating System","OSI":"Open Systems Interconnection","OSINT":"Open-Source Intelligence","PKI":"Public Key Infrastructure","PSH":"Push","RC6":"Rivest Cipher 6","RID":"Relative Identifier","RSA":"Rivest–Shamir–Adleman","RST":"Reset","RTOS":"Real-Time Operating System","SCADA":"Supervisory Control and Data Acquisition","SHA1":"Secure Hash Algorithm 1","SID":"Security Identifier","SMB":"Server Message Block","SMTP":"Simple Mail Transfer Protocol","SNMP":"Simple Network Management Protocol","SQL":"Structured Query Language","SSH":"Secure Shell","SSID":"Service Set Identifier","SSL":"Secure Sockets Layer","SYN":"Synchronize","TCP":"Transmission Control Protocol","TLS":"Transport Layer Security","TOE":"Target of Evaluation","TOR":"The Onion Router","UDP":"User Datagram Protocol","URG":"Urgent","VLANS":"Virtual Local Area Networks","WEP":"Wired Equivalent Privacy","WLAN":"Wireless Local Area Network","WPA":"Wi-Fi Protected Access","WPA2":"Wi-Fi Protected Access 2","WPA3":"Wi-Fi Protected Access 3","WPS":"Wi-Fi Protected Setup","XOR":"Exclusive OR","XSS":"Cross-Site Scripting","ZAP":"Zed Attack Proxy"},"HOD402":{"AAA":"Authentication, Authorization, and Accounting","ACK":"Acknowledgment","AD":"Active Directory","AES":"Advanced Encryption Standard","AP":"Access Point","API":"Application Programming Interface","APK":"Android Package Kit","ARP":"Address Resolution Protocol","BLE":"Bluetooth Low Energy","C2":"Command and Control","CA":"Certificate Authority","CAV2":"Card Authentication Value 2","CFTC":"Commodity Futures Trading Commission","CIA":"Confidentiality, Integrity, Availability","CID":"Card Identification Number","CMD":"Command Prompt","CRL":"Certificate Revocation List","CSS":"Content Scrambling System","CSV":"Comma-Separated Values","CVC":"Card Validation Code","CVC2":"Card Validation Code 2","CVE":"Common Vulnerabilities and Exposures","CVSS":"Common Vulnerability Scoring System","CVV":"Card Verification Value","CVV2":"Card Verification Value 2","DDOS":"Distributed Denial of Service","DES":"Data Encryption Standard","DHCP":"Dynamic Host Configuration Protocol","DLL":"Dynamic-Link Library","DMZ":"Demilitarized Zone","DNS":"Domain Name System","DOS":"Denial of Service","DSS":"Data Security Standard","EAP":"Extensible Authentication Protocol","EMV":"Europay, Mastercard, and Visa","ESMTP":"Extended Simple Mail Transfer Protocol","FDIC":"Federal Deposit Insurance Corporation","FFIEC":"Federal Financial Institutions Examination Council","FIN":"Finish","FOCA":"Fingerprinting Organizations with Collected Archives","FQDN":"Fully Qualified Domain Name","FTC":"Federal Trade Commission","FTP":"File Transfer Protocol","GATT":"Generic Attribute Profile","GDPR":"General Data Protection Regulation","GLB":"Gramm-Leach-Bliley","GUI":"Graphical User Interface","HIDS":"Host-based Intrusion Detection System","HIPAA":"Health Insurance Portability and Accountability Act","HTML":"HyperText Markup Language","HTTP":"Hypertext Transfer Protocol","HTTPS":"Hypertext Transfer Protocol Secure","ICMP":"Internet Control Message Protocol","IDS":"Intrusion Detection System","IEEE":"Institute of Electrical and Electronics Engineers","IMAP":"Internet Message Access Protocol","IMAPS":"Internet Message Access Protocol Secure","IP":"Internet Protocol","IPMI":"Intelligent Platform Management Interface","IPS":"Intrusion Prevention System","IRS":"Internal Revenue Service","MAC":"Media Access Control","MD5":"Message-Digest Algorithm 5","MFA":"Multi-Factor Authentication","MFP":"Management Frame Protection","MIME":"Multipurpose Internet Mail Extensions","MITM":"Man-in-the-Middle","MSA":"Master Service Agreement","NAT":"Network Address Translation","NDA":"Non-Disclosure Agreement","NIDS":"Network Intrusion Detection System","NIPS":"Network Intrusion Prevention System","NIST":"National Institute of Standards and Technology","NSE":"Nmap Scripting Engine","NTLM":"NT LAN Manager","NVD":"National Vulnerability Database","OBEX":"Object Exchange","OS":"Operating System","OSINT":"Open-Source Intelligence","OSSTMM":"Open Source Security Testing Methodology Manual","OT":"Operational Technology","OWASP":"Open Web Application Security Project","PAN":"Primary Account Number","PBX":"Private Branch Exchange","PCI":"Payment Card Industry","PGP":"Pretty Good Privacy","PIN":"Personal Identification Number","PKI":"Public Key Infrastructure","PNL":"Preferred Network List","POODLE":"Padding Oracle On Downgraded Legacy Encryption","POP3":"Post Office Protocol version 3","PTES":"Penetration Testing Execution Standard","QR":"Quick Response","RBAC":"Role-Based Access Control","RC5":"Rivest Cipher 5","RFI":"Remote File Inclusion","RFID":"Radio-Frequency Identification","RFP":"Request for Proposal","RSA":"Rivest–Shamir–Adleman","RST":"Reset","SAM":"Security Account Manager","SANS":"SysAdmin, Audit, Network, and Security","SCADA":"Supervisory Control and Data Acquisition","SCP":"Secure Copy Protocol","SDK":"Software Development Kit","SDLC":"Software Development Life Cycle","SEC":"Securities and Exchange Commission","SET":"Social-Engineer Toolkit","SFTP":"SSH File Transfer Protocol","SHA":"Secure Hash Algorithm","SID":"Security Identifier","SLA":"Service-Level Agreement","SMS":"Short Message Service","SMTP":"Simple Mail Transfer Protocol","SOAP":"Simple Object Access Protocol","SOW":"Statement of Work","SP":"Special Publication","SPN":"Service Principal Name","SQL":"Structured Query Language","SYN":"Synchronize","TCP":"Transmission Control Protocol","TGS":"Ticket-Granting Service","TKIP":"Temporal Key Integrity Protocol","TLS":"Transport Layer Security","UDP":"User Datagram Protocol","UI":"User Interface","VM":"Virtual Machine","VNC":"Virtual Network Computing","VPN":"Virtual Private Network","WADL":"Web Application Description Language","WMI":"Windows Management Instrumentation","WPA2":"Wi-Fi Protected Access 2","WPA3":"Wi-Fi Protected Access 3","WPS":"Wi-Fi Protected Setup","WSDL":"Web Services Description Language","WSTG":"Web Security Testing Guide","XML":"Extensible Markup Language","XOR":"Exclusive OR","XSS":"Cross-Site Scripting"},"IAP301":{"ABAC":"Attribute-Based Access Control","AR":"Augmented Reality","AUP":"Acceptable Use Policy","BCP":"Business Continuity Plan","BIA":"Business Impact Analysis","CBT":"Computer-Based Training","CCE":"Common Configuration Enumeration","CFO":"Chief Financial Officer","CIA":"Confidentiality, Integrity, and Availability","CIO":"Chief Information Officer","CIPA":"Children's Internet Protection Act","CISO":"Chief Information Security Officer","CM":"Configuration Management","CMDB":"Configuration Management Database","COBIT":"Control Objectives for Information and Related Technologies","COSO":"Committee of Sponsoring Organizations of the Treadway Commission","CPE":"Common Platform Enumeration","CRO":"Chief Risk Officer","CVE":"Common Vulnerabilities and Exposures","CVSS":"Common Vulnerability Scoring System","DLP":"Data Loss Prevention","DMZ":"Demilitarized Zone","DNS":"Domain Name System","DRP":"Disaster Recovery Plan","DSS":"Data Security Standard","EHR":"Electronic Health Record","ERM":"Enterprise Risk Management","FCC":"Federal Communications Commission","FDCC":"Federal Desktop Core Configuration","FERPA":"Family Educational Rights and Privacy Act","FISMA":"Federal Information Security Management Act","FOUO":"For Official Use Only","FTP":"File Transfer Protocol","GLBA":"Gramm-Leach-Bliley Act","GRC":"Governance, Risk Management, and Compliance","HIPAA":"Health Insurance Portability and Accountability Act","HTTP":"Hypertext Transfer Protocol","IA":"Information Assurance","IDS":"Intrusion Detection System","IPS":"Intrusion Prevention System","IRT":"Incident Response Team","ISACA":"Information Systems Audit and Control Association","ISMS":"Information Security Management System","ISS":"Information Systems Security","ITIL":"Information Technology Infrastructure Library","LAN":"Local Area Network","MFA":"Multi-Factor Authentication","NIST":"National Institute of Standards and Technology","NTFS":"New Technology File System","OCTAVE":"Operationally Critical Threat, Asset, and Vulnerability Evaluation","OECD":"Organisation for Economic Co-operation and Development","OS":"Operating System","OVAL":"Open Vulnerability and Assessment Language","OWASP":"Open Web Application Security Project","PAA":"Privileged-Level Access Agreement","PCI":"Payment Card Industry","PII":"Personally Identifiable Information","PR":"Public Relations","QA":"Quality Assurance","QC":"Quality Control","RBAC":"Role-Based Access Control","RCSA":"Risk and Control Self-Assessment","RFID":"Radio-Frequency Identification","RTO":"Recovery Time Objective","SAN":"Storage Area Network","SBU":"Sensitive But Unclassified","SCADA":"Supervisory Control and Data Acquisition","SCAP":"Security Content Automation Protocol","SEC":"Securities and Exchange Commission","SNMP":"Simple Network Management Protocol","SOD":"Separation of Duties","SOX":"Sarbanes-Oxley Act","SP":"Special Publication","SQL":"Structured Query Language","TLS":"Transport Layer Security","VPN":"Virtual Private Network","WAN":"Wide Area Network","WBEM":"Web-Based Enterprise Management","WMI":"Windows Management Instrumentation","XCCDF":"Extensible Configuration Checklist Description Format"},"PMG201c":{"AC":"Actual Cost","BAC":"Budget at Completion","CPI":"Cost Performance Index","CV":"Cost Variance","EAC":"Estimate at Completion","EF":"Early Finish","ES":"Early Start","ETC":"Estimate to Complete","EV":"Earned Value","EVM":"Earned Value Management","LF":"Late Finish","LS":"Late Start","PERT":"Program Evaluation and Review Technique","PMBOK":"Project Management Body of Knowledge","PMO":"Project Management Office","PV":"Planned Value","RACI":"Responsible, Accountable, Consulted, Informed","RAM":"Responsibility Assignment Matrix","RBS":"Risk Breakdown Structure","SPI":"Schedule Performance Index","SV":"Schedule Variance","SWOT":"Strengths, Weaknesses, Opportunities, Threats","USD":"United States dollar","WBS":"Work Breakdown Structure"},"SPM401":{"AAR":"After-Action Review","ACL":"Access Control List","ACS":"Access Control System","AES":"Advanced Encryption Standard","AH":"Authentication Header","AIO":"All-in-One","AIS":"Accounting Information Systems","ARP":"Address Resolution Protocol","AUP":"Acceptable Use Policy","AUPs":"Acceptable Use Policies","AV":"Antivirus","BC":"Business Continuity","BCP":"Business Continuity Plan","BIA":"Business Impact Analysis","BLP":"Bell-LaPadula","CBA":"Cost-Benefit Analysis","CC":"Common Criteria","CCE":"Certified Computer Examiner","CCMP":"Counter Mode with Cipher Block Chaining Message Authentication Code Protocol","CER":"Crossover Error Rate","CGTF":"Corporate Governance Task Force","CHAP":"Challenge-Handshake Authentication Protocol","CIS":"Center for Internet Security","CISO":"Chief Information Security Officer","CISSP":"Certified Information Systems Security Professional","CMM":"Capability Maturity Model","CMMI":"Capability Maturity Model Integration","CMU":"Carnegie Mellon University","CNSS":"Committee on National Security Systems","COBIT":"Control Objectives for Information and Related Technologies","COO":"Chief Operating Officer","COSO":"Committee of Sponsoring Organizations of the Treadway Commission","CP":"Contingency Planning","CSIRT":"Computer Security Incident Response Team","CSRC":"Computer Security Resource Center","CTO":"Chief Technology Officer","DES":"Data Encryption Standard","DLP":"Data Loss Prevention","DOM":"Document Object Model","DR":"Disaster Recovery","DRP":"Disaster Recovery Plan","DoS":"Denial of Service","EAL":"Evaluation Assurance Level","EAL1":"Evaluation Assurance Level 1","EAL7":"Evaluation Assurance Level 7","EAP":"Extensible Authentication Protocol","ECC":"Elliptic Curve Cryptography","EDLP":"Endpoint Data Loss Prevention","EISP":"Enterprise Information Security Policy","EM":"Evidentiary Material","EPL":"Evaluated Products List","ERM":"Enterprise Risk Management","ESP":"Encapsulating Security Payload","FAIR":"Factor Analysis of Information Risk","FAR":"False Acceptance Rate","FRR":"False Rejection Rate","HIPAA":"Health Insurance Portability and Accountability Act","HVAC":"Heating, Ventilation, and Air Conditioning","IC":"Internal Control","IDPS":"Intrusion Detection and Prevention System","IDPSs":"Intrusion Detection and Prevention Systems","IDS":"Intrusion Detection System","IEC":"International Electrotechnical Commission","IEEE":"Institute of Electrical and Electronics Engineers","IETF":"Internet Engineering Task Force","IKE":"Internet Key Exchange","IP":"Internet Protocol","IPSec":"Internet Protocol Security","IR":"Incident Response","IRP":"Incident Response Plan","ISACA":"Information Systems Audit and Control Association","ISAKMP":"Internet Security Association and Key Management Protocol","ISFCE":"International Society of Forensic Computer Examiners","ISMS":"Information Security Management System","ISO":"International Organization for Standardization","ISSP":"Issue-Specific Security Policy","ITGI":"IT Governance Institute","ITIL":"Information Technology Infrastructure Library","ITU":"International Telecommunication Union","IV":"Initialization Vector","InfoSec":"Information Security","IoT":"Internet of Things","KDC":"Key Distribution Center","LEAP":"Lightweight Extensible Authentication Protocol","LEF":"Loss Event Frequency","MAC":"Media Access Control","MAN":"Metropolitan Area Network","MIC":"Message Integrity Code","MIS":"Management of Information Security","MP":"Media Protection","MTD":"Maximum Tolerable Downtime","NIST":"National Institute of Standards and Technology","NISTIR":"NIST Interagency or Internal Report","NSRL":"National Software Reference Library","NZS":"New Zealand Standard","OCTAVE":"Operationally Critical Threat, Asset, and Vulnerability Evaluation","OFDM":"Orthogonal Frequency-Division Multiplexing","OLTP":"Online Transaction Processing","OWASP":"Open Web Application Security Project","PAP":"Password Authentication Protocol","PEAP":"Protected Extensible Authentication Protocol","PIS":"Principles of Information Security","PKI":"Public Key Infrastructure","PP":"Protection Profile","PPP":"Point-to-Point Protocol","PPTP":"Point-to-Point Tunneling Protocol","PSTN":"Public Switched Telephone Network","QA":"Quality Assurance","RADIUS":"Remote Authentication Dial-In User Service","RBAC":"Role-Based Access Control","RC4":"Rivest Cipher 4","RFC":"Request for Comments","RFP":"Request for Proposal","RICO":"Racketeer Influenced and Corrupt Organizations Act","RSA":"Rivest-Shamir-Adleman","RTP":"Real-time Transport Protocol","RW":"Rewritable","SANS":"SysAdmin, Audit, Network, and Security","SBU":"Sensitive But Unclassified","SC":"System and Communications Protection","SDLC":"Systems Development Life Cycle","SEI":"Software Engineering Institute","SETA":"Security Education, Training, and Awareness","SIP":"Session Initiation Protocol","SMTP":"Simple Mail Transfer Protocol","SP":"Special Publication","SPI":"Stateful Packet Inspection","SS7":"Signaling System No. 7","SSD":"Solid-State Drive","SSDs":"Solid-State Drives","SSL":"Secure Sockets Layer","SSO":"Single Sign-On","SW":"Software","SecSDLC":"Security Systems Development Life Cycle","TCB":"Trusted Computing Base","TCP":"Transmission Control Protocol","TCSEC":"Trusted Computer System Evaluation Criteria","TGS":"Ticket-Granting Service","TGT":"Ticket-Granting Ticket","TKIP":"Temporal Key Integrity Protocol","TLS":"Transport Layer Security","TR":"Technical Report","TTLS":"Tunneled Transport Layer Security","USDA":"United States Department of Agriculture","UTM":"Unified Threat Management","VM":"Virtual Machine","VPN":"Virtual Private Network","VoIP":"Voice over Internet Protocol","WBS":"Work Breakdown Structure","WEP":"Wired Equivalent Privacy","WLAN":"Wireless Local Area Network","WLANs":"Wireless Local Area Networks","WPA2":"Wi-Fi Protected Access 2","WiMAX":"Worldwide Interoperability for Microwave Access","XOR":"Exclusive OR","XSS":"Cross-Site Scripting"}};const ABBR_HIDE=new Set(["CES202_SP26_RE#19", "CES202_SP26_RE#3", "CES202_SP26_RE#34", "CES202_SP26_RE#36", "CES202_SP26_RE#4", "CES202_SP26_RE#45", "FRS401c_FA24_RE#23", "FRS401c_FA24_RE#28", "FRS401c_SP25_RE#23", "FRS401c_SP25_RE#54", "HOD401 - FA 2023 - FE#39", "HOD401 - FE - SU 2023#19", "HOD401 - FE - SU 2023#36", "HOD401 - RE - SU23362111#22", "HOD401_SP25_RE#32", "HOD401_SP25_RE#34", "HOD401_SU24_RE#34", "HOD401_SU24_RE#35", "HOD401_SU24_RE#36", "HOD402 - SU25 - FE#16", "HOD402 - SU25 - FE#25", "HOD402 - SU25 - FE#47", "HOD402_SP25_FE_541794#0", "HOD402_SP25_FE_541794#12", "HOD402_SP25_FE_541794#43", "HOD402_SP25_FE_541794#49", "HOD402_SP25_RE_396441#29", "HOD402_SP26_RE#11", "HOD402_SP26_RE#13", "HOD402_SP26_RE#26", "IAP301_FA24_FE#29", "IAP301_FE_SU2023#28", "IAP301_FE_SU2023#41", "IAP301_FE_SU2024#6", "IAP301_FE_SU2025#14", "IAP301_SP25_FE#0", "IAP301_SP25_FE#20", "IAP301_SP25_FE_HCM#0", "IAP301_SP25_FE_HCM#20", "IAP301_SP26_FE#10", "IAP301_SU25_RE#13", "IAP301_SU25_RE#18", "IAP301_SU25_RE#28", "PMG201c - Project Management#128", "PMG201c - Project Management#28", "PMG201c - Project Management#325", "PMG201c - Project Management#8", "SPM401 · FA 2023 · RE (đề 1083)#18", "SPM401 · SU 2023 · FE (đề 408)#36", "SPM401 · SU 2023 · FE (đề 408)#39", "SPM401 · SU 2023 · FE (đề 408)#41", "SPM401 · SU 2023 · FE (đề 408)#44", "SPM401 · SU 2023 · RE (đề 550)#26", "SPM401 · SU 2023 · RE (đề 550)#27", "SPM401 · SU 2023 · RE (đề 550)#46", "SPM401 · SU 2026 · FE#36"]);
 /* the box can be switched off: ⚙️ Tùy chọn or the button in the box; remembered in fu_abx (exported with the data) */
 let ABX_ON=(()=>{try{return localStorage.getItem('fu_abx')!=='0'}catch(e){return true}})();
 function setAbx(on,init){ABX_ON=!!on;if(!init)try{localStorage.setItem('fu_abx',on?'1':'0')}catch(e){}
@@ -746,6 +766,7 @@ const MODELABEL={random:'Random',exam:'Theo đề',all:'Ôn tổng',wrong:'Ôn c
   flash:'Flashcard',book:'Câu đánh dấu',seen:'Câu đã xem đáp án',search:'Tìm kiếm'};
 /* theme */
 function applyTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem('app_theme',t)}catch(e){}
+  const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=t==='light'?'#f6f8fa':'#0d1117';
   const b=el('themeBtn');if(b)b.textContent=t==='dark'?'☀️ Sáng':'🌙 Tối';}
 function toggleTheme(){applyTheme((document.documentElement.dataset.theme||'dark')==='dark'?'light':'dark')}
 (function(){let t;try{t=localStorage.getItem('app_theme')}catch(e){}
@@ -827,7 +848,7 @@ function sameQuestion(a,b){const A=a._k,B=b._k;if(!A.length||!B.length)return fa
   let n=0;a._o.forEach(x=>{if(_near(x,b._o))n++});return n/Math.min(a._o.length,b._o.length)>=.75;}
 /* reprints with reworded keys, confirmed by reading them. Applied only while the two rows still share a
    stem, so a later bank edit that shifts positions can never merge unrelated rows. */
-const SAME_Q=[["IAP301_FA24_RE#17","IAP301_SP25_FE#42"],["IAP301_FA24_RE#17","IAP301_SP25_FE_HCM#42"],["IAP301_FA24_RE#17","IAP301_SU25_RE#32"],["IAP301_FA24_RE#49","IAP301_FE_SU2024#19"],["IAP301_FA24_RE#49","IAP301_FE_SU2025#32"],["IAP301_FE_SU2024#19","IAP301_SP26_FE#14"],["IAP301_FE_SU2025#32","IAP301_SP26_FE#14"],["IAP301_SP25_FE#47","IAP301_SU25_RE#33"],["IAP301_SP25_FE_HCM#47","IAP301_SU25_RE#33"],["VNR - Final Exam - Chu Be Dan#79","VNR - Final Exam - Nhung Hoang#10"],["VNR - Final Exam - Chu Be Dan#98","VNR - Final Exam - Nhung Hoang#289"],["VNR - Final Exam - Chu Be Dan#113","VNR - Final Exam - Nhung Hoang#161"],["VNR - Final Exam - Chu Be Dan#323","VNR - Final Exam - Nhung Hoang#82"],["VNR - Final Exam - Chu Be Dan#104","VNR - Final Exam - Nhung Hoang#31"],["HCM202 - Final Exam - Nhung Hoang#76","HCM202 - Progress Test#50"],["HCM202 - Final Exam - Chu Be Dan#202","HCM202 - Progress Test#50"],["HCM202 - Final Exam - Chu Be Dan#278","HCM202 - Final Exam - Nhung Hoang#110"],["HCM202 - Final Exam - Chu Be Dan#284","HCM202 - Final Exam - Nhung Hoang#263"],["HCM202 - Final Exam - Chu Be Dan#133","HCM202 - Progress Test#37"],["HCM202 - Final Exam - Chu Be Dan#122","HCM202 - Final Exam - Nhung Hoang#333"],["SWD392 - Final Exam#160","SWD392 - Ngân hàng câu hỏi#237"],["SWD392 - Final Exam#254","SWD392 - Ngân hàng câu hỏi#34"],["SWD392 - Ngân hàng câu hỏi#33","SWD392 - Ngân hàng câu hỏi#34"],["HCM202 - Final Exam - Chu Be Dan#250","HCM202 - Final Exam - Nhung Hoang#26"],["HCM202 - Final Exam - Chu Be Dan#199","HCM202 - Final Exam - Nhung Hoang#228"]];
+const SAME_Q=[["IAP301_FA24_RE#17","IAP301_SP25_FE#42"],["IAP301_FA24_RE#17","IAP301_SP25_FE_HCM#42"],["IAP301_FA24_RE#17","IAP301_SU25_RE#32"],["IAP301_FA24_RE#49","IAP301_FE_SU2024#19"],["IAP301_FA24_RE#49","IAP301_FE_SU2025#32"],["IAP301_FE_SU2024#19","IAP301_SP26_FE#14"],["IAP301_FE_SU2025#32","IAP301_SP26_FE#14"],["IAP301_SP25_FE#47","IAP301_SU25_RE#33"],["IAP301_SP25_FE_HCM#47","IAP301_SU25_RE#33"],["VNR - Final Exam - Chu Be Dan#79","VNR - Final Exam - Nhung Hoang#10"],["VNR - Final Exam - Chu Be Dan#98","VNR - Final Exam - Nhung Hoang#289"],["VNR - Final Exam - Chu Be Dan#113","VNR - Final Exam - Nhung Hoang#161"],["VNR - Final Exam - Chu Be Dan#323","VNR - Final Exam - Nhung Hoang#82"],["VNR - Final Exam - Chu Be Dan#104","VNR - Final Exam - Nhung Hoang#31"],["HCM202 - Final Exam - Nhung Hoang#76","HCM202 - Progress Test#50"],["HCM202 - Final Exam - Chu Be Dan#202","HCM202 - Progress Test#50"],["HCM202 - Final Exam - Chu Be Dan#278","HCM202 - Final Exam - Nhung Hoang#110"],["HCM202 - Final Exam - Chu Be Dan#284","HCM202 - Final Exam - Nhung Hoang#263"],["HCM202 - Final Exam - Chu Be Dan#133","HCM202 - Progress Test#37"],["HCM202 - Final Exam - Chu Be Dan#122","HCM202 - Final Exam - Nhung Hoang#333"],["HCM202 - Final Exam - Chu Be Dan#250","HCM202 - Final Exam - Nhung Hoang#26"],["HCM202 - Final Exam - Chu Be Dan#199","HCM202 - Final Exam - Nhung Hoang#228"]];
 function assignGroups(bi){const L=Object.values(bi),ord=new Map(L.map((x,i)=>[x.id,i])),par=new Map(L.map(x=>[x.id,x.id]));
   const f=id=>{while(par.get(id)!==id){par.set(id,par.get(par.get(id)));id=par.get(id)}return id};
   const u=(a,b)=>{a=f(a);b=f(b);if(a!==b){if(ord.get(a)<ord.get(b))par.set(b,a);else par.set(a,b)}};
@@ -1308,7 +1329,11 @@ function renderMastery(P){const box=el('masteryBox');if(!box)return;const dl=el(
   if(dl){const due=dueCount();dl.textContent=due?('⏰ '+due+' câu cần ôn hôm nay'):'Không có câu đến hạn';}
   const kn=el('knownNote');if(kn)kn.textContent=scopeCount(KNOWN)?' ★ là ghi chú của bạn, không tính là Vững.':'';
   const un=el('unvNote');if(un){const n=scopeQuestions().filter(x=>{const r=qrec(x.id);return r&&r.unv&&(r.box||1)>1}).length;
-    un.textContent=n?` ${n} câu mang tiến độ từ bản cũ đang chờ xác nhận (tính tối đa Đã nhớ): trả lời đúng 1 lần là giữ lại bậc cũ.`:'';}}
+    un.textContent=n?` ${n} câu mang tiến độ từ bản cũ đang chờ xác nhận (tính tối đa Đã nhớ): trả lời đúng 1 lần là giữ lại bậc cũ.`:'';}
+  if(P.n&&P.u===P.n){   // nothing answered yet: one line and a way in instead of rows of 0% bars
+    if(sb)sb.innerHTML='<div class="hist-empty">Chưa có tiến độ. Chọn <b>🧠 Học thông minh</b> rồi bấm <b>Bắt đầu</b>.</div>'+
+      '<button type="button" class="btn sec" style="margin-top:10px" onclick="pickMode(\'learn\',1);el(\'startBtn\').focus()"><span aria-hidden="true">🧠</span> Chọn Học thông minh</button>';
+    box.innerHTML='';}}
 function clearSearch(){const g=el('globalSearch');if(!g)return;g.value='';onSearchInput();g.focus();}
 function onSearchInput(){const raw=(el('globalSearch').value||'').trim();const k=raw.toLowerCase();
   const w=el('searchWrap');if(w)w.classList.toggle('has-text',raw.length>0);
@@ -1635,45 +1660,54 @@ function renderFlashcard(q){
   if(span>1)h+=`<span class="badge hot">🔥 Hay ra ×${span}</span>`;
   h+=xrBadge(q);
   h+=`<span class="fc-acts" onclick="event.stopPropagation()">`+
-     `<span class="star" onclick="toggleKnown()">${knownQ(q.id)?'★':'☆'}</span>`+
-     `<span class="bmk" onclick="toggleBook()">${BOOK.has(q.id)?'🔖':'🏳'}</span></span></div>`+
+     `<button type="button" class="star" data-fk="star" onclick="toggleKnown()" aria-pressed="${knownQ(q.id)}" aria-label="Đã thuộc">${knownQ(q.id)?'★':'☆'}</button>`+
+     `<button type="button" class="bmk" data-fk="bmk" onclick="toggleBook()" aria-pressed="${BOOK.has(q.id)}" aria-label="Câu khó">${BOOK.has(q.id)?'🔖':'🏳'}</button></span></div>`+
      `<div class="qgrid"><div class="qmain"><p class="stem">${AB(formatQStem(q.q),1)}</p>${opts}</div><!--ABX--></div>`;
   h+=preNotesHTML(q);
   if(FLIPPED)h+=answerCard(q,keyRowsOf(q),vfBadge(q.vf),x=>AB(x,0));
   h+=`<div class="flip-hint">${FLIPPED?'👆 Nhấn để úp thẻ lại':'👆 Nhấn vào thẻ hoặc phím Space để xem đáp án'}</div></div>`;
   h+=`<div class="navbtns"><button class="btn sec" onclick="go(-1)" ${IDX===0?'disabled':''}>← Trước</button><button class="btn" onclick="go(1)" ${IDX===SESSION.length-1?'disabled':''}>Sau →</button></div>`;
-  el('test').innerHTML=withAbx(h,AB);}
+  setTest(withAbx(h,AB));}
 /* a question the subject's other bank already covers (set by scratchpad pt_xref.py) */
 function xrBadge(q){
   if(!q.xr)return '';
   const t=q.xrc?'⚠ MLN111 ghi đáp án khác':q.xrn?'≈ gần giống câu ở MLN111':'📚 đã có ở MLN111';
   return `<span class="badge ${q.xrc?'multi':q.xrn?'':'xr'}" title="${esc(q.xr)}${q.xrn?' — đề hỏi khác chữ, đọc kỹ':''}">${t}</span>`;}
+/* the card is rebuilt on every change: a Tab user keeps focus on the same control (option, ★, 🔖, chip) */
+function setTest(html){const a=document.activeElement,fk=a&&a.dataset&&a.dataset.fk,t=el('test');t.innerHTML=html;
+  const b=KB&&fk&&t.querySelector('[data-fk="'+fk+'"]');if(b)b.focus({preventScroll:true});}
 function renderQ(){if(isFlash()){renderFlashcard(SESSION[IDX]);return}const q=SESSION[IDX];const AB=abbrFor(q);const showAns=submitted||REVEALED.has(q.id);const known=knownQ(q.id);
   el('prog').textContent=(IDX+1)+'/'+SESSION.length;el('srcLabel').textContent=q.src+(q.n?' · Câu '+q.n:'');syncTopbar();
-  let h=`<div class="card"><div class="qh"><span class="qnum">Câu ${IDX+1}</span><span class="badge">${esc(q.subject)}</span><span class="badge">${esc(q.src)}${q.n?' · Câu '+q.n:''}</span><span class="star" onclick="toggleKnown()">${known?'★':'☆'}</span><span class="bmk" onclick="toggleBook()" title="Đánh dấu câu khó (ôn riêng)">${BOOK.has(q.id)?'🔖':'🏳'}</span>`;
+  // the subject pill only helps when the page mixes subjects; FORCED (?subject=, the dashboard) = one subject
+  let h=`<div class="card"><div class="qh"><span class="qnum">Câu ${IDX+1}</span>${FORCED?'':`<span class="badge">${esc(q.subject)}</span>`}<span class="badge qsrc">${esc(q.src)}${q.n?' · Câu '+q.n:''}</span>`;
   if(isMulti(q))h+=`<span class="badge multi">☑ Chọn ${q.ci.length} đáp án</span>`;
   const span=examSpan(q.dk||dkOf(q.id));
   if(span>1)h+=`<span class="badge hot" title="Câu này xuất hiện trong ${span} đề khác nhau">🔥 Hay ra ×${span}</span>`;
   h+=xrBadge(q);
+  h+='<span class="qacts">';   // ☆ 🏳 (and the review status) stay together on the right
   if(submitted){const ok=graded(q);const st=!isAnswered(q)?['skip','⊘ Chưa làm']:ok?['ok','✔ Đúng']:peeked(q)?['skip','👁 Đúng, đã xem đáp án']:['no','✘ Sai'];h+=`<span class="rev-status ${st[0]}">${st[1]}</span>`;}
+  h+=`<button type="button" class="star" data-fk="star" onclick="toggleKnown()" aria-pressed="${known}" aria-label="Đã thuộc" title="Đánh dấu đã thuộc (S)">${known?'★':'☆'}</button>`+
+     `<button type="button" class="bmk" data-fk="bmk" onclick="toggleBook()" aria-pressed="${BOOK.has(q.id)}" aria-label="Câu khó" title="Đánh dấu câu khó (ôn riêng)">${BOOK.has(q.id)?'🔖':'🏳'}</button></span>`;
   h+=`</div><div class="qgrid"><div class="qmain"><p class="stem">${AB(formatQStem(q.q),1)}</p>`;
   const multi=isMulti(q);
   q.oi.forEach((oi,i)=>{const chosen=q.sels.indexOf(oi)>=0, right=(q.ci||[]).indexOf(oi)>=0;
     let cls='opt';if(showAns){cls+=' locked';if(right)cls+=' correct';else if(chosen)cls+=' wrong';}else if(chosen)cls+=' sel';
     let mk='';if(showAns){if(right)mk='<span class="mk">✔ đáp án đúng</span>';else if(chosen)mk='<span class="mk">✗ bạn chọn</span>';}
     const box=multi?`<span class="cbox">${chosen?'☑':'☐'}</span>`:'';
-    h+=`<div class="${cls}" onclick="pick(${i})">${box}<span class="olet">${String.fromCharCode(65+i)}.</span><span class="otext">${AB(esc(optText(q,oi)),1)}</span>${mk}</div>`;});
+    h+=`<button type="button" class="${cls}" data-fk="o${i}" aria-pressed="${chosen}"${showAns||q.fz?' aria-disabled="true"':''} onclick="pick(${i})">${box}<span class="olet">${String.fromCharCode(65+i)}.</span><span class="otext">${AB(esc(optText(q,oi)),1)}</span>${mk}</button>`;});
   h+='</div><!--ABX--></div>';
   h+=preNotesHTML(q);
-  if(!showAns&&!q.fz){const cf=q.conf||'';h+=`<div class="conf-row"><span class="sub">Mức độ tự tin:</span><span class="conf-chip${cf==='sure'?' sel':''}" onclick="setConf('sure')">✅ Chắc chắn</span><span class="conf-chip${cf==='unsure'?' sel':''}" onclick="setConf('unsure')">🤔 Không chắc</span><span class="conf-chip${cf==='guess'?' sel':''}" onclick="setConf('guess')">🎲 Đoán</span></div>`;}
+  if(!showAns&&!q.fz){const cf=q.conf||'';h+=`<div class="conf-row"><span class="sub">Mức độ tự tin:</span><button type="button" class="conf-chip${cf==='sure'?' sel':''}" data-fk="c-sure" aria-pressed="${cf==='sure'}" onclick="setConf('sure')">✅ Chắc chắn</button><button type="button" class="conf-chip${cf==='unsure'?' sel':''}" data-fk="c-unsure" aria-pressed="${cf==='unsure'}" onclick="setConf('unsure')">🤔 Không chắc</button><button type="button" class="conf-chip${cf==='guess'?' sel':''}" data-fk="c-guess" aria-pressed="${cf==='guess'}" onclick="setConf('guess')">🎲 Đoán</button></div>`;}
   if(!showAns)h+=q.fz?'<div class="sub" style="margin-top:8px">🔒 Đã khóa: bạn đã xem đáp án ở một bản in khác của câu này — lựa chọn ở đây vẫn được chấm.</div>'
-    :`<div style="margin-top:8px"><button class="btn sec" onclick="revealAns()">👁 Xem đáp án</button></div>`;
+    :`<div style="margin-top:8px"><button class="btn sec" onclick="revealAns()"><span aria-hidden="true">👁</span> Xem đáp án</button></div>`;
   if(showAns){
     const peek=REVEALED.has(q.id)&&!submitted?'<span class="vbadge corr">👁 đã xem trước — không tính điểm, không lên bậc, đã khóa chọn</span>':'';
     h+=answerCard(q,keyRowsOf(q),vfBadge(q.vf)+peek,x=>AB(x,0));}
   h+=`<div class="navbtns"><button class="btn sec" onclick="go(-1)" ${IDX===0?'disabled':''}>← Trước</button><button class="btn" onclick="go(1)" ${IDX===SESSION.length-1?'disabled':''}>Sau →</button></div>`;
-  h+=`<div class="jump">`+SESSION.map((s,i)=>{let c=i===IDX?'cur ':'';const ans=isAnswered(s);if(submitted)c+=(!ans||peeked(s)?'':graded(s)?'correct':'wrong');else c+=(ans?'done':'');if(knownQ(s.id))c+=' known';return `<button class="${c}" onclick="jumpTo(${i})">${i+1}</button>`}).join('')+`</div></div>`;
-  el('test').innerHTML=withAbx(h,AB);if(submitted&&window._hero)el('test').insertAdjacentHTML('afterbegin',REVIEWING&&window._heroMini?window._heroMini:window._hero);
+  h+=`<div class="jump">`+SESSION.map((s,i)=>{let c=i===IDX?'cur ':'';const ans=isAnswered(s);if(submitted)c+=(!ans||peeked(s)?'':graded(s)?'correct':'wrong');else c+=(ans?'done':'');const kn=knownQ(s.id);if(kn)c+=' known';
+    const st=submitted?(!ans?'chưa làm':peeked(s)?'đã xem đáp án':graded(s)?'đúng':'sai'):(ans?'đã trả lời':'chưa làm');
+    return `<button type="button" class="${c}" aria-label="Câu ${i+1}: ${st}${kn?', đã thuộc':''}"${i===IDX?' aria-current="step"':''} onclick="jumpTo(${i})">${i+1}</button>`}).join('')+`</div></div>`;
+  setTest(withAbx(h,AB));if(submitted&&window._hero)el('test').insertAdjacentHTML('afterbegin',REVIEWING&&window._heroMini?window._heroMini:window._hero);
   // the grid is rebuilt every render, so its scroll resets — bring the current question back into view
   const jw=el('test').querySelector('.jump'),cur=jw&&jw.querySelector('.cur');
   if(jw&&cur)jw.scrollTop+=cur.getBoundingClientRect().top-jw.getBoundingClientRect().top-(jw.clientHeight-cur.offsetHeight)/2;}
@@ -1820,6 +1854,8 @@ function keyIndex(e){
   m=/^Key([A-F])$/.exec(e.code);
   if(m)return m[1].charCodeAt(0)-65;
   return -1;}
+/* KB = the user is moving with Tab. Not :focus-visible: Chrome turns it on for a clicked button at the next key */
+let KB=false;addEventListener('pointerdown',()=>{KB=false},true);addEventListener('keydown',e=>{if(e.key==='Tab')KB=true},true);
 addEventListener('keydown',function(e){
   if(e.ctrlKey||e.altKey||e.metaKey)return;
   if(e.code==='Escape'){closeShortcutModal();return}
@@ -1839,6 +1875,9 @@ addEventListener('keydown',function(e){
     return;}
 
   if(onTestScreen()){
+    // a button reached with Tab (option, ★, 🔖, chip, grid) keeps its own Space/Enter; after a mouse click
+    // Space still reveals the answer as before
+    if((e.code==='Space'||e.code==='Enter')&&KB&&e.target&&e.target.closest&&e.target.closest('button'))return;
     if(e.code==='Space'&&e.target&&e.target.closest&&e.target.closest('summary'))return;   // a focused 📖 row toggles itself
     if(e.code==='ArrowRight'||e.code==='ArrowDown'){e.preventDefault();go(1);return}
     if(e.code==='ArrowLeft'||e.code==='ArrowUp'){e.preventDefault();go(-1);return}
