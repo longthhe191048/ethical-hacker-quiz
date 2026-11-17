@@ -1659,11 +1659,11 @@ function buildSession(){if(MODE==='mix')return buildMix();const exs=examsFor(cur
 function startTest(){if(MODE==='step'||MODE==='write'){lsStart();return}if(MODE==='match'){mtStart();return}clearTimeout(FC_T);SESSION=buildSession();if(!SESSION.length){alert('Không có câu hỏi cho lựa chọn này.');return;}
   IDX=0;submitted=false;REVIEWING=false;REV_WRONG=false;REVEALED=new Set();
   const mins=isFlash()?0:Math.max(0,parseInt(el('mins').value)||0);limited=mins>0;FLIPPED=false;remaining=mins*60;initSec=mins*60;startedAt=Date.now();deadline=startedAt+mins*60000;
-  enterTestUI();
-  document.querySelector('#topbar .btn.danger').style.display=isFlash()?'none':'';
+  enterTestUI();   // also shows or hides the topbar "Nộp bài"
   if(limited)startTimer();else el('timer').textContent=isFlash()?'🎴 Flashcard':'⏱ ∞';
   renderQ();syncTopbar();saveDraft();window.scrollTo(0,0);}
-function enterTestUI(){el('start').style.display='none';el('matching').style.display='none';el('histDetail').style.display='none';el('test').style.display='block';el('topbar').style.display='flex';document.body.classList.add('testing');}
+function enterTestUI(){el('start').style.display='none';el('matching').style.display='none';el('histDetail').style.display='none';el('test').style.display='block';el('topbar').style.display='flex';document.body.classList.add('testing');
+  document.querySelector('#topbar .btn.danger').style.display=noTimer(MODE)?'none':'';}   // nothing to hand in: flashcards, the study loops
 
 /* ---- autosave / resume an in-progress attempt ---- */
 function draftKey(){return 'fu_draft_'+scopeKey()}
@@ -1974,8 +1974,11 @@ function copyText(s){const fb=()=>{const t=document.createElement('textarea');t.
 
 /* ---- sources: the same rows the old modes start from (poolRows: one row per question, ★ hidden while the switch is on) ---- */
 const SRC_LBL={all:'Tất cả',unk:'Chưa thuộc',wrong:'Câu sai',book:'Đã đánh dấu',due:'Đến hạn'};
-function srcRows(src){if(src==='wrong'||src==='book')return poolRows(src);if(src==='due')return poolRows('review');
-  const L=poolRows('all');return src==='unk'?L.filter(x=>stageOf(qrec(x.id))<3):L}
+let SRC_MEMO=null;   // set for one start-screen render: the chips count every source, then the settings count one again
+function srcRows(src){const M=SRC_MEMO;if(M&&M[src])return M[src];
+  const r=src==='wrong'||src==='book'?poolRows(src):src==='due'?poolRows('review'):src==='unk'?srcRows('all').filter(x=>stageOf(qrec(x.id))<3):poolRows('all');
+  if(M)M[src]=r;return r}
+function isOn(id){const e=el(id);return !!e&&e.checked}
 
 /* ---- which question can be asked in which form ----
    sc (self-contained): one key that is not an option pointing at other options, not a native true/false,
@@ -2021,14 +2024,16 @@ function recordOne(id,ok,conf,o){o=o||{};let r0=null;
     srsSet(id,r);saveSet('fu_wrong',WRONG,sib);saveSRS(sib);}catch(e){storageWarn(e)}
   return r0}
 
-/* ---- typed answers ---- norm: NFC, lower case, one space, no leading "A." or trailing punctuation; fold: also no accents, đ -> d */
+/* ---- typed answers ---- norm: NFC, lower case, one space, no trailing punctuation; fold: also no accents, đ -> d */
 const STOPW=new Set('va cua la cac nhung mot nay thi ma trong voi cho the an of to in and or for on is are be by with as at from that this which it its'.split(' '));
-function tNorm(s){return String(s==null?'':s).normalize('NFC').toLowerCase().replace(/^\s*[a-z][.)]\s+/,'').replace(/\s+/g,' ').trim().replace(/[\s.,;:!?…]+$/,'')}
+function tNorm(s){return String(s==null?'':s).normalize('NFC').toLowerCase().replace(/\s+/g,' ').trim().replace(/[\s.,;:!?…]+$/,'')}
+const OPT_LET=/^\s*[a-z][.)]\s+/i;
 function tFold(s){return tNorm(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d')}
 function lev(a,b){let p=Array.from({length:b.length+1},(_,j)=>j);
   for(let i=1;i<=a.length;i++){const c=[i];for(let j=1;j<=b.length;j++)c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1));p=c}
   return p[b.length]}
-function gradeOne(inp,key){const a=tNorm(inp),b=tNorm(key);if(!a)return 'wrong';if(a===b)return 'exact';
+function gradeOne(inp,key){if(OPT_LET.test(inp)&&!OPT_LET.test(key))inp=inp.replace(OPT_LET,'');   // "B. Policy" typed out of habit; a key's own "C. Mác" stays
+  const a=tNorm(inp),b=tNorm(key);if(!a)return 'wrong';if(a===b)return 'exact';
   const fa=tFold(inp),fb=tFold(key);if(fa===fb)return 'nodiac';
   const dg=s=>(s.match(/\d+/g)||[]).join(' ');if(dg(fa)!==dg(fb))return 'wrong';          // "5 chức năng" is never "Năm chức năng"
   if(fb.length<=25)return lev(fa,fb)<=Math.max(1,Math.floor(.15*fb.length))?'near':'wrong';
@@ -2043,8 +2048,8 @@ function gradeTyped(v,q){const keys=[qinfo(q).at],a=clean(stripPrefix(q.at||''))
 function isLetterOnly(v){return /^\s*[a-f]\s*[.)]?\s*$/i.test(v)}
 function hintMask(k){return k.charAt(0)+k.slice(1).replace(/[0-9A-Za-zÀ-ỹĐđ]/g,'•')}
 /* the key with the words the answer lacks marked */
-function diffHTML(inp,key){const have=new Set(tFold(inp).split(/\s+/));
-  return String(key).split(/(\s+)/).map(w=>!w.trim()?w:have.has(tFold(w))?esc(w):'<mark>'+esc(w)+'</mark>').join('')}
+function diffHTML(inp,key){const wd=s=>tFold(s).replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu,''),have=new Set(String(inp).split(/\s+/).map(wd));
+  return String(key).split(/(\s+)/).map(w=>{if(!w.trim())return w;const t=wd(w);return !t||have.has(t)?esc(w):'<mark>'+esc(w)+'</mark>'}).join('')}
 /* notes that name options by letter, dropped where the options are not on screen */
 function noLetters(q){return Object.assign({},q,{nt:String(q.nt||'').split(' · ').filter(n=>n.search(NT_LETTER)<0).join(' · ')})}
 function typedCmp(res,key){return `<div class="tcmp"><div><div class="ac-lbl">Bạn gõ</div><div class="tbox${res.ok?' ok':' no'}">${res.dk||!res.tx?'<i>(không trả lời)</i>':esc(res.tx)}</div></div>`+
@@ -2058,7 +2063,8 @@ function uiSwitch(k,label,re){return `<label class="switch"><input type="checkbo
 function rsrcChips(){return '<div class="chips" role="group" aria-label="Nguồn câu" style="margin-bottom:8px">'+[['all','Tất cả câu'],['unk','Chỉ câu chưa thuộc']].map(([k,l])=>
   `<button type="button" class="chip${UI.rsrc===k?' on':''}" id="rs-${k}" aria-pressed="${UI.rsrc===k}" onclick="uiSet('rsrc','${k}');pickMode(MODE);el('rs-${k}').focus()">${l}</button>`).join('')+'</div>'}
 function mxType(t){const tp=Object.assign({},UI.tps);tp[t]=tp[t]?0:1;if(!Object.keys(tp).some(k=>tp[k]))return;uiSet('tps',tp);pickMode(MODE);el('tp-'+t).focus()}
-function newCfg(m,cfg){let h='',dis=false;const nf=mx=>numField('Số câu',Math.min(lastNumQ||20,mx),mx,[10,20,40]);
+function newCfg(m,cfg){SRC_MEMO={};try{return newCfgBody(m,cfg)}finally{SRC_MEMO=null}}
+function newCfgBody(m,cfg){let h='',dis=false;const nf=mx=>numField('Số câu',Math.min(lastNumQ||20,mx),mx,[10,20,40]);
   if(m==='step'||m==='write'){const s=lsLoad(m),filt=m==='write'?goOk:null,all=srcRows(UI.src).length,n=filt?srcRows(UI.src).filter(filt).length:all;
     h=cfgDesc(m==='step'?'👣 Trả lời từng câu, biết đúng/sai ngay. Câu sai được hỏi lại sau vài câu, mỗi 10 câu có một chặng tổng kết. Chỉ lần trả lời đầu tiên của mỗi câu được tính vào tiến độ.'
       :'✍️ Tự gõ nội dung đáp án (thiếu dấu, sai chính tả nhỏ vẫn tính đúng). Vòng sau chỉ hỏi lại câu sai cho tới khi đúng hết. Chỉ hỏi câu có đáp án tự đứng được (không “Tất cả…”, không Đúng/Sai).');
@@ -2090,7 +2096,7 @@ function nmSub(){const i=el('numQ'),n=i?Math.max(1,parseInt(i.value)||0):0,src='
 function nmExit(){clearTimeout(LS_T);clearInterval(MT_T);if(LS&&!LS.fin&&(MODE==='step'||MODE==='write'))lsSave();
   el('test').style.display='none';el('topbar').style.display='none';el('start').style.display='block';document.body.classList.remove('testing');
   syncTopbar();renderStats();renderHistory();renderResume();window.scrollTo(0,0)}
-function nmEnter(label){enterTestUI();document.querySelector('#topbar .btn.danger').style.display='none';el('timer').textContent=label;syncTopbar();window.scrollTo(0,0)}
+function nmEnter(label){enterTestUI();el('timer').textContent=label;syncTopbar();window.scrollTo(0,0)}
 
 /* ---- 👣 Học từng bước + ✍️ Gõ đáp án: one queue, answered one item at a time with instant feedback ----
    item {id, r:'i' first ask | 'r' retry, o: ordinal of the first ask, t:'mc'|'type', oi, done, res}.
@@ -2099,12 +2105,13 @@ function nmEnter(label){enterTestUI();document.querySelector('#topbar .btn.dange
 let LS=null,LS_T=null,LS_SEL=[];
 function lsKey(kind){return (kind==='write'?'fu_write_':'fu_learn_')+scopeKey()}
 function lsLoad(kind){const s=readJSON(lsKey(kind),null);if(!s||typeof s!=='object'||!Array.isArray(s.q))return null;
-  const bi=bankIndex();s.q=s.q.map(x=>{const id=x&&remapId(x.id);return id&&bi[id]?Object.assign(x,{id,oi:fitOrder(bi[id],x.oi)}):null}).filter(Boolean);
+  const bi=bankIndex(),m=s.q.map(x=>{const id=x&&remapId(x.id);return id&&bi[id]?Object.assign(x,{id,oi:fitOrder(bi[id],x.oi)}):null});
+  const at=m.slice(0,Math.max(0,s.i|0)).filter(Boolean).length;s.q=m.filter(Boolean);   // questions gone from the bank: stay on the same one
   if(!s.q.some(x=>x.r==='i')){lsClear(kind);toast('Phiên học cũ không còn câu nào trong ngân hàng — đã bỏ.');return null}
-  s.kind=kind;s.log=Array.isArray(s.log)?s.log:[];s.i=Math.max(0,Math.min(s.i|0,s.q.length-1));return s}
+  s.kind=kind;s.log=Array.isArray(s.log)?s.log:[];s.i=Math.min(at,s.q.length-1);return s}
 function lsSave(){if(!LS||LS.fin)return;const n=Date.now();LS.used=(LS.used||0)+Math.max(0,n-(LS.tick||n));LS.tick=n;writeJSON(lsKey(LS.kind),LS)}
 function lsClear(kind){try{localStorage.removeItem(lsKey(kind))}catch(e){}}
-function lsItem(id,r,o,t){const q=bankIndex()[id],x={o:q.o,oi:(q.o||[]).map((_,i)=>i)};if(el('shufOpts').checked)shuffleOpts(x);
+function lsItem(id,r,o,t){const q=bankIndex()[id],x={o:q.o,oi:(q.o||[]).map((_,i)=>i)};if(isOn('shufOpts'))shuffleOpts(x);
   return {id,r,o,t,oi:x.oi,done:0,res:null}}
 function lsType(kind,id){if(kind==='write')return 'type';const q=bankIndex()[id],I=qinfo(q);
   return UI.typ&&I.sc&&I.at.length<=120&&stageOf(qrec(id))>=2?'type':'mc'}
@@ -2114,7 +2121,7 @@ function lsBegin(kind,ids){clearTimeout(LS_T);clearInterval(MT_T);LS_SEL=[];OA_C
 function lsEnter(){MODE=LS.kind;nmEnter(LS.kind==='write'?'✍️ Gõ đáp án':'👣 Học từng bước');lsRender()}
 function lsStart(){const kind=MODE,s=lsLoad(kind);if(s){LS=s;LS.tick=Date.now();LS_SEL=[];lsEnter();return}
   let rows=kind==='write'?writePool():srcRows(UI.src);if(!rows.length){alert('Không có câu hỏi cho lựa chọn này.');return}
-  if(el('shufQs')&&el('shufQs').checked)rows=shuffle(rows);
+  if(isOn('shufQs'))rows=shuffle(rows);
   const i=el('numQ'),n=Math.max(1,Math.min((i&&parseInt(i.value))||rows.length,rows.length));
   lsBegin(kind,rows.slice(0,n).map(x=>x.id))}
 function lsNew(){if(!confirm('Bỏ phiên đang học dở và bắt đầu phiên mới?'))return;lsClear(MODE);startTest()}
@@ -2184,7 +2191,7 @@ function lsFinish(){const Q=LS.q,ini=Q.filter(x=>x.r==='i'),N=ini.length,okF=x=>
 function lsAgain(){lsStartIds(LS.kind,LS.sum.again)}
 function lsMore(){const kind=LS.kind;uiSet('src','unk');let rows=kind==='write'?writePool('unk'):srcRows('unk');
   if(!rows.length){toast('Không còn câu chưa thuộc trong nguồn này.');return}
-  if(el('shufQs')&&el('shufQs').checked)rows=shuffle(rows);lsClear(kind);lsBegin(kind,rows.slice(0,(LS.sum&&LS.sum.N)||20).map(x=>x.id))}
+  if(isOn('shufQs'))rows=shuffle(rows);lsClear(kind);lsBegin(kind,rows.slice(0,(LS.sum&&LS.sum.N)||20).map(x=>x.id))}
 function lsTools(it){return '<span class="qacts">'+
   `<button type="button" class="bmk" data-fk="snd" aria-pressed="${!!UI.snd}" aria-label="Âm thanh" title="Âm thanh" onclick="uiSet('snd',UI.snd?0:1);lsRender()">${UI.snd?'🔊':'🔇'}</button>`+
   `<button type="button" class="bmk" data-fk="fs-" aria-label="Chữ nhỏ hơn" title="Chữ nhỏ hơn" onclick="uiFont(-2)" ${UI.fs<=14?'disabled':''}>A−</button>`+
@@ -2230,10 +2237,12 @@ function lsRender(){if(!LS)return;if(LS.fin){lsEndView();return}if(LS.cpShow){ls
   const jw=el('test').querySelector('.jump'),cj=jw&&jw.querySelector('.cur');
   if(jw&&cj)jw.scrollTop+=cj.getBoundingClientRect().top-jw.getBoundingClientRect().top-(jw.clientHeight-cj.offsetHeight)/2;
   const fi=el('lsRe')||(!it.done&&el('lsIn'));if(fi)fi.focus({preventScroll:true});}
-function lsCpView(){const ords=LS.log.slice(LS.cp,LS.cp+10),Q=LS.q,bi=bankIndex();let k=0;
-  const rows=ords.map(o=>{const x=Q.find(y=>y.r==='i'&&y.o===o),n=Q.filter(y=>y.id===x.id&&y.done).length,ok=!!x.res&&x.res.ok&&!x.res.hint;if(ok)k++;
-    const s=clean(bi[x.id].q);return `<div class="hist-item"><span class="hbadge ${ok?'p':'f'}">${ok?'✓ đúng ngay':'✗ sai'}</span><span class="cp-q">Câu ${o+1}. ${esc(s.length>120?s.slice(0,118)+'…':s)}</span><span class="sub" style="margin:0">${n} lần trả lời</span></div>`}).join('');
-  setTest(`<div class="card"><h2 class="mg-h">🏁 Chặng ${LS.cp/10+1}</h2><div class="result-score">${k}/${ords.length} câu đúng ngay lần đầu</div>${rows}`+
+function lsCpView(){const Q=LS.q,bi=bankIndex();let k=0;
+  // a question that left the bank since the session was saved has no row any more
+  const xs=LS.log.slice(LS.cp,LS.cp+10).map(o=>Q.find(y=>y.r==='i'&&y.o===o)).filter(Boolean);
+  const rows=xs.map(x=>{const n=Q.filter(y=>y.id===x.id&&y.done).length,ok=!!x.res&&x.res.ok&&!x.res.hint;if(ok)k++;
+    const s=clean(bi[x.id].q);return `<div class="hist-item"><span class="hbadge ${ok?'p':'f'}">${ok?'✓ đúng ngay':'✗ sai'}</span><span class="cp-q">Câu ${x.o+1}. ${esc(s.length>120?s.slice(0,118)+'…':s)}</span><span class="sub" style="margin:0">${n} lần trả lời</span></div>`}).join('');
+  setTest(`<div class="card"><h2 class="mg-h">🏁 Chặng ${LS.cp/10+1}</h2><div class="result-score">${k}/${xs.length} câu đúng ngay lần đầu</div>${rows}`+
     `<div class="navbtns"><span></span><button type="button" class="btn" data-fk="cp" onclick="lsCpDone()">Tiếp tục →</button></div></div>`)}
 function lsEndView(){const S=LS.sum,rc=S.pct>=50?'var(--green)':'var(--red)',bi=bankIndex();el('prog').textContent=S.N+'/'+S.N;
   setTest(`<div class="card" style="text-align:center"><div class="ring" style="--v:${S.pct};--rc:${rc}"><div class="in"><div class="result-score" style="color:${rc}">${S.score}/${S.N}</div><div style="color:${rc};font-weight:700">${S.pct}%</div></div></div>`+
@@ -2298,12 +2307,12 @@ function mtRender(){if(!MT)return;const n=MT.ids.length,bi=bankIndex();el('prog'
 const MX_T={mc:'Trắc nghiệm',tf:'Đúng/Sai',gh:'Ghép',go:'Tự luận gõ'};
 let MX_NEXT=null,MXS={streak:0,best:0},MXF='all',MX_SUM=null;
 function mxMake(t,ids,sh){const q=bankIndex()[ids[0]],it={...q,t,ids:ids.slice(),sels:[],ci:correctIdxOf(q),oi:(q.o||[]).map((_,i)=>i),tx:'',pk:ids.map(()=>-1)};
-  if(el('shufOpts').checked)shuffleOpts(it);
+  if(isOn('shufOpts'))shuffleOpts(it);
   if(t==='tf'){const I=qinfo(q);if(sh!=null)it.sh=sh;else{const want=Math.random()<.5,c=I.plain.filter(i=>I.truth[i]===want),L=c.length?c:I.plain;it.sh=L[Math.floor(Math.random()*L.length)]}}
   if(t==='gh')it.ro=shuffle(ids);
   return it}
 function buildMix(){MXS={streak:0,best:0};if(MX_NEXT){const s=MX_NEXT;MX_NEXT=null;return s}
-  let rows=srcRows(UI.src);if(el('shufQs')&&el('shufQs').checked)rows=shuffle(rows);
+  let rows=srcRows(UI.src);if(isOn('shufQs'))rows=shuffle(rows);
   const ni=el('numQ');rows=rows.slice(0,Math.max(1,Math.min((ni&&parseInt(ni.value))||20,rows.length)));
   const on=['mc','tf','gh','go'].filter(t=>UI.tps[t]);if(!on.length)on.push('mc');
   const can={mc:()=>true,tf:x=>!!qinfo(x).truth,gh:x=>qinfo(x).sc,go:goOk};
@@ -2449,8 +2458,8 @@ function fcAdvance(){FLIPPED=false;if(IDX>=SESSION.length-1)FC.end=1;else IDX++;
 function fcSort(know){if(!isFlash()||FC.how!=='sort'||!FLIPPED||FC.end)return;(know?FC.know:FC.learn).push(SESSION[IDX].id);FC.undo.push({i:IDX,k:know?1:0});fcAdvance()}
 function fcUndo(){const u=FC.undo.pop();if(!u)return;(u.k?FC.know:FC.learn).pop();IDX=u.i;FC.end=0;FLIPPED=false;renderQ();saveDraft()}
 function fcAgain(only){const bi=bankIndex(),ids=only?FC.learn.slice():(FC.all&&FC.all.length?FC.all:SESSION.map(s=>s.id));if(!ids.length)return;
-  let L=ids.map(id=>bi[id]).filter(Boolean).map(q=>{const x={...q,sels:[],ci:correctIdxOf(q),oi:(q.o||[]).map((_,i)=>i)};if(el('shufOpts').checked)shuffleOpts(x);return x});
-  if(el('shufQs')&&el('shufQs').checked)L=shuffle(L);
+  let L=ids.map(id=>bi[id]).filter(Boolean).map(q=>{const x={...q,sels:[],ci:correctIdxOf(q),oi:(q.o||[]).map((_,i)=>i)};if(isOn('shufOpts'))shuffleOpts(x);return x});
+  if(isOn('shufQs'))L=shuffle(L);
   SESSION=L;Object.assign(FC,{know:[],learn:[],undo:[],end:0,round:FC.round+1});IDX=0;FLIPPED=false;renderQ();saveDraft();window.scrollTo(0,0)}
 function fcRate(n){if(!isFlash()||FC.how!=='rate'||!FLIPPED||FC.end)return;const q=SESSION[IDX];
   if(!qrec(q.id)&&!q.rq)fcNewUse();
@@ -2544,6 +2553,8 @@ function nmSelfTest(){const R=[],ok=(c,m)=>R.push((c?'PASS ':'FAIL ')+m),save=LS
   ok(gradeOne('Ba giai doan','Ba giai đoạn')==='nodiac','"Ba giai doan" vs "Ba giai đoạn" = đúng, thiếu dấu');
   ok(gradeOne('5 chức năng','Năm chức năng')==='wrong','"5 chức năng" vs "Năm chức năng" = sai');
   ok(gradeOne('Netwrk team','Network team')==='near','one-letter typo in a 12-character key = gần đúng');
+  ok(gradeOne('B. Network team','Network team')==='exact'&&gradeOne('Mác','C. Mác')!=='exact','a typed "B." is dropped; a key\'s own "C." initial is not');
+  ok(diffHTML('security policy, standards','Security policy, (standards).').indexOf('<mark>')<0&&diffHTML('policy','policy, standards').indexOf('<mark>standards</mark>')>=0,'diff: punctuation never marks a word missing');
   const t1=qinfo({id:'__st1',q:'x',o:['A. alpha','B. beta','C. gamma','D. Tất cả các phương án trên'],a:'D',as:['D']});
   ok(!!t1.truth&&t1.truth[0]===true&&t1.truth[2]===true,'key "Tất cả…" makes A true');
   const t2=qinfo({id:'__st2',q:'x',o:['A. alpha','B. beta','C. gamma','D. Cả A và B'],a:'D',as:['D']});
