@@ -3,20 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0d1117">
+<meta name="theme-color" content="#F7F7F4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap"></noscript>
 <title>Ôn tập đề (FUoverflow)</title>
 <style>
-:root, :root[data-theme="dark"]{
-  --bg:#0d1117;--panel:#161b22;--panel2:#1c232d;--border:#30363d;--text:#e6edf3;--muted:#9aa7b4;
-  --accent:#3b82f6;--accent2:#2563eb;--green:#3fb950;--greenbg:#12261a;--red:#f85149;--redbg:#2b1517;
-  --amber:#d29922;--amberbg:#241c0e;--chip:#21262d;--selbg:#12203a;--topbar:rgba(13,17,23,.96);--shadow:rgba(0,0,0,.45);
-  --fill:#2563eb;--fill-h:#1d4ed8;--danger:#da3633;color-scheme:dark;   /* white on --fill 5.2:1, on --danger 4.6:1 */
+/* "Gọn, sáng, tập trung" (design-patches/design_patch.py): light by default, dark only when the reader picks it.
+   Contrast (check_contrast.py) light: text >= 14.5:1, muted >= 5.3, accent >= 6.5, white on fill 7.5 / on danger 5.5,
+   green / red / amber on their tint 5.4 / 5.7 / 5.6; dark: text >= 12.6, muted >= 6.4, accent >= 6.2,
+   white on fill 6.0 / on danger 5.5, green / red / amber on their tint 7.2 / 6.6 / 7.9 */
+:root, :root[data-theme="light"]{
+  --bg:#F7F7F4;--panel:#FFFFFF;--panel2:#F1F1EC;--border:#E3E3DC;--text:#1B1D21;--muted:#5D626A;
+  --accent:#2747C4;--accent2:#1E389E;--green:#11703A;--greenbg:#E5F3E9;--red:#B42318;--redbg:#FCEBEA;
+  --amber:#875800;--amberbg:#FFF4D6;--chip:#EEEEE8;--selbg:#EAEEFC;--topbar:rgba(255,255,255,.92);--shadow:rgba(20,20,15,.10);
+  --fill:#2747C4;--fill-h:#1E389E;--danger:#C4312B;--elev:0 1px 2px rgba(20,20,15,.05),0 4px 16px rgba(20,20,15,.04);color-scheme:light;
 }
-:root[data-theme="light"]{
-  --bg:#f6f8fa;--panel:#fff;--panel2:#eef1f4;--border:#d0d7de;--text:#1f2328;--muted:#59636e;
-  --accent:#2563eb;--accent2:#1d4ed8;--green:#116329;--greenbg:#d8f6e0;--red:#b62324;--redbg:#ffe4e2;
-  --amber:#7d4e00;--amberbg:#fff3bf;--chip:#eaeef2;--selbg:#dbe8ff;--topbar:rgba(255,255,255,.94);--shadow:rgba(140,149,159,.28);
-  --fill:#2563eb;--fill-h:#1d4ed8;--danger:#cf222e;color-scheme:light;   /* status text >= 5.3:1 on its tint */
+:root[data-theme="dark"]{
+  --bg:#111315;--panel:#181B1F;--panel2:#20242A;--border:#2D3238;--text:#E9EBEE;--muted:#A3AAB3;
+  --accent:#8EA2F7;--accent2:#A8B7FA;--green:#5BC489;--greenbg:#14281C;--red:#F2827A;--redbg:#2E1716;
+  --amber:#E0B04A;--amberbg:#2A2111;--chip:#23272D;--selbg:#1D2440;--topbar:rgba(17,19,21,.92);--shadow:rgba(0,0,0,.45);
+  --fill:#3B57D6;--fill-h:#3550C4;--danger:#C4312B;--elev:none;color-scheme:dark;
 }
 :root{--fs-xs:.75rem;--fs-sm:.875rem;--fs-md:1rem;--fs-lg:1.125rem;--fs-xl:1.5rem;
   --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--r-sm:6px;--r-md:10px;--r-lg:14px;--ease:cubic-bezier(.16,1,.3,1)}
@@ -363,8 +370,8 @@ label.theme-btn{display:inline-flex;align-items:center}
   .gh-row{grid-template-columns:auto minmax(0,1fr) auto}.gh-row .gh-key{grid-column:2/-1}
 }
 /* 🖨 In: always on the light palette (a dark page would print light text on white paper) */
-@media print{:root[data-theme]{--bg:#fff;--panel:#fff;--panel2:#f6f8fa;--border:#d0d7de;--text:#1f2328;--muted:#59636e;--green:#116329;--greenbg:#d8f6e0;
-    --red:#b62324;--redbg:#ffe4e2;--amber:#7d4e00;--amberbg:#fff3bf;--chip:#eaeef2;--selbg:#dbe8ff;color-scheme:light}
+@media print{:root[data-theme]{--bg:#fff;--panel:#fff;--panel2:#F1F1EC;--border:#E3E3DC;--text:#1B1D21;--muted:#5D626A;--green:#11703A;--greenbg:#E5F3E9;
+    --red:#B42318;--redbg:#FCEBEA;--amber:#875800;--amberbg:#FFF4D6;--chip:#EEEEE8;--selbg:#EAEEFC;--accent:#2747C4;--fill:#2747C4;--elev:none;color-scheme:light}
   #topbar,#toast,.no-print,.navbtns,.jump{display:none!important}body,body:not(.testing){background:#fff}.card{break-inside:avoid}}
 /* MODES-CSS-END */
 /* narrow tablets: groups stack, tiles go 3-across with the icon/count on top */
@@ -432,6 +439,222 @@ label.theme-btn{display:inline-flex;align-items:center}
   .ac-key{padding:10px 12px 12px}
   .ac-body{padding:12px 12px 14px}
 }
+/* DESIGN-CSS-BEGIN */
+/* ===== "Gọn, sáng, tập trung" (owner 18/11: "đẹp nhưng dễ dùng"; design-spec.md) =====
+   Quiz pages (onthi-*). design_patch.py injects this LAST in <style> so it wins the cascade; the colour tokens
+   themselves are replaced in place at the top of the page (light by default, dark only when picked).
+   One accent, calm surfaces, 10px controls / 14px cards, Be Vietnam Pro (drawn for Vietnamese diacritics). */
+:root{--r-ctl:10px;--r-card:14px;--ff:"Be Vietnam Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:var(--ff);font-size:16px;line-height:1.6}
+body:not(.testing){background:var(--bg)}            /* no tinted glow behind the start screen any more */
+button,input,select,textarea{font-family:inherit}
+:where(button,a,summary,input,select,textarea,[tabindex]):focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#timer,#prog,.kpi,.streakbar,.mode .mc,.jump button,.modbar,.hist-item,.result-score,.hm-score,.start-sum,.ex-badge,.ex-mp,.fc-count{font-variant-numeric:tabular-nums}
+h1,.mg-h,.ac-lbl{text-wrap:balance}
+.cfg-desc,.ac-why p,.ac-nt,.hist-empty{text-wrap:pretty}
+
+/* ---- controls: one filled button per screen, everything else quiet ---- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:10px 18px;border-radius:var(--r-ctl);
+  font-size:1rem;font-weight:600;line-height:1.3;
+  transition-property:background-color,border-color,color,transform;transition-duration:150ms;transition-timing-function:ease-out}
+.btn:active:not(:disabled){transform:scale(.97)}
+@media(prefers-reduced-motion:reduce){.btn:active:not(:disabled){transform:none}}
+.btn.sec{background:var(--panel);color:var(--text);border:1px solid var(--border)}
+.btn.sec:hover{background:var(--panel2)}
+.theme-btn{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:8px 12px;border-radius:var(--r-ctl);
+  background:transparent;border:1px solid var(--border);color:var(--text);font-size:.875rem;font-weight:500;
+  transition-property:background-color;transition-duration:150ms}
+.theme-btn:hover{background:var(--panel2)}
+select,input[type=number],input[type=text]{border-radius:var(--r-ctl);background:var(--panel);border-color:var(--border)}
+.card{border-radius:var(--r-card);box-shadow:var(--elev);margin:16px 0}
+.sub{font-size:.875rem}
+.badge{background:transparent;border-color:var(--border);border-radius:999px;padding:1px 9px;font-size:.75rem}
+.qnum{background:var(--selbg);color:var(--accent);border-radius:999px;padding:2px 10px;font-size:.8125rem;font-weight:700}
+.chip{min-height:44px;border-radius:var(--r-ctl);background:var(--panel);font-weight:600;
+  transition-property:border-color,background-color,color;transition-duration:150ms}
+.chip.on{background:var(--selbg);border-color:var(--accent);color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.switch input{accent-color:var(--fill)}
+
+/* ---- start screen: compact hero, one progress line ---- */
+.wrap{padding-top:24px}
+.hero{align-items:center}
+.hero-txt{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:12px}
+.hero-txt h1{flex-basis:100%}
+h1{font-size:1.5rem;font-weight:700;letter-spacing:-.015em;line-height:1.25}
+#srcNote{flex:1 1 0;min-width:0;margin-top:4px;font-size:.875rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+#srcNote.open{white-space:normal}                     /* tap to read the whole source line */
+#reportLink{flex:0 1 auto;min-width:0;max-width:50%;margin-top:4px!important;font-size:.875rem;color:var(--accent);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-underline-offset:3px}
+.embed #reportLink{display:none!important}            /* inside the dashboard the subject list links it */
+.hero-acts .theme-btn{border-color:transparent}
+.hero-acts .theme-btn:hover{border-color:var(--border)}
+.sumbar{margin:12px 0 0;gap:6px 20px;font-size:.875rem;color:var(--muted)}
+.sumbar b{color:var(--text)}
+.streakbar{gap:10px}
+.gbar{height:6px;max-width:140px;border-radius:999px;background:var(--panel2);box-shadow:inset 0 0 0 1px var(--border)}
+.gbar>div{border-radius:999px;background:var(--accent)}
+.main-card{padding:24px}
+.search-wrap input{min-height:44px;border-radius:var(--r-ctl);background:var(--panel);font-size:1rem}
+.search-wrap input:focus{border-color:var(--accent)}
+
+/* mode picker: groups + compact tiles (icon, title, count). The selected mode's description lives in #modeCfg */
+.mgroups{gap:20px 16px;margin-top:20px}
+.mg-h{margin:0 0 8px;font-size:.8125rem;font-weight:600;letter-spacing:0;text-transform:none;color:var(--muted)}
+.mlist{gap:10px}
+.mode{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"ic t" "ic c";align-items:center;
+  column-gap:12px;row-gap:3px;min-height:56px;padding:8px 12px;border-radius:var(--r-ctl);background:var(--panel);border:1px solid var(--border);
+  transition-property:border-color,background-color,box-shadow;transition-duration:150ms;transition-timing-function:ease-out}
+.mode:hover{border-color:var(--accent)}
+.mode.active{background:var(--selbg);border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.mtop{display:contents}
+.mode .ic{grid-area:ic;font-size:1.2rem;line-height:1}
+.mode .mt{grid-area:t}
+.mode .mt b{font-size:.9375rem;font-weight:600;line-height:1.3}
+.mode .mt small{display:none}
+.mode .mc{grid-area:c;justify-self:start;margin:0;padding:1px 8px;border:0;border-radius:999px;background:var(--panel2);
+  color:var(--muted);font-size:.75rem;font-weight:600;line-height:18px}
+.mode.active .mc{background:var(--panel)}
+.mode .mc.bad{background:var(--redbg);color:var(--red)}
+.mode .mc.due{background:var(--amberbg);color:var(--amber)}
+.mode .mkey{background:transparent;color:var(--muted)}
+.mode.active .mkey{background:var(--panel);border-color:var(--accent);color:var(--accent)}
+/* "Gợi ý": a small tag sitting on the tile's top edge, so the row keeps its room for the title */
+.mrec{position:absolute;top:-8px;right:10px;margin:0;padding:0 7px;border:1px solid var(--green);border-radius:999px;
+  background:var(--greenbg);color:var(--green);font-size:.75rem;font-weight:700;line-height:14px}
+.mode.rec .mrec{display:block}
+.match-btn{margin-top:14px}
+
+/* settings of the picked mode + folded options + the start band */
+.mode-cfg{margin-top:20px;padding-top:18px;border-top:1px solid var(--border)}
+.cfg-desc{margin:0 0 10px;font-size:.9375rem;color:var(--text)}
+.exam-row{border-radius:var(--r-ctl);background:var(--panel);min-height:56px}
+.exam-row.sel .ex-badge{background:var(--panel);border-color:var(--accent);color:var(--accent)}
+.ex-badge{border-radius:8px;background:var(--panel2);border-color:var(--border);white-space:nowrap}
+.exam-grp{font-size:.8125rem;font-weight:600;letter-spacing:0;text-transform:none}
+.opts{border-radius:var(--r-ctl);background:var(--panel)}
+.opts-t{font-weight:600}
+#startRow{margin-top:20px;background:var(--panel);border-radius:0 0 var(--r-card) var(--r-card)}
+.start-sum{font-size:.9375rem}
+.start-btn{min-height:48px;padding:10px 28px;font-size:1.0625rem;border-radius:var(--r-ctl)}
+/* progress + history cards */
+.modbar .barwrap{height:8px;border-radius:999px;background:var(--panel2)}
+.stleg{font-size:.8125rem}
+.hist-item{background:var(--panel);border-radius:var(--r-ctl)}
+.hbadge{border-radius:999px}
+.footer-note{font-size:.8125rem;line-height:1.5}
+
+/* ---- question screen ---- */
+#topbar{gap:10px;min-height:56px;padding:8px 16px;background:var(--topbar);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+#timer{padding:4px 8px;background:transparent;border:0;border-radius:8px;font-weight:600}
+#timer.warn{background:var(--amberbg)}
+#prog{color:var(--muted);font-weight:600}
+#topbar .btn.danger{background:var(--panel);color:var(--accent);border:1px solid var(--border)}   /* calm: confirm() guards it */
+#topbar .btn.danger:hover{border-color:var(--accent);background:var(--selbg)}
+/* thin rail under the topbar: answered / total (railSync) */
+#rail{position:absolute;left:0;right:0;bottom:-1px;height:3px;pointer-events:none}
+#rail>i{display:block;width:0;height:100%;background:var(--accent);border-radius:0 2px 2px 0;transition:width .25s ease-out}
+#test>.card{padding:28px 32px}
+.qh{gap:8px;align-items:center;margin-bottom:14px}
+#test .stem,.stem{font-size:calc(var(--qfs,16px)*1.125);font-weight:600;line-height:1.55;margin:0 0 18px}   /* 1.125rem at the default A size */
+#test .opt{font-size:var(--qfs,16px)}
+.opt{align-items:flex-start;gap:12px;min-height:52px;padding:12px 16px;margin:8px 0;border-radius:var(--r-ctl);background:var(--panel);
+  transition-property:border-color,background-color,box-shadow;transition-duration:120ms;transition-timing-function:ease-out}
+.opt:hover{border-color:var(--accent)}
+.opt.locked:hover{border-color:var(--border)}
+.opt.correct.locked:hover{border-color:var(--green)}.opt.wrong.locked:hover{border-color:var(--red)}
+/* the letter in a small square */
+.opt .olet,.flash-opt .olet{flex:0 0 28px;display:inline-grid;place-items:center;width:28px;height:28px;min-width:0;border:1px solid var(--border);
+  border-radius:7px;background:var(--panel2);color:var(--muted);font-size:.8125rem;font-weight:700;line-height:1}
+.opt .otext,.flash-opt .otext{padding-top:2px}
+.opt .cbox{padding-top:1px}
+.opt .mk{padding-top:3px;font-size:.875rem}
+.opt.sel .olet{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+.opt.correct .olet,.flash-opt.correct .olet{background:var(--green);border-color:var(--green);color:var(--panel)}
+.opt.wrong .olet{background:var(--red);border-color:var(--red);color:var(--panel)}
+.conf-row{gap:8px;margin:16px 0 4px}
+.conf-chip{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;border-radius:var(--r-ctl);background:var(--panel);
+  color:var(--text);font-size:.875rem;font-weight:500;transition-property:border-color,background-color;transition-duration:150ms}
+.conf-chip.sel{background:var(--selbg);border-color:var(--accent);color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.navbtns{margin-top:20px}
+/* the number grid: smaller, quieter squares; current = accent outline */
+.jump{grid-template-columns:repeat(auto-fill,34px);justify-content:start;gap:6px;margin-top:20px;padding:14px 2px 2px;border-top:1px solid var(--border);max-height:150px}
+.jump button{width:34px;height:34px;aspect-ratio:auto;background:transparent;border-color:var(--border);border-radius:8px;color:var(--muted);font-weight:500}
+.jump button.done{background:var(--selbg);border-color:transparent;color:var(--accent)}
+.jump button.correct{background:var(--greenbg);border-color:transparent}
+.jump button.wrong{background:var(--redbg);border-color:transparent}
+.jump button.cur{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);color:var(--text);font-weight:700}
+@media(pointer:coarse){.jump{grid-template-columns:repeat(auto-fill,44px)}.jump button{width:44px;height:44px}}
+.star:hover,.bmk:hover{background:var(--panel2)}
+/* "Viết tắt" box */
+.abx{background:var(--panel2);border:0;border-radius:var(--r-ctl);font-size:.875rem}
+.abx-h{font-size:.8125rem;font-weight:600;letter-spacing:0;text-transform:none}
+.abx-t{position:relative}
+.abx-t::before{content:'';position:absolute;inset:-9px -4px}   /* 44px hit area around the small Ẩn / Hiện */
+.qaid{border-radius:0 var(--r-ctl) var(--r-ctl) 0;font-size:.9375rem}
+
+/* ---- answer card: "Đáp án đúng" (tinted) then "Giải thích" ---- */
+.ac{margin:18px 0 4px;border-radius:var(--r-card);background:var(--panel);line-height:1.65}
+.ac-lbl{margin:0 0 6px;font-size:.8125rem;font-weight:600;letter-spacing:0;text-transform:none;color:var(--muted)}
+.ac-key{padding:14px 18px 16px}
+.ac-key .ac-lbl{color:var(--green)}
+.ac-L{border-radius:7px}
+.ac-body{gap:14px;padding:16px 18px 18px}
+.ac-why p+p{margin-top:12px}
+/* "[EN] …" / "[VI] …": one block per language, a small pill instead of the raw marker */
+.ac-pill{display:inline-block;margin-right:8px;padding:0 7px;border:1px solid var(--border);border-radius:6px;background:var(--panel2);
+  color:var(--muted);font-size:.75rem;font-weight:700;letter-spacing:.04em;line-height:20px;vertical-align:1px;white-space:nowrap}
+.ac-why .ac-exs{margin-top:10px}
+.ac-exs{font-size:.875rem}
+.ev-q{border-left-color:var(--accent)}
+.vbadge,.ac-meta .vbadge{border-radius:8px}   /* long status badges wrap to two lines on phones */
+.rev-status{border-radius:999px}
+.hero-mini{padding:12px 16px}
+/* flashcards, shortcuts sheet, toast */
+.flash-card{background:var(--panel);border-radius:var(--r-card);box-shadow:var(--elev);padding:24px}
+.flash-card .ac,.flash-card .qaid{background:var(--panel)}
+.flash-opt{min-height:48px;gap:12px;border-radius:var(--r-ctl);background:var(--panel)}
+.modal-overlay{background:rgba(20,20,15,.4)}
+:root[data-theme="dark"] .modal-overlay{background:rgba(0,0,0,.6)}
+.modal-card{border-radius:var(--r-card)}
+.sc-item{border-radius:var(--r-ctl);background:var(--panel2);border-color:transparent}
+kbd{border-radius:6px;color:var(--accent);font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+/* study modes (modes.css): same surfaces */
+.mt-tile,.tbox,.tin,.gh-ans{border-radius:var(--r-ctl)}
+.mt-tile{background:var(--panel)}
+.fb{border-radius:var(--r-ctl)}
+
+/* ---- phones: three tiles a row, icon + count over the title ---- */
+@media(max-width:560px){
+  .mode{grid-template-areas:"ic c" "t t";align-items:start;row-gap:6px}
+  .mode .mc{justify-self:end;align-self:center}
+  .wrap{padding-top:14px}
+  h1{font-size:1.25rem}
+  .card{padding:16px}
+  .main-card{padding:16px}
+  #test>.card{padding:20px 16px}
+  #srcNote{font-size:.8125rem}
+  #reportLink{font-size:.8125rem}
+  .sumbar{gap:4px 14px;font-size:.8125rem}
+  .mgroups{gap:16px;margin-top:16px}
+  .mlist{gap:10px 8px}
+  .mode{min-height:68px;padding:9px 9px 10px;border-radius:var(--r-ctl)}
+  .mode .mt b{font-size:.875rem;line-height:1.25}
+  .mode .mkey,.kbd-only{display:none}   /* .theme-btn above is inline-flex: keep the phone's hidden keyboard help hidden */
+  .mode .ic{font-size:1.15rem}
+  .mrec{width:auto;height:auto;right:6px;padding:0 6px;border-radius:999px;font-size:.75rem;line-height:14px}   /* the old phone rule made it a dot */
+  .mode .mc{padding:0 6px;font-size:.75rem;line-height:18px}
+  .mode-cfg{margin-top:16px;padding-top:14px}
+  .conf-chip{padding:9px 14px}
+  .opt{flex-wrap:wrap;row-gap:2px}
+  .opt .mk{order:9;flex:1 0 100%;margin:0;padding:0 0 0 40px}   /* "✔ đáp án đúng" under the text: the option keeps its width */
+  .theme-btn{min-height:44px}
+  .jump{max-height:140px}
+  .ac-key{padding:12px 14px 14px}
+  .ac-body{padding:14px 14px 16px}
+  #topbar{padding:6px 10px;min-height:56px}
+}
+/* DESIGN-CSS-END */
 </style>
 <script>(function(d){try{if(window.self!==window.top)d.classList.add('embed')}catch(e){d.classList.add('embed')}
 try{var t=localStorage.getItem('app_theme');if(t==='dark'||t==='light')d.setAttribute('data-theme',t)}catch(e){}})(document.documentElement);</script>
@@ -539,6 +762,7 @@ try{var t=localStorage.getItem('app_theme');if(t==='dark'||t==='light')d.setAttr
   <div id="timer">∞</div><div id="prog">1/1</div><div class="src" id="srcLabel"></div><div class="grow"></div>
   <button class="theme-btn theme-toggle" onclick="toggleTheme()" aria-label="Đổi giao diện sáng/tối">🌓</button>
   <button class="btn danger" onclick="submitTest()"><span aria-hidden="true">✔</span> Nộp bài</button>
+  <div id="rail" aria-hidden="true"><i></i></div>
 </div>
 
 <script>
@@ -710,7 +934,13 @@ function evidenceHTML(exq,forceOpen){
 /* ---- the card ---- */
 const EXS_TEXT={
   none:'Giáo trình không đề cập nội dung này — đáp án giữ theo nguồn đề.',
-  unclear:'Giáo trình có nói tới chủ đề này nhưng không đủ để chốt đáp án — đáp án giữ theo nguồn đề.'};
+  unclear:'Giáo trình có nói tới chủ đề này nhưng không đủ để chốt đáp án — đáp án giữ theo nguồn đề.',
+  draft:'Lời giải viết từ kiến thức chung, chưa đối chiếu giáo trình.'};   // shown AFTER an explanation, not instead of one
+/* a bilingual explanation "[EN] …\n\n[VI] …" -> [['EN','…'],['VI','…']]; text without the markers -> [['','text']] */
+function exParts(s){const p=String(s==null?'':s).split(/(?:^|\n)[ \t]*\[(EN|VI)\][ \t]*/),out=[];
+  if(p.length<2||p[0].trim())out.push(['',p[0].trim()]);
+  for(let i=1;i<p.length;i+=2)if(p[i+1].trim())out.push([p[i],p[i+1].trim()]);
+  return out;}
 function noteKind(n){
   if(/^(?:Đáp án (?:đã )?sửa|Đã bổ sung|File nguồn ghép nhầm|Form gốc)/i.test(n))return ['fix','✎'];
   if(/^(?:Lưu ý|Gần giống|Source note)|nghiêng về đáp án khác|answer key|source key/i.test(n))return ['warn','⚠'];
@@ -733,7 +963,10 @@ function answerCard(q,keyRows,badgesHTML,fmt){
       (F(esc(clean(r.text)))||'<i>(lựa chọn trống)</i>')+'</span></div>').join('')+'</div>';
   const body=[],ex=String(q.ex==null?'':q.ex).trim(),
         exq=(Array.isArray(q.exq)?q.exq:[]).filter(x=>x&&clean(x.t));
-  if(ex)body.push('<div class="ac-why"><div class="ac-lbl">Giải thích</div><p>'+F(esc(exLetters(ex,q)))+'</p></div>');
+  // one <p> per language part (a pill instead of the raw [EN]/[VI]); exLetters and F run on each part
+  if(ex)body.push('<div class="ac-why"><div class="ac-lbl">Giải thích</div>'+exParts(ex).map(p=>'<p'+
+    (p[0]?' class="ac-lang" lang="'+p[0].toLowerCase()+'"><span class="ac-pill">'+p[0]+'</span>':'>')+F(esc(exLetters(p[1],q)))+'</p>').join('')+
+    (q.exs==='draft'?'<p class="ac-exs">📕 '+EXS_TEXT.draft+'</p>':'')+'</div>');
   else if(q.exs==='none'||q.exs==='unclear')body.push('<p class="ac-exs">📕 '+EXS_TEXT[q.exs]+'</p>');
   const post=splitNotes(q.nt).post;
   if(post.length)body.push('<ul class="ac-notes">'+post.map(n=>{const k=noteKind(n);
@@ -836,11 +1069,11 @@ const MODELABEL={random:'Random',exam:'Theo đề',all:'Ôn tổng',wrong:'Ôn c
   step:'Học từng bước',write:'Gõ đáp án',mix:'Kiểm tra tổng hợp',match:'Ghép thẻ'};
 /* theme */
 function applyTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem('app_theme',t)}catch(e){}
-  const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=t==='light'?'#f6f8fa':'#0d1117';
+  const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=t==='dark'?'#111315':'#F7F7F4';
   const b=el('themeBtn');if(b)b.textContent=t==='dark'?'☀️ Sáng':'🌙 Tối';}
-function toggleTheme(){applyTheme((document.documentElement.dataset.theme||'dark')==='dark'?'light':'dark')}
+function toggleTheme(){applyTheme((document.documentElement.dataset.theme||'light')==='dark'?'light':'dark')}
 (function(){let t;try{t=localStorage.getItem('app_theme')}catch(e){}
-  if(!t)t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';applyTheme(t)})();
+  if(t!=='dark')t='light';applyTheme(t)})();   // light unless the reader picked dark
 addEventListener('storage',e=>{if(e.key==='app_theme'&&(e.newValue==='dark'||e.newValue==='light')&&e.newValue!==document.documentElement.dataset.theme)applyTheme(e.newValue)});
 /* another tab or dashboard frame saved progress for a subject shown here: show it on the start screen.
    READ ONLY: no migration, no reconcile, no save from here, so two open pages can never feed each other
@@ -1677,7 +1910,13 @@ function renderResume(){const box=el('resume');if(!box)return;const d=loadDraft(
     <div class="row"><button class="btn" onclick="resumeDraft()">▶ Tiếp tục</button><button class="theme-btn" onclick="discardDraft()">🗑 Bỏ</button></div></div></div>`;}
 /* keep content clear of the fixed topbar no matter how many rows it wraps to */
 function syncTopbar(){const tb=el('topbar'),w=document.querySelector('.wrap');if(!w)return;
-  w.style.paddingTop=(tb&&tb.style.display!=='none')?(tb.offsetHeight+12)+'px':'';}
+  w.style.paddingTop=(tb&&tb.style.display!=='none')?(tb.offsetHeight+12)+'px':'';railSync();}
+/* the thin rail under the topbar (every renderer calls syncTopbar): answered/total in a test; the topbar's own
+   "n/N" in flashcards and the study loops, which have nothing to answer ahead */
+function railSync(){const r=el('rail'),p=el('prog');if(!r||!p||!r.firstChild)return;let f=0;
+  if(SESSION.length&&MODE&&!noTimer(MODE))f=SESSION.filter(isAnswered).length/SESSION.length;
+  else{const m=/^(\d+)\s*\/\s*(\d+)$/.exec(p.textContent.trim());if(m&&+m[2])f=+m[1]/+m[2];}
+  r.firstChild.style.width=(Math.max(0,Math.min(1,f))*100).toFixed(1)+'%';}
 addEventListener('resize',syncTopbar);addEventListener('orientationchange',()=>setTimeout(syncTopbar,150));
 /* wall-clock: a per-tick counter silently runs slow when the phone locks or the tab is backgrounded */
 function startTimer(){updateTimer();timerInt=setInterval(()=>{
@@ -1736,7 +1975,7 @@ function renderFlashcard(q){
   const opts=!FLIPPED&&FC.front==='stem'?'':q.oi.map((oi,i)=>{const right=(q.ci||[]).indexOf(oi)>=0;
     const cls='flash-opt'+(FLIPPED&&right?' correct':'');
     const mk=FLIPPED&&right?'<span class="mk" style="margin-left:auto;color:var(--green);font-weight:700">✔ đúng</span>':'';
-    return `<div class="${cls}"><span class="olet">${String.fromCharCode(65+i)}.</span><span class="otext">${AB(esc(optText(q,oi)),1)}</span>${mk}</div>`}).join('');
+    return `<div class="${cls}"><span class="olet">${String.fromCharCode(65+i)}</span><span class="otext">${AB(esc(optText(q,oi)),1)}</span>${mk}</div>`}).join('');
   const span=examSpan(q.dk||dkOf(q.id));
   let h=`<div class="flash-card" onclick="toggleFlip()" ontouchstart="fcTouch(event)" ontouchend="fcSwipe(event)">
     <div class="qh"><span class="qnum">Thẻ ${IDX+1}</span><span class="badge">${esc(q.src)}${q.n?' · Câu '+q.n:''}</span>`;
@@ -1779,7 +2018,7 @@ function renderQ(){if(MODE==='mix'){mxRender();return}if(MODE==='step'||MODE==='
     let cls='opt';if(showAns){cls+=' locked';if(right)cls+=' correct';else if(chosen)cls+=' wrong';}else if(chosen)cls+=' sel';
     let mk='';if(showAns){if(right)mk='<span class="mk">✔ đáp án đúng</span>';else if(chosen)mk='<span class="mk">✗ bạn chọn</span>';}
     const box=multi?`<span class="cbox">${chosen?'☑':'☐'}</span>`:'';
-    h+=`<button type="button" class="${cls}" data-fk="o${i}" aria-pressed="${chosen}"${showAns||q.fz?' aria-disabled="true"':''} onclick="pick(${i})">${box}<span class="olet">${String.fromCharCode(65+i)}.</span><span class="otext">${AB(esc(optText(q,oi)),1)}</span>${mk}</button>`;});
+    h+=`<button type="button" class="${cls}" data-fk="o${i}" aria-pressed="${chosen}"${showAns||q.fz?' aria-disabled="true"':''} onclick="pick(${i})">${box}<span class="olet">${String.fromCharCode(65+i)}</span><span class="otext">${AB(esc(optText(q,oi)),1)}</span>${mk}</button>`;});
   h+='</div><!--ABX--></div>';
   h+=preNotesHTML(q);
   if(!showAns&&!q.fz){const cf=q.conf||'';h+=`<div class="conf-row"><span class="sub">Mức độ tự tin:</span><button type="button" class="conf-chip${cf==='sure'?' sel':''}" data-fk="c-sure" aria-pressed="${cf==='sure'}" onclick="setConf('sure')">✅ Chắc chắn</button><button type="button" class="conf-chip${cf==='unsure'?' sel':''}" data-fk="c-unsure" aria-pressed="${cf==='unsure'}" onclick="setConf('unsure')">🤔 Không chắc</button><button type="button" class="conf-chip${cf==='guess'?' sel':''}" data-fk="c-guess" aria-pressed="${cf==='guess'}" onclick="setConf('guess')">🎲 Đoán</button></div>`;}
@@ -1904,7 +2143,7 @@ function openHistoryDetail(idx){const a=loadHistory()[idx];if(!a)return;const bi
     const st=!sels.length?['skip','⊘ Chưa làm']:ok?['ok','✔ Đúng']:(rec.rv&&sameSet(sels,ci))?['skip','👁 Đúng, đã xem đáp án']:['no','✘ Sai'];
     let oh=q.o.map((o,j)=>{const right=ci.indexOf(j)>=0,chosen=sels.indexOf(j)>=0;let cls='opt';if(right)cls+=' correct';else if(chosen)cls+=' wrong';
       let mk=right?'<span class="mk">✔ đáp án đúng</span>':(chosen?'<span class="mk">✗ bạn chọn</span>':'');
-      return `<div class="${cls}"><span class="olet">${String.fromCharCode(65+j)}.</span><span class="otext">${AB(esc(stripPrefix(o)),1)}</span>${mk}</div>`}).join('');
+      return `<div class="${cls}"><span class="olet">${String.fromCharCode(65+j)}</span><span class="otext">${AB(esc(stripPrefix(o)),1)}</span>${mk}</div>`}).join('');
     const tags=(rec.cf?`<span class="badge">${CFLABEL[rec.cf]||rec.cf}</span>`:'')+(rec.rv?'<span class="badge multi">👁 đã xem đáp án</span>':'')+(ci.length>1?`<span class="badge multi">☑ ${ci.length} đáp án</span>`:'');
     const card=`<div class="card"><div class="qh"><span class="qnum">Câu ${i+1}</span><span class="badge">${esc(q.src)}</span>${tags}<span class="rev-status ${st[0]}">${st[1]}</span></div><div class="qgrid"><div class="qmain"><p class="stem">${AB(formatQStem(q.q),1)}</p>${oh}</div><!--ABX--></div>${preNotesHTML(q)}${answerCard(q,keyRowsOf(q),vfBadge(q.vf),x=>AB(x,0))}</div>`;return withAbx(card,AB)}).join('');
   box.innerHTML=`<div class="row" style="margin:6px 0"><button class="btn sec" onclick="backToStart()">← Về lịch sử</button></div>
@@ -1921,7 +2160,7 @@ function showMatching(){const exs=examsFor(curSubject());const ms=[];exs.forEach
   if(!ms.length)h+='<div class="hist-empty">Môn này không có câu matching.</div>';
   ms.forEach((q,i)=>{h+=`<div class="card"><div class="qh"><span class="qnum">${i+1}</span><span class="badge">${esc(q.src)}</span></div><p class="stem">${formatQStem(q.q)}</p>`;
     const ci=correctIdxOf(q);
-    q.o.forEach((o,i)=>{const right=ci.indexOf(i)>=0;h+=`<div class="opt${right?' correct':''}"><span class="olet">${String.fromCharCode(65+i)}.</span><span class="otext">${esc(stripPrefix(o))}</span>${right?'<span class="mk">✔ đúng</span>':''}</div>`});
+    q.o.forEach((o,i)=>{const right=ci.indexOf(i)>=0;h+=`<div class="opt${right?' correct':''}"><span class="olet">${String.fromCharCode(65+i)}</span><span class="otext">${esc(stripPrefix(o))}</span>${right?'<span class="mk">✔ đúng</span>':''}</div>`});
     h+=preNotesHTML(q)+answerCard(q,keyRowsOf(q),vfBadge(q.vf))+'</div>'});
   box.innerHTML=h;window.scrollTo(0,0);}
 
@@ -2193,7 +2432,7 @@ function lsRender(){if(!LS)return;if(LS.fin){lsEndView();return}if(LS.cpShow){ls
       if(it.done){cls+=' locked';if(right){cls+=' correct';mk='<span class="mk">✔ đáp án đúng</span>'}else if(chosen){cls+=' wrong';mk='<span class="mk">✗ bạn chọn</span>'}}
       else if(chosen)cls+=' sel';
       return `<button type="button" class="${cls}" data-fk="o${i}" aria-pressed="${chosen}"${it.done?' aria-disabled="true"':''} onclick="lsPick(${i})">`+
-        `${multi?`<span class="cbox">${chosen?'☑':'☐'}</span>`:''}<span class="olet">${String.fromCharCode(65+i)}.</span><span class="otext">${AB(esc(optText(q,oi)),1)}</span>${mk}</button>`}).join('');}
+        `${multi?`<span class="cbox">${chosen?'☑':'☐'}</span>`:''}<span class="olet">${String.fromCharCode(65+i)}</span><span class="otext">${AB(esc(optText(q,oi)),1)}</span>${mk}</button>`}).join('');}
   else if(!it.done)h+=`<input type="text" class="tin" id="lsIn" value="${esc(it.dr||'')}" aria-label="Đáp án của bạn" placeholder="Gõ nội dung đáp án rồi Enter" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" oninput="LS.q[LS.i].dr=this.value" onkeydown="if(event.key==='Enter'){event.preventDefault();lsCheck()}">`+
     (it.h?`<div class="thint">💡 Gợi ý: <code>${esc(hintMask(key))}</code> · ${key.length} ký tự</div>`:'')+'<div class="sub" id="lsMsg" aria-live="polite"></div>';
   else if(!res.ok||res.v!=='exact')h+=typedCmp(res,res.key||key);
@@ -2347,13 +2586,13 @@ function mxBody(it,AB,show){const bi=bankIndex(),L=k=>String.fromCharCode(65+k);
   const optBtns=(fn,isSel)=>q.oi.map((oi,i)=>{const chosen=isSel(oi),right=q.ci.indexOf(oi)>=0;let cls='opt',mk='';
     if(show){cls+=' locked';if(right){cls+=' correct';mk='<span class="mk">✔ đáp án đúng</span>'}else if(chosen){cls+=' wrong';mk='<span class="mk">✗ bạn chọn</span>'}}else if(chosen)cls+=' sel';
     return `<button type="button" class="${cls}" data-fk="o${i}" aria-pressed="${chosen}"${show?' aria-disabled="true"':''}${fn?` onclick="${fn}(${i})"`:''}>`+
-      `${multi&&fn?`<span class="cbox">${chosen?'☑':'☐'}</span>`:''}<span class="olet">${L(i)}.</span><span class="otext">${AB(esc(optText(q,oi)),1)}</span>${mk}</button>`}).join('');
+      `${multi&&fn?`<span class="cbox">${chosen?'☑':'☐'}</span>`:''}<span class="olet">${L(i)}</span><span class="otext">${AB(esc(optText(q,oi)),1)}</span>${mk}</button>`}).join('');
   if(it.t==='mc')h+=optBtns('mxPick',oi=>it.sels.indexOf(oi)>=0);
   else if(it.t==='tf'){const truth=!!qinfo(q).truth[it.sh];
     h+=`<div class="tf-st">Phương án: «${AB(esc(optText(q,it.sh)),1)}»</div><p class="tf-ask">Đây có phải đáp án đúng của câu hỏi không?</p><div class="tf-row">`+
       [[1,'Đúng'],[0,'Sai']].map(([v,l])=>{const chosen=it.sels[0]===v,right=(v===1)===truth;let cls='opt';
         if(show){cls+=' locked';if(right)cls+=' correct';else if(chosen)cls+=' wrong'}else if(chosen)cls+=' sel';
-        return `<button type="button" class="${cls}" data-fk="tf${v}" aria-pressed="${chosen}"${show?' aria-disabled="true"':''} onclick="mxTF(${v})"><span class="olet">${v?'A':'B'}.</span><span class="otext">${l}</span>${show&&right?'<span class="mk">✔ đáp án</span>':show&&chosen?'<span class="mk">✗ bạn chọn</span>':''}</button>`}).join('')+'</div>';}
+        return `<button type="button" class="${cls}" data-fk="tf${v}" aria-pressed="${chosen}"${show?' aria-disabled="true"':''} onclick="mxTF(${v})"><span class="olet">${v?'A':'B'}</span><span class="otext">${l}</span>${show&&right?'<span class="mk">✔ đáp án</span>':show&&chosen?'<span class="mk">✗ bạn chọn</span>':''}</button>`}).join('')+'</div>';}
   else if(!show)h+=`<input type="text" class="tin" id="mxIn" value="${esc(it.tx||'')}" aria-label="Đáp án của bạn" placeholder="Gõ nội dung đáp án (không gõ chữ cái)" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="next" `+
       `oninput="mxTx(this.value)" onkeydown="if(event.key==='Enter'){event.preventDefault();UI.inst?mxCheck():go(1)}">`;
   else{const g=gradeTyped(it.tx||'',q),ok=!isLetterOnly(it.tx||'')&&g.ok||!!it.ov;h+=typedCmp({tx:it.tx,ok},g.key)+(ok&&!it.ov&&g.v!=='exact'?`<div class="sub">${GNOTE[g.v].replace(/^ — /,'')}</div>`:'')+(it.ov?'<div class="sub">Bạn tự chấm đúng.</div>':'')}

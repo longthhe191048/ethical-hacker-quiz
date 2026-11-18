@@ -3,18 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0d1117">
+<meta name="theme-color" content="#F7F7F4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap"></noscript>
 <title>Dashboard ôn thi FU — 12 môn</title>
 <style>
-:root, :root[data-theme="dark"]{
-  --bg:#0d1117;--panel:#161b22;--panel2:#1c232d;--border:#30363d;--text:#e6edf3;--muted:#9aa7b4;
-  --accent:#3b82f6;--accent2:#2563eb;--chip:#21262d;--topbar:rgba(13,17,23,.96);--shadow:rgba(0,0,0,.45);
-  --amber:#d29922;--fill:#2563eb;color-scheme:dark;
+/* "Gọn, sáng, tập trung" (design-patches/design_patch.py): light by default, dark only when the reader picks it.
+   Contrast (check_contrast.py) light: text >= 14.5:1, muted >= 5.3, accent >= 6.5, white on fill 7.5 / on danger 5.5,
+   green / red / amber on their tint 5.4 / 5.7 / 5.6; dark: text >= 12.6, muted >= 6.4, accent >= 6.2,
+   white on fill 6.0 / on danger 5.5, green / red / amber on their tint 7.2 / 6.6 / 7.9 */
+:root, :root[data-theme="light"]{
+  --bg:#F7F7F4;--panel:#FFFFFF;--panel2:#F1F1EC;--border:#E3E3DC;--text:#1B1D21;--muted:#5D626A;
+  --accent:#2747C4;--accent2:#1E389E;--green:#11703A;--greenbg:#E5F3E9;--red:#B42318;--redbg:#FCEBEA;
+  --amber:#875800;--amberbg:#FFF4D6;--chip:#EEEEE8;--selbg:#EAEEFC;--topbar:rgba(255,255,255,.92);--shadow:rgba(20,20,15,.10);
+  --fill:#2747C4;--fill-h:#1E389E;--danger:#C4312B;--elev:0 1px 2px rgba(20,20,15,.05),0 4px 16px rgba(20,20,15,.04);color-scheme:light;
 }
-:root[data-theme="light"]{
-  --bg:#f6f8fa;--panel:#fff;--panel2:#eef1f4;--border:#d0d7de;--text:#1f2328;--muted:#59636e;
-  --accent:#2563eb;--accent2:#1d4ed8;--chip:#eaeef2;--topbar:rgba(255,255,255,.94);--shadow:rgba(140,149,159,.28);
-  --amber:#7d4e00;--fill:#2563eb;color-scheme:light;
+:root[data-theme="dark"]{
+  --bg:#111315;--panel:#181B1F;--panel2:#20242A;--border:#2D3238;--text:#E9EBEE;--muted:#A3AAB3;
+  --accent:#8EA2F7;--accent2:#A8B7FA;--green:#5BC489;--greenbg:#14281C;--red:#F2827A;--redbg:#2E1716;
+  --amber:#E0B04A;--amberbg:#2A2111;--chip:#23272D;--selbg:#1D2440;--topbar:rgba(17,19,21,.92);--shadow:rgba(0,0,0,.45);
+  --fill:#3B57D6;--fill-h:#3550C4;--danger:#C4312B;--elev:none;color-scheme:dark;
 }
 :root{--fs-xs:.75rem;--ease:cubic-bezier(.16,1,.3,1)}
 *{box-sizing:border-box}html,body{margin:0;padding:0;height:100%}
@@ -105,6 +114,56 @@ a.tab{text-decoration:none;color:inherit}
 }
 @media(max-width:340px){.grp-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(prefers-reduced-motion:reduce){#subjNav,#navScrim,.sb-caret{transition:none}.loading::before{animation:none}}
+/* DESIGN-CSS-BEGIN */
+/* ===== "Gọn, sáng, tập trung" (design-spec.md) — the dashboard shell (index.html) =====
+   Injected LAST in <style> by design_patch.py. Light header, one subject per row (code + the full name, wrapped),
+   the answer-comparison pages as a small link row under their subject, active row = tint + accent rule. */
+:root{--r-ctl:10px;--ff:"Be Vietnam Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:var(--ff);line-height:1.5}
+:where(button,a):focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+header{min-height:56px;padding:6px 20px;background:var(--panel);-webkit-backdrop-filter:none;backdrop-filter:none}
+.brand{font-size:1.0625rem;font-weight:700;letter-spacing:-.01em}
+.cur-title{font-weight:600}
+.subj-btn,.theme-btn{border-radius:var(--r-ctl);background:var(--panel);transition-property:background-color,border-color;transition-duration:150ms}
+.subj-btn:hover,.theme-btn:hover{background:var(--panel2)}
+.theme-btn{font-weight:500}
+.sb-cur{font-weight:600}
+
+/* subject list */
+.grp{margin:8px 0 18px}
+.grp-h{display:flex;align-items:center;gap:8px;margin:0 4px 6px;font-size:.8125rem;font-weight:600;letter-spacing:0;text-transform:none;color:var(--muted)}
+.grp-h::before{content:'';flex:0 0 auto;width:3px;height:14px;border-radius:2px;background:var(--g,var(--accent))}   /* group colour: a marker only */
+.grp-list{display:flex;flex-direction:column;gap:2px}
+.tab{flex-direction:column;align-items:flex-start;justify-content:center;gap:1px;width:100%;min-height:56px;padding:8px 30px 8px 14px;
+  background:transparent;border:0;border-radius:var(--r-ctl);text-align:left;
+  transition-property:background-color,box-shadow;transition-duration:120ms;transition-timing-function:ease-out}
+.tab b{min-width:0;font-size:.9375rem;font-weight:700;line-height:1.3;white-space:normal}
+.tab small{font-size:.8125rem;line-height:1.35;color:var(--muted);white-space:normal;overflow:visible;text-overflow:clip;text-wrap:pretty}
+.tab:hover{background:var(--panel2);border-color:transparent}
+.tab.active{background:var(--selbg);color:var(--text);box-shadow:inset 3px 0 0 var(--accent)}
+.tab.active b{color:var(--accent)}
+.tab.active small{color:var(--muted)}
+.tab.due::after{top:50%;right:12px;margin-top:-4px}
+.tab.active.due::after{background:var(--amber)}
+/* "Đối chiếu đáp án": a small secondary row, indented under its subject */
+.xlink{display:flex;align-items:center;gap:6px;min-height:40px;margin:0 0 4px 14px;padding:6px 12px;border-left:2px solid var(--border);
+  border-radius:0 8px 8px 0;color:var(--muted);font-size:.8125rem;font-weight:500;text-decoration:none;
+  transition-property:background-color,color;transition-duration:120ms}
+.xlink:hover{background:var(--panel2);color:var(--accent)}
+.xlink .xl-new{margin-left:auto;font-size:.75rem;opacity:.8}
+
+@media(min-width:900px){
+  #subjNav{flex-basis:268px;padding:12px 10px 20px;background:var(--panel)}
+  .tab{min-height:52px}
+}
+@media(max-width:899px){
+  #subjNav{padding:6px 12px calc(16px + env(safe-area-inset-bottom))}
+  .xlink{min-height:44px}
+}
+@media(max-width:560px){header{padding:6px 10px}}
+@media(prefers-reduced-motion:reduce){.tab,.xlink,.subj-btn,.theme-btn{transition:none}}
+/* DESIGN-CSS-END */
 </style>
 </head>
 <body>
@@ -127,31 +186,31 @@ a.tab{text-decoration:none;color:inherit}
     <div class="nav-head"><b>Chọn môn</b><button type="button" class="nav-close" onclick="closeNav()" aria-label="Đóng">✕</button></div>
 
     <!-- groups (owner 17/11): political theory (MLN*, HCM*, VNR) · IT security · Coursera (a code ending in "c") -->
-    <div class="grp"><div class="grp-h">Lý luận chính trị</div><div class="grp-list">
+    <div class="grp" style="--g:#B4432F"><div class="grp-h">Lý luận chính trị</div><div class="grp-list">
       <button type="button" class="tab" data-tab="mln111" data-scope="MLN111" data-label="MLN111 · Triết học"         onclick="selectTab('mln111')"><b>MLN111</b><small>Triết học Mác–Lênin</small></button>
       <button type="button" class="tab" data-tab="mln111pt" data-scope="MLN111PT" data-label="MLN111 · Progress test" onclick="selectTab('mln111pt')"><b>MLN111</b><small>Ôn tập Progress test</small></button>
-      <a class="tab" href="doi-chieu-mln111.html" target="_blank" rel="noopener"><b>MLN111</b><small><span aria-hidden="true">📋</span> Đối chiếu đáp án</small></a>
+      <a class="xlink" href="doi-chieu-mln111.html" target="_blank" rel="noopener" aria-label="MLN111: đối chiếu đáp án (mở tab mới)"><span aria-hidden="true">📋</span> Đối chiếu đáp án<span class="xl-new" aria-hidden="true">↗</span></a>
       <button type="button" class="tab" data-tab="mln122" data-scope="MLN122" data-label="MLN122 · Kinh tế chính trị" onclick="selectTab('mln122')"><b>MLN122</b><small>Kinh tế chính trị</small></button>
-      <a class="tab" href="doi-chieu-mln122.html" target="_blank" rel="noopener"><b>MLN122</b><small><span aria-hidden="true">📋</span> Đối chiếu đáp án</small></a>
+      <a class="xlink" href="doi-chieu-mln122.html" target="_blank" rel="noopener" aria-label="MLN122: đối chiếu đáp án (mở tab mới)"><span aria-hidden="true">📋</span> Đối chiếu đáp án<span class="xl-new" aria-hidden="true">↗</span></a>
       <button type="button" class="tab" data-tab="mln131" data-scope="MLN131" data-label="MLN131 · CNXH khoa học"     onclick="selectTab('mln131')"><b>MLN131</b><small>CNXH khoa học</small></button>
-      <a class="tab" href="doi-chieu-mln131.html" target="_blank" rel="noopener"><b>MLN131</b><small><span aria-hidden="true">📋</span> Đối chiếu đáp án</small></a>
+      <a class="xlink" href="doi-chieu-mln131.html" target="_blank" rel="noopener" aria-label="MLN131: đối chiếu đáp án (mở tab mới)"><span aria-hidden="true">📋</span> Đối chiếu đáp án<span class="xl-new" aria-hidden="true">↗</span></a>
       <button type="button" class="tab" data-tab="hcm202" data-scope="HCM202" data-label="HCM202 · Tư tưởng HCM"      onclick="selectTab('hcm202')"><b>HCM202</b><small>Tư tưởng Hồ Chí Minh</small></button>
-      <a class="tab" href="doi-chieu-hcm202.html" target="_blank" rel="noopener"><b>HCM202</b><small><span aria-hidden="true">📋</span> Đối chiếu đáp án</small></a>
+      <a class="xlink" href="doi-chieu-hcm202.html" target="_blank" rel="noopener" aria-label="HCM202: đối chiếu đáp án (mở tab mới)"><span aria-hidden="true">📋</span> Đối chiếu đáp án<span class="xl-new" aria-hidden="true">↗</span></a>
       <button type="button" class="tab" data-tab="vnr"    data-scope="VNR"    data-label="VNR · Lịch sử Đảng"        onclick="selectTab('vnr')"><b>VNR</b><small>Lịch sử Đảng CSVN</small></button>
-      <a class="tab" href="doi-chieu-vnr.html" target="_blank" rel="noopener"><b>VNR</b><small><span aria-hidden="true">📋</span> Đối chiếu đáp án</small></a>
+      <a class="xlink" href="doi-chieu-vnr.html" target="_blank" rel="noopener" aria-label="VNR: đối chiếu đáp án (mở tab mới)"><span aria-hidden="true">📋</span> Đối chiếu đáp án<span class="xl-new" aria-hidden="true">↗</span></a>
     </div></div>
 
-    <div class="grp"><div class="grp-h">An toàn thông tin</div><div class="grp-list">
+    <div class="grp" style="--g:#0E7C6B"><div class="grp-h">An toàn thông tin</div><div class="grp-list">
       <button type="button" class="tab" data-tab="hod402"  data-scope="ETHICAL_HACKER" data-label="HOD402 · ITexam" onclick="selectTab('hod402')"><b>HOD402</b><small>ITexam (Cisco)</small></button>
       <button type="button" class="tab" data-tab="hodfu"   data-scope="HOD402"  data-label="HOD402 · Đề FU"  onclick="selectTab('hodfu')"><b>HOD402</b><small>Đề thi FU</small></button>
       <button type="button" class="tab" data-tab="hod401"  data-scope="HOD401"  data-label="HOD401 · Đề FU"  onclick="selectTab('hod401')"><b>HOD401</b><small>Đề thi FU</small></button>
       <button type="button" class="tab" data-tab="ces202"  data-scope="CES202"  data-label="CES202 · Đề FU"  onclick="selectTab('ces202')"><b>CES202</b><small>Đề thi FU</small></button>
       <button type="button" class="tab" data-tab="iap301"  data-scope="IAP301"  data-label="IAP301 · Đề FU"  onclick="selectTab('iap301')"><b>IAP301</b><small>Đề thi FU</small></button>
       <button type="button" class="tab" data-tab="spm401"  data-scope="SPM401"  data-label="SPM401 · Đề FU"  onclick="selectTab('spm401')"><b>SPM401</b><small>Đề thi FU</small></button>
-      <a class="tab" href="doi-chieu-spm401.html" target="_blank" rel="noopener"><b>SPM401</b><small><span aria-hidden="true">📋</span> Đối chiếu đáp án</small></a>
+      <a class="xlink" href="doi-chieu-spm401.html" target="_blank" rel="noopener" aria-label="SPM401: đối chiếu đáp án (mở tab mới)"><span aria-hidden="true">📋</span> Đối chiếu đáp án<span class="xl-new" aria-hidden="true">↗</span></a>
     </div></div>
 
-    <div class="grp"><div class="grp-h">Coursera</div><div class="grp-list">
+    <div class="grp" style="--g:#2747C4"><div class="grp-h">Coursera</div><div class="grp-list">
       <button type="button" class="tab" data-tab="frs401c" data-scope="FRS401C" data-label="FRS401C · Đề FU" onclick="selectTab('frs401c')"><b>FRS401C</b><small>Đề thi FU</small></button>
       <button type="button" class="tab" data-tab="pmg201c" data-scope="PMG201c" data-label="PMG201c · Quản lý dự án" onclick="selectTab('pmg201c')"><b>PMG201c</b><small>Quản lý dự án</small></button>
     </div></div>
@@ -200,18 +259,18 @@ function syncFrame(f){
 function applyTheme(t){
   t=t==='light'?'light':'dark';
   document.documentElement.dataset.theme=t;try{localStorage.setItem('app_theme',t)}catch(e){}
-  const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=t==='light'?'#f6f8fa':'#0d1117';   // phone address bar
+  const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=t==='dark'?'#111315':'#F7F7F4';   // phone address bar
   const b=el('themeBtn');
   if(b){const toLight=t==='dark',lbl=toLight?'Chuyển sang giao diện sáng':'Chuyển sang giao diện tối';
     b.innerHTML=toLight?'<span aria-hidden="true">☀️</span><span class="tl"> Sáng</span>':'<span aria-hidden="true">🌙</span><span class="tl"> Tối</span>';
     b.setAttribute('aria-label',lbl);b.title=lbl;}
   document.querySelectorAll('.panel iframe[src]').forEach(syncFrame);   // already-loaded pages update now, not on reload
 }
-function toggleTheme(){applyTheme((document.documentElement.dataset.theme||'dark')==='dark'?'light':'dark')}
+function toggleTheme(){applyTheme((document.documentElement.dataset.theme||'light')==='dark'?'light':'dark')}
 addEventListener('storage',e=>{if(e.key==='app_theme'&&(e.newValue==='dark'||e.newValue==='light')&&e.newValue!==document.documentElement.dataset.theme)applyTheme(e.newValue);
   if(e.key&&e.key.indexOf('fu_srs_')===0)markDue();});
 (function(){let t;try{t=localStorage.getItem('app_theme')}catch(e){}
-  if(!t)t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';applyTheme(t)})();
+  if(t!=='dark')t='light';applyTheme(t)})();   // light unless the reader picked dark
 
 /* ---- an amber dot on subjects that have SRS questions due today (read straight from their storage) ---- */
 function markDue(){
