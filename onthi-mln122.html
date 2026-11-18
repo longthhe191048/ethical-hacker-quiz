@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap"></noscript>
 <title>Ôn tập đề (FUoverflow)</title>
+<meta name="description" content="Ôn thi trắc nghiệm các môn FPT University: làm đề, học từng bước, flashcard, ghép thẻ; đáp án có giải thích và trích giáo trình.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232747C4'/%3E%3Cpath d='M9 16.5l4.5 4.5L23 11.5' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <style>
 /* "Gọn, sáng, tập trung" (design-patches/design_patch.py): light by default, dark only when the reader picks it.
    Contrast (check_contrast.py) light: text >= 14.5:1, muted >= 5.3, accent >= 6.5, white on fill 7.5 / on danger 5.5,
@@ -333,13 +335,14 @@ label.theme-btn{display:inline-flex;align-items:center}
 .tbox.ok{border-color:var(--green)}.tbox.no{border-color:var(--red);background:var(--redbg)}
 .tbox mark{background:var(--amberbg);color:var(--text);border-bottom:2px solid var(--amber);padding:0 1px}
 .cp-q{flex:1;min-width:0;overflow-wrap:anywhere}
-/* Ghép thẻ: two columns on every screen; a tile shows 4 lines, a long press (or the tooltip) shows the rest */
+/* Ghép thẻ: two columns on every screen; a tile shows 6 lines (8 on phones, in a smaller size), a long press (or the tooltip)
+   shows the rest — 4 lines were only the generic opening of a long stem (audit F08) */
 .mt-board{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
 .mt-col{display:flex;flex-direction:column;gap:8px}
 .mt-tile{display:block;width:100%;min-height:64px;padding:10px 12px;border:1px solid var(--border);border-radius:var(--r-md);background:var(--panel2);color:var(--text);
   font:inherit;font-size:calc(var(--qfs,16px)*.875);line-height:1.4;text-align:left;cursor:pointer;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:opacity .3s}
 .mt-tile:hover{border-color:var(--accent)}
-.mt-tile .tx{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.mt-tile .tx{display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
 .mt-tile.exp .tx{display:block}
 .mt-tile.sel{border-color:var(--accent);background:var(--selbg);box-shadow:inset 0 0 0 1px var(--accent)}
 .mt-tile.bad{border-color:var(--red);background:var(--redbg)}
@@ -352,7 +355,7 @@ label.theme-btn{display:inline-flex;align-items:center}
 .gh-row .qnum{justify-self:start}
 .gh-row.ok .gh-st{color:var(--green)}.gh-row.no select{border-color:var(--red)}
 .gh-st{overflow-wrap:anywhere}
-.gh-row select{min-width:64px;min-height:40px}
+.gh-row select{min-width:64px;min-height:44px}
 .gh-key{color:var(--green);font-weight:700;white-space:nowrap}
 .gh-ans{list-style:none;margin:10px 0 0;padding:10px 12px;background:var(--panel2);border:1px solid var(--border);border-radius:var(--r-md);display:flex;flex-direction:column;gap:6px}
 .gh-ans li{overflow-wrap:anywhere}
@@ -361,11 +364,16 @@ label.theme-btn{display:inline-flex;align-items:center}
 .fc-sort{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
 .fc-rate{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}
 .fc-sort .btn,.fc-rate .btn{min-height:48px;padding:10px 8px}
+/* a flipped card can be screens long (explanation, EN/VI, quotes): the grading row stays at the bottom of the screen */
+.fc-sort,.fc-rate{position:sticky;bottom:calc(8px + env(safe-area-inset-bottom));z-index:6;padding:8px;margin-left:-8px;margin-right:-8px;
+  background:var(--topbar);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:var(--r-md);
+  box-shadow:0 -4px 16px var(--shadow)}
 #toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:1100;display:none;max-width:calc(100% - 32px);
   padding:10px 16px;background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:var(--r-md);box-shadow:0 6px 18px var(--shadow);font-weight:600}
 @media(max-width:560px){
   .tcmp{grid-template-columns:1fr}
-  .mt-board{gap:6px}.mt-col{gap:6px}.mt-tile{padding:8px 9px;min-height:56px}
+  .mt-board{gap:6px}.mt-col{gap:6px}.mt-tile{padding:8px 9px;min-height:56px;font-size:calc(var(--qfs,16px)*.8125);line-height:1.35}
+  .mt-tile .tx{-webkit-line-clamp:8}
   .fc-rate{grid-template-columns:repeat(2,minmax(0,1fr))}
   .gh-row{grid-template-columns:auto minmax(0,1fr) auto}.gh-row .gh-key{grid-column:2/-1}
 }
@@ -374,6 +382,98 @@ label.theme-btn{display:inline-flex;align-items:center}
     --red:#B42318;--redbg:#FCEBEA;--amber:#875800;--amberbg:#FFF4D6;--chip:#EEEEE8;--selbg:#EAEEFC;--accent:#2747C4;--fill:#2747C4;--elev:none;color-scheme:light}
   #topbar,#toast,.no-print,.navbtns,.jump{display:none!important}body,body:not(.testing){background:#fff}.card{break-inside:avoid}}
 /* MODES-CSS-END */
+/* MODES2-CSS-BEGIN */
+/* ---- study methods part 2 (modes2): Danh sách câu, Nghe ôn, Nghe – viết, the new flashcard ways. Tokens only, so dark follows ---- */
+.m2-warn{margin:8px 0 10px;padding:10px 14px;border-left:3px solid var(--amber);background:var(--amberbg);border-radius:0 var(--r-ctl,10px) var(--r-ctl,10px) 0;color:var(--text);font-size:.9rem;line-height:1.55}
+.m2-vrow{display:flex;gap:8px;align-items:center}.m2-vrow select{flex:1 1 auto;min-width:0;min-height:44px}.m2-vrow .btn{flex:0 0 auto}
+/* 📚 Danh sách câu */
+.lv-bar>.chips{margin-bottom:10px}
+.lv-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.lv-row .search-wrap{flex:1 1 240px;min-width:0}
+.lv-bar #lvCount{margin-top:8px}
+#lvEnd{margin:14px 0;text-align:center}
+.lv-ptitle{display:none}
+.dc-list{margin:16px 0;padding:6px 20px;background:var(--panel);border:1px solid var(--border);border-radius:var(--r-card,14px)}
+.dc-item{padding:12px 0;border-bottom:1px solid var(--border)}.dc-item:last-child{border-bottom:0}
+.dc-q{margin:0 0 4px;font-weight:600;overflow-wrap:anywhere}
+.dc-a{margin:0;color:var(--green);font-weight:600;overflow-wrap:anywhere}
+.dc-ex{margin:4px 0 0;color:var(--muted);font-size:.92em;white-space:pre-line;overflow-wrap:anywhere}
+@media(max-width:560px){.dc-list{padding:4px 14px}}
+@media print{.lv-ptitle{display:block;margin:0 0 8px;font-size:1.1rem}.dc-list{border:0;padding:0}.dc-item{break-inside:avoid}.lv-item .ac-ev{display:none}}
+/* 🎧 Nghe ôn: the part being read is tinted */
+.ln-ctl{display:flex;justify-content:center;gap:10px;margin:18px 0 4px}.ln-ctl .btn{min-width:56px}
+.ln-card .field .chips{justify-content:center}.ln-card .field>.sub{text-align:center}
+.ln-wait{margin:14px 0 4px;padding:12px 16px;border:1px dashed var(--border);border-radius:var(--r-ctl,10px);color:var(--muted);text-align:center}
+.ln-wait b{color:var(--text);font-variant-numeric:tabular-nums}
+.ln-voice{margin-top:8px;text-align:center}
+.ln-card .ln-stem,.ln-card .ln-opts,.ln-card .ac-key,.ln-card .ac-why{border-radius:var(--r-ctl,10px);transition:background-color .2s,box-shadow .2s}
+.on-stem .ln-stem,.on-opts .ln-opts,.on-ans .ac-key,.on-ex .ac-why{background:var(--selbg);box-shadow:0 0 0 6px var(--selbg)}
+/* 🔤 Nghe – viết */
+.sp-panel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px}
+#test .stem.sp-ctx{font-size:1em;font-weight:500;color:var(--muted)}
+/* 🎴 Flashcard: answer first, Đúng/Sai, cloze, pairs, terms, Leitner boxes */
+.fx-big{margin:4px 0 10px;font-size:1.2em;font-weight:700;line-height:1.45;overflow-wrap:anywhere}
+.fx-back{color:var(--green)}
+.fx-where{margin-top:14px;padding-top:12px;border-top:1px dashed var(--border)}
+.cz-key{margin:0 0 8px;font-size:1.05em;font-weight:600;line-height:1.9;overflow-wrap:anywhere}
+.cz-b{display:inline-block;min-width:2.5em;line-height:1.3;background:var(--selbg);border-bottom:2px solid var(--accent);border-radius:4px 4px 0 0}
+.cz-key mark,.fx-where mark,.pr-col .stem mark{padding:0 2px;background:var(--amberbg);color:var(--text);border-bottom:2px solid var(--amber);border-radius:2px}
+.pr-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.pr-col{min-width:0;padding:12px;background:var(--panel);border:1px solid var(--border);border-radius:var(--r-ctl,10px)}
+.pr-h{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+.pr-col .stem{margin-bottom:10px}.pr-col .ac{font-size:.92em}
+@media(max-width:720px){.pr-grid{grid-template-columns:minmax(0,1fr)}}
+.lt-boxes{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:4px 0 10px}
+.lt-box{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:96px;padding:10px 6px;background:var(--panel);color:var(--text);
+  border:1px solid var(--border);border-radius:var(--r-ctl,10px);font:inherit;text-align:center;cursor:pointer;transition:border-color .15s}
+.lt-box:hover:not(:disabled){border-color:var(--accent)}.lt-box:disabled{opacity:.5;cursor:default}
+.lt-box.on{background:var(--selbg);border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.lt-h{color:var(--muted);font-size:.8125rem;font-weight:600}
+.lt-n{font-size:1.5rem;line-height:1.2;font-variant-numeric:tabular-nums}
+.lt-s{color:var(--muted);font-size:.75rem}.lt-due{color:var(--amber);font-weight:700}
+@media(max-width:560px){.lt-boxes{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* 💬 Tự giải thích */
+textarea.tin{display:block;min-height:96px;resize:vertical;line-height:1.5}
+.why-box{margin-top:14px;padding:14px 16px;background:var(--panel);border:1px solid var(--border);border-radius:var(--r-ctl,10px)}
+.why-ex{margin:0 0 8px;line-height:1.7;white-space:pre-line;overflow-wrap:anywhere}
+mark.hit{padding:0 2px;background:var(--greenbg);color:var(--text);border-bottom:2px solid var(--green);border-radius:2px}
+mark.miss{padding:0 2px;background:var(--amberbg);color:var(--text);border-bottom:2px solid var(--amber);border-radius:2px}
+/* 💭 Nhớ tự do */
+.fr-in{min-height:220px}
+.fr-mine{margin:10px 0}.fr-mine summary{cursor:pointer;min-height:44px;display:flex;align-items:center;color:var(--muted)}
+.fr-mine .tbox{white-space:pre-wrap}
+.fr-list{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.fr-fact{display:flex;gap:12px;align-items:flex-start;min-height:44px;padding:10px 12px;background:var(--panel);border:1px solid var(--border);border-radius:var(--r-ctl,10px);color:var(--text);font-size:.95rem;cursor:pointer}
+.fr-fact:has(input:checked){background:var(--greenbg);border-color:var(--green)}
+.fr-fact input{flex:0 0 auto;width:20px;height:20px;margin:2px 0 0;accent-color:var(--fill)}
+.fr-tx{display:flex;flex-direction:column;gap:2px;min-width:0;overflow-wrap:anywhere}
+.fr-tx small{color:var(--muted);font-size:.85em}
+.fr-auto{align-self:flex-start;padding:0 7px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font-size:.75rem}
+#frCov{margin:4px 0 8px}
+/* ⏳ Sắp xếp mốc thời gian */
+.od-list{display:flex;flex-direction:column;gap:8px;margin:6px 0 14px}
+.od-ev{display:flex;gap:12px;align-items:flex-start;width:100%;min-height:52px;padding:12px 14px;background:var(--panel);color:var(--text);border:1px solid var(--border);
+  border-radius:var(--r-ctl,10px);font:inherit;text-align:left;cursor:pointer;transition:border-color .15s,background-color .15s}
+.od-ev:hover{border-color:var(--accent)}
+.od-ev.on{background:var(--selbg);border-color:var(--accent)}
+.od-n{flex:0 0 28px;display:inline-grid;place-items:center;width:28px;height:28px;border:1px solid var(--border);border-radius:7px;background:var(--panel2);color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums}
+.od-ev.on .od-n{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+.od-tx{padding-top:2px;overflow-wrap:anywhere}
+.od-key{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.od-key li{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border:1px solid var(--border);border-radius:var(--r-ctl,10px);background:var(--panel)}
+.od-key li.ok{border-color:var(--green)}.od-key li.no{border-color:var(--red);background:var(--redbg)}
+.od-d{flex:0 0 auto;min-width:88px;padding:2px 8px;border-radius:7px;background:var(--panel2);color:var(--text);font-weight:700;font-size:.875rem;text-align:center;font-variant-numeric:tabular-nums}
+.od-body{display:flex;flex-direction:column;gap:2px;min-width:0;overflow-wrap:anywhere}.od-body small{color:var(--muted)}
+@media(max-width:560px){.od-key li{flex-direction:column;gap:6px}.od-d{min-width:0}}
+/* 📅 Lộ trình ôn thi: in the progress line */
+#streak .streakbar{flex-wrap:wrap;row-gap:6px}
+.pl-tag{color:var(--muted);font-size:.8125rem;white-space:nowrap}
+.pl-btn{min-height:36px;padding:4px 10px;font-size:.8125rem}
+.pl-panel{margin:10px 0 0}
+.pl-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+.pl-row input[type=date]{min-height:44px;padding:8px 10px;background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:var(--r-ctl,10px);font:inherit}
+@media(max-width:560px){.pl-btn{min-height:44px}}
+/* MODES2-CSS-END */
 /* narrow tablets: groups stack, tiles go 3-across with the icon/count on top */
 @media(max-width:720px){
   .mgroups{grid-template-columns:1fr;gap:12px}
@@ -614,6 +714,8 @@ h1{font-size:1.5rem;font-weight:700;letter-spacing:-.015em;line-height:1.25}
 .flash-card{background:var(--panel);border-radius:var(--r-card);box-shadow:var(--elev);padding:24px}
 .flash-card .ac,.flash-card .qaid{background:var(--panel)}
 .flash-opt{min-height:48px;gap:12px;border-radius:var(--r-ctl);background:var(--panel)}
+/* the "✔ đúng" mark must not be squeezed into a one-letter column on a phone: the option text gives way instead */
+.flash-opt .otext{flex:1 1 auto;min-width:0}.flash-opt .mk{flex:0 0 auto;white-space:nowrap}
 .modal-overlay{background:rgba(20,20,15,.4)}
 :root[data-theme="dark"] .modal-overlay{background:rgba(0,0,0,.6)}
 .modal-card{border-radius:var(--r-card)}
@@ -654,18 +756,68 @@ kbd{border-radius:6px;color:var(--accent);font-family:ui-monospace,SFMono-Regula
   .ac-body{padding:14px 14px 16px}
   #topbar{padding:6px 10px;min-height:56px}
 }
+
+/* ===== audit 19/11 (scratchpad ui-audit/findings.json) ===== */
+/* F18 / F22 the source line is a real button (Tab + Enter opens it); it wraps on wide screens, phones keep one line */
+button#srcNote{display:block;padding:0;border:0;background:none;color:var(--muted);font:inherit;font-size:.875rem;line-height:1.5;text-align:left}
+@media(min-width:561px){#srcNote{white-space:normal;overflow:visible}}
+@media(pointer:coarse){button#srcNote{min-height:44px;padding:11px 0;margin:-7px 0 -11px}}   /* a 44px target, same visual spacing */
+/* F18 the flashcard's flip line is a button (the card itself holds the ★ / 🏳 buttons, so it cannot be one) */
+button.flip-hint{display:block;width:100%;min-height:44px;margin-top:14px;padding:10px 0 0;border:0;border-top:1px dashed var(--border);background:none;
+  color:var(--muted);font:inherit;font-size:.875rem;text-align:center;cursor:pointer}
+button.flip-hint:hover{color:var(--accent)}
+/* F10 zero counts in full muted colour (the .55 opacity made them 2.3:1) */
+.mode .mc.zero{opacity:1}
+/* F11 the raw exam name: readable and whole */
+.ex-raw{opacity:1;white-space:normal;overflow:visible;overflow-wrap:anywhere}
+/* F22 labels that were cut */
+.modbar .mlabel{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}
+.opts-s{white-space:normal}
+/* F33 shortcut sheet: the key group never wraps */
+.sc-item>div{flex:0 0 auto;white-space:nowrap}
+/* F34 "Không giới hạn" picked: the number box (it would read 0) steps aside; 15 / 30 / … bring it back to type minutes */
+#minsField .qty:has(.chip.on[data-v="0"]) input{display:none}
+/* F35 Học thông minh already picked: no button that picks it again */
+body:has(.mode.active[data-mode="learn"]) #stageBox .btn{display:none}
+/* F28 one filled button per screen: ▶ Bắt đầu / Được / Sau → stay filled, the rest is outlined */
+#resume .btn:not(.sec){background:var(--panel);color:var(--accent);border:1px solid var(--accent)}
+#resume .btn:not(.sec):hover{background:var(--selbg)}
+.fc-rate .btn.danger,.fc-rate .btn.sec,.fc-rate .btn[data-fk="r4"]{background:var(--panel);color:var(--text);border:1px solid var(--border)}
+.fc-rate .btn.danger{color:var(--red)}
+.fc-rate .btn.danger:hover,.fc-rate .btn.sec:hover,.fc-rate .btn[data-fk="r4"]:hover{background:var(--panel2)}
+.navbtns .btn.danger{background:var(--panel);color:var(--red);border:1px solid var(--red)}
+/* F12 touch screens: 44px controls between the phone and desktop layouts too */
+@media(pointer:coarse){
+  .theme-btn,select,input[type=number],.chip,.conf-chip{min-height:44px}
+  #topbar .theme-btn{min-width:44px}
+  .star,.bmk{min-width:44px;min-height:44px}
+  .search-wrap input{padding-right:46px}
+  .search-clear{right:0;min-width:44px;min-height:44px;background:transparent;border:0}
+}
+/* F29 keyboard hints only where there is a keyboard */
+@media(hover:none) and (pointer:coarse){.kbd-only,.mode .mkey{display:none}}
+/* F36 layout shift: the start screen is filled in by script and the web font swaps in; it shows once both are done
+   (html.ready: set at the end of the page script, and by the head script after 2.5 s whatever happens) */
+html:not(.ready) #start{visibility:hidden}
+/* F30 print: no controls, no room for the topbar */
+@media print{
+  .wrap,body.testing .wrap{padding-top:0!important}
+  .star,.bmk,.abx-t,.conf-row,.flip-hint,#rail,.hero-acts,#startRow,.search-wrap,.fc-sort,.fc-rate,button[onclick^="revealAns"]{display:none!important}
+  html:not(.ready) #start{visibility:visible}
+}
 /* DESIGN-CSS-END */
 </style>
 <script>(function(d){try{if(window.self!==window.top)d.classList.add('embed')}catch(e){d.classList.add('embed')}
-try{var t=localStorage.getItem('app_theme');if(t==='dark'||t==='light')d.setAttribute('data-theme',t)}catch(e){}})(document.documentElement);</script>
+try{var t=localStorage.getItem('app_theme');if(t==='dark'||t==='light')d.setAttribute('data-theme',t)}catch(e){}
+setTimeout(function(){d.classList.add('ready')},2500)})(document.documentElement);</script>   <!-- html.ready: see the end of the page script -->
 </head>
 <body>
-<div class="wrap">
+<div class="wrap" role="main">
   <div id="start">
     <div class="hero">
       <div class="hero-txt">
         <h1 id="title">📝 Ôn tập đề</h1>
-        <div class="sub" id="srcNote" onclick="this.classList.toggle('open')">Nguồn: FUoverflow · OCR + đáp án (Opus/Sonnet) · verify độc lập nhiều lượt</div>
+        <button type="button" class="sub" id="srcNote" aria-expanded="false" onclick="this.setAttribute('aria-expanded',this.classList.toggle('open'))">Nguồn: FUoverflow · OCR + đáp án (Opus/Sonnet) · kiểm tra độc lập nhiều lượt</button>
       </div>
       <div class="hero-acts">
         <button type="button" class="theme-btn kbd-only" onclick="openShortcutModal()" title="Phím tắt (? hoặc H)"><span aria-hidden="true">⌨️</span> Phím tắt</button>
@@ -679,7 +831,7 @@ try{var t=localStorage.getItem('app_theme');if(t==='dark'||t==='light')d.setAttr
     <div class="card main-card" style="--i:2">
       <div class="field" id="subjField"><label for="subject">Môn</label><select id="subject" onchange="onSubjectChange()"></select></div>
       <div class="search-wrap" id="searchWrap"><span class="search-ic" aria-hidden="true">🔍</span>
-        <input type="text" id="globalSearch" placeholder="Tìm câu theo từ khóa rồi làm riêng…" aria-label="Tìm câu hỏi theo từ khóa" oninput="onSearchInput()" autocomplete="off" spellcheck="false" enterkeyhint="go">
+        <input type="text" id="globalSearch" placeholder="Tìm câu theo từ khóa…" aria-label="Tìm câu hỏi theo từ khóa" oninput="onSearchInput()" autocomplete="off" spellcheck="false" enterkeyhint="go">
         <button type="button" class="search-clear" onclick="clearSearch()" aria-label="Xóa tìm kiếm">✕</button></div>
       <div class="sub" id="searchCount"></div>
 
@@ -706,7 +858,7 @@ try{var t=localStorage.getItem('app_theme');if(t==='dark'||t==='light')d.setAttr
           <button type="button" class="mode" data-mode="mix" aria-pressed="false" onclick="pickMode('mix',1)"><span class="mtop"><span class="ic" aria-hidden="true">📝</span><span class="mrec">Gợi ý</span></span><span class="mt"><b>Kiểm tra tổng hợp</b><small>Trắc nghiệm, Đúng/Sai, ghép, gõ trong một đề</small></span></button>
         </div></section>
       </div>
-      <button type="button" class="btn sec match-btn" id="matchBtn" onclick="showMatching()" style="display:none"><span aria-hidden="true">📎</span> Xem câu Matching <span id="matchN"></span></button>
+      <button type="button" class="btn sec match-btn" id="matchBtn" onclick="showMatching()" style="display:none"><span aria-hidden="true">📎</span> Xem câu ghép cặp <span id="matchN"></span></button>
 
       <div id="modeCfg" class="mode-cfg"></div>
 
@@ -750,7 +902,7 @@ try{var t=localStorage.getItem('app_theme');if(t==='dark'||t==='light')d.setAttr
         </div></div>
       <div id="historyBox" style="margin-top:10px"></div>
     </div>
-    <div class="footer-note" id="footNote" style="--i:5">Đáp án do AI giải &amp; verify từ đề FUoverflow (không phải đáp án chính thức) — dùng để tham khảo/ôn tập. Lịch sử, câu đã thuộc &amp; câu sai lưu trên máy bạn.</div>
+    <div class="footer-note" id="footNote" style="--i:5">Đáp án do AI giải và kiểm tra lại từ đề FUoverflow (không phải đáp án chính thức) — dùng để tham khảo/ôn tập. Lịch sử, câu đã thuộc &amp; câu sai lưu trên máy bạn.</div>
   </div>
   <div id="test" style="display:none"></div>
   <div id="matching" style="display:none"></div>
@@ -789,13 +941,13 @@ function num1(x){return (Math.round(x*10)/10).toString().replace(/\.0$/,'')}
    FU papers were OCR'd, solved and verified here; imported sets were not. */
 function vfBadge(vf){
   switch(vf){
-    case 'corrected':     return '<span class="vbadge corr">✎ đã sửa khi verify</span>';
+    case 'corrected':     return '<span class="vbadge corr">✎ đáp án đã sửa khi kiểm tra</span>';
     case 'review':        return '<span class="vbadge warn">⚠ nguồn đánh dấu cần rà soát</span>';
     case 'corrected-src': return '<span class="vbadge src">nguồn đã hiệu đính</span>';
     case 'imported':      return '<span class="vbadge warn">⚠ đáp án theo nguồn, chưa đối chiếu</span>';
-    case 'checked':       return '<span class="vbadge ok">✓ đã đối chiếu</span>';
+    case 'checked':       return '<span class="vbadge ok">✓ đáp án đã đối chiếu</span>';
     case 'formkey':       return '<span class="vbadge ok">✓ đáp án chấm của form</span>';
-    default:              return '<span class="vbadge ok">✓ verify khớp</span>';
+    default:              return '<span class="vbadge ok">✓ đáp án đã kiểm tra lại</span>';
   }}
 /* ===== revealed-answer card + question aids ==================================
    Paste right after vfBadge() (template line 391). Uses esc, stripPrefix, optLetterAt,
@@ -1064,7 +1216,7 @@ function formatQStem(x){
   t=t.replace(/(^|<br>)\s*([1-9])\.\s+/g,'$1&nbsp;&nbsp;<b>$2.</b> ');
   t=t.replace(/(^|<br>)\s*([a-f])\.\s+/g,'$1&nbsp;&nbsp;<b>$2.</b> ');
   return t;}
-const MODELABEL={random:'Random',exam:'Theo đề',all:'Ôn tổng',wrong:'Ôn câu sai',learn:'Học thông minh',review:'Ôn đến hạn',
+const MODELABEL={random:'Ngẫu nhiên',exam:'Theo đề',all:'Ôn tổng',wrong:'Ôn câu sai',learn:'Học thông minh',review:'Ôn đến hạn',
   flash:'Flashcard',book:'Câu đánh dấu',seen:'Câu đã xem đáp án',search:'Tìm kiếm',
   step:'Học từng bước',write:'Gõ đáp án',mix:'Kiểm tra tổng hợp',match:'Ghép thẻ'};
 /* theme */
@@ -1542,6 +1694,11 @@ function migrateStore(){const subs=pageSubs(),run=f=>{try{f()}catch(e){try{conso
   subs.forEach(s=>run(()=>srsOf(s,false)));run(foldAllScope);
   subs.forEach(s=>run(()=>identityPass(s)));subs.forEach(s=>run(()=>wrongRepair(s)));}
 
+/* a page opened on its own (no ?subject=) whose bank has one subject: name it, and drop the "Môn" picker that would
+   offer "Tất cả môn" + that one subject. Display only: the scope stays '__all__', so stored history keys do not move */
+function oneSubject(){const ss=[...new Set((FU_BANK.exams||[]).map(e=>e.subject))];
+  if(!FORCED&&ss.length===1){const f=el('subjField');if(f)f.style.display='none';const h=el('title');if(h&&h.textContent==='📝 Ôn tập đề')h.textContent='📝 Ôn tập '+ss[0];}
+  const s=FORCED||(ss.length===1?ss[0]:'');if(s&&document.title==='Ôn tập đề (FUoverflow)')document.title='Ôn tập '+s;}
 function applyOrigin(){
   // a bank may describe its own provenance (e.g. a file the user supplied)
   const m=FU_BANK.meta;
@@ -1559,7 +1716,7 @@ function applyOrigin(){
   const ex=FU_BANK.exams||[];if(!ex.length||!ex.every(e=>e.origin==='quizlet-study'))return;
   const sn=el('srcNote'),fn=el('footNote');
   if(sn)sn.textContent='Nguồn: quizlet-study.vercel.app (Ôn Thi Cùng Ngọc Dương) · câu hỏi trích từ PDF, đáp án đã đối chiếu lại';
-  if(fn)fn.textContent='Bộ câu hỏi nhập từ quizlet-study.vercel.app (Ngọc Dương) — đáp án đã được đối chiếu lại từng câu (✓ đã đối chiếu); câu gắn ✎ là câu đã sửa đáp án so với nguồn, lý do ghi ở phần ghi chú. Lịch sử, câu đã thuộc & câu sai lưu trên máy bạn.';
+  if(fn)fn.textContent='Bộ câu hỏi nhập từ quizlet-study.vercel.app (Ngọc Dương) — đáp án đã được đối chiếu lại từng câu (✓ đáp án đã đối chiếu); câu gắn ✎ là câu đã sửa đáp án so với nguồn, lý do ghi ở phần ghi chú. Lịch sử, câu đã thuộc & câu sai lưu trên máy bạn.';
   document.title='Ôn tập '+(FORCED||'')+' (Ngọc Dương)';}
 (function init(){
   const sel=el('subject');
@@ -1567,7 +1724,7 @@ function applyOrigin(){
     const o=document.createElement('option');o.value=FORCED;o.textContent=FORCED;sel.appendChild(o);sel.value=FORCED;
   } else {const oa=document.createElement('option');oa.value='__all__';oa.textContent='Tất cả môn';sel.appendChild(oa);
     [...new Set(FU_BANK.exams.map(e=>e.subject))].sort().forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;sel.appendChild(o)});}
-  applyOrigin();
+  applyOrigin();oneSubject();
   migrateIds();
   refreshScope(); renderStats(); renderHistory(); renderResume();
   // tablet/desktop have room for the options; phones keep them folded behind a one-line summary
@@ -1683,7 +1840,7 @@ function examMeta(e){let m=_EXM.get(e);if(m)return m;
     .replace(/(^|[^A-Za-z])(SP|SU|FA)\s?\d{2,}/g,'$1 ')
     .replace(/(^|[^A-Za-z])(FE|RE)(?![A-Za-z])/g,'$1 ')
     .replace(/(^|\s)\d{4,}(?=\s|$)/g,' ')
-    .replace(/(\s*-\s*)+/g,' - ').replace(/^[\s-]+|[\s-]+$/g,'');
+    .replace(/(\s*-\s*)+/g,' - ').replace(/(\s*·\s*)+/g,' · ').replace(/^[\s·-]+|[\s·-]+$/g,'').replace(/\s{2,}/g,' ');
   const term=tm?{s:tm[1],y:+tm[2]}:null,code=tm?tm[1]+tm[2]:'';
   m={term,code,type,extra,
      title:[EX_TYPE[type],extra].filter(Boolean).join(' · ')||raw,
@@ -1988,7 +2145,7 @@ function renderFlashcard(q){
      `<div class="qgrid"><div class="qmain"><p class="stem">${AB(formatQStem(q.q),1)}</p>${opts}</div><!--ABX--></div>`;
   h+=preNotesHTML(q);
   if(FLIPPED)h+=answerCard(q,keyRowsOf(q),vfBadge(q.vf),x=>AB(x,0));
-  h+=`<div class="flip-hint">${FLIPPED?'👆 Nhấn để úp thẻ lại':'👆 Nhấn vào thẻ hoặc phím Space để xem đáp án'}</div></div>`;
+  h+=`<button type="button" class="flip-hint" data-fk="flip" onclick="event.stopPropagation();toggleFlip()">${FLIPPED?'👆 Nhấn để úp thẻ lại':'👆 Nhấn vào thẻ<span class="kbd-only"> hoặc phím Space</span> để xem đáp án'}</button></div>`;
   h+=fcControls();
   setTest(withAbx(h,AB));}
 /* a question the subject's other bank already covers (set by scratchpad pt_xref.py) */
@@ -2156,8 +2313,8 @@ function backToStart(){el('histDetail').style.display='none';el('matching').styl
 /* ---- matching review ---- */
 function showMatching(){const exs=examsFor(curSubject());const ms=[];exs.forEach(e=>e.questions.forEach((q,i)=>{if(isMatch(q))ms.push({...q,src:e.name})}));
   el('start').style.display='none';const box=el('matching');box.style.display='block';
-  let h=`<div class="row" style="margin:6px 0;justify-content:space-between"><h1>📎 Câu Matching (${ms.length})</h1><button class="btn sec" onclick="backToStart()">← Về menu</button></div><div class="sub" style="margin-bottom:8px">Các câu "Match X to Y" — xem đề, các phương án ánh xạ và đáp án đúng.</div>`;
-  if(!ms.length)h+='<div class="hist-empty">Môn này không có câu matching.</div>';
+  let h=`<div class="row" style="margin:6px 0;justify-content:space-between"><h1>📎 Câu ghép cặp (${ms.length})</h1><button class="btn sec" onclick="backToStart()">← Về menu</button></div><div class="sub" style="margin-bottom:8px">Các câu "Match X to Y" — xem đề, các phương án ánh xạ và đáp án đúng.</div>`;
+  if(!ms.length)h+='<div class="hist-empty">Môn này không có câu ghép cặp.</div>';
   ms.forEach((q,i)=>{h+=`<div class="card"><div class="qh"><span class="qnum">${i+1}</span><span class="badge">${esc(q.src)}</span></div><p class="stem">${formatQStem(q.q)}</p>`;
     const ci=correctIdxOf(q);
     q.o.forEach((o,i)=>{const right=ci.indexOf(i)>=0;h+=`<div class="opt${right?' correct':''}"><span class="olet">${String.fromCharCode(65+i)}</span><span class="otext">${esc(stripPrefix(o))}</span>${right?'<span class="mk">✔ đúng</span>':''}</div>`});
@@ -2637,11 +2794,11 @@ function mxResult(){const S=mxScore(),pct=pctOf(S.s,S.t),rc=pct>=50?'var(--green
     return `<div class="modbar"><span class="mlabel">${MX_T[t]}</span><div class="barwrap"><div class="bar" style="width:${p}%;background:${p>=70?'var(--green)':p>=40?'var(--amber)':'var(--red)'}"></div></div><span>${v[0]}/${v[1]}</span></div>`}).join('');
   const G=SESSION.map(it=>it.g||mxGrade(it)),cnt={all:G.length,wrong:G.filter(g=>g.ans&&g.pts<g.max).length,blank:G.filter(g=>!g.ans).length};
   let h=`<div class="card" style="text-align:center"><div class="ring" style="--v:${pct};--rc:${rc}"><div class="in"><div class="result-score" style="color:${rc}">${S.s}/${S.t}</div><div style="color:${rc};font-weight:700">${pct}%</div></div></div>`+
-    `<div class="sub">📝 Kiểm tra tổng hợp · ⏱ ${Math.floor(sec/60)}m${sec%60}s${MXS.best>=5?' · 🔥 chuỗi dài nhất '+MXS.best:''} · chỉ trắc nghiệm và tự gõ được tính vào tiến độ</div>`+
+    `<div class="sub">📝 Kiểm tra tổng hợp · ⏱ ${Math.floor(sec/60)}m${sec%60}s${MXS.best>=5?' · 🔥 chuỗi dài nhất '+MXS.best:''} · điểm tính theo ý (mỗi ý của khối Ghép 1 điểm) · chỉ trắc nghiệm và tự gõ được tính vào tiến độ</div>`+
     `<div class="modbars" style="margin-top:10px">${bars}</div>`+
     '<div class="row no-print" style="justify-content:center;margin-top:12px"><button type="button" class="btn" onclick="mxRetake()">🔁 Làm lại cùng đề</button>'+
     '<button type="button" class="btn sec" onclick="startTest()">🆕 Tạo đề mới</button>'+
-    (wr.length?`<button type="button" class="btn sec" onclick="lsStartIds('step',mxWrongIds())">👣 Học các câu sai (${wr.length})</button>`:'')+
+    (wr.length?`<button type="button" class="btn sec" onclick="lsStartIds('step',mxWrongIds())">👣 Học lại ${wr.length} câu chưa đúng</button>`:'')+
     '<button type="button" class="btn sec" onclick="window.print()">🖨 In</button><button type="button" class="btn sec" onclick="exitTest()">← Về menu</button></div></div>'+
     '<div class="chips no-print" role="group" aria-label="Lọc câu" style="margin:8px 0">'+[['all','Tất cả'],['wrong','Chỉ sai'],['blank','Chưa làm']].map(([k,l])=>
       `<button type="button" class="chip${MXF===k?' on':''}" data-fk="f-${k}" aria-pressed="${MXF===k}" onclick="MXF='${k}';mxRender()">${l} (${cnt[k]})</button>`).join('')+'</div>';
@@ -2698,12 +2855,12 @@ function fcSwipe(e){if(FCX==null||FC.how!=='sort'||!FLIPPED||!e.changedTouches)r
   if(Math.abs(dx)>60){e.preventDefault();fcSort(dx>0)}}
 function fcControls(){
   if(FC.how==='sort')return `<div class="fc-count" aria-live="polite">✓ Đã thuộc <b>${FC.know.length}</b> · ✗ Chưa thuộc <b>${FC.learn.length}</b> · Thẻ ${IDX+1}/${SESSION.length}</div>`+
-    (FLIPPED?'<div class="fc-sort"><button type="button" class="btn sec" data-fk="fl" onclick="fcSort(false)">✗ Chưa thuộc (←)</button><button type="button" class="btn" data-fk="fk" onclick="fcSort(true)">✓ Đã thuộc (→)</button></div>'
+    (FLIPPED?'<div class="fc-sort"><button type="button" class="btn sec" data-fk="fl" onclick="fcSort(false)">✗ Chưa thuộc<span class="kbd-only"> (←)</span></button><button type="button" class="btn" data-fk="fk" onclick="fcSort(true)">✓ Đã thuộc<span class="kbd-only"> (→)</span></button></div>'
             :'<div class="sub" style="text-align:center;margin-top:10px">Lật thẻ rồi tự xếp: ← chưa thuộc · → đã thuộc</div>')+
     `<div class="navbtns"><button type="button" class="btn sec" onclick="fcUndo()" ${FC.undo.length?'':'disabled'}>↶ Hoàn tác</button></div>`;
   if(FC.how==='rate')return `<div class="fc-count">Thẻ ${IDX+1}/${SESSION.length}</div>`+(FLIPPED?'<div class="fc-rate">'+[[1,'Lại','danger'],[2,'Khó','sec'],[3,'Được',''],[4,'Dễ','']].map(([n,l,c])=>
-      `<button type="button" class="btn${c?' '+c:''}" data-fk="r${n}" onclick="fcRate(${n})">${l} (${n})</button>`).join('')+'</div><div class="sub" style="text-align:center;margin-top:6px">Lại: hỏi lại sau 3 thẻ · Khó: mai · Được: theo lịch · Dễ: giãn thêm 1 bậc</div>'
-    :'<div class="sub" style="text-align:center;margin-top:10px">Lật thẻ (Space) rồi tự chấm mức nhớ</div>');
+      `<button type="button" class="btn${c?' '+c:''}" data-fk="r${n}" onclick="fcRate(${n})">${l}<span class="kbd-only"> (${n})</span></button>`).join('')+'</div><div class="sub" style="text-align:center;margin-top:6px">Lại: hỏi lại sau 3 thẻ · Khó: mai · Được: theo lịch · Dễ: giãn thêm 1 bậc</div>'
+    :'<div class="sub" style="text-align:center;margin-top:10px">Lật thẻ<span class="kbd-only"> (Space)</span> rồi tự chấm mức nhớ</div>');
   return `<div class="navbtns"><button type="button" class="btn sec" onclick="go(-1)" ${IDX===0?'disabled':''}>← Trước</button>`+
     `<button type="button" class="btn sec" data-fk="auto" aria-pressed="${!!FC.auto}" onclick="fcAuto()">${FC.auto?'⏸ Dừng':'▶ Tự chạy'}</button>`+
     `<button type="button" class="btn" onclick="go(1)" ${IDX===SESSION.length-1?'disabled':''}>Sau →</button></div>`}
@@ -2786,8 +2943,643 @@ function nmSelfTest(){const R=[],ok=(c,m)=>R.push((c?'PASS ':'FAIL ')+m),save=LS
 if(qsParam('selftest')!==null)setTimeout(nmSelfTest,0);
 var NM_ON=true;renderModeCounts(examsFor(curSubject()));
 /* MODES-JS-END */
-function openShortcutModal(){el('shortcutModal').style.display='flex'}
-function closeShortcutModal(e){if(!e||e.target.id==='shortcutModal'||e.target.tagName==='BUTTON')el('shortcutModal').style.display='none'}
+/* MODES2-JS-BEGIN */
+/* ===== study methods, part 2 (owner 19/11: "làm đủ cách học tập" · "không cần trò chơi, cần cách học khác như kiểu
+   flashcard" · "tìm thêm các dạng học khác, đảm bảo các chức năng gốc k mất, k trùng lặp"; spec modes2-spec.md).
+   New tiles (group "Đọc · nghe · nhớ lại"): 📋 Danh sách câu, 🎧 Nghe ôn, 💭 Nhớ tự do, ⏳ Sắp xếp mốc thời gian (only
+   where the bank has ≥8 clean dated events). Inside existing modes: 🔤 Nghe – viết (✍️ Gõ đáp án), and in 🎴 Flashcard
+   "Đáp án trước", "Chỉ câu đã đánh dấu", 🔊 read-aloud (also during ▶ Tự chạy), the Leitner boxes of ⏰ Chấm mức nhớ,
+   and the ways 🔲 Điền khuyết · 🔀 Dễ nhầm · 🔤 Thuật ngữ · 💬 Tự giải thích. 📅 Lộ trình ôn thi replaces the fixed daily
+   goal of the progress line when an exam date is set.
+   Progress: nothing here writes, except ⏰ Chấm mức nhớ on one box (fcRate, as before) and the 📅 "Học hôm nay" session
+   (an ordinary 🧠 Học thông minh test). Nghe – viết hears the answer first (a peek): no record, no history.
+   This block runs after the MODES block and only EXTENDS it: globals are wrapped (m2Wrap), never edited, and the tiles
+   are added from here, so modes_patch.py / design_patch.py can be re-run in any order. ===== */
+function m2Wrap(n,f){const o=window[n];if(typeof o!=='function'){try{console.warn('modes2: '+n+' missing')}catch(e){}return}
+  window[n]=function(){return f.call(this,o,arguments)}}
+function escA(s){return esc(s).replace(/"/g,'&quot;')}
+Object.entries({wAsk:'read',lnOpt:0,lnEx:1,lnGap:4,lnRate:1,fcBook:0,fcSay:0,fcBox:0,fcTdir:'tm',lvF:'all',lvView:'full',frTopic:'',frMin:0}).forEach(([k,v])=>{if(UI[k]===undefined)UI[k]=v});
+UI.lnGap=Math.max(2,Math.min(10,UI.lnGap|0||4));if([.75,1,1.25,1.5].indexOf(+UI.lnRate)<0)UI.lnRate=1;UI.fcBox=Math.max(0,Math.min(5,UI.fcBox|0));
+if(['flip','sort','rate','cloze','pair','term','why'].indexOf(UI.fcHow)<0)UI.fcHow='flip';   // a way dropped since (🃏, 📦) falls back to Lật xem
+const M2_MODES=['list','listen','recall','order'];
+NEWMODES.push(...M2_MODES);
+Object.assign(MODELABEL,{list:'Danh sách câu',listen:'Nghe ôn',recall:'Nhớ tự do',order:'Sắp xếp mốc thời gian'});
+(function(){const g=document.querySelector('.mgroups');if(!g||g.querySelector('[data-mode="list"]'))return;
+  const t=(m,ic,b)=>`<button type="button" class="mode" data-mode="${m}" aria-pressed="false" onclick="pickMode('${m}',1)"><span class="mtop"><span class="ic" aria-hidden="true">${ic}</span></span><span class="mt"><b>${b}</b></span></button>`;
+  g.insertAdjacentHTML('beforeend','<section class="mgroup wide" aria-label="Đọc, nghe, nhớ lại"><h2 class="mg-h">Đọc · nghe · nhớ lại</h2><div class="mlist">'+
+    t('list','📋','Danh sách câu')+t('listen','🎧','Nghe ôn')+t('recall','💭','Nhớ tự do')+t('order','⏳','Sắp xếp mốc thời gian')+'</div></section>');
+  const s=document.querySelector('.sumbar');if(s&&!el('plBox'))s.insertAdjacentHTML('afterend','<div id="plBox"></div>')})();
+(function(){const f=()=>{const g=document.querySelector('#shortcutModal .shortcut-grid');if(!g||g.querySelector('.m2-sc'))return;
+    const last=[...g.children].find(x=>/\?/.test(x.textContent)&&x.querySelector('kbd'));if(!last)return;
+    last.insertAdjacentHTML('beforebegin','<div class="sc-item m2-sc"><div><kbd>Space</kbd> <kbd>←</kbd> <kbd>→</kbd></div><span>Nghe ôn: phát / tạm dừng · câu trước / sau</span></div>'+
+      '<div class="sc-item m2-sc"><div><kbd>←</kbd> <kbd>→</kbd></div><span>Flashcard Điền khuyết, Dễ nhầm, Thuật ngữ, Tự giải thích: Chưa nhớ / Nhớ</span></div>')};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',f);else f()})();
+
+/* ---- text helpers shared by the speech, the list and the cards ---- */
+const FX_LANG={};
+/* the subject's language: Vietnamese when ≥30% of its stems carry Vietnamese letters */
+function subjLang(){const s=curSubject();if(FX_LANG[s])return FX_LANG[s];const L=scopeQuestions();let v=0;L.forEach(x=>{if(NT_VI.test(x.q||''))v++});
+  return FX_LANG[s]=L.length&&v/L.length>=.3?'vi':'en'}
+function langOf(s){return subjLang()==='vi'||NT_VI.test(s)?'vi':'en'}
+/* "[EN] …\n\n[VI] …": the part in the wanted language, else the unmarked one, else the first */
+function exPick(ex,lang){const P=exParts(ex);if(!P.length)return '';const p=P.find(x=>x[0]===lang.toUpperCase())||P.find(x=>!x[0])||P[0];return p[1]}
+/* the key as words to read or show without its options: a reference key ("Tất cả…", "Cả A và B") lists what it covers */
+function keyTexts(q){const o=q.o||[],ci=correctIdxOf(q),I=qinfo(q),tx=i=>clean(stripPrefix(o[i]));
+  if(ci.length===1&&I.truth&&I.plain.length){const k=refKind(o,ci[0]);
+    if(k&&(k.k==='all'||k.k==='list')){const ts=I.plain.filter(i=>I.truth[i]).map(tx);if(ts.length)return [tx(ci[0])+': '+ts.join('; ')]}}
+  return ci.map(tx)}
+/* text for a voice: blanks become a pause; abbreviations of the Vietnamese subjects are read out in full */
+function spoken(s,q){s=String(s==null?'':s).replace(/_{2,}|\.{4,}/g,' … ').replace(/\s+/g,' ').trim();const subj=(q&&q.subject)||curSubject();
+  if(!ABBR_SUBJ.has(subj)||/gọi tắt|viết tắt/i.test(s)||(q&&ABBR_HIDE.has(q.id)))return s;
+  return s.replace(ABBR_TOK,(m,pre,tok)=>{const x=tok.split(/[\/\-]/).map(k=>abbrOf(k,subj));return x.every(Boolean)?pre+x.join(' '):m})}
+/* content words, folded (stop-words dropped before folding, so "tư bản" keeps "tu") — free recall and self-explanation */
+const FX_VSTOP=new Set('và của là các những một này thì mà trong với cho được có không đã sẽ để từ theo về khi ra vào bị do nên cũng như đến hay hoặc tại vì bởi trên dưới sau trước giữa qua đó rằng nhất lại phải chỉ việc sự'.split(' '));
+function fxTok(s){return String(s==null?'':s).normalize('NFC').toLowerCase().split(/[^\p{L}\p{N}]+/u).filter(w=>w.length>=2&&!FX_VSTOP.has(w)&&!(/^[a-z]+$/.test(w)&&STOPW.has(w))).map(tFold)}
+
+/* ---- speech (Web Speech API): one queue, cut into short pieces (Chrome stops a long utterance after ~15 s) ---- */
+const TTS=('speechSynthesis' in window)&&typeof SpeechSynthesisUtterance!=='undefined'?window.speechSynthesis:null;
+let TTS_TOK=0,TTS_U=null,TTS_T=null,TTS_LOADED=false;
+function ttsVoicesAll(){try{return TTS?TTS.getVoices()||[]:[]}catch(e){return []}}
+function vLang(v){return String(v.lang||'').toLowerCase().replace('_','-')}
+function voiceRank(v,lang){return (vLang(v)===(lang==='vi'?'vi-vn':'en-us')?4:0)+(/natural|neural|online/i.test(v.name)?3:0)+(/google/i.test(v.name)?2:0)+(v.default?1:0)}
+function ttsVoices(lang,all){return (all||ttsVoicesAll()).filter(v=>vLang(v).split('-')[0]===lang).sort((a,b)=>voiceRank(b,lang)-voiceRank(a,lang))}
+function ttsVoice(lang){const vs=ttsVoices(lang);return vs.find(v=>v.voiceURI===UI['v_'+lang])||vs[0]||null}
+function ttsReady(){return !!TTS&&ttsVoicesAll().length>0}
+function ttsChunks(s,max){max=max||180;const out=[];
+  String(s==null?'':s).replace(/\s+/g,' ').trim().replace(/([.!?;:…])\s+/g,'$1\u0001').split('\u0001').forEach(p=>{
+    while(p.length>max){let k=p.lastIndexOf(', ',max);if(k<max/3)k=p.lastIndexOf(' ',max);if(k<1)k=max-1;out.push(p.slice(0,k+1).trim());p=p.slice(k+1).trim()}
+    if(p)out.push(p)});return out}
+function ttsStop(){TTS_TOK++;clearTimeout(TTS_T);if(TTS)try{TTS.cancel()}catch(e){}}
+/* done() runs once, after the last piece; ttsStop() (or a newer ttsSay) drops it */
+function ttsSay(text,lang,rate,done){ttsStop();const tok=TTS_TOK,parts=ttsChunks(text);let i=0;rate=rate||1;
+  if(!TTS||!parts.length){if(done)setTimeout(()=>{if(tok===TTS_TOK)done()},0);return}
+  const next=()=>{clearTimeout(TTS_T);if(tok!==TTS_TOK)return;if(i>=parts.length){if(done)done();return}
+    const p=parts[i++],u=new SpeechSynthesisUtterance(p),v=ttsVoice(lang);let fired=false;const go=()=>{if(!fired){fired=true;next()}};
+    try{if(v)u.voice=v}catch(e){}u.lang=v?v.lang:(lang==='vi'?'vi-VN':'en-US');u.rate=rate;u.onend=u.onerror=()=>{if(tok===TTS_TOK)setTimeout(go,0)};
+    TTS_U=u;   // a live reference: Chrome loses the end event of an utterance it garbage-collected
+    TTS_T=setTimeout(go,(p.length/7/rate+5)*1000);   // a voice that never sends its end event must not stall the queue
+    try{TTS.speak(u)}catch(e){go()}};
+  setTimeout(next,60)}   // a speak() right after cancel() is dropped by some Chrome builds
+function ttsTry(lang){ttsSay(lang==='vi'?'Xin chào, đây là giọng đọc ôn bài.':'Hello, this is the study voice.',lang,UI.lnRate)}
+function ttsMissing(lang){const vn=lang==='vi'?'tiếng Việt':'tiếng Anh';
+  return `<div class="m2-warn" role="note">🔇 Máy này chưa có giọng đọc <b>${vn}</b>${ttsVoicesAll().length?' (máy sẽ đọc bằng giọng mặc định, có thể sai dấu)':''}. Cách thêm:<br>`+
+    `• <b>Windows</b>: Cài đặt → Thời gian và ngôn ngữ → Giọng nói → Thêm giọng nói → ${vn}, rồi mở lại trình duyệt. Trình duyệt <b>Edge</b> có sẵn giọng ${vn} tự nhiên (cần mạng).<br>`+
+    `• <b>Android</b>: cài hoặc cập nhật «Dịch vụ lời nói của Google» (Google TTS), rồi Cài đặt → Hỗ trợ tiếp cận → Chuyển văn bản thành giọng nói → tải giọng ${vn}.<br>`+
+    `• <b>iPhone, iPad</b>: Cài đặt → Trợ năng → Nội dung được đọc → Giọng nói → ${vn}.</div>`}
+function ttsBlock(lang){if(!TTS)return '<div class="m2-warn" role="note">🔇 Trình duyệt này không đọc thành tiếng được (không có Web Speech). Hãy mở trang bằng Chrome, Edge hoặc Safari bản mới.</div>';
+  if(!ttsVoicesAll().length&&!TTS_LOADED)return '<div class="sub">Đang tải danh sách giọng đọc…</div>';
+  const vs=ttsVoices(lang),cur=ttsVoice(lang);if(!vs.length)return ttsMissing(lang);
+  return `<div class="field"><label for="m2Voice">Giọng đọc ${lang==='vi'?'tiếng Việt':'tiếng Anh'}</label><div class="m2-vrow"><select id="m2Voice" onchange="uiSet('v_${lang}',this.value)">`+
+    vs.map(v=>`<option value="${escA(v.voiceURI)}"${v===cur?' selected':''}>${esc(v.name)}</option>`).join('')+
+    `</select><button type="button" class="btn sec" onclick="ttsTry('${lang}')">🔊 Nghe thử</button></div></div>`}
+if(TTS){const vc=()=>{TTS_LOADED=true;
+    if(onStartScreen()&&(MODE==='listen'||(MODE==='write'&&UI.wAsk==='spell'))){const a=document.activeElement,id=a&&a.id;pickMode(MODE);if(id&&el(id))el(id).focus()}};
+  try{TTS.addEventListener('voiceschanged',vc)}catch(e){TTS.onvoiceschanged=vc}
+  if(ttsVoicesAll().length)TTS_LOADED=true;else setTimeout(()=>{if(!TTS_LOADED)vc()},2500)}
+addEventListener('pagehide',()=>ttsStop());
+
+/* ---- hooks into the start screen and the test screen ---- */
+m2Wrap('newCfg',function(o,a){const m=a[0],cfg=a[1];
+  if(M2_MODES.indexOf(m)>=0){SRC_MEMO={};try{return m==='list'?lvCfg(cfg):m==='listen'?lnCfg(cfg):m==='recall'?frCfg(cfg):odCfg(cfg)}finally{SRC_MEMO=null}}
+  const dis=o.apply(this,a);return m==='write'?spCfg(cfg,dis):dis});
+m2Wrap('noTimer',function(o,a){return M2_MODES.indexOf(a[0])>=0||o.apply(this,a)});
+m2Wrap('startLabel',function(o,a){const L={list:'Mở danh sách',listen:'Bắt đầu nghe',recall:'Bắt đầu viết',order:'Bắt đầu xếp'}[a[0]];return L?'<span aria-hidden="true">▶</span> '+L:o.apply(this,a)});
+m2Wrap('nmSub',function(o,a){const t=o.apply(this,a);return MODE==='write'&&UI.wAsk==='spell'?t.replace('✍️ Gõ đáp án','🔤 Nghe – viết'):t});
+m2Wrap('updateStartSub',function(o,a){const r=o.apply(this,a),s=el('startSub');if(!s)return r;const i=el('numQ'),n=i?Math.max(1,parseInt(i.value)||0):0;let t=null;
+  if(MODE==='list')t=`📋 Danh sách câu · <b>${poolRows('all').length}</b> câu`;
+  else if(MODE==='listen')t=`🎧 Nghe ôn · ${SRC_LBL[UI.src]} · <b>${n}</b> câu`;
+  else if(MODE==='recall'){const T=frTopics().find(x=>x.k===UI.frTopic);t=T?`💭 Nhớ tự do · ${esc(T.l)} · <b>${T.ids.length}</b> ý`:'💭 Chưa có chủ đề'}
+  else if(MODE==='order')t=`⏳ Sắp xếp mốc thời gian · <b>${odPool().length}</b> sự kiện`;
+  else if(MODE==='flash'&&fxOwn(UI.fcHow))t=`🎴 Flashcard · ${FX_HOW[UI.fcHow]} · <b>${n}</b> ${UI.fcHow==='pair'?'cặp':'thẻ'}`;
+  else if(MODE==='flash')s.innerHTML+=(UI.fcHow==='rate'&&UI.fcBox?' · hộp '+UI.fcBox:'')+(UI.fcFront==='ans'?' · đáp án trước':'')+(UI.fcBook?' · chỉ câu 🔖':'');
+  if(t!==null){if(el('hideKnown').checked)t+=' · ẩn ★';s.innerHTML=t;updateOptsSum()}return r});
+m2Wrap('pickMode',function(o,a){const r=o.apply(this,a),b=el('startBtn');
+  if(MODE==='flash'&&b){const h=UI.fcHow;if(fxOwn(h))b.disabled=!fxPool(h).length;else if(UI.fcBook&&!poolRows('flash').length)b.disabled=true}
+  return r});
+m2Wrap('renderModeCounts',function(o,a){const r=o.apply(this,a);odTile();return r});
+m2Wrap('startTest',function(o,a){ttsStop();
+  if(MODE==='list'){lvStart();return}if(MODE==='listen'){lnStart();return}if(MODE==='recall'){frStart();return}if(MODE==='order'){odStart();return}
+  return o.apply(this,a)});
+m2Wrap('exitTest',function(o,a){if(MODE==='recall'&&FR&&FR.ph==='write'&&FR.text.trim()&&!confirm('Thoát? Phần bạn đang viết sẽ mất.'))return;
+  ttsStop();FX_SAY++;FX_SPK=0;
+  if(M2_MODES.indexOf(MODE)>=0){lnHalt();lvHalt();clearInterval(FR_T);FR=null;OD=null;nmExit();return}
+  return o.apply(this,a)});
+m2Wrap('newKey',function(o,a){const e=a[0];
+  if(MODE==='list'||MODE==='recall'||MODE==='order')return true;   // pages of buttons and text: Tab / Enter, nothing to pick by number
+  if(MODE==='listen')return lnKey(e);
+  if(isFlash()&&fxOwn(FC.how)){if(FC.auto)fcAuto(false);return FC.end?true:fxKey(e)}
+  return o.apply(this,a)});
+
+/* ==== 📋 Danh sách câu: every question of the subject, key marked, explanation; 30 at a time; read only ==== */
+let LV=null,LV_IO=null;
+const LV_F={all:'Tất cả',wrong:'Câu sai',book:'Đã đánh dấu',new:'Chưa làm',unk:'Chưa thuộc'};
+const LV_TX=new Map();
+function lvRows(f){const all=poolRows('all');if(f==='new')return all.filter(x=>!qrec(x.id));if(f==='unk')return all.filter(x=>stageOf(qrec(x.id))<3);
+  if(f==='wrong'||f==='book'){const s=new Set(poolRows(f).map(x=>x.dk));return all.filter(x=>s.has(x.dk))}return all}
+function lvText(q){let t=LV_TX.get(q.id);if(t===undefined){t=tFold([q.q].concat(q.o||[],[q.ex||'']).join(' '));LV_TX.set(q.id,t)}return t}
+function lvCfg(cfg){const n=poolRows('all').length;
+  cfg.innerHTML=cfgDesc('📋 Đọc lần lượt mọi câu của môn, kèm đáp án đúng và giải thích, 30 câu một lượt. Lọc theo câu sai, đã đánh dấu, chưa làm, chưa thuộc hoặc theo chữ; bản <b>Đề cương</b> chỉ giữ đề, đáp án và giải thích, in được. Chỉ để đọc, không ảnh hưởng tiến độ.')+
+    (n?'':cfgDesc('★ Mọi câu đang bị ẩn — tắt “Ẩn câu ★” trong ⚙️ Tùy chọn để xem.'));return !n}
+function lvStart(){MODE='list';LV={q:'',rows:[],n:0};if(!LV_F[UI.lvF])UI.lvF='all';nmEnter('📋 Danh sách câu');lvRender()}
+function lvHalt(){if(LV_IO){LV_IO.disconnect();LV_IO=null}clearTimeout(lvType.t);LV=null}
+function lvRender(){if(!LV)return;const ch=(fk,on,fn,l)=>`<button type="button" class="chip${on?' on':''}" data-fk="${fk}" aria-pressed="${on}" onclick="${fn}">${l}</button>`,dc=UI.lvView==='dc';
+  setTest(`<div class="card lv-bar no-print"><div class="chips" role="group" aria-label="Lọc câu">`+Object.keys(LV_F).map(f=>ch('lf-'+f,UI.lvF===f,`uiSet('lvF','${f}');lvRender()`,LV_F[f]+' ('+lvRows(f).length+')')).join('')+'</div>'+
+    `<div class="lv-row"><div class="search-wrap"><span class="search-ic" aria-hidden="true">🔍</span><input type="text" id="lvQ" value="${escA(LV.q)}" placeholder="Lọc theo chữ trong đề, phương án, giải thích" aria-label="Lọc theo chữ" autocomplete="off" spellcheck="false" enterkeyhint="search" oninput="lvType(this.value)"></div>`+
+    `<div class="chips" role="group" aria-label="Cách xem">${ch('lv-full',!dc,"uiSet('lvView','full');lvRender()",'Đầy đủ')}${ch('lv-dc',dc,"uiSet('lvView','dc');lvRender()",'Đề cương')}</div>`+
+    `<button type="button" class="btn sec" data-fk="lv-print" onclick="lvPrint()">🖨 In</button></div><div class="sub" id="lvCount" aria-live="polite"></div></div>`+
+    `<h2 class="lv-ptitle">${dc?'Đề cương':'Danh sách câu'} · ${esc(curSubject()==='__all__'?'Tất cả môn':curSubject())} · ${LV_F[UI.lvF]}</h2><div id="lvList"${dc?' class="dc-list"':''}></div><div id="lvEnd" class="no-print"></div>`);
+  lvFilter();lvMore(true);
+  if(LV_IO)LV_IO.disconnect();LV_IO='IntersectionObserver' in window?new IntersectionObserver(es=>{if(es.some(x=>x.isIntersecting))lvMore()},{rootMargin:'600px 0px'}):null;
+  if(LV_IO)LV_IO.observe(el('lvEnd'))}
+function lvType(v){if(!LV)return;LV.q=v;clearTimeout(lvType.t);lvType.t=setTimeout(()=>{if(!LV)return;lvFilter();lvMore(true)},200)}
+function lvFilter(){const t=tFold(LV.q.trim()),bi=bankIndex();LV.rows=lvRows(UI.lvF).filter(x=>!t||lvText(bi[x.id]).indexOf(t)>=0)}
+function lvMore(reset,all){if(!LV||MODE!=='list')return;const box=el('lvList'),end=el('lvEnd');if(!box||!end)return;
+  const a=document.activeElement,keep=!!a&&a.dataset&&a.dataset.fk==='lv-more';
+  if(reset){box.innerHTML='';LV.n=0}else if(LV.n>=LV.rows.length)return;
+  const k=LV.n,to=all?LV.rows.length:Math.min(LV.rows.length,k+30),left=LV.rows.length-to;
+  box.insertAdjacentHTML('beforeend',LV.rows.slice(k,to).map((x,j)=>lvItem(x,k+j)).join(''));LV.n=to;
+  end.innerHTML=left?`<button type="button" class="btn sec" data-fk="lv-more" onclick="lvMore()">Tải thêm ${Math.min(30,left)} câu (còn ${left})</button>`
+    :LV.rows.length?'<div class="sub">— Hết danh sách —</div>':'<div class="hist-empty">Không có câu nào khớp.</div>';
+  const c=el('lvCount');if(c)c.textContent=LV.rows.length+' câu'+(LV.q.trim()?' khớp “'+LV.q.trim()+'”':'')+(left?' · đang hiện '+to:'');
+  el('prog').textContent=to+'/'+LV.rows.length;railSync();
+  if(keep){const b=end.querySelector('button');if(b)b.focus({preventScroll:true})}
+  if(LV_IO&&left&&!all){LV_IO.unobserve(end);LV_IO.observe(end)}}   // still in view after a short page: fire again
+function lvItem(x,k){const q=bankIndex()[x.id],AB=abbrFor(q),ci=correctIdxOf(q),sib=siblings(q.id),
+    tags=`<span class="badge">${['Chưa làm','Đang học','Đã nhớ','Vững'][stageOf(qrec(q.id))]}</span>`+(sib.some(s=>WRONG.has(s))?'<span class="badge hot">✗ câu sai</span>':'')+(sib.some(s=>BOOK.has(s))?'<span class="badge">🔖</span>':'');
+  if(UI.lvView==='dc'){const ex=exPick(q.ex,subjLang());
+    return `<div class="dc-item"><p class="dc-q"><b>${k+1}.</b> ${AB(formatQStem(q.q),1)}</p><p class="dc-a"><span aria-hidden="true">→</span> ${keyTexts(q).map(t=>AB(esc(t),0)).join(' · ')}</p>${ex?`<p class="dc-ex">${AB(esc(ex),0)}</p>`:''}</div>`}
+  const opts=(q.o||[]).map((o,i)=>{const r=ci.indexOf(i)>=0;return `<div class="opt locked${r?' correct':''}"><span class="olet">${String.fromCharCode(65+i)}</span><span class="otext">${AB(esc(stripPrefix(o)),1)}</span>${r?'<span class="mk">✔ đáp án đúng</span>':''}</div>`}).join('');
+  return withAbx(`<div class="card lv-item"><div class="qh"><span class="qnum">${k+1}</span><span class="badge qsrc">${esc(q.src)}${q.n?' · Câu '+q.n:''}</span>${tags}</div>`+
+    `<div class="qgrid"><div class="qmain"><p class="stem">${AB(formatQStem(q.q),1)}</p>${opts}</div><!--ABX--></div>${preNotesHTML(q)}${answerCard(q,keyRowsOf(q),vfBadge(q.vf),y=>AB(y,0))}</div>`,AB)}
+function lvPrint(){lvMore(false,true);window.print()}
+addEventListener('beforeprint',()=>{if(MODE==='list'&&LV&&onTestScreen())lvMore(false,true)});
+
+/* ==== 🎧 Nghe ôn: stem (+ options) → N s to think → the key (+ explanation) → next; nothing is written ==== */
+let LN=null;
+function lnCfg(cfg){const n=srcRows(UI.src).length;
+  cfg.innerHTML=cfgDesc('🎧 Máy đọc câu hỏi, chờ vài giây để bạn tự nghĩ, rồi đọc đáp án đúng (và giải thích) và tự sang câu sau — nghe như podcast ôn bài. Không ảnh hưởng tiến độ.')+
+    ttsBlock(subjLang())+srcChips()+(n?numField('Số câu',Math.min(lastNumQ||20,n),n,[10,20,40]):cfgDesc('Nguồn này chưa có câu nào.'))+
+    uiSwitch('lnOpt','Đọc cả các phương án')+uiSwitch('lnEx','Đọc giải thích sau đáp án')+
+    `<div class="field"><label for="lnGap">Thời gian tự nghĩ trước khi nghe đáp án</label><select id="lnGap" onchange="uiSet('lnGap',+this.value)">`+
+    [2,3,4,5,6,7,8,9,10].map(s=>`<option value="${s}"${s===UI.lnGap?' selected':''}>${s} giây</option>`).join('')+'</select></div>'+lnRateChips();
+  return !n||!ttsReady()}
+function lnRateChips(){return '<div class="field"><span class="sub" style="margin:0">Tốc độ đọc</span><div class="chips" role="group" aria-label="Tốc độ đọc">'+
+  [.75,1,1.25,1.5].map(r=>`<button type="button" class="chip${UI.lnRate===r?' on':''}" data-fk="rt-${r}" aria-pressed="${UI.lnRate===r}" onclick="lnRateSet(${r})">${String(r).replace('.',',')}×</button>`).join('')+'</div></div>'}
+function lnRateSet(r){uiSet('lnRate',r);
+  if(MODE==='listen'&&LN&&onTestScreen()){if(LN.on&&!LN.end)lnGo();else lnRender()}   // the new speed from the piece being read
+  else if(onStartScreen())pickMode(MODE);
+  const b=document.querySelector('[data-fk="rt-'+r+'"]');if(b&&KB)b.focus()}
+function lnStart(){let rows=srcRows(UI.src);if(!rows.length){alert('Không có câu hỏi cho lựa chọn này.');return}if(isOn('shufQs'))rows=shuffle(rows);
+  const i=el('numQ'),n=Math.max(1,Math.min((i&&parseInt(i.value))||rows.length,rows.length));
+  LN={ids:rows.slice(0,n).map(x=>x.id),i:0,s:0,on:1,cd:0,end:0,tok:0};MODE='listen';nmEnter('🎧 Nghe ôn');lnGo()}
+function lnSegs(q){const st=clean(q.q),L=langOf(st),V=L==='vi',ks=keyTexts(q),S=[{k:'stem',text:spoken(st,q),lang:L}];
+  if(UI.lnOpt)S.push({k:'opts',text:(q.o||[]).map((o,i)=>String.fromCharCode(65+i)+'. '+clean(stripPrefix(o))).join('. '),lang:L});
+  S.push({k:'think',sec:UI.lnGap},{k:'ans',text:(V?(ks.length>1?'Các đáp án đúng: ':'Đáp án: '):(ks.length>1?'Correct answers: ':'Answer: '))+spoken(ks.join('; '),q),lang:L});
+  const ex=UI.lnEx?exPick(q.ex,L):'';if(ex){const l=langOf(ex);S.push({k:'ex',text:(l==='vi'?'Giải thích: ':'Explanation: ')+spoken(ex,q),lang:l})}
+  S.push({k:'gap',sec:1});return S}
+function lnGo(){if(!LN)return;clearInterval(LN.ti);ttsStop();if(LN.end){lnRender();return}
+  const q=bankIndex()[LN.ids[LN.i]],S=lnSegs(q);
+  if(LN.s>=S.length){if(LN.i<LN.ids.length-1){LN.i++;LN.s=0;lnGo()}else{LN.end=1;LN.on=0;lnRender()}return}
+  const g=S[LN.s],tok=++LN.tok,nx=()=>{if(LN&&LN.on&&LN.tok===tok){LN.s++;lnGo()}};
+  if(g.sec)LN.cd=g.sec;lnRender();if(!LN.on)return;
+  if(g.sec)LN.ti=setInterval(()=>{if(!LN||LN.tok!==tok)return;LN.cd--;const c=el('lnCd');if(c)c.textContent=LN.cd;if(LN.cd<=0){clearInterval(LN.ti);nx()}},1000);
+  else ttsSay(g.text,g.lang,UI.lnRate,nx)}
+function lnRender(){if(!LN)return;const N=LN.ids.length;el('prog').textContent=(LN.end?N:LN.i+1)+'/'+N;
+  if(LN.end){el('srcLabel').textContent='';syncTopbar();
+    setTest(`<div class="card" style="text-align:center"><div class="sub">🎧 Nghe ôn</div><div class="result-score">Đã nghe hết ${N} câu</div>`+
+      `<div class="row" style="justify-content:center;margin-top:12px"><button type="button" class="btn" data-fk="ln-again" onclick="lnAgain()">↺ Nghe lại từ đầu</button>`+
+      `<button type="button" class="btn sec" onclick="lnLearn()">👣 Học từng bước ${N} câu này</button><button type="button" class="btn sec" onclick="exitTest()">← Về menu</button></div></div>`);return}
+  const q=bankIndex()[LN.ids[LN.i]],S=lnSegs(q),g=S[Math.min(LN.s,S.length-1)],shown=LN.s>S.findIndex(x=>x.k==='think'),AB=abbrFor(q),ci=correctIdxOf(q),L=langOf(clean(q.q)),v=ttsVoice(L);
+  el('srcLabel').textContent=q.src+(q.n?' · Câu '+q.n:'');syncTopbar();
+  const what={stem:'🔊 Đang đọc câu hỏi',opts:'🔊 Đang đọc các phương án',think:'🤔 Tự nghĩ đáp án',ans:'🔊 Đang đọc đáp án',ex:'🔊 Đang đọc giải thích',gap:'⏭ Sắp sang câu sau'}[g.k];
+  const ans=UI.lnOpt?answerCard(q,keyRowsOf(q),vfBadge(q.vf),x=>AB(x,0)):answerCard(noLetters(q),keyTexts(q).map(t=>({L:'✓',text:t})),vfBadge(q.vf),x=>AB(x,0));
+  setTest(withAbx(`<div class="card ln-card${LN.on?' on-'+g.k:''}"><div class="qh"><span class="qnum">Câu ${LN.i+1}/${N}</span><span class="badge qsrc">${esc(q.src)}${q.n?' · Câu '+q.n:''}</span><span class="badge ln-st" role="status">${LN.on?what:'⏸ Đã tạm dừng'}</span></div>`+
+    `<div class="qgrid"><div class="qmain"><p class="stem ln-stem">${AB(formatQStem(q.q),1)}</p>`+
+    (UI.lnOpt?'<div class="ln-opts">'+(q.o||[]).map((o,i)=>`<div class="flash-opt${shown&&ci.indexOf(i)>=0?' correct':''}"><span class="olet">${String.fromCharCode(65+i)}</span><span class="otext">${AB(esc(stripPrefix(o)),1)}</span></div>`).join('')+'</div>':'')+
+    '</div><!--ABX--></div>'+(shown?ans:`<div class="ln-wait">${g.k==='think'&&LN.on?`🤔 Đáp án được đọc sau <b id="lnCd">${LN.cd}</b> giây`:'Đáp án hiện ra khi được đọc tới.'}</div>`)+
+    `<div class="ln-ctl"><button type="button" class="btn sec" data-fk="ln-prev" aria-label="Câu trước" title="Câu trước (←)" onclick="lnStep(-1)"${LN.i?'':' disabled'}>⏮</button>`+
+    `<button type="button" class="btn" data-fk="ln-play" onclick="lnToggle()">${LN.on?'⏸ Tạm dừng':'▶ Phát'}</button>`+
+    `<button type="button" class="btn sec" data-fk="ln-next" aria-label="Câu sau" title="Câu sau (→)" onclick="lnStep(1)">⏭</button></div>`+lnRateChips()+
+    `<div class="sub ln-voice">${!TTS?'🔇 Trình duyệt không đọc thành tiếng được.':v?'🔊 '+esc(v.name):'🔇 Chưa có giọng '+(L==='vi'?'tiếng Việt':'tiếng Anh')+' — xem hướng dẫn ở màn hình chọn chế độ.'}</div></div>`,AB))}
+function lnToggle(){if(!LN)return;if(LN.end){lnAgain();return}LN.on=LN.on?0:1;if(LN.on){lnGo();return}LN.tok++;clearInterval(LN.ti);ttsStop();lnRender()}
+function lnStep(d){if(!LN)return;if(d>0&&LN.i>=LN.ids.length-1&&!LN.end){LN.tok++;ttsStop();clearInterval(LN.ti);LN.end=1;LN.on=0;lnRender();return}
+  LN.i=Math.max(0,Math.min(LN.ids.length-1,LN.i+(LN.end&&d<0?0:d)));LN.s=0;LN.end=0;lnGo()}
+function lnAgain(){if(!LN)return;LN.i=0;LN.s=0;LN.end=0;LN.on=1;lnGo()}
+function lnLearn(){if(!LN)return;LN.tok++;LN.on=0;ttsStop();clearInterval(LN.ti);lsStartIds('step',LN.ids.slice());if(MODE==='step')LN=null;else lnRender()}
+function lnHalt(){if(LN){LN.tok++;clearInterval(LN.ti)}ttsStop();LN=null}
+function lnKey(e){const c=e.code;
+  if(c==='Space'||c==='KeyK'){e.preventDefault();lnToggle()}else if(c==='ArrowRight'||c==='KeyL'){e.preventDefault();lnStep(1)}else if(c==='ArrowLeft'||c==='KeyJ'){e.preventDefault();lnStep(-1)}
+  return true}
+
+/* ==== 🔤 Nghe – viết: a way of asking inside ✍️ Gõ đáp án (same pool, goOk). The answer is spoken, the learner types
+   it, missing letters are marked, each question must be right twice. A heard answer proves nothing: no record, no
+   history (m2Quiet), unlike a typed recall ==== */
+let SP_NEW=0,SP_KEY='';
+function spCfg(cfg,dis){const sp=UI.wAsk==='spell',d=cfg.querySelector('.cfg-desc'),s=lsLoad('write');
+  const row='<div class="field"><span class="sub" style="margin:0">Cách hỏi</span><div class="chips" role="group" aria-label="Cách hỏi">'+[['read','📖 Đọc câu hỏi'],['spell','🔤 Nghe đáp án rồi viết lại']].map(([k,l])=>
+    `<button type="button" class="chip${UI.wAsk===k?' on':''}" id="wa-${k}" aria-pressed="${UI.wAsk===k}" onclick="uiSet('wAsk','${k}');pickMode(MODE);el('wa-${k}').focus()">${l}</button>`).join('')+'</div></div>';
+  if(d){if(sp)d.innerHTML='🔤 Máy đọc to đáp án, bạn gõ lại cho đúng chính tả — chữ còn thiếu được tô màu. Mỗi câu phải viết đúng 2 lần. Vì đã nghe đáp án nên kiểu này không tính vào tiến độ.';
+    d.insertAdjacentHTML('afterend',row+(sp?ttsBlock(subjLang()):''))}
+  const rn=cfg.querySelector('.resume-note');if(s&&rn&&!!s.sp!==sp)rn.insertAdjacentHTML('beforeend',' <small>(phiên dở là kiểu '+(s.sp?'Nghe – viết':'Đọc câu hỏi')+')</small>');
+  return dis||(sp&&!s&&!ttsReady())}
+function spSay(slow){const it=LS&&LS.q[LS.i];if(!it)return;const k=qinfo(lsQ(it)).at;ttsSay(k,langOf(k),slow?Math.max(.5,UI.lnRate*.6):UI.lnRate)}
+/* the key with the letters the answer lacks marked (longest common subsequence, case ignored) */
+function spellDiff(inp,key){const A=[...String(inp).normalize('NFC').toLowerCase()].slice(0,400),K=[...String(key).normalize('NFC')],B=K.map(c=>c.toLowerCase()),n=A.length,m=B.length;
+  const D=Array.from({length:n+1},()=>new Uint16Array(m+1));
+  for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)D[i][j]=A[i]===B[j]?D[i+1][j+1]+1:Math.max(D[i+1][j],D[i][j+1]);
+  const hit=new Uint8Array(m);for(let i=0,j=0;i<n&&j<m;){if(A[i]===B[j]){hit[j]=1;i++;j++}else if(D[i+1][j]>=D[i][j+1])i++;else j++}
+  let h='',on=0;K.forEach((c,j)=>{const miss=!hit[j]&&!!c.trim();if(miss!==!!on){h+=miss?'<mark>':'</mark>';on=miss?1:0}h+=esc(c)});return h+(on?'</mark>':'')}
+function m2Quiet(f){const a=recordOne,b=bumpStreak,c=saveAttempt;recordOne=()=>null;bumpStreak=()=>{};saveAttempt=()=>{};try{return f()}finally{recordOne=a;bumpStreak=b;saveAttempt=c}}
+/* right once: one more ask at the end, until the question has been right twice */
+function spTwice(){if(!LS||!LS.sp||LS.fin)return false;const it=LS.q[LS.i],Q=LS.q;if(!it||!it.done||!it.res||!it.res.ok)return false;
+  if(Q.filter(x=>x.id===it.id&&x.done&&x.res&&x.res.ok).length>=2||Q.some(x=>x.id===it.id&&!x.done))return false;
+  const x=lsItem(it.id,'r',it.o,'type');x.rd=(it.rd||1)+1;Q.push(x);lsSave();return true}
+m2Wrap('lsBegin',function(o,a){SP_NEW=a[0]==='write'&&UI.wAsk==='spell'?1:0;try{return o.apply(this,a)}finally{SP_NEW=0}});
+m2Wrap('lsEnter',function(o,a){if(SP_NEW&&LS&&LS.sp===undefined){LS.sp=1;lsSave()}SP_KEY='';const r=o.apply(this,a);if(LS&&LS.sp)el('timer').textContent='🔤 Nghe – viết';return r});
+m2Wrap('lsGrade',function(o,a){if(!(LS&&LS.sp))return o.apply(this,a);const r=m2Quiet(()=>o.apply(this,a));if(spTwice())lsRender();return r});
+m2Wrap('lsOverride',function(o,a){if(!(LS&&LS.sp))return o.apply(this,a);const r=m2Quiet(()=>o.apply(this,a));if(spTwice())lsRender();return r});
+m2Wrap('lsFinish',function(o,a){return LS&&LS.sp?m2Quiet(()=>o.apply(this,a)):o.apply(this,a)});
+m2Wrap('lsEndView',function(o,a){if(!(LS&&LS.sp))return o.apply(this,a);const w=MODELABEL.write;MODELABEL.write='🔤 Nghe – viết';try{return o.apply(this,a)}finally{MODELABEL.write=w}});
+m2Wrap('lsRender',function(o,a){const r=o.apply(this,a);if(!LS||!LS.sp||LS.fin||LS.cpShow)return r;
+  const it=LS.q[LS.i],t=el('test'),st=t&&t.querySelector('.qmain .stem');if(!it||it.t!=='type'||!st)return r;const key=qinfo(lsQ(it)).at,v=ttsVoice(langOf(key));
+  st.insertAdjacentHTML('beforebegin',`<div class="sp-panel"><button type="button" class="btn" data-fk="sp-say" onclick="spSay(0)">🔊 Nghe lại</button><button type="button" class="btn sec" data-fk="sp-slow" onclick="spSay(1)">🐢 Đọc chậm</button>`+
+    (TTS&&v?'':`<span class="sub">🔇 Chưa có giọng ${langOf(key)==='vi'?'tiếng Việt':'tiếng Anh'} — xem hướng dẫn ở màn hình chọn chế độ.</span>`)+'</div><div class="ac-lbl">Câu hỏi</div>');
+  st.classList.add('sp-ctx');const i=el('lsIn');if(i)i.placeholder='Gõ lại đáp án vừa nghe rồi Enter';
+  if(it.done){const bx=t.querySelectorAll('.tcmp .tbox');if(bx[1])bx[1].innerHTML=spellDiff(it.res.tx||'',it.res.key||key)}
+  const k=LS.i+'|'+it.id+'|'+(it.rd||1);if(!it.done&&SP_KEY!==k){SP_KEY=k;spSay(0)}
+  return r});
+
+/* ==== 💭 Nhớ tự do: pick a topic (a chapter where the quotes carry one, else a paper in parts of ≤25), write what you
+   remember, then tick the topic's key facts your text covers (fuzzy, editable) and see the coverage. Nothing is written ==== */
+let FR=null,FR_T=null,FR_TOP=null;
+function frTopics(){const hd=hiddenDk(),key=curSubject()+'|'+(hd?hd.size:0);if(FR_TOP&&FR_TOP.k===key)return FR_TOP.v;const bi=bankIndex(),by=new Map(),ch=new Map(),T=[];
+  poolRows('all').forEach(x=>{const q=bi[x.id];if(isMatch(q)||!(q.o||[]).length||(q.o||[]).every(o=>NTF.test(stripPrefix(o).trim())))return;by.set(x.dk,q.id);   // "True" is no fact to recall
+    // chapter › section of the book quote that backs the key (a chapter alone holds up to 300 questions)
+    const l=(q.exq||[]).map(e=>e&&Array.isArray(e.loc)?e.loc.slice(0,2).map(clean).filter(Boolean).join(' › '):'').find(Boolean);if(l){let a=ch.get(l);if(!a)ch.set(l,a=[]);a.push(q.id)}});
+  if(new Set([...ch.keys()].map(l=>l.split(' › ')[0])).size>=2)[...ch.keys()].sort((a,b)=>a.localeCompare(b,'vi',{numeric:true})).forEach(l=>{const ids=ch.get(l),P=Math.ceil(ids.length/25);
+    for(let p=0;p<P;p++){const a=ids.slice(p*25,p*25+25);if(a.length>=3)T.push({k:'c:'+l+':'+p,l:l.replace(/\.pptx?\b/gi,'')+(P>1?` · phần ${p+1}/${P}`:''),ids:a})}});
+  examsFor(curSubject()).map((e,i)=>({e,i,m:examMeta(e)})).sort(examCmp).forEach(({e,m})=>{const ids=[...new Set(paperItems(e).map(x=>by.get(x.dk)).filter(Boolean))],P=Math.ceil(ids.length/25);
+    for(let p=0;p<P;p++){const a=ids.slice(p*25,p*25+25);if(a.length>=3)T.push({k:'e:'+e.name+':'+p,l:(m.short||e.name)+(P>1?` · câu ${p*25+1}–${p*25+a.length}`:''),ids:a})}});
+  FR_TOP={k:key,v:T};return T}
+function frHit(text,key){const K=[...new Set(fxTok(key))];if(!K.length)return false;const H=new Set(fxTok(text));if(K.some(w=>/\d/.test(w)&&!H.has(w)))return false;
+  const r=K.filter(w=>H.has(w)).length/K.length;return K.length<=2?r===1:r>=.6}
+function frCfg(cfg){const T=frTopics();if(!T.length){cfg.innerHTML=cfgDesc('💭 Môn này chưa có câu nào làm chủ đề được.');return true}
+  if(!T.some(t=>t.k===UI.frTopic))UI.frTopic=T[0].k;
+  const opt=t=>`<option value="${escA(t.k)}"${t.k===UI.frTopic?' selected':''}>${esc(t.l)} (${t.ids.length} ý)</option>`,ch=T.filter(t=>t.k[0]==='c'),ex=T.filter(t=>t.k[0]==='e');
+  cfg.innerHTML=cfgDesc('💭 Chọn một chủ đề rồi viết ra mọi điều bạn nhớ — định nghĩa, mốc, tên, ý chính — không xem tài liệu. Xong thì trang đối chiếu với các ý chính của chủ đề, tự đánh dấu ý bạn đã nêu (bạn sửa lại được) và cho tỉ lệ bao phủ. Không ảnh hưởng tiến độ.')+
+    `<div class="field"><label for="frTopic">Chủ đề</label><select id="frTopic" onchange="uiSet('frTopic',this.value);updateStartSub()">`+
+    (ch.length?`<optgroup label="Theo chương, mục (theo giáo trình)">${ch.map(opt).join('')}</optgroup>`:'')+`<optgroup label="Theo đề (mỗi phần tối đa 25 câu)">${ex.map(opt).join('')}</optgroup></select></div>`+
+    '<div class="field"><span class="sub" style="margin:0">Giới hạn thời gian</span><div class="chips" role="group" aria-label="Giới hạn thời gian">'+[0,3,5,10].map(m=>
+      `<button type="button" class="chip${(UI.frMin|0)===m?' on':''}" id="frm-${m}" aria-pressed="${(UI.frMin|0)===m}" onclick="uiSet('frMin',${m});pickMode(MODE);el('frm-${m}').focus()">${m?m+' phút':'Không giới hạn'}</button>`).join('')+'</div></div>';
+  return false}
+function frStart(){const T=frTopics(),t=T.find(x=>x.k===UI.frTopic)||T[0];if(!t){alert('Không có chủ đề.');return}
+  FR={t,text:'',ph:'write',t0:Date.now(),lim:(UI.frMin|0)*60};MODE='recall';nmEnter('💭 Nhớ tự do');frRender();frClock();clearInterval(FR_T);if(FR.lim)FR_T=setInterval(frClock,1000)}
+function frClock(){if(!FR||FR.ph!=='write'){clearInterval(FR_T);return}const s=Math.round((Date.now()-FR.t0)/1000);
+  if(!FR.lim){el('timer').textContent='💭 Nhớ tự do';return}const left=Math.max(0,FR.lim-s);el('timer').textContent=`⏱ ${Math.floor(left/60)}:${String(left%60).padStart(2,'0')}`;if(!left)frCheck()}
+function frWords(s){return (String(s).trim().match(/\S+/g)||[]).length}
+function frRender(){if(!FR)return;const t=FR.t,bi=bankIndex();el('srcLabel').textContent=t.l;
+  if(FR.ph==='write'){el('prog').textContent=t.ids.length+' ý';syncTopbar();
+    setTest(`<div class="card"><div class="qh"><span class="qnum">💭 ${esc(t.l)}</span><span class="badge">${t.ids.length} ý chính</span></div>`+
+      '<p class="sub" style="margin-top:0">Viết ra mọi điều bạn nhớ về chủ đề này: định nghĩa, mốc thời gian, tên, ý chính… Viết thoải mái, không cần đúng thứ tự.</p>'+
+      `<label class="ac-lbl" for="frIn">Bài viết của bạn</label><textarea class="tin fr-in" id="frIn" rows="10" spellcheck="false" oninput="FR.text=this.value;const w=el('frW');if(w)w.textContent=frWords(this.value)+' chữ'">${esc(FR.text)}</textarea>`+
+      `<div class="navbtns"><span class="sub" id="frW">${frWords(FR.text)} chữ</span><button type="button" class="btn" data-fk="fr-done" onclick="frCheck()">Xong — đối chiếu →</button></div></div>`);
+    const i=el('frIn');if(i&&!KB)i.focus({preventScroll:true});return}
+  el('prog').textContent=FR.tick.size+'/'+t.ids.length;syncTopbar();
+  setTest(`<div class="card"><div class="qh"><span class="qnum">💭 ${esc(t.l)}</span><span class="badge">đối chiếu</span></div><div id="frCov" aria-live="polite"></div>`+
+    (FR.text.trim()?`<details class="fr-mine"><summary>Bài bạn viết (${frWords(FR.text)} chữ)</summary><div class="tbox">${esc(FR.text)}</div></details>`:'')+
+    '<p class="sub">Ý có trong bài của bạn đã được tự đánh dấu ✓ (nhận theo từ khóa, có thể nhầm). Bỏ hoặc thêm dấu cho đúng với điều bạn thật sự nhớ.</p><div class="fr-list">'+
+    t.ids.map((id,i)=>{const q=bi[id];return `<label class="fr-fact"><input type="checkbox" data-fk="fr${i}" ${FR.tick.has(id)?'checked':''} onchange="frTick(${i},this.checked)"><span class="fr-tx"><b>${esc(keyTexts(q).join(' · '))}</b>`+
+      `<small>${esc(clean(q.q))}</small>${FR.auto.has(id)?'<span class="fr-auto">tự nhận</span>':''}</span></label>`}).join('')+'</div>'+
+    '<div class="row" style="justify-content:center;margin-top:12px"><button type="button" class="btn" id="frLearn" onclick="frLearn()"></button><button type="button" class="btn sec" onclick="frAgain()">💭 Viết lại chủ đề này</button><button type="button" class="btn sec" onclick="exitTest()">← Về menu</button></div></div>');
+  frCov()}
+function frCheck(){if(!FR||FR.ph!=='write')return;clearInterval(FR_T);const bi=bankIndex();FR.ph='check';
+  FR.auto=new Set(FR.t.ids.filter(id=>frHit(FR.text,keyTexts(bi[id]).join(' '))));FR.tick=new Set(FR.auto);el('timer').textContent='💭 Nhớ tự do';frRender();window.scrollTo(0,0)}
+function frTick(i,on){const id=FR&&FR.t.ids[i];if(!id)return;if(on)FR.tick.add(id);else FR.tick.delete(id);frCov()}
+function frCov(){const n=FR.t.ids.length,k=FR.tick.size,p=pctOf(k,n),c=el('frCov'),b=el('frLearn');el('prog').textContent=k+'/'+n;railSync();
+  if(c)c.innerHTML=`<div class="modbar"><span class="mlabel"><b>Bao phủ</b> · ${k}/${n} ý</span><div class="barwrap"><div class="bar" style="width:${p}%;background:${p>=70?'var(--green)':p>=40?'var(--amber)':'var(--red)'}"></div></div><span><b>${p}%</b></span></div>`;
+  if(b){b.textContent=`👣 Học các ý chưa nhớ (${n-k})`;b.disabled=k>=n}}
+function frLearn(){if(!FR)return;const ids=FR.t.ids.filter(id=>!FR.tick.has(id));if(ids.length)lsStartIds('step',ids)}
+function frAgain(){if(!FR)return;FR={t:FR.t,text:'',ph:'write',t0:Date.now(),lim:(UI.frMin|0)*60};frRender();frClock();clearInterval(FR_T);if(FR.lim)FR_T=setInterval(frClock,1000)}
+
+/* ==== ⏳ Sắp xếp mốc thời gian: rounds of 5 (or 4) events with different years, taken from "năm nào / khi nào"
+   questions whose key is a plain date; the event is the stem without its question words. Unclean stems are left out ==== */
+let OD=null,OD_P=null;
+/* a key that is only a date ("6/3/1946", "Tháng 3 năm 1951", "1961-1965") -> yyyymmdd of its first date, else 0 */
+function odDate(k){const t=clean(k).normalize('NFC').toLowerCase();if(!t||t.length>40||t.replace(/\d+|ngày|tháng|năm|đến|từ|và|[\s\/\-.,–]/g,''))return 0;
+  const n=(t.match(/\d+/g)||[]).map(Number),i=n.findIndex(x=>x>=1858&&x<=2030);if(i<0||i>2)return 0;
+  const m=i?n[i-1]:0,d=i===2?n[0]:0;return m>12||d>31||(i&&!m)?0:n[i]*10000+m*100+d}
+const OD_ASK=/(năm nào|khi nào|thời gian nào|thời điểm nào|ngày nào|năm bao nhiêu|lúc nào|bao giờ)|(?:vào|trong)\s+năm\s*[:?.]?\s*$/i;
+function odEvent(s){let t=clean(s).normalize('NFC');if(!OD_ASK.test(t))return '';
+  t=t.replace(/[\s?:.]+$/,'').replace(/^(?:mốc\s+)?(?:thời gian|thời điểm|năm)\s+nào\s+(?:ghi dấu|đánh dấu|gắn với)\s+/i,'')
+    .replace(/[\s,]*(?:(?:vào|từ|trong|là)\s+)?(?:(?:những|khoảng)\s+)?(?:năm nào|khi nào|thời gian nào(?:\s+sau đây)?|thời điểm nào|ngày,?\s*tháng,?\s*năm nào|ngày nào|năm bao nhiêu|lúc nào|bao giờ|năm)$/i,'')
+    .replace(/[\s,;]*(?:đó là|là)$/i,'').trim();
+  // still a question, a pointer to other text, a year that gives the answer away, or a sentence cut mid-phrase: not clean
+  if(t.length<12||t.length>150||/(^|\s)nào(\s|$)|câu trên|sau đây|[?;]|(^|\D)(18[5-9]\d|19\d\d|20[0-3]\d)(\D|$)|\s(có|từ|vào|của|được|và|với|tại|ở|là)$/i.test(t))return '';
+  return t.charAt(0).toUpperCase()+t.slice(1)}
+function odPool(){const hd=hiddenDk(),key=curSubject()+'|'+(hd?hd.size:0);if(OD_P&&OD_P.k===key)return OD_P.v;const bi=bankIndex(),seen=new Set(),v=[];
+  poolRows('all').forEach(x=>{const q=bi[x.id],ci=correctIdxOf(q);if(ci.length!==1)return;const k=clean(stripPrefix(q.o[ci[0]])),d=odDate(k),ev=d?odEvent(q.q):'',f=ev&&tFold(ev);
+    if(!ev||seen.has(f))return;seen.add(f);v.push({id:q.id,ev,d,k})});
+  OD_P={k:key,v};return v}
+function odTile(){const b=document.querySelector('.mode[data-mode="order"]');if(!b)return;const on=odPool().length>=8;b.style.display=on?'':'none';
+  if(!on&&MODE==='order'&&onStartScreen())pickMode(REC_MODE)}
+function odCfg(cfg){const n=odPool().length;
+  cfg.innerHTML=cfgDesc('⏳ Mỗi ván 5 sự kiện lấy từ các câu hỏi “năm nào / khi nào” của môn. Bấm lần lượt từ sự kiện xảy ra sớm nhất đến muộn nhất, rồi xem mốc thời gian và câu hỏi gốc của từng sự kiện. Không ảnh hưởng tiến độ.')+
+    `<div class="sub">${n} sự kiện có mốc thời gian rõ ràng${n<8?' — chưa đủ để chơi':''}.</div>`;return n<8}
+function odStart(){if(odPool().length<4){alert('Chưa đủ sự kiện có mốc thời gian.');return}OD={seen:[],n:0,perf:0};MODE='order';nmEnter('⏳ Sắp xếp mốc thời gian');odNew()}
+/* a round: different years only (the order must be clear), events not seen in this cycle first */
+function odDraw(){const P=odPool(),n=P.length>=10?5:4,sn=new Set(OD.seen),pick=[],ys=new Set();
+  for(const x of shuffle(P.filter(x=>!sn.has(x.id))).concat(shuffle(P.filter(x=>sn.has(x.id))))){if(pick.length>=n)break;const y=Math.floor(x.d/10000);if(ys.has(y))continue;ys.add(y);pick.push(x)}
+  pick.forEach(x=>OD.seen.push(x.id));if(OD.seen.length>=P.length)OD.seen=[];return pick}
+function odNew(){if(!OD)return;OD.r=shuffle(odDraw());OD.ord=[];OD.chk=0;odRender();window.scrollTo(0,0)}
+function odTap(i){if(!OD||OD.chk)return;const k=OD.ord.indexOf(i);if(k>=0)OD.ord.splice(k,1);else OD.ord.push(i);odRender()}
+function odCheck(){if(!OD||OD.chk||OD.ord.length<OD.r.length)return;OD.chk=1;OD.n++;const S=OD.r.map((x,i)=>i).sort((a,b)=>OD.r[a].d-OD.r[b].d);
+  OD.ok=OD.ord.map((i,p)=>S[p]===i);if(OD.ok.every(Boolean))OD.perf++;beep(OD.ok.every(Boolean));odRender()}
+function odWrong(){return OD?OD.ord.filter((i,p)=>!OD.ok[p]).map(i=>OD.r[i].id):[]}
+function odRender(){if(!OD)return;const R=OD.r,n=R.length,bi=bankIndex();el('prog').textContent=OD.ord.length+'/'+n;el('srcLabel').textContent=OD.n?`${OD.perf}/${OD.n} ván đúng hết`:'';syncTopbar();
+  const ev=(i,cls,inner)=>`<button type="button" class="od-ev${cls}" data-fk="od${i}" onclick="odTap(${i})">${inner}<span class="od-tx">${esc(R[i].ev)}</span></button>`;
+  if(!OD.chk){const rest=R.map((x,i)=>i).filter(i=>OD.ord.indexOf(i)<0);
+    setTest(`<div class="card"><div class="qh"><span class="qnum">⏳ Ván ${OD.n+1}</span><span class="badge">${n} sự kiện</span></div>`+
+      '<p class="sub" style="margin-top:0">Bấm lần lượt từ sự kiện xảy ra <b>sớm nhất</b> đến <b>muộn nhất</b>. Bấm lại một sự kiện đã xếp để bỏ nó ra.</p>'+
+      (OD.ord.length?'<div class="ac-lbl">Thứ tự của bạn</div><div class="od-list">'+OD.ord.map((i,p)=>ev(i,' on',`<span class="od-n">${p+1}</span>`)).join('')+'</div>':'')+
+      (rest.length?'<div class="ac-lbl">Chưa xếp</div><div class="od-list">'+rest.map(i=>ev(i,'','<span class="od-n" aria-hidden="true">○</span>')).join('')+'</div>':'')+
+      `<div class="navbtns"><button type="button" class="btn sec" onclick="if(OD){OD.ord=[];odRender()}"${OD.ord.length?'':' disabled'}>↺ Xếp lại</button>`+
+      `<button type="button" class="btn" data-fk="od-chk" onclick="odCheck()"${OD.ord.length<n?' disabled':''}>Kiểm tra</button></div></div>`);return}
+  const S=R.map((x,i)=>i).sort((a,b)=>R[a].d-R[b].d),k=OD.ok.filter(Boolean).length,wr=OD.ord.filter((i,p)=>!OD.ok[p]).map(i=>R[i].id);
+  setTest(`<div class="card"><div class="qh"><span class="qnum">⏳ Ván ${OD.n}</span><span class="badge ${k===n?'xr':'hot'}">${k===n?'✔ Đúng hết':'Đúng vị trí '+k+'/'+n}</span></div>`+
+    '<div class="ac-lbl">Thứ tự đúng</div><ol class="od-key">'+S.map(i=>{const x=R[i],q=bi[x.id],p=OD.ord.indexOf(i);
+      return `<li class="${OD.ok[p]?'ok':'no'}"><span class="od-d">${esc(x.k)}</span><span class="od-body"><b>${esc(x.ev)}</b><small>${OD.ok[p]?'✓ bạn xếp đúng':'✗ bạn xếp ở vị trí '+(p+1)} · Câu hỏi: ${esc(clean(q.q))}</small></span></li>`}).join('')+'</ol>'+
+    `<div class="row" style="justify-content:center;margin-top:12px"><button type="button" class="btn" data-fk="od-new" onclick="odNew()">⏳ Ván mới</button>`+
+    (wr.length?`<button type="button" class="btn sec" onclick="lsStartIds('step',odWrong())">👣 Học các câu xếp sai (${wr.length})</button>`:'')+
+    '<button type="button" class="btn sec" onclick="exitTest()">← Về menu</button></div></div>')}
+
+/* ==== 📅 Lộ trình ôn thi: with an exam date, the daily goal of the progress line becomes today's due questions plus
+   a share of the unlearned ones, so each question can still get 3 right answers on different days (Vững) before the
+   exam (the Leitner steps need about 7 days). The number is fixed for the day once shown (fu_plan_<scope>.s);
+   "today" counts this subject's questions answered today. Without a date the page keeps its 20-a-day goal ==== */
+let PL_OPEN=false;
+function plKey(){return 'fu_plan_'+scopeKey()}
+function plGet(){const p=readObj(plKey());return p.d>today()?p:null}   // the exam day has come: back to the usual goal
+function plUTC(d){return new Date(d*86400000)}   // a localDay as a Date whose UTC fields are that local date
+function plDay(d){const D=plUTC(d);return D.getUTCDate()+'/'+(D.getUTCMonth()+1)}
+function plISO(d){return plUTC(d).toISOString().slice(0,10)}
+function plCalc(p){const t=today(),L=p.d-t,dueIds=[],newIds=[];let done=0,need=0;
+  poolRows('all').forEach(x=>{const r=qrec(x.id);need+=3-stepsOf(r);if(r&&r.last===t)done++;else if(!r)newIds.push(x.id);else if(r.due<=t)dueIds.push(x.id)});
+  const W=L>=7?L-6:Math.max(1,Math.ceil(L/3)),per=Math.ceil(newIds.length/W);
+  let s=p.s&&p.s.day===t?p.s:null;if(!s){s=p.s={day:t,q:done+Math.min(newIds.length,per)+dueIds.length,nw:per};writeJSON(plKey(),p)}
+  return {L,done,need,per:s.nw,q:Math.max(1,s.q),dueIds,newIds,tight:L<7&&newIds.length>0}}
+m2Wrap('streakInfo',function(o,a){const s=o.apply(this,a),p=plGet();if(!p)return s;const c=plCalc(p);return Object.assign(s,{todayCount:c.done,goal:c.q})});
+/* with a plan, the streak day is the plan's goal met (one goal, not two) */
+m2Wrap('bumpStreak',function(o,a){const p=plGet();if(!p)return o.apply(this,a);const t=today(),s=loadStreak();if(s.todayDay!==t){s.todayDay=t;s.todayCount=0}
+  s.todayCount=(s.todayCount||0)+(a[0]|0);const c=plCalc(p);if(c.done>=c.q&&s.lastGoalDay!==t){s.streak=s.lastGoalDay===t-1?(s.streak||0)+1:1;s.lastGoalDay=t}saveStreak(s)});
+m2Wrap('renderStreak',function(o,a){const r=o.apply(this,a),bar=el('streak')&&el('streak').querySelector('.streakbar'),pb=el('plBox'),p=plGet();if(!bar)return r;
+  if(p){const c=plCalc(p),left=Math.max(0,c.q-c.done);
+    bar.insertAdjacentHTML('beforeend',`<span class="pl-tag"><span class="m-hide">📅 thi ${plDay(p.d)} · </span>còn ${c.L} ngày</span>`+
+      (left?`<button type="button" class="theme-btn pl-btn" onclick="plGo()">▶ Học hôm nay</button>`:'')+
+      `<button type="button" class="theme-btn pl-btn" aria-label="Lộ trình ôn thi" aria-expanded="${PL_OPEN}" onclick="plToggle()">📅</button>`)}
+  else bar.insertAdjacentHTML('beforeend',`<button type="button" class="theme-btn pl-btn" aria-expanded="${PL_OPEN}" onclick="plToggle()">📅 <span class="m-hide">Đặt </span>ngày thi</button>`);
+  if(pb)pb.innerHTML=PL_OPEN?plPanel(p):'';return r});
+function plPanel(p){const c=p&&plCalc(p),t=today();
+  return '<div class="card pl-panel" role="group" aria-label="Lộ trình ôn thi"><div class="pl-row"><label for="plDate">📅 Ngày thi</label>'+
+    `<input type="date" id="plDate" min="${plISO(t+1)}" value="${p?plISO(p.d):''}"><button type="button" class="btn" onclick="plSave()">Lưu</button>`+
+    (p?'<button type="button" class="theme-btn" onclick="plClear()">Bỏ lộ trình</button>':'')+'</div>'+
+    `<div class="sub">${c?`Còn ${c.L} ngày · ${c.newIds.length} câu chưa học: khoảng <b>${c.per}</b> câu mới mỗi ngày, cộng các câu đến hạn ôn (hôm nay ${c.dueIds.length}). Mục tiêu hôm nay: <b>${c.q}</b> câu, đã làm ${c.done}. Cần thêm khoảng ${c.need} lượt trả lời đúng ở các ngày khác nhau để mọi câu lên Vững.`+
+      (c.tight?' ⚠ Còn dưới 7 ngày: không kịp ôn đủ 3 lần cách quãng mọi câu, hãy ưu tiên câu hay sai.':''):
+      'Nhập ngày thi: mỗi ngày, mục tiêu trên thanh tiến độ (thay cho 20 câu) là các câu đến hạn ôn cộng một phần câu mới, đủ để mọi câu được trả lời đúng 3 lần cách quãng trước ngày thi.'}</div>`+
+    (c?'<div class="row" style="gap:8px;margin-top:8px"><button type="button" class="btn sec" onclick="plGo()">🧠 Học thông minh hôm nay</button><button type="button" class="btn sec" onclick="plRate()">⏰ Chấm mức nhớ hôm nay</button></div>':'')+'</div>'}
+function plToggle(){PL_OPEN=!PL_OPEN;renderStreak();if(PL_OPEN){const i=el('plDate');if(i)i.focus()}}
+function plSave(){const v=(el('plDate')||{}).value||'',m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(v);const d=m?localDay(new Date(+m[1],+m[2]-1,+m[3]).getTime()):0;
+  if(!(d>today())){toast('Chọn một ngày sau hôm nay.');return}writeJSON(plKey(),{d});PL_OPEN=false;renderStreak();const c=plCalc(plGet());toast('Đã lưu lộ trình — mục tiêu hôm nay: '+c.q+' câu')}
+function plClear(){if(!confirm('Bỏ lộ trình ôn thi? Mục tiêu quay về 20 câu mỗi ngày.'))return;try{localStorage.removeItem(plKey())}catch(e){}PL_OPEN=false;renderStreak()}
+/* today's quota as one 🧠 Học thông minh test: the due questions first, then new ones */
+function plGo(){const p=plGet();if(!p)return;const c=plCalc(p),left=Math.max(0,c.q-c.done),ids=c.dueIds.concat(c.newIds).slice(0,left);
+  if(!ids.length){toast('Hôm nay đã đủ mục tiêu 🎉');return}pickMode('learn',1);RETAKE=ids;startTest()}
+function plRate(){const p=plGet();if(!p)return;const c=plCalc(p);uiSet('fcNew',c.per);uiSet('fcHow','rate');uiSet('fcBox',0);pickMode('flash',1);
+  if(el('startBtn').disabled){toast('Hôm nay không còn thẻ đến hạn hay thẻ mới.');return}startTest()}
+
+/* ==== 🎴 Flashcard extras: "Đáp án trước", "Chỉ câu đã đánh dấu", 🔊 on the card and during ▶ Tự chạy, the Leitner boxes
+   of ⏰ Chấm mức nhớ, and the ways 🔲 cloze, 🔀 pair, 🔤 term, 💬 why — drawn here (fxRender), self-rated, never written ==== */
+const FX_HOW={cloze:'🔲 Điền khuyết',pair:'🔀 Dễ nhầm',term:'🔤 Thuật ngữ',why:'💬 Tự giải thích'};
+let FX_PR=null,FX_TM=null,FX_WI=null,FX_SPK=0,FX_SAY=0;
+function fxOwn(h){return Object.prototype.hasOwnProperty.call(FX_HOW,h)}
+function fxPool(h){const src=()=>poolRows('flash');   // ★ left out; only 🔖 with the switch on (poolRows wrapper)
+  return h==='cloze'?src().filter(x=>qinfo(x).sc):h==='pair'?fxPairs():h==='term'?fxTerms():h==='why'?src().filter(x=>!isMatch(x)&&exPick(x.ex,subjLang()).length>=20):[]}
+function fxCard(q,d){return Object.assign({},q,{sels:[],ci:correctIdxOf(q),oi:(q.o||[]).map((_,i)=>i)},d)}
+function fxDesc(s){const d={id:s.id};['cz','pb','tm'].forEach(k=>{if(s[k]!==undefined)d[k]=s[k]});return d}
+/* cloze: 1–3 words of the key to hide, numbers first, then names, then the longest; never a stop-word */
+function czPick(key){const w=String(key).split(/\s+/).filter(Boolean),c=[];
+  w.forEach((x,i)=>{const t=x.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu,'');if(!t||(t.length<2&&!/\d/.test(t)))return;
+    if(FX_VSTOP.has(t.toLowerCase())||(/^[a-z]+$/i.test(t)&&STOPW.has(t.toLowerCase())))return;
+    c.push({i,p:/\d/.test(t)?3:(i>0&&/^\p{Lu}/u.test(t))||/^[A-ZĐ0-9]{2,}$/.test(t)?2:1,n:t.length})});
+  if(!c.length)return w.length?[0]:[];
+  return c.sort((a,b)=>b.p-a.p||b.n-a.n||a.i-b.i).slice(0,Math.max(1,Math.min(3,Math.round(w.length/4)))).map(x=>x.i).sort((a,b)=>a-b)}
+function czHTML(k,cz,show){let w=-1;return String(k).split(/(\s+)/).map(p=>{if(!p.trim())return p;w++;if(cz.indexOf(w)<0)return esc(p);
+  return show?'<mark>'+esc(p)+'</mark>':`<span class="cz-b" role="img" aria-label="chỗ trống">${'\u2003'.repeat(Math.min(8,Math.max(2,Math.ceil(p.length*.6))))}</span>`}).join('')}
+function czText(k,cz){return String(k).split(/\s+/).map((p,i)=>cz.indexOf(i)>=0?'…':p).join(' ')}
+function czHits(tx,k,cz){const have=new Set(tFold(tx).split(/\s+/).map(w=>w.replace(/[^a-z0-9]/g,''))),miss=String(k).split(/\s+/).filter((_,i)=>cz.indexOf(i)>=0),
+    n=miss.filter(w=>{const f=tFold(w).replace(/[^a-z0-9]/g,'');return f&&have.has(f)}).length;
+  return n===miss.length?`✔ đủ ${n}/${miss.length} chữ`:`${n}/${miss.length} chữ khớp`}
+/* 🔀 pairs: stems alike (token Jaccard ≥ .6, or the very same stem) with different keys; each question in one pair.
+   A reprint whose options are the same too is a disputed key, not two questions: left out. Cached per subject */
+function fxKeySig(q){return correctIdxOf(q).map(i=>tFold(stripPrefix(q.o[i]))).sort().join('|')}
+function fxPairs(){const hd=hiddenDk(),key=curSubject()+'|'+(hd?hd.size:0);if(FX_PR&&FX_PR.k===key)return FX_PR.v;
+  const bi=bankIndex(),L=poolRows('all').map(x=>bi[x.id]).filter(q=>(q.o||[]).length>=2&&correctIdxOf(q).length&&!isMatch(q));
+  const T=L.map(q=>[...new Set(tFold(q.q).split(/[^a-z0-9]+/).filter(w=>w.length>=2&&!STOPW.has(w)))]),S=T.map(t=>new Set(t)),df=new Map(),inv=new Map(),stem=new Map(),C=[];
+  T.forEach(t=>t.forEach(w=>df.set(w,(df.get(w)||0)+1)));const cap=Math.max(30,L.length*.1);
+  T.forEach((t,i)=>{t.forEach(w=>{if(df.get(w)<=cap){let a=inv.get(w);if(!a)inv.set(w,a=[]);a.push(i)}});const f=tFold(L[i].q);let a=stem.get(f);if(!a)stem.set(f,a=[]);a.push(i)});
+  const os=q=>(q.o||[]).map(o=>tFold(stripPrefix(o))).sort().join('|'),add=(i,j,s)=>{const a=L[i],b=L[j];
+    if(a.dk===b.dk||fxKeySig(a)===fxKeySig(b)||(tFold(a.q)===tFold(b.q)&&os(a)===os(b)))return;C.push([a.id,b.id,s])};
+  stem.forEach(g=>{for(let x=0;x<g.length&&x<8;x++)for(let y=x+1;y<g.length&&y<8;y++)add(g[x],g[y],1)});
+  T.forEach((t,i)=>{if(t.length<3)return;const seen=new Set();t.forEach(w=>(inv.get(w)||[]).forEach(j=>{if(j<=i||seen.has(j))return;seen.add(j);
+    const u=T[j];if(u.length<3||tFold(L[i].q)===tFold(L[j].q))return;let c=0;u.forEach(x=>{if(S[i].has(x))c++});const s=c/(t.length+u.length-c);if(s>=.6)add(i,j,s)}))});
+  C.sort((x,y)=>y[2]-x[2]);const used=new Set(),v=[];C.forEach(p=>{if(used.has(p[0])||used.has(p[1]))return;used.add(p[0]);used.add(p[1]);v.push(p)});
+  FX_PR={k:key,v};return v}
+/* 🔤 terms: the abbreviation dictionaries of the subject (ABBR / ABBR_EN / ABBR_BY_SUBJ via abbrOf), only terms the bank uses */
+function fxTerms(){const hd=hiddenDk(),key=curSubject()+'|'+(hd?hd.size:0);if(FX_TM&&FX_TM.k===key)return FX_TM.v;const bi=bankIndex(),M=new Map();
+  poolRows('all').forEach(x=>{const q=bi[x.id],s=q.subject,txt=[clean(q.q)].concat((q.o||[]).map(o=>clean(stripPrefix(o)))).join(' \u2016 ');
+    const add=t=>{const m=abbrOf(t,s);if(!m)return;const k=s+'|'+t;let e=M.get(k);if(!e)M.set(k,e={t,m,s,ids:[]});if(e.ids.indexOf(q.id)<0)e.ids.push(q.id)};
+    txt.replace(ABBR_TOK,(z,p,tok)=>{tok.split(/[\/\-]/).forEach(add);return z});const mx=abbrMixed(s);if(mx)txt.replace(mx,(z,p,tok)=>{add(tok);return z})});
+  const v=[...M.values()].sort((a,b)=>b.ids.length-a.ids.length);FX_TM={k:key,v};return v}
+function termRe(t,g){return new RegExp('(^|[^A-Za-zÀ-ỹĐđ0-9])('+t.replace(/[.*+?^${}()|[\]\\\/-]/g,'\\$&')+')(?![A-Za-zÀ-ỹĐđ0-9])',g?'g':'')}
+/* 💬 why: the explanation's key words = its rarest content words in this subject that the question and the key do not already give */
+function whyTerms(q){const s=curSubject();if(!FX_WI||FX_WI.k!==s){const df=new Map();let n=0;const bi=bankIndex();
+    scopeQuestions().forEach(x=>{const e=exPick(bi[x.id].ex,subjLang());if(!e)return;n++;new Set(fxTok(e)).forEach(w=>df.set(w,(df.get(w)||0)+1))});FX_WI={k:s,df,n}}
+  const giv=new Set(fxTok(q.q+' '+keyTexts(q).join(' '))),seen=new Set(),T=[];
+  fxTok(exPick(q.ex,subjLang())).forEach(w=>{if(giv.has(w)||seen.has(w)||/^\d+$/.test(w))return;seen.add(w);T.push([w,Math.log((FX_WI.n+1)/((FX_WI.df.get(w)||0)+1))])});
+  return T.sort((a,b)=>b[1]-a[1]).slice(0,8).map(x=>x[0])}
+function whyHTML(e,T,have){return String(e).split(/(\s+)/).map(p=>{const f=tFold(p).replace(/[^a-z0-9]/g,'');if(!p.trim()||T.indexOf(f)<0)return esc(p);
+  return `<mark class="${have.has(f)?'hit':'miss'}">${esc(p)}</mark>`}).join('')}
+function fxBoxCounts(){const t=today(),B=[0,0,0,0,0,0],D=[0,0,0,0,0,0];let nw=0;
+  poolRows('all').forEach(x=>{const r=qrec(x.id);if(!r){nw++;return}const b=Math.max(1,Math.min(5,r.box||1));B[b]++;if(r.due<=t)D[b]++});return {B,D,nw}}
+function fxBoxOf(x){const r=qrec(x.id);return r?Math.max(1,Math.min(5,r.box||1)):0}
+
+/* the "Cách học" row gets the four ways; "Mặt trước" gets "Đáp án trước"; ⏰ Chấm mức nhớ shows its 5 boxes and can
+   keep to one; the deck can be only 🔖 questions */
+function fxAfter(h,mark,add){const i=h.indexOf(mark);if(i<0)return h;const j=h.indexOf('</button>',i)+9;return h.slice(0,j)+add+h.slice(j)}
+function fxChip(k,v,l){return `<button type="button" class="chip${UI[k]===v?' on':''}" id="fc-${k}-${v}" aria-pressed="${UI[k]===v}" onclick="uiSet('${k}','${v}');pickMode(MODE);el('fc-${k}-${v}').focus()">${l}</button>`}
+function fxBookSw(){return uiSwitch('fcBook','Chỉ câu đã đánh dấu 🔖 ('+poolRows('book').length+')',1)}
+function fxBoxes(){const C=fxBoxCounts(),b=UI.fcBox|0,all=C.B.reduce((x,y)=>x+y,0);
+  return '<div class="field"><span class="sub" style="margin:0">Hộp Leitner — bấm một hộp để chỉ ôn hộp đó</span><div class="lt-boxes" role="group" aria-label="Hộp Leitner">'+[0,1,2,3,4,5].map(k=>
+    `<button type="button" class="lt-box${b===k?' on':''}" id="lt-${k}" aria-pressed="${b===k}" onclick="uiSet('fcBox',${k});pickMode(MODE);el('lt-${k}').focus()"${k&&!C.B[k]&&b!==k?' disabled':''}>`+
+    (k?`<span class="lt-h">Hộp ${k}</span><b class="lt-n">${C.B[k]}</b><span class="lt-s">chu kỳ ${SRS_IV[k]} ngày${C.D[k]?` · <span class="lt-due">⏰ ${C.D[k]}</span>`:''}</span>`
+      :`<span class="lt-h">Tất cả hộp</span><b class="lt-n">${all}</b><span class="lt-s">đến hạn + thẻ mới</span>`)+'</button>').join('')+'</div>'+
+    `<div class="sub">${C.nw} câu chưa học (chưa vào hộp nào) · ⏰ = câu đến hạn hôm nay · đúng ở một ngày mới thì lên hộp, sai thì về Hộp 1.</div></div>`}
+function fxCfg(h){const P=fxPool(h),n=P.length,nf=(l,st)=>numField(l,Math.min(lastNumQ||(st?10:20),n),n,st||[10,20,30]),rate='Lật thẻ rồi tự chấm <b>Nhớ</b> (→) / <b>Chưa nhớ</b> (←). Không ảnh hưởng tiến độ.';
+  if(h==='cloze')return cfgDesc('🔲 Thẻ hiện câu hỏi và đáp án bị che 1–3 chữ quan trọng (số, tên riêng trước). Tự nhớ — gõ thử nếu muốn — rồi '+rate.charAt(0).toLowerCase()+rate.slice(1)+' Bỏ qua câu có đáp án “Tất cả…”, “Cả A và B” hay Đúng/Sai.')+
+    (n?nf('Số thẻ'):cfgDesc('Không có câu nào có đáp án tự đứng được.'))+fxBookSw();
+  if(h==='pair')return cfgDesc('🔀 Hai câu có đề gần giống nhau nhưng đáp án khác nhau, đặt cạnh nhau — chữ khác nhau được tô màu. '+rate)+
+    (n?nf('Số cặp',[5,10,20]):cfgDesc('Môn này không có cặp câu nào dễ nhầm.'));
+  if(h==='term')return cfgDesc('🔤 Thẻ từ viết tắt có trong ngân hàng câu: một mặt là thuật ngữ, mặt kia là nghĩa kèm một câu hỏi có dùng nó. '+rate)+
+    (n?`<div class="field"><span class="sub" style="margin:0">Chiều</span><div class="chips" role="group" aria-label="Chiều">${fxChip('fcTdir','tm','Thuật ngữ → Nghĩa')}${fxChip('fcTdir','mn','Nghĩa → Thuật ngữ')}</div></div>`+nf('Số thẻ'):cfgDesc('Môn này chưa có bảng thuật ngữ.'));
+  return cfgDesc('💬 Thẻ cho sẵn câu hỏi và đáp án đúng. Bạn tự viết <b>vì sao</b> nó đúng bằng lời của mình, rồi xem giải thích của sách: từ khóa bạn đã nêu được tô xanh, từ khóa còn thiếu tô vàng. Tự chấm <b>Hiểu rồi</b> (→) / <b>Chưa hiểu</b> (←). Không ảnh hưởng tiến độ.')+
+    (n?nf('Số thẻ'):cfgDesc('Không có câu nào có giải thích.'))+fxBookSw()}
+m2Wrap('fcCfg',function(o,a){const h=UI.fcHow,bk=UI.fcBook&&(h==='flip'||h==='sort'||h==='rate');let mx=a[0];if(bk)mx=Math.max(1,poolRows('flash').length);
+  let s=fxAfter(o.call(this,mx),'id="fc-fcHow-rate"',Object.keys(FX_HOW).map(k=>fxChip('fcHow',k,FX_HOW[k])).join(''));
+  if(fxOwn(h))return s.slice(0,s.indexOf('</div></div>')+12)+fxCfg(h);   // the "Cách học" row, then this way's own settings
+  s=fxAfter(s,'id="fc-fcFront-stem"',fxChip('fcFront','ans','Đáp án trước'));
+  if(h==='rate'){s=s.replace('<div class="cfg-desc">',fxBoxes()+'<div class="cfg-desc">');
+    if(UI.fcBox)s=s.replace(/<div class="cfg-desc">⏰[\s\S]*?<\/div>/,cfgDesc(`📦 Chỉ ôn <b>Hộp ${UI.fcBox}</b>: <b>${fcDeckN()}</b> thẻ, cả thẻ chưa đến hạn (thẻ đến hạn trước). Tự chấm Lại · Khó · Được · Dễ như thường — có tính vào tiến độ.`))
+      .replace(/<div class="field"><label for="fcNew">[\s\S]*?<\/div>/,'')}
+  return s+fxBookSw()+(bk&&!poolRows('flash').length?cfgDesc('🔖 Chưa có câu nào được đánh dấu — trong bài làm, bấm 🔖 ở câu khó.'):'')+
+    (h==='flip'&&TTS?uiSwitch('fcSay','▶ Tự chạy đọc to từng thẻ 🔊'):'')});
+m2Wrap('poolRows',function(o,a){const h=UI.fcHow;return a[0]==='flash'&&UI.fcBook&&(h==='flip'||h==='sort'||h==='rate'||h==='cloze'||h==='why')?o.call(this,'book'):o.apply(this,a)});
+m2Wrap('fcDeckN',function(o,a){const b=UI.fcHow==='rate'?UI.fcBox|0:0;if(!UI.fcBook&&!b)return o.apply(this,a);const t=today();let d=0,nw=0,inb=0;
+  poolRows('flash').forEach(x=>{const r=qrec(x.id);if(b){if(fxBoxOf(x)===b)inb++;return}if(!r)nw++;else if(r.due<=t)d++});return b?inb:d+Math.min(nw,fcNewLeft())});
+m2Wrap('fcBlank',function(o,a){const f=o.apply(this,a);if(f.how==='rate'&&UI.fcBox)f.box=UI.fcBox|0;return f});
+m2Wrap('fcRateDeck',function(o,a){if(!FC.box)return o.apply(this,a);const R=x=>qrec(x.id)||{};return a[0].filter(x=>fxBoxOf(x)===FC.box).sort((x,y)=>(R(x).due||0)-(R(y).due||0))});
+m2Wrap('buildSession',function(o,a){if(!(MODE==='flash'&&fxOwn(UI.fcHow)))return o.apply(this,a);
+  const h=UI.fcHow,P=shuffle(fxPool(h)),ni=el('numQ'),n=Math.max(1,Math.min((ni&&parseInt(ni.value))||20,P.length)),bi=bankIndex();FC=fcBlank();
+  const L=P.slice(0,n).map(x=>h==='pair'?fxCard(bi[x[0]],{pb:x[1]}):h==='term'?fxCard(bi[x.ids[Math.floor(Math.random()*x.ids.length)]],{tm:x.t})
+    :fxCard(x,h==='cloze'?{cz:czPick(qinfo(x).at)}:{}));
+  FC.all=L.map(fxDesc);return L});
+m2Wrap('nmItem',function(o,a){const r=o.apply(this,a),s=a[0];['cz','pb','tm'].forEach(k=>{if(s[k]!==undefined)r[k]=s[k]});return r});
+m2Wrap('renderFlashcard',function(o,a){const q=a[0];if(FC.end||!q)return o.apply(this,a);if(fxOwn(FC.how)){fxRender(q);return}
+  const ae=document.activeElement,fk=ae&&ae.dataset&&ae.dataset.fk;
+  if(FC.front==='ans'&&!FLIPPED)fxAnsFront(q);else if(FC.front==='ans'){FC.front='full';try{o.apply(this,a)}finally{FC.front='ans'}}else o.apply(this,a);
+  const s=el('test').querySelector('.fc-acts');if(s&&TTS&&!s.querySelector('[data-fk="say"]'))s.insertAdjacentHTML('afterbegin',fxSayBtn());
+  if(KB&&fk==='say'){const b=el('test').querySelector('[data-fk="say"]');if(b)b.focus({preventScroll:true})}});
+m2Wrap('fcEnd',function(o,a){return fxOwn(FC.how)?fxEnd():o.apply(this,a)});
+/* ▶ Tự chạy with 🔊 on: read the face, then wait 1 s, instead of the fixed 4 s / 3 s */
+m2Wrap('fcTick',function(o,a){if(!(UI.fcSay&&FC.auto&&ttsReady()))return o.apply(this,a);clearTimeout(FC_T);const tok=++FX_SAY,t=fxFaceText();
+  ttsSay(t,langOf(t),UI.lnRate,()=>{if(tok!==FX_SAY)return;FC_T=setTimeout(()=>{if(!FC.auto||!isFlash()||!onTestScreen()){FC.auto=0;return}
+    if(!FLIPPED){FLIPPED=true;renderQ();fcTick()}else if(IDX<SESSION.length-1){go(1);fcTick()}else fcAuto(false)},1000)})});
+m2Wrap('fcAuto',function(o,a){const r=o.apply(this,a);if(!FC.auto){FX_SAY++;ttsStop()}return r});
+
+function fxSayBtn(){return '<button type="button" class="bmk" data-fk="say" aria-label="Đọc to thẻ này" title="Đọc to thẻ này" onclick="fxSay()">🔊</button>'}
+function fxSay(){if(FX_SPK){FX_SPK=0;ttsStop();return}if(!ttsReady()){toast('Máy chưa có giọng đọc — xem hướng dẫn ở 🎧 Nghe ôn.');return}
+  const t=fxFaceText();if(!t)return;FX_SPK=1;ttsSay(t,langOf(t),UI.lnRate,()=>{FX_SPK=0})}
+/* what the face on screen says, for 🔊 and ▶ Tự chạy */
+function fxFaceText(){const q=SESSION[IDX];if(!q||FC.end)return '';const st=spoken(clean(q.q),q),V=langOf(st)==='vi',key=spoken(keyTexts(q).join('; '),q),ex=exPick(q.ex,V?'vi':'en');
+  const A=(V?'Đáp án: ':'Answer: ')+key+(ex?'. '+(V?'Giải thích: ':'Explanation: ')+spoken(ex,q):'');
+  if(FC.how==='cloze')return FLIPPED?A:st+'. '+(V?'Đáp án: ':'Answer: ')+czText(qinfo(q).at,q.cz||[]);
+  if(FC.how==='why')return FLIPPED?A:st+'. '+(V?'Đáp án: ':'Answer: ')+key+'. '+(V?'Vì sao?':'Why?');
+  if(FC.how==='pair'){const B=bankIndex()[q.pb];if(!B)return st;const c=V?'Câu ':'Question ';
+    return FLIPPED?c+'1: '+key+'. '+c+'2: '+spoken(keyTexts(B).join('; '),B):c+'1: '+st+'. '+c+'2: '+spoken(clean(B.q),B)}
+  if(FC.how==='term'){const m=abbrOf(q.tm,q.subject),f=UI.fcTdir==='mn'?[m,q.tm]:[q.tm,m];return FLIPPED?f[0]+': '+f[1]:f[0]}
+  const Q=st+(FC.front==='stem'?'':'. '+q.oi.map((oi,i)=>String.fromCharCode(65+i)+'. '+clean(optText(q,oi))).join('. '));
+  if(FC.front==='ans')return FLIPPED?Q:(V?'Đáp án: ':'Answer: ')+key;   // answer first: the back is the question
+  return FLIPPED?A:Q}
+function fxActs(q){return '<span class="fc-acts" onclick="event.stopPropagation()">'+(TTS?fxSayBtn():'')+
+  `<button type="button" class="star" data-fk="star" onclick="toggleKnown()" aria-pressed="${knownQ(q.id)}" aria-label="Đã thuộc">${knownQ(q.id)?'★':'☆'}</button>`+
+  `<button type="button" class="bmk" data-fk="bmk" onclick="toggleBook()" aria-pressed="${BOOK.has(q.id)}" aria-label="Câu khó">${BOOK.has(q.id)?'🔖':'🏳'}</button></span>`}
+/* "Đáp án trước": the key on the front (references spelled out, no letters: the options are not shown), the question on the back */
+function fxAnsFront(q){const AB=abbrFor(q),ks=keyTexts(q);el('prog').textContent=(IDX+1)+'/'+SESSION.length;el('srcLabel').textContent=q.src+(q.n?' · Câu '+q.n:'');syncTopbar();
+  setTest(withAbx(`<div class="flash-card" onclick="toggleFlip()" ontouchstart="fcTouch(event)" ontouchend="fcSwipe(event)"><div class="qh"><span class="qnum">Thẻ ${IDX+1}</span><span class="badge">${esc(q.src)}${q.n?' · Câu '+q.n:''}</span>${fxActs(q)}</div>`+
+    `<div class="qgrid"><div class="qmain"><div class="ac-lbl">${ks.length>1?ks.length+' đáp án đúng':'Đáp án'}</div>${ks.map(t=>`<p class="fx-big">${AB(esc(t),1)}</p>`).join('')}</div><!--ABX--></div>`+
+    '<div class="flip-hint">👆 Nhấn vào thẻ hoặc phím Space để xem câu hỏi</div></div>'+fcControls(),AB))}
+function fxRender(q){const h=FC.how,AB=abbrFor(q),I=qinfo(q),opt=(x,i,r)=>`<div class="flash-opt${r?' correct':''}"><span class="olet">${String.fromCharCode(65+i)}</span><span class="otext">${esc(stripPrefix(x))}</span></div>`;
+  el('prog').textContent=(IDX+1)+'/'+SESSION.length;el('srcLabel').textContent=q.src+(q.n?' · Câu '+q.n:'');syncTopbar();
+  let body='',hint=FLIPPED?'👆 Nhấn để úp thẻ lại':'👆 Nhấn vào thẻ hoặc phím Space để lật';
+  if(h==='cloze'){const k=I.at,cz=q.cz||[];
+    body=`<div class="qgrid"><div class="qmain"><p class="stem">${AB(formatQStem(q.q),1)}</p><div class="ac-lbl">Đáp án</div><p class="cz-key">${czHTML(k,cz,FLIPPED)}</p>`+
+      (FLIPPED?(q.tx?`<div class="sub">Bạn gõ: ${esc(q.tx)} — ${czHits(q.tx,k,cz)}</div>`:'')
+        :`<input type="text" class="tin" id="czIn" value="${escA(q.tx||'')}" aria-label="Chữ còn thiếu (không bắt buộc)" placeholder="Gõ chữ còn thiếu (không bắt buộc) rồi Enter" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" `+
+          `onclick="event.stopPropagation()" ontouchstart="event.stopPropagation()" ontouchend="event.stopPropagation()" oninput="SESSION[IDX].tx=this.value" onkeydown="if(event.key==='Enter'){event.preventDefault();fxFlip()}">`)+'</div><!--ABX--></div>'+
+      (FLIPPED?answerCard(noLetters(q),[{L:'✓',text:k}],vfBadge(q.vf),x=>AB(x,0)):'')}
+  else if(h==='pair'){const B=bankIndex()[q.pb];
+    body=!B?'<p class="sub">Câu cặp không còn trong ngân hàng — chấm tạm rồi qua thẻ sau.</p>':'<div class="pr-grid">'+[[q,B],[B,q]].map(([x,y],j)=>{const ci=correctIdxOf(x);
+      return `<div class="pr-col"><div class="pr-h"><span class="qnum">Câu ${j+1}</span><span class="badge">${esc(x.src)}${x.n?' · Câu '+x.n:''}</span></div><p class="stem">${diffHTML(clean(y.q),clean(x.q))}</p>`+
+        (x.o||[]).map((o,i)=>opt(o,i,FLIPPED&&ci.indexOf(i)>=0)).join('')+(FLIPPED?answerCard(x,keyRowsOf(x),vfBadge(x.vf)):'')+'</div>'}).join('')+'</div>';
+    if(!FLIPPED)hint=(B&&tFold(B.q)===tFold(q.q)?'Hai câu cùng một đề, khác phương án — so kỹ các phương án':'Hai đề gần giống nhau — chữ khác nhau được tô màu')+'. Nhấn hoặc Space để xem đáp án'}
+  else if(h==='term'){const t=q.tm,m=abbrOf(t,q.subject),f=UI.fcTdir==='mn'?['Nghĩa',m,'Thuật ngữ',t]:['Thuật ngữ',t,'Nghĩa',m],re=termRe(t),mk=s=>esc(s).replace(termRe(t,1),'$1<mark>$2</mark>');
+    const o=re.test(clean(q.q))?'':((q.o||[]).map(x=>clean(stripPrefix(x))).find(x=>re.test(x))||'');
+    body=`<div class="fx-term"><div class="ac-lbl">${f[0]}</div><p class="fx-big">${esc(f[1])}</p>`+(FLIPPED?`<div class="ac-lbl">${f[2]}</div><p class="fx-big fx-back">${esc(f[3])}</p>`+
+      `<div class="fx-where"><div class="ac-lbl">Gặp trong câu · ${esc(q.src)}${q.n?' · Câu '+q.n:''}</div><p class="stem">${mk(clean(q.q))}</p>${o?`<p class="sub">Phương án: «${mk(o)}»</p>`:''}<p class="sub">Đáp án: ${esc(keyTexts(q).join(' · '))}</p></div>`:'')+'</div>'}
+  else{const e=exPick(q.ex,subjLang());
+    body=`<div class="qgrid"><div class="qmain"><p class="stem">${AB(formatQStem(q.q),1)}</p><div class="ac-lbl">Đáp án đúng</div><p class="fx-big fx-back">${keyTexts(q).map(t=>AB(esc(t),1)).join('<br>')}</p>`+
+      (FLIPPED?(q.tx?`<div class="ac-lbl">Bạn giải thích</div><div class="tbox">${esc(q.tx)}</div>`:'')
+        :`<label class="ac-lbl" for="whyIn">Vì sao đáp án này đúng? Viết bằng lời của bạn</label><textarea class="tin why-in" id="whyIn" rows="4" spellcheck="false" onclick="event.stopPropagation()" `+
+          `oninput="SESSION[IDX].tx=this.value" onkeydown="if(event.key==='Enter'&&(event.ctrlKey||event.metaKey)){event.preventDefault();fxFlip()}">${esc(q.tx||'')}</textarea>`+
+          '<div><button type="button" class="btn" data-fk="why-go" onclick="fxFlip()">Xem giải thích</button></div>')+'</div><!--ABX--></div>';
+    if(FLIPPED){const T=whyTerms(q),have=new Set(fxTok(q.tx||'')),k=T.filter(w=>have.has(w)).length;
+      body+=`<div class="why-box"><div class="ac-lbl">Giải thích</div><p class="why-ex">${whyHTML(e,T,have)}</p><div class="sub">${q.tx&&q.tx.trim()?`Bạn đã nêu <b>${k}/${T.length}</b> từ khóa`:'Bạn chưa viết gì'} · `+
+        '<mark class="hit">xanh</mark>: từ khóa bạn đã nêu · <mark class="miss">vàng</mark>: từ khóa còn thiếu.</div></div>'}
+    hint=FLIPPED?'Space: xem lại câu hỏi':'Viết xong bấm “Xem giải thích” (hoặc Ctrl+Enter)'}
+  const lbl=h==='why'?['Hiểu rồi','Chưa hiểu']:['Nhớ','Chưa nhớ'];
+  const act=FLIPPED?`<div class="fc-sort"><button type="button" class="btn sec" data-fk="fl" onclick="fxRate(false)">✗ ${lbl[1]} (←)</button><button type="button" class="btn" data-fk="fk" onclick="fxRate(true)">✓ ${lbl[0]} (→)</button></div>`
+    :`<div class="sub" style="text-align:center;margin-top:10px">${h==='why'?'Tự giải thích rồi xem giải thích của sách':'Lật thẻ rồi tự chấm: ← chưa nhớ · → nhớ'}</div>`;
+  setTest(withAbx(`<div class="flash-card fx-${h}"${h==='why'?'':' onclick="toggleFlip()"'} ontouchstart="fcTouch(event)" ontouchend="fxSwipe(event)"><div class="qh"><span class="qnum">Thẻ ${IDX+1}</span><span class="badge">${FX_HOW[h]}</span>`+
+    `<span class="fc-acts" onclick="event.stopPropagation()">${TTS?fxSayBtn():''}</span></div>${body}<div class="flip-hint">${hint}</div></div>`+
+    `<div class="fc-count" aria-live="polite">✓ ${lbl[0]} <b>${FC.know.length}</b> · ✗ ${lbl[1]} <b>${FC.learn.length}</b> · Thẻ ${IDX+1}/${SESSION.length}</div>`+act+
+    `<div class="navbtns"><button type="button" class="btn sec" onclick="fcUndo()" ${FC.undo.length?'':'disabled'}>↶ Hoàn tác</button></div>`,AB))}
+function fxFlip(){if(!FLIPPED){FLIPPED=true;renderQ();saveDraft()}}
+function fxRate(know){if(!isFlash()||!fxOwn(FC.how)||!FLIPPED||FC.end)return;(know?FC.know:FC.learn).push(fxDesc(SESSION[IDX]));FC.undo.push({i:IDX,k:know?1:0});fcAdvance()}
+function fxSwipe(e){if(FCX==null||!e.changedTouches||!e.changedTouches[0])return;const dx=e.changedTouches[0].clientX-FCX;FCX=null;if(Math.abs(dx)<=60||!FLIPPED)return;e.preventDefault();fxRate(dx>0)}
+function fxLearnIds(){return [...new Set(FC.learn.flatMap(d=>d.pb?[d.id,d.pb]:[d.id]))]}
+function fxEnd(){const h=FC.how,k=FC.know.length,y=FC.learn.length,lbl=h==='why'?['Hiểu rồi','Chưa hiểu']:['Nhớ','Chưa nhớ'];el('prog').textContent=SESSION.length+'/'+SESSION.length;railSync();
+  setTest(`<div class="card" style="text-align:center"><div class="sub">${FX_HOW[h]} · hết vòng ${FC.round}</div><div class="result-score">✓ ${lbl[0]} ${k} · ✗ ${lbl[1]} ${y}</div><div class="sub">Không ảnh hưởng tiến độ.</div>`+
+    '<div class="row" style="justify-content:center;margin-top:12px">'+(y?`<button type="button" class="btn" onclick="fxAgain(1)">🔁 Học lại ${y} thẻ ${lbl[1].toLowerCase()}</button>`:'')+
+    (y&&h!=='term'?'<button type="button" class="btn sec" onclick="lsStartIds(\'step\',fxLearnIds())">👣 Học từng bước các câu này</button>':'')+
+    '<button type="button" class="btn sec" onclick="startTest()">🆕 Bộ thẻ mới</button><button type="button" class="btn sec" onclick="fcUndo()">↶ Hoàn tác</button>'+
+    '<button type="button" class="btn sec" onclick="exitTest()">← Về menu</button></div></div>')}
+function fxAgain(only){const bi=bankIndex();let L=(only?FC.learn:FC.all).map(d=>bi[d.id]?fxCard(bi[d.id],d):null).filter(Boolean);if(!L.length)return;if(isOn('shufQs'))L=shuffle(L);
+  SESSION=L;Object.assign(FC,{know:[],learn:[],undo:[],end:0,round:FC.round+1});IDX=0;FLIPPED=false;renderQ();saveDraft();window.scrollTo(0,0)}
+function fxKey(e){const c=e.code;
+  if(c==='Space'||c==='Enter'){e.preventDefault();if(FC.how==='why'&&!FLIPPED)fxFlip();else toggleFlip();return true}
+  if(FLIPPED&&(c==='ArrowLeft'||c==='Digit1'||c==='Numpad1')){e.preventDefault();fxRate(false);return true}
+  if(FLIPPED&&(c==='ArrowRight'||c==='Digit2'||c==='Numpad2')){e.preventDefault();fxRate(true);return true}
+  if(c==='Backspace'||c==='KeyZ'){e.preventDefault();fcUndo();return true}
+  if(/^Arrow/.test(c))e.preventDefault();return true}
+odTile();
+
+/* ---- ?selftest2: asserts for this block's pure parts (console + toast; window.__selftest2 for automation) ---- */
+function m2SelfTest(){const R=[],ok=(c,m)=>R.push((c?'PASS ':'FAIL ')+m),bi=bankIndex();
+  try{
+  ok(spellDiff('Netwrk team','Network team')==='Netw<mark>o</mark>rk team'&&spellDiff('network team','Network team')==='Network team','Nghe – viết: only the missing letter is marked, case is not');
+  const long='Câu này khá dài để thử. '.repeat(25),ch=ttsChunks(long),w='x'.repeat(400),c2=ttsChunks(w);
+  ok(ch.length>1&&ch.every(c=>c.length<=180)&&ch.join('').replace(/\s/g,'')===long.replace(/\s/g,'')&&c2.every(c=>c.length<=180)&&c2.join('')===w,'speech: pieces ≤180 characters, nothing lost');
+  ok(exPick('[EN] Hello\n\n[VI] Xin chào','vi')==='Xin chào'&&exPick('[EN] Hello\n\n[VI] Xin chào','en')==='Hello'&&exPick('Chỉ một','en')==='Chỉ một','explanation: the part in the voice language');
+  const V=[{name:'Microsoft An - Vietnamese (Vietnam)',lang:'vi-VN'},{name:'Microsoft HoaiMy Online (Natural) - Vietnamese (Vietnam)',lang:'vi-VN'},{name:'Microsoft Zira - English',lang:'en-US'},{name:'Google US English',lang:'en-US'}];
+  ok(/HoaiMy/.test(ttsVoices('vi',V)[0].name)&&ttsVoices('en',V)[0].name==='Google US English'&&!ttsVoices('fr',V).length,'voices: the natural vi-VN / en-US voice first');
+  ok(spoken('Xây dựng CNXH ở ____ nước ta',{subject:'MLN131',q:'',id:'__m2s'})==='Xây dựng chủ nghĩa xã hội ở … nước ta','speech: blanks pause, CNXH is read in full');
+  ok(keyTexts({id:'__m2k1',q:'x',o:['A. alpha','B. beta','C. gamma','D. Tất cả các phương án trên'],a:'D',as:['D']})[0]==='Tất cả các phương án trên: alpha; beta; gamma','a "Tất cả…" key lists what it covers');
+  const z=czPick('Năm 1945 Đảng Cộng sản ra đời');ok(z.indexOf(1)>=0&&z.indexOf(5)<0&&z.length>=1&&z.length<=3&&czPick('the network').join()==='1'&&czHTML('Năm 1945',[1],false).indexOf('1945')<0,'Điền khuyết: numbers first, never a stop-word, 1–3 blanks');
+  const P=fxPairs();ok(P.every(p=>bi[p[0]]&&bi[p[1]]&&p[2]>=.6&&fxKeySig(bi[p[0]])!==fxKeySig(bi[p[1]]))&&new Set(P.flatMap(p=>[p[0],p[1]])).size===2*P.length,'Dễ nhầm: '+P.length+' pairs, alike stems, different keys, each question once');
+  const T=fxTerms();ok(T.every(e=>e.m===abbrOf(e.t,e.s)&&e.ids.every(id=>{const q=bi[id];return [clean(q.q)].concat((q.o||[]).map(o=>clean(stripPrefix(o)))).some(s=>termRe(e.t).test(s))})),'Thuật ngữ: '+T.length+' terms, each found in its questions');
+  ok(fxTok('Chủ nghĩa tư bản và CNXH').join(' ')==='chu nghia tu ban cnxh'&&frHit('chu nghia xa hoi khoa hoc ra doi','Chủ nghĩa xã hội khoa học')&&!frHit('năm 1930','Năm 1945')&&!frHit('xã hội','Chủ nghĩa xã hội khoa học'),'Nhớ tự do: fuzzy hits ignore accents, need the numbers and most words');
+  ok(odDate('6/3/1946')===19460306&&odDate('Tháng 3 năm 1951')===19510300&&odDate('1961-1965')===19610000&&odDate('Ngày 28 - 1 - 1941')===19410128&&!odDate('Giải phóng miền Nam năm 1975')&&!odDate('13/1930'),'Sắp xếp: dates read from plain date keys only');
+  ok(odEvent('Đại hội lần thứ VII của Quốc tế Cộng sản họp vào năm nào?')==='Đại hội lần thứ VII của Quốc tế Cộng sản họp'&&odEvent('Tên gọi "Nước Cộng hoà xã hội chủ nghĩa Việt Nam" có từ khi nào ?')===''&&
+    odEvent('Chiến dịch nào mở đầu năm 1975?')==='','Sắp xếp: the stem minus its question words; unclean stems dropped');
+  const OP=odPool();ok(OP.every(x=>x.d&&x.ev&&!/(^|\D)(18[5-9]\d|19\d\d|20[0-3]\d)(\D|$)/.test(x.ev))&&new Set(OP.map(x=>tFold(x.ev))).size===OP.length,'Sắp xếp: '+OP.length+' clean events, none repeated, no year in the text');
+  const wq=scopeQuestions().map(x=>bi[x.id]).find(q=>exPick(q.ex,subjLang()).length>=20);ok(!wq||whyTerms(wq).every(t=>fxTok(exPick(wq.ex,subjLang())).indexOf(t)>=0&&fxTok(wq.q+' '+keyTexts(wq).join(' ')).indexOf(t)<0),'Tự giải thích: key words come from the explanation, not from the question or key');
+  const A=lvRows('all').length;ok(['wrong','book','new','unk'].every(f=>lvRows(f).length<=A)&&lvRows('new').every(x=>!qrec(x.id)),'Danh sách: every filter is part of the whole list');
+  const C=fxBoxCounts();ok(C.B.reduce((a,b)=>a+b,0)+C.nw===poolRows('all').length,'Hộp Leitner: the 5 boxes and the unlearned add up to the subject');
+  const sv=readJSON(plKey(),null),t=today();try{writeJSON(plKey(),{d:t+30});const c=plCalc(plGet());ok(c.L===30&&c.per===Math.ceil(c.newIds.length/24)&&c.q>=Math.min(c.newIds.length,c.per),'Lộ trình: 30 days left = new questions over 24 days, plus the due ones')}
+  finally{if(sv)writeJSON(plKey(),sv);else try{localStorage.removeItem(plKey())}catch(e){}}
+  }catch(e){ok(false,'threw: '+e)}
+  window.__selftest2=R;try{console.log('[selftest2]\n'+R.join('\n'))}catch(e){}
+  toast((R.every(x=>x.indexOf('PASS')===0)?'✔ selftest2: ':'✘ selftest2: ')+R.filter(x=>x.indexOf('PASS')===0).length+'/'+R.length);return R}
+if(qsParam('selftest2')!==null)setTimeout(m2SelfTest,0);
+/* MODES2-JS-END */
+/* the shortcut sheet is a modal dialog: focus moves into it, Tab stays inside, Esc closes it, focus goes back */
+let SC_RET=null;
+function openShortcutModal(){const m=el('shortcutModal');SC_RET=document.activeElement;m.style.display='flex';
+  const b=m.querySelector('.modal-header button');if(b)b.focus()}
+function closeShortcutModal(e){if(!e||e.target.id==='shortcutModal'||e.target.tagName==='BUTTON'){const m=el('shortcutModal'),was=m.style.display==='flex';
+  m.style.display='none';if(was&&SC_RET&&SC_RET.focus&&document.contains(SC_RET))try{SC_RET.focus({preventScroll:true})}catch(_){}
+  if(was)SC_RET=null}}
+addEventListener('keydown',e=>{if(e.key!=='Tab'||!modalOpen())return;
+  const f=[...el('shortcutModal').querySelectorAll('button,a[href],[tabindex]:not([tabindex="-1"])')].filter(x=>x.offsetParent);if(!f.length)return;
+  const i=f.indexOf(document.activeElement);e.preventDefault();f[i<0?0:(i+(e.shiftKey?f.length-1:1))%f.length].focus()});
 function modalOpen(){const m=el('shortcutModal');return m&&m.style.display==='flex'}
 function clearAnswer(){if(locked())return;const q=SESSION[IDX];if(!q)return;q.sels=[];renderQ();saveDraft();}
 function onStartScreen(){const a=el('start');return a&&a.style.display!=='none'}
@@ -2840,12 +3632,16 @@ addEventListener('keydown',function(e){
     if(i>=0&&i<(SESSION[IDX].o||[]).length){e.preventDefault();pick(i);}
   }
 });
+/* the start screen is filled in by this script and the web font swaps in: show it once both are done, so nothing
+   jumps under the reader (layout shift); the head script shows it after 2.5 s whatever happens */
+(function(){const r=()=>document.documentElement.classList.add('ready');
+  try{Promise.race([document.fonts.ready,new Promise(f=>setTimeout(f,1200))]).then(r,r)}catch(e){r()}})();
 </script>
 <div id="shortcutModal" class="modal-overlay" onclick="closeShortcutModal(event)" style="display:none">
-  <div class="modal-card" onclick="event.stopPropagation()">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="scTitle" onclick="event.stopPropagation()">
     <div class="modal-header">
-      <h3>⌨️ Bảng phím tắt nhanh</h3>
-      <button class="theme-btn" onclick="closeShortcutModal()">✕ Đóng</button>
+      <h3 id="scTitle">⌨️ Bảng phím tắt nhanh</h3>
+      <button type="button" class="theme-btn" onclick="closeShortcutModal()">✕ Đóng</button>
     </div>
     <div class="shortcut-grid">
       <div class="sc-item"><div><kbd>1</kbd> - <kbd>9</kbd></div><span>Chọn chế độ theo số trên ô (1-3 Làm bài · 4-6 Ôn chỗ yếu · 7-9 Ôn nhanh)</span></div>
