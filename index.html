@@ -154,6 +154,8 @@ header{min-height:56px;padding:6px 20px;background:var(--panel);-webkit-backdrop
   transition-property:background-color,color;transition-duration:120ms}
 .xlink:hover{background:var(--panel2);color:var(--accent)}
 .xlink .xl-new{margin-left:auto;font-size:.75rem;opacity:.8}
+/* 19/11 (2): only the open subject shows its "Đối chiếu đáp án" row, so the list reads as a list of subjects */
+.tab:not(.active)+.xlink{display:none}
 
 @media(min-width:900px){
   #subjNav{flex-basis:268px;padding:12px 10px 20px;background:var(--panel)}
