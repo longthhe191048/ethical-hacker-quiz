@@ -837,7 +837,7 @@ html:not(.ready) #start{visibility:hidden}
 .search-ic::before{width:18px;height:18px}
 @media print{.mode .ic{font-size:1.2rem;background:none}.mode .ic::before{display:none}}
 @media(max-width:560px){.mode .ic{width:32px;height:32px;border-radius:8px}.mode .ic::before{width:18px;height:18px}}
-#srcNote{text-wrap:pretty}                            /* no lone last word ("lại") on the source line */
+#srcNote{text-wrap-style:pretty}   /* no lone last word ("lại"); NOT the text-wrap shorthand: it would undo the phone's one-line nowrap */
 
 /* the tile: icon | title over count (+ "Gợi ý" next to the count) | the 1–9 key as a quiet chip on the right.
    Phones keep their own three-a-row tile (max-width:560px above) */
